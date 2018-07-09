@@ -1,0 +1,24 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use Ngsoft\User;
+
+class UsersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        factory(User::class)->create([
+            'name' => 'Victor',
+            'lastname' => 'Puello Gonzalez',
+            'email' => 'victor.puello@gmail.com',
+            'username' => 'victor.puello',
+            'type' => 'admin'
+        ]);
+        factory(User::class,40)->create();
+    }
+}
