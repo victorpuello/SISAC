@@ -76,6 +76,7 @@ Theme Version: 	2.1.1
 					_self.rowEdit( $(this).closest( 'tr' ) );
 				})
 				.on( 'click', 'a.remove-row', function( e ) {
+				    alert('hecho');
 					e.preventDefault();
 
 					var $row = $(this).closest( 'tr' ),
@@ -185,7 +186,7 @@ Theme Version: 	2.1.1
 				data;
 
 			data = this.datatable.row( $row.get(0) ).data();
-
+			alert(data);
 			$row.children( 'td' ).each(function( i ) {
 				var $this = $( this );
 

@@ -5,7 +5,7 @@
         <!-- Basic -->
         <meta charset="UTF-8">
 
-        <title>@yield('titulo')| ATS</title>
+        <title>@yield('titulo') - ATS</title>
         <meta name="keywords" content="HTML5 Admin Template" />
         <meta name="description" content="Porto Admin - Responsive HTML5 Template">
         <meta name="author" content="okler.net">
@@ -24,12 +24,14 @@
         <link rel="stylesheet" href="{{asset('vendor/magnific-popup/magnific-popup.css')}}" />
         <link rel="stylesheet" href="{{asset('vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css')}}" />
 
+        <!-- Specific Page Vendor CSS -->
+        @yield('styles')
+        <link rel="stylesheet" href="{{asset('vendor/pnotify/pnotify.custom.css')}}" />
         <!-- Theme CSS -->
         <link rel="stylesheet" href="{{asset('css/theme.css')}}" />
 
         <!-- Skin CSS -->
         <link rel="stylesheet" href="{{asset('css/skins/default.css')}}" />
-        @yield('styles')
         <!-- Theme Custom CSS -->
         <link rel="stylesheet" href="{{asset('css/custom.css')}}">
 
@@ -91,8 +93,8 @@
                             <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
                         </div>
                     </header>
-
                     <!-- start: page -->
+                        @yield('content')
                     <!-- end: page -->
                 </section>
             </div>
@@ -115,7 +117,9 @@
                 </div>
             </aside>
         </section>
-
+        <!-- Variables JS-->
+        @include ('footer')
+        <!-- End Variables JS -->
         <!-- Vendor -->
         <script src="{{asset('vendor/jquery/jquery.js')}}"></script>
         <script src="{{asset('vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>
@@ -126,7 +130,10 @@
         <script src="{{asset('vendor/nanoscroller/nanoscroller.js')}}"></script>
         <script src="{{asset('vendor/magnific-popup/jquery.magnific-popup.js')}}"></script>
         <script src="{{asset('vendor/jquery-placeholder/jquery-placeholder.js')}}"></script>
-
+        <!-- Specific Page Vendor -->
+        @yield('script')
+        <script src="{{asset('vendor/pnotify/pnotify.custom.js')}}"></script>
+        <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
         <!-- Theme Base, Components and Settings -->
         <script src="{{asset('js/theme.js')}}"></script>
 

@@ -11,7 +11,8 @@
 |
 */
 Route::get('/','Auth\LoginController@showLoginForm')->name('login');
-Route::group(['prefix' => 'auth'], function () {
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('users', 'UserController');
 });
 
 Auth::routes();

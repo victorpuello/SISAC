@@ -11,6 +11,26 @@ Theme Version: 	2.1.1
 	/*
 	Default Notifications
 	*/
+
+	$(document).ready(function() {
+
+        var errores = $('#errores').data('errores');
+        for (const error in errores) {
+            const nombre = `${error}`;
+            const titulo = `${errores[error]}`;
+            crearNotificacion(nombre,titulo,'error');
+        }
+	});
+
+	function crearNotificacion(titulo, text, clase) {
+		new PNotify({
+	        title: titulo,
+	        text: text,
+	        shadow: true,
+	        addclass: clase,
+	    });
+	}
+
 	$('#default-primary').click(function() {
 		new PNotify({
 			title: 'Regular Notice',
