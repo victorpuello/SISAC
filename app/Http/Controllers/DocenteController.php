@@ -14,7 +14,9 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        //
+        $docentes = Docente::all();
+        $fondos = ['bg-primary','bg-secondary','bg-tertiary','bg-quaternary'];
+        return view('admin.docentes.index',compact('docentes','fondos'));
     }
 
     /**

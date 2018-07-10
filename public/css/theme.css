@@ -6192,6 +6192,7 @@ html:not(.sidebar-left-collapsed).boxed .call-to-action .call-to-action-btn > sp
 	-webkit-box-shadow: none;
 	        box-shadow: none;
 	border: none;
+    margin-bottom: 15px;
 }
 
 .card + .card {

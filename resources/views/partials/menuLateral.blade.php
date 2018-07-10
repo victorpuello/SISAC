@@ -18,4 +18,17 @@
             </li>
         </ul>
     </li>
+    <li class="nav-parent">
+        <a class="nav-link" href="#">
+            <i class="fas fa-users" aria-hidden="true"></i>
+            <span>Docentes</span>
+        </a>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="{{route('docentes.index')}}">
+                    Ver Docentes
+                </a>
+            </li>
+        </ul>
+    </li>
 </ul>
