@@ -10,7 +10,7 @@
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
                 <div class="modal-text">
-                    <p>Estas seguro que deseas eliminar el usuario: <strong><span id="NombreUser"></span></strong></p>
+                    <p>Estas seguro que deseas eliminar el docente: <strong><span id="NombreDocente"></span></strong></p>
                 </div>
             </div>
         </div>

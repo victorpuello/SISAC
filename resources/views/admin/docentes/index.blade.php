@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('titulo', "Usuarios")
 @section('namePage', "Modulo: Docentes")
+@section('styles')
+    <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.css')}}" />
+    <link rel="stylesheet" href="{{asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('vendor/pnotify/pnotify.custom.css')}}" />
+@endsection
 @section('content')
     <div class="row">
         @foreach($docentes as $docente)
@@ -18,8 +23,8 @@
                         <hr class="solid short">
                         <div class="row">
                             <div class="col-lg-6">
-                                <p class="mb-1"><a href="#"><i class="fas fa-user-edit mr-1"></i>Editar</a></p>
-                                <p class="mb-1"><a href="#"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
+                                <p class="mb-1"><a href="{{route('docentes.edit',$docente->id)}}"><i class="fas fa-user-edit mr-1"></i>Editar</a></p>
+                                <p class="mb-1"><a href="#modalEliminar" class="deleted modal-basic" data-nuser="{{$docente->user->FullName}}" data-url="{{ route('docentes.destroy', $docente->id ) }}"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
                                 <p class="mb-1"><a href="#"><i class="fas fa-share-square mr-1"></i> Asignaturas</a></p>
                             </div>
                             <div class="col-lg-6">
@@ -30,5 +35,19 @@
                 </section>
             </div>
         @endforeach
+            @include('admin.docentes.partials.modals')
     </div>
     @endsection
+
+@section('script')
+    <script src="{{asset('vendor/select2/js/select2.js')}}"></script>
+    <script src="{{asset('vendor/pnotify/pnotify.custom.js')}}"></script>
+    <script src="{{asset('js/examples/examples.modals.js')}}"></script>
+    <script type="text/javascript">
+        $(".deleted").click(function (e) {
+            $("#form-delete").attr('action', $(this).data('url') );
+            $("#NombreDocente").text( $(this).data('nuser') );
+           //alert('hola');
+        });
+    </script>
+@endsection

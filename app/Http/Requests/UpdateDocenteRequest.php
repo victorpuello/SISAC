@@ -3,6 +3,9 @@
 namespace Ngsoft\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Routing\Route;
+use Illuminate\Validation\Rule;
+use Ngsoft\Docente;
 
 class UpdateDocenteRequest extends FormRequest
 {
@@ -11,6 +14,13 @@ class UpdateDocenteRequest extends FormRequest
      *
      * @return bool
      */
+    private $route;
+    private $docente;
+    public function __construct (Route $route)
+    {
+        $this->route = $route;
+    }
+
     public function authorize()
     {
         return true;
@@ -23,8 +33,17 @@ class UpdateDocenteRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        $this->docente = Docente::find($this->route->parameter('docente'));
+        return[
+            'typeid' => 'required|in:CC,CE,PT',
+            'numberid' => 'required|numeric|max:9999999999|min:1000000',Rule::unique('docentes')->ignore($this->docente->numberid, 'docente_numberid'),
+            'fnac' => 'required|date',
+            'gender' => 'required|in:M,F',
+            'address' => 'required|min:3|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/|max:80',
+            'phone' => 'required|numeric',
+            'path' => 'image|mimes:jpeg,bmp,png',
+            'coordinator' => 'nullable',
+            'user_id' => 'required',Rule::unique('docentes')->ignore($this->docente->user_id,'docente_user_id')
         ];
     }
 }

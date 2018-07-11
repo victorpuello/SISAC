@@ -3,8 +3,8 @@
 namespace Ngsoft\Http\Controllers;
 
 use Ngsoft\Docente;
-use Illuminate\Http\Request;
 use Ngsoft\Http\Requests\CreateDocenteRequest;
+use Ngsoft\Http\Requests\UpdateDocenteRequest;
 use Ngsoft\User;
 
 class DocenteController extends Controller
@@ -65,12 +65,14 @@ class DocenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Docente  $docente
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Docente $docente)
+    public function edit($id)
     {
-        //
+        $docente = Docente::findOrFail($id);
+        $users = $docente->user;
+        return view('admin.docentes.edit',compact('docente','users'));
     }
 
     /**
@@ -80,9 +82,12 @@ class DocenteController extends Controller
      * @param  \Ngsoft\Docente  $docente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Docente $docente)
+    public function update(UpdateDocenteRequest $request, $id)
     {
-        //
+        $docente = Docente::findOrFail($id);
+        $docente->fill($request->all());
+        $docente->save();
+        return redirect()->route('docentes.index');
     }
 
     /**
@@ -91,8 +96,10 @@ class DocenteController extends Controller
      * @param  \Ngsoft\Docente  $docente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Docente $docente)
+    public function destroy($id)
     {
-        //
+        $docente = Docente::findOrFail($id);
+        $docente->delete();
+        return redirect()->back();
     }
 }
