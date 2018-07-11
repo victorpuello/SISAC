@@ -143,10 +143,6 @@
         <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
         <!-- Theme Base, Components and Settings -->
         <script src="{{asset('js/theme.js')}}"></script>
-
-        <!-- Theme Custom -->
-        <script src="{{asset('js/custom.js')}}"></script>
-
         <!-- Theme Initialization Files -->
         <script src="{{asset('js/theme.init.js')}}"></script>
 

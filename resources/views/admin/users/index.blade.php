@@ -49,6 +49,7 @@
     <script src="{{asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('js/examples/examples.datatables.editable.js')}}"></script>
     <script src="{{asset('js/examples/examples.modals.js')}}"></script>
+    <script src="{{asset('js/custom.js')}}"></script>
     <script type="text/javascript">
         $(".deleted").click(function (e) {
             $("#form-delete").attr('action', $(this).data('url') );

@@ -20,13 +20,20 @@
     </li>
     <li class="nav-parent">
         <a class="nav-link" href="#">
-            <i class="fas fa-users" aria-hidden="true"></i>
+            <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
             <span>Docentes</span>
         </a>
         <ul class="nav nav-children">
             <li>
                 <a class="nav-link" href="{{route('docentes.index')}}">
                     Ver Docentes
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="{{route('docentes.create')}}">
+                    Agregar Docente
                 </a>
             </li>
         </ul>

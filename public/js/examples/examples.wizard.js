@@ -25,7 +25,7 @@ Theme Version: 	2.1.1
 		}
 	});
 
-	$w1finish.on('click', function( ev ) {
+	/*$w1finish.on('click', function( ev ) {
 		ev.preventDefault();
 		var validated = $('#w1 form').valid();
 		if ( validated ) {
@@ -37,7 +37,7 @@ Theme Version: 	2.1.1
 				icon: 'fas fa-check'
 			});
 		}
-	});
+	});*/
 
 	$('#w1').bootstrapWizard({
 		tabClass: 'wizard-steps',
@@ -263,7 +263,7 @@ Theme Version: 	2.1.1
 			var $total = navigation.find('li').length - 1;
 			var $current = index;
 			var $percent = Math.floor(( $current / $total ) * 100);
-			
+
 			navigation.find('li').removeClass('active');
 			navigation.find('li').eq( $current ).addClass('active');
 

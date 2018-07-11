@@ -4,6 +4,8 @@ namespace Ngsoft\Http\Controllers;
 
 use Ngsoft\Docente;
 use Illuminate\Http\Request;
+use Ngsoft\Http\Requests\CreateDocenteRequest;
+use Ngsoft\User;
 
 class DocenteController extends Controller
 {
@@ -14,7 +16,7 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        $docentes = Docente::all();
+        $docentes = Docente::where('coordinator','=','0')->get();
         $fondos = ['bg-primary','bg-secondary','bg-tertiary','bg-quaternary'];
         return view('admin.docentes.index',compact('docentes','fondos'));
     }
@@ -26,7 +28,14 @@ class DocenteController extends Controller
      */
     public function create()
     {
-        //
+        $datas = User::where('type','=','docente')->orderBy('name', 'desc')->get();
+        $users = array();
+        foreach ($datas as $data){
+            if (is_null($data->docente)){
+                array_push($users,$data);
+            }
+        }
+        return view('admin.docentes.create',compact('users'));
     }
 
     /**
@@ -35,9 +44,11 @@ class DocenteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateDocenteRequest $request)
     {
-        //
+        $docente = new Docente($request->all());
+        $docente->save();
+        return redirect()->route('docentes.index');
     }
 
     /**
