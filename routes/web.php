@@ -14,6 +14,7 @@ Route::get('/','Auth\LoginController@showLoginForm')->name('login');
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('users', 'UserController');
     Route::resource('docentes', 'DocenteController');
+    Route::resource('asignaturas', 'AsignaturaController');
 });
 
 Auth::routes();

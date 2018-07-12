@@ -99,7 +99,9 @@ class DocenteController extends Controller
     public function destroy($id)
     {
         $docente = Docente::findOrFail($id);
+        $user = User::findOrFail($docente->user->id);
         $docente->delete();
+        $user->delete();
         return redirect()->back();
     }
 }

@@ -38,4 +38,17 @@
             </li>
         </ul>
     </li>
+    <li class="nav-parent">
+        <a class="nav-link" href="#">
+            <i class="fas fa-book" aria-hidden="true"></i>
+            <span>Asignaturas</span>
+        </a>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="{{route('asignaturas.index')}}">
+                    Ver Asignaturas
+                </a>
+            </li>
+        </ul>
+    </li>
 </ul>
