@@ -2,6 +2,8 @@
 
 namespace Ngsoft\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Ngsoft\Asignatura;
 use Ngsoft\Docente;
 use Ngsoft\Http\Requests\CreateDocenteRequest;
 use Ngsoft\Http\Requests\UpdateDocenteRequest;
@@ -18,7 +20,11 @@ class DocenteController extends Controller
     {
         $docentes = Docente::where('coordinator','=','0')->get();
         $fondos = ['bg-primary','bg-secondary','bg-tertiary','bg-quaternary'];
-        return view('admin.docentes.index',compact('docentes','fondos'));
+        $asignaturas = Asignatura::all();
+        foreach ($asignaturas as $key => $value){
+            $asignaturas[$key]->name = $value->name;
+        }
+        return view('admin.docentes.index',compact('docentes','fondos','asignaturas'));
     }
 
     /**
@@ -103,5 +109,18 @@ class DocenteController extends Controller
         $docente->delete();
         $user->delete();
         return redirect()->back();
+    }
+
+    /**
+     * @param Request $request
+     * @param $id
+     */
+    public function addAsignaturas(Request $request,$id){
+        $asignaturas = $request->asignaturas_id;
+        $docente = Docente::findOrFail($id);
+        for ($i=0; $i<= count($asignaturas); $i++){
+            $docente->asignaturas()->sync($asignaturas);
+        }
+        return redirect()->route('docentes.index');
     }
 }

@@ -25,7 +25,7 @@
                             <div class="col-lg-6">
                                 <p class="mb-1"><a href="{{route('docentes.edit',$docente->id)}}"><i class="fas fa-user-edit mr-1"></i>Editar</a></p>
                                 <p class="mb-1"><a href="#modalEliminar" class="deleted modal-basic" data-nuser="{{$docente->user->FullName}}" data-url="{{ route('docentes.destroy', $docente->id ) }}"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
-                                <p class="mb-1"><a href="#"><i class="fas fa-share-square mr-1"></i> Asignaturas</a></p>
+                                <p class="mb-1"><a href="#modalAddAsignaturas" data-url="{{route('docentes.addAsignaturas',$docente->id)}}" class="modal-basic addAsignatura"><i class="fas fa-share-square mr-1"></i> Asignaturas</a></p>
                             </div>
                             <div class="col-lg-6">
                                 <p class="mb-1"><a href="#"><i class="fas fa-chalkboard mr-1"></i>Salones</a></p>
@@ -48,6 +48,10 @@
             $("#form-delete").attr('action', $(this).data('url') );
             $("#NombreDocente").text( $(this).data('nuser') );
            //alert('hola');
+        });
+
+        $(".addAsignatura").click(function (e) {
+            $("#form-addAsignaturas").attr('action', $(this).data('url'))
         });
     </script>
 @endsection

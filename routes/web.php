@@ -15,6 +15,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('users', 'UserController');
     Route::resource('docentes', 'DocenteController');
     Route::resource('asignaturas', 'AsignaturaController');
+    Route::post('docentes/addAsignaturas/{id}',['as' => 'docentes.addAsignaturas', 'uses' => 'DocenteController@addAsignaturas']);
 });
 
 Auth::routes();

@@ -53,4 +53,13 @@ class Docente extends Model
 
         return $this->name;
     }
+
+    public function getAsignaturasVinculadasAtribute(){
+        $asignaturas = $this->asignaturas();
+        foreach ($asignaturas as $key => $value){
+            $asignaturas[$key]->name = $value->name;
+        }
+        return $asignaturas;
+    }
+
 }
