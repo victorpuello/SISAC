@@ -4,6 +4,7 @@ namespace Ngsoft\Http\Controllers;
 
 use Illuminate\Validation\Rule;
 use Ngsoft\Docente;
+use Ngsoft\Salon;
 use Validator;
 use Ngsoft\Asignatura;
 use Illuminate\Http\Request;
@@ -106,4 +107,6 @@ class AsignaturaController extends Controller
         $asignatura->delete();
         return redirect()->back();
     }
+
+
 }

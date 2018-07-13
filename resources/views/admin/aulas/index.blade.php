@@ -14,7 +14,7 @@
                         <div class="summary-icon bg-{{$fondos[rand(0,3)]}}">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-square-o fa-stack-2x"></i>
-                                <strong class="fa-stack-1x" style="font-size:80%; margin: -17%;">{{$i}}</strong>
+                                <strong class="fa-stack-1x" style="font-size:80%; margin: -17%;">{{$salones->where('grade','=',$i)->count()}}</strong>
                             </span>
                         </div>
                     </div>
@@ -23,7 +23,6 @@
                             <h4 class="title">Aulas Grado {{$i}}</h4>
                             <div class="info">
                                 <strong >Ingresa para hacer modificaciones en las aulas de</strong>
-                                <span class="text-primary"> {{$i}}°</span>
                             </div>
                         </div>
                         <div class="summary-footer">
