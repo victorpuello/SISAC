@@ -12,9 +12,11 @@ class SalonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $fondos =  ['primary','secondary','tertiary','quaternary'];
     public function index()
     {
-        //
+        $fondos = $this->fondos;
+        return view('admin.aulas.index',compact('fondos'));
     }
 
     /**
@@ -44,9 +46,11 @@ class SalonController extends Controller
      * @param  \Ngsoft\Salon  $salon
      * @return \Illuminate\Http\Response
      */
-    public function show(Salon $salon)
+    public function show($grado)
     {
-        //
+        $aulas = Salon::where('grade','=',$grado)->get();
+        $fondos = $this->fondos;
+        return view('admin.aulas.salones',compact('aulas','fondos'));
     }
 
     /**

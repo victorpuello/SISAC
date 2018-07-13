@@ -3,6 +3,7 @@
 namespace Ngsoft;
 
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\This;
 
 class Salon extends Model
 {
@@ -19,5 +20,9 @@ class Salon extends Model
 
     public function estudiantes(){
         return $this->hasMany(Estudiante::class);
+    }
+
+    public function getNameAulaAttribute(){
+        return 'Grado '. $this->grade .' - '. $this->name;
     }
 }

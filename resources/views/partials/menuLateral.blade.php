@@ -5,7 +5,7 @@
             <span>Escritorio</span>
         </a>
     </li>
-    <li class="nav-parent nav-expanded nav-active">
+    <li class="nav-parent nav-active">
         <a class="nav-link" href="#">
             <i class="fas fa-user" aria-hidden="true"></i>
             <span>Usuarios</span>
@@ -50,5 +50,11 @@
                 </a>
             </li>
         </ul>
+    </li>
+    <li >
+        <a class="nav-link" href="{{route('aulas.index')}}">
+            <i class="fas fa-school" aria-hidden="true"></i>
+            <span>Aulas</span>
+        </a>
     </li>
 </ul>
