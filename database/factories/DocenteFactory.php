@@ -10,7 +10,7 @@ $factory->define(Ngsoft\Docente::class, function (Faker $faker) {
         'gender'  => $faker->randomElement(['F','M']),
         'address' => $faker->address,
         'phone' => $faker->phoneNumber,
-        'path' => 'public/img/1.jpg',
+        'path' => $faker->randomElement(['1.jpg','2.jpg','3.jpg']),
         'coordinator' => $faker->boolean
     ];
 });

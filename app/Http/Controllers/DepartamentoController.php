@@ -3,10 +3,9 @@
 namespace Ngsoft\Http\Controllers;
 
 use Ngsoft\Departamento;
-use Ngsoft\Estudiante;
 use Illuminate\Http\Request;
 
-class EstudianteController extends Controller
+class DepartamentoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        $estudiantes = Estudiante::all();
-        return view('admin.estudiantes.index',compact('estudiantes'));
+        //
     }
 
     /**
@@ -26,8 +24,7 @@ class EstudianteController extends Controller
      */
     public function create()
     {
-        $departamentos = Departamento::pluck('name','id');
-        return view('admin.estudiantes.create',compact('departamentos'));
+        //
     }
 
     /**
@@ -44,10 +41,10 @@ class EstudianteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Estudiante  $estudiante
+     * @param  \Ngsoft\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function show(Estudiante $estudiante)
+    public function show(Departamento $departamento)
     {
         //
     }
@@ -55,22 +52,22 @@ class EstudianteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Estudiante  $estudiante
+     * @param  \Ngsoft\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Estudiante $estudiante)
+    public function edit(Departamento $departamento)
     {
-
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Estudiante  $estudiante
+     * @param  \Ngsoft\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Estudiante $estudiante)
+    public function update(Request $request, Departamento $departamento)
     {
         //
     }
@@ -78,10 +75,10 @@ class EstudianteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Estudiante  $estudiante
+     * @param  \Ngsoft\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Estudiante $estudiante)
+    public function destroy(Departamento $departamento)
     {
         //
     }

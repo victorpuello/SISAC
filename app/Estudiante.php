@@ -30,4 +30,7 @@ class Estudiante extends Model
         return $this->hasMany(Anotacion::class);
     }
 
+    public function getFullNameAttribute(){
+        return $this->name.' '.$this->lastname;
+    }
 }

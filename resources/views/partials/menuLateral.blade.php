@@ -18,6 +18,19 @@
             </li>
         </ul>
     </li>
+    <li class="nav-parent nav-active">
+        <a class="nav-link" href="#">
+            <i class="fas fa-user-graduate" aria-hidden="true"></i>
+            <span>Estudiantes</span>
+        </a>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="{{route('estudiantes.index')}}">
+                    Ver Estudiantes
+                </a>
+            </li>
+        </ul>
+    </li>
     <li class="nav-parent">
         <a class="nav-link" href="#">
             <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>

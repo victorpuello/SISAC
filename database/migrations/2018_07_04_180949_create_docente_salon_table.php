@@ -19,6 +19,7 @@ class CreateDocenteSalonTable extends Migration
             $table->integer('salon_id')->unsigned();
             $table->foreign('docente_id')->references('id')->on('docentes')->onDelete('cascade');
             $table->foreign('salon_id')->references('id')->on('salons')->onDelete('cascade');
+            $table->boolean('isdirector')->default(false);
             $table->timestamps();
         });
     }

@@ -13,10 +13,12 @@
 Route::get('/','Auth\LoginController@showLoginForm')->name('login');
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('users', 'UserController');
+    Route::resource('estudiantes', 'EstudianteController');
     Route::resource('docentes', 'DocenteController');
     Route::resource('asignaturas', 'AsignaturaController');
     Route::resource('aulas', 'SalonController');
     Route::post('docentes/addAsignaturas/{id}',['as' => 'docentes.addAsignaturas', 'uses' => 'DocenteController@addAsignaturas']);
+    Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'MunicipioController']);
 });
 
 Auth::routes();

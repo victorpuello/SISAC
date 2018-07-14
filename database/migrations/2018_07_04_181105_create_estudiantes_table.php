@@ -14,15 +14,16 @@ class CreateEstudiantesTable extends Migration
     public function up()
     {
         Schema::create('estudiantes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('lastname');
-            $table->enum('typeid',['RC','TI','CC','DE']);
-            $table->string('identification')->unique();
-            $table->string('birthstate');
-            $table->string('birthcity');
-            $table->enum('gender',['M','F']);
-            $table->string('address');
+            $table->increments('id');//ok
+            $table->string('name');//ok
+            $table->string('lastname');//ok
+            $table->enum('typeid',['RC','TI','CC','DE']);//ok
+            $table->integer('identification')->unique();//ok
+            $table->date('birthday');//ok
+            $table->string('birthstate');//ok
+            $table->string('birthcity');//ok
+            $table->enum('gender',['M','F']);//ok
+            $table->string('address');// ok
             $table->string('EPS');
             $table->string('phone');
             $table->date('datein');

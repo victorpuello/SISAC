@@ -28,7 +28,7 @@ class Docente extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function setPathAttribute($path)
+   public function setPathAttribute($path)
     {
         if (!empty($path)) {
             $name = Carbon::now()->second.$path->getClientOriginalName();
