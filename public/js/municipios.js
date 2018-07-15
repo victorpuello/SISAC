@@ -16,6 +16,7 @@ $("#birthstate").change(event => {
         });
     });
 });
+
 // Funcion para usar en crear el estudiante y hacer el change de estado
 $("#stade").change(event => {
     const estado = `${event.target.value}`;

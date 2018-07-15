@@ -45,7 +45,7 @@
     </div>
     <div class="col-lg-4">
         {!! Form::label('birthcity', 'Municipio de nacimiento',['class'=>'control-label']) !!}
-        {!! Form::select('birthcity', ['placeholder' =>'Selecciona un Municipio'],null,['class' => 'form-control mb-3', 'id'=>'birthcity','required']) !!}
+        {!! Form::select('birthcity', [],null,['class' => 'form-control mb-3', 'id'=>'birthcity','required']) !!}
     </div>
     <div class="col-lg-4">
         <div class="form-group">

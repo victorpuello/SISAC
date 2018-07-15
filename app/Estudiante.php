@@ -2,6 +2,7 @@
 
 namespace Ngsoft;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Estudiante extends Model
@@ -40,5 +41,12 @@ class Estudiante extends Model
             $this->attributes['path'] = $name;
             \Storage::disk('estudiantes')->put($name,\File::get($path));
         }
+    }
+    public function getActiveAttribute ()
+    {
+        if ($this->stade ==='activo'){
+            return true;
+        }
+        return false;
     }
 }

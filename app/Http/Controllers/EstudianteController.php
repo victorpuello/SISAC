@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Ngsoft\Http\Requests\CreateEstudianteRequest;
 use Ngsoft\Http\Requests\UpdateDocenteRequest;
 use Ngsoft\Http\Requests\UpdateEstudianteRequest;
+use Ngsoft\Municipio;
 use Ngsoft\Salon;
 
 class EstudianteController extends Controller
@@ -54,9 +55,11 @@ class EstudianteController extends Controller
      * @param  \Ngsoft\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
-    public function show(Estudiante $estudiante)
+    public function show($id)
     {
-        //
+        $estudiante = Estudiante::findOrFail($id);
+        $municipio = Municipio::findOrFail($estudiante->birthcity);
+        return view('admin.estudiantes.show', compact('estudiante','municipio'));
     }
 
     /**

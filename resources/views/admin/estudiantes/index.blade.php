@@ -32,7 +32,7 @@
                 <td>{{$estudiante->phone}}</td>
                 <td class="actions">
                     <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
-                    <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
+                    <a href="{{route('estudiantes.show', $estudiante->id)}}" class=" on-default"><i class="fas fa-eye"></i></a>
                     <a href="{{route('estudiantes.edit', $estudiante->id)}}" class="on-default " > <i class="fas fa-pencil-alt"></i></a>
                     <a href="#modalEliminar" class="on-default deleted modal-basic" data-nuser="{{$estudiante->FullName}}" data-url="{{ route('estudiantes.destroy', $estudiante->id ) }}"><i class="far fa-trash-alt"></i></a>
                 </td>
