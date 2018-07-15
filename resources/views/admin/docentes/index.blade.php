@@ -47,7 +47,6 @@
         $(".deleted").click(function (e) {
             $("#form-delete").attr('action', $(this).data('url') );
             $("#NombreDocente").text( $(this).data('nuser') );
-           //alert('hola');
         });
 
         $(".addAsignatura").click(function (e) {

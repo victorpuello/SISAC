@@ -24,13 +24,13 @@ class CreateEstudiantesTable extends Migration
             $table->string('birthcity');//ok
             $table->enum('gender',['M','F']);//ok
             $table->string('address');// ok
-            $table->string('EPS');
-            $table->string('phone');
-            $table->date('datein');
-            $table->date('dateout')->nullable();
-            $table->string('path');
-            $table->enum('stade',['activo','retirado','graduado']);
-            $table->enum('situation',['repitente','promovido','normal']);
+            $table->string('EPS');//ok
+            $table->string('phone');//ok
+            $table->date('datein');//ok
+            $table->date('dateout')->nullable();//ok
+            $table->string('path');//ok
+            $table->enum('stade',['activo','retirado','graduado']);//ok
+            $table->enum('situation',['nuevo','repitente','promovido','normal'])->default('nuevo');//ok
             $table->integer('salon_id')->unsigned();
             $table->foreign('salon_id')->references('id')->on('salons')->onDelete('cascade');
             $table->timestamps();

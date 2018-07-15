@@ -52,7 +52,7 @@
     </div>
     <div id="w1-confirm" class="tab-pane p-3">
         <div class="form-group row">
-            <label class="col-lg-3 control-label text-lg-right pt-2">Fotografia del Docente</label>
+            <label class="col-lg-6 control-label text-lg-right pt-2">Fotografia del Docente</label>
             <div class="col-lg-6">
                 <div class="fileupload fileupload-new" data-provides="fileupload">
                     <div class="input-append">
@@ -63,9 +63,9 @@
                         <span class="btn btn-default btn-file">
                             <span class="fileupload-exists">Cambiar</span>
                             <span class="fileupload-new">Selecionar archivo</span>
-                            {!! Form::file('path',['required'])!!}
+                            {!! Form::file('path')!!}
                         </span>
-                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remove</a>
+                        <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Cambiar</a>
                     </div>
                 </div>
             </div>

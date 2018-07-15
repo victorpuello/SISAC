@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Estudiante extends Model
 {
     protected $fillable =[
-        'name','lastname','typeid','identification','birthstate','birthcity','gender','address','EPS','phone','datein','dateout','path','stade','situation','salon_id',
+        'name','lastname','typeid','identification','birthday','birthstate','birthcity','gender','address','EPS','phone','datein','dateout','path','stade','situation','salon_id',
     ];
     public function periodos(){
         return $this->belongsToMany(Periodo::class)->withPivot('inasistencias');
@@ -32,5 +32,13 @@ class Estudiante extends Model
 
     public function getFullNameAttribute(){
         return $this->name.' '.$this->lastname;
+    }
+    public function setPathAttribute($path)
+    {
+        if (!empty($path)) {
+            $name = Carbon::now()->second.$path->getClientOriginalName();
+            $this->attributes['path'] = $name;
+            \Storage::disk('estudiantes')->put($name,\File::get($path));
+        }
     }
 }
