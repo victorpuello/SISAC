@@ -9,15 +9,13 @@ class Periodo extends Model
     protected $fillable = [
         'name','datestart','dateend',
     ];
+
     public function estudiantes(){
-        return $this->belongsToMany(Periodo::class)->withPivot('inasistencias');
+        return $this->belongsToMany(Estudiante::class);
     }
 
-    public function anotacion(){
-       return $this->belongsTo(Anotacion::class);
+    public function logros(){
+        return $this->hasMany(Logro::class);
     }
 
-    public function  notas(){
-        return $this->hasMany(Nota::class);
-    }
 }

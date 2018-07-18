@@ -34,6 +34,10 @@ class Salon extends Model
     {
         return $this->nombres[$this->grade] . ' - ' . $this->name;
     }
+    public function getNameGradeAttibute ()
+    {
+        return $this->nombres[$this->grade];
+    }
 
     public function estudiantes ()
     {

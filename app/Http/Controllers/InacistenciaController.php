@@ -2,12 +2,10 @@
 
 namespace Ngsoft\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use Ngsoft\Nota;
+use Ngsoft\Inacistencia;
 use Illuminate\Http\Request;
-use Ngsoft\Periodo;
 
-class NotaController extends Controller
+class InacistenciaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,20 +14,7 @@ class NotaController extends Controller
      */
     public function index()
     {
-        try{
-            $periodos = Periodo::pluck('name','id');
-            $salones = Auth::user()->docente->salones;
-            $grados = [];
-            foreach ($salones as $key => $salon){
-                $grados[$salon->grade] = $salon->getNameGradeAttibute();
-            }
-            $grados = array_unique($grados);
-            $asignaturas =Auth::user()->docente->asignaturas->pluck('name','id');
-            $logros = [];
-            return view('admin.notas.index',compact('periodos','asignaturas','grados','logros'));
-        }catch (\Exception $e){
-            return back()->withErrors($e);
-        }
+        //
     }
 
     /**
@@ -56,10 +41,10 @@ class NotaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Nota  $nota
+     * @param  \Ngsoft\Inacistencia  $inacistencia
      * @return \Illuminate\Http\Response
      */
-    public function show(Nota $nota)
+    public function show(Inacistencia $inacistencia)
     {
         //
     }
@@ -67,10 +52,10 @@ class NotaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Nota  $nota
+     * @param  \Ngsoft\Inacistencia  $inacistencia
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nota $nota)
+    public function edit(Inacistencia $inacistencia)
     {
         //
     }
@@ -79,10 +64,10 @@ class NotaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Nota  $nota
+     * @param  \Ngsoft\Inacistencia  $inacistencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nota $nota)
+    public function update(Request $request, Inacistencia $inacistencia)
     {
         //
     }
@@ -90,10 +75,10 @@ class NotaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Nota  $nota
+     * @param  \Ngsoft\Inacistencia  $inacistencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nota $nota)
+    public function destroy(Inacistencia $inacistencia)
     {
         //
     }

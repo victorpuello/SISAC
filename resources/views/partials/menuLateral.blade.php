@@ -64,6 +64,26 @@
             </li>
         </ul>
     </li>
+    <li class="nav-parent">
+        <a class="nav-link" href="#">
+            <i class="fas fa-book-open" aria-hidden="true"></i>
+            <span>Academia</span>
+        </a>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="{{route('notas.index')}}">
+                    Logros
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="#">
+                    Calificar
+                </a>
+            </li>
+        </ul>
+    </li>
     <li >
         <a class="nav-link" href="{{route('aulas.index')}}">
             <i class="fas fa-school" aria-hidden="true"></i>

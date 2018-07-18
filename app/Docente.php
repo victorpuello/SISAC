@@ -14,13 +14,17 @@ class Docente extends Model
         'id','typeid','numberid','fnac','gender','address','phone','path','coordinator','user_id'
     ];
     private $name;
+    public function asignaturas(){
+        return $this->belongsToMany(Asignatura::class);
+    }
+
+    public function logros(){
+        return $this->hasMany(Logro::class);
+    }
+
     public function salones()
     {
         return $this->belongsToMany(Salon::class);
-    }
-
-    public function asignaturas(){
-        return $this->belongsToMany(Asignatura::class);
     }
 
     public function user()
@@ -36,6 +40,7 @@ class Docente extends Model
             \Storage::disk('local')->put($name,\File::get($path));
         }
     }
+
 
     /**
      * @return string

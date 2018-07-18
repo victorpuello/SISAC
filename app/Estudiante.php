@@ -23,8 +23,8 @@ class Estudiante extends Model
         return $this->hasOne(Acudiente::class);
     }
 
-    public function notas(){
-        return $this->hasMany(Nota::class);
+    public function logros(){
+        return $this->belongsToMany(Logro::class)->withPivot('score');
     }
 
     public function anotaciones(){
