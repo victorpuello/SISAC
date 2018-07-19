@@ -78,7 +78,7 @@
         </ul>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="<?php echo e(route('notas.index')); ?>">
                     Calificar
                 </a>
             </li>

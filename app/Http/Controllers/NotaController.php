@@ -5,13 +5,15 @@ namespace Ngsoft\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Ngsoft\Asignatura;
+use Ngsoft\Estudiante;
 use Ngsoft\Logro;
-use Ngsoft\Nota;
 use Illuminate\Http\Request;
 use Ngsoft\Periodo;
+use Ngsoft\Salon;
 
 class NotaController extends Controller
 {
+    private $fondos =  ['primary','secondary','tertiary','quaternary'];
     /**
      * Display a listing of the resource.
      *
@@ -19,22 +21,17 @@ class NotaController extends Controller
      */
     public function index()
     {
+        $fondos = $this->fondos;
         switch (Auth::user()->type){
             case 'docente':
-                return $this->runDocenteView();
+                $docente = Auth::user()->docente;
+                $salones = $docente->salones;
                 break;
             default:
-                $logros = DB::table('users')
-                    ->join('docentes', 'users.id','=','docentes.user_id')
-                    ->join('logros','docentes.id','=','logros.docente_id')
-                    ->select('logros.*','docentes.*','users.*')
-                    ->get();
-                $asignaturas = Asignatura::all();
-                $grados = ['0' => 'Pre-Escolar', '1' => 'Primero', '2' => 'Segundo', '3' => 'Tercero', '4' => 'Cuarto', '5' => 'Quinto', '6' => 'Sexto', '7' => 'Septimo', '8' => 'Octavo', '9' => 'Noveno', '10' => 'Decimo', '11' => 'Once'];
-                $periodos = Periodo::all();
-                return view('admin.logros.index', compact('logros','asignaturas','grados','periodos'));
+                $salones = Salon::select('name','id','grade')->get();
                 break;
         }
+        return view('admin.notas.index',compact('salones','fondos'));
     }
 
     /**
@@ -44,7 +41,7 @@ class NotaController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -64,9 +61,13 @@ class NotaController extends Controller
      * @param  \Ngsoft\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function show(Nota $nota)
+    public function show($id)
     {
-        //
+        $estudiantes = DB::table('estudiantes')
+            ->where('salon_id','=',$id)
+            ->orderBy('lastname','asc')
+            ->get();
+        return view('admin.notas.show',compact('estudiantes'));
     }
 
     /**
