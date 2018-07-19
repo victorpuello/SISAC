@@ -35,8 +35,22 @@
     <script src="{{asset('js/examples/examples.datatables.editable.js')}}"></script>
     <script>
         $(".deleted").click(function (e) {
-           /* $("#form-delete").attr('action', $(this).data('url') );
-            $("#NombreUser").text( $(this).data('nuser') );*/
+            $("#form-delete").attr('action', $(this).data('url') );
+            $("#NombreLogro").text( $(this).data('nlogro') );
+        });
+
+        $(".edit").click(function (e) {
+            $("#form-edit").attr('action', $(this).data('urlupdate') );
+            var ruta = $(this).data('urledit');
+            $.get(ruta , function (data) {
+                $("#docente_id").val(data.docente_id);
+                $("#periodo_id").val(data.periodo_id);
+                $("#asignatura_id").val(data.asignatura_id);
+                $("#grade").val(data.grade);
+                $("#category").val(data.category);
+                $("#description").val(data.description);
+                $("#code").val(data.code);
+            });
         });
     </script>
     @endsection

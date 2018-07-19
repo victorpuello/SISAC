@@ -42,6 +42,7 @@
             $("#form-edit").attr('action', $(this).data('urlupdate') );
             var ruta = $(this).data('urledit');
             $.get(ruta , function (data) {
+                console.log(data);
                 $("#docente_id").val(data.docente_id);
                 $("#periodo_id").val(data.periodo_id);
                 $("#asignatura_id").val(data.asignatura_id);

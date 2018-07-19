@@ -27,8 +27,8 @@
                     <td class="actions">
                         <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
                         <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
-                        <a href="#modalEditar" class="on-default modal-basic" > <i class="fas fa-pencil-alt"></i></a>
-                        <a href="#modalEliminar" class="on-default deleted modal-basic" data-nuser="#" data-url="#"><i class="far fa-trash-alt"></i></a>
+                        <a href="#modalEditar" class="on-default edit modal-basic" data-urlupdate="{{ route('logros.update', $logro->id ) }}" data-urledit="{{ route('logros.edit', $logro->id ) }}" > <i class="fas fa-pencil-alt"></i></a>
+                        <a href="#modalEliminar" data-url="{{route('logros.destroy',$logro->id)}}" data-nlogro="{{$logro->code}}" class="on-default deleted modal-basic" data-nuser="#" data-url="#"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
             @endforeach

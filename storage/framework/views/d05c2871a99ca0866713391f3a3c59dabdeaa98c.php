@@ -27,7 +27,7 @@
                     <td class="actions">
                         <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
                         <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
-                        <a href="#modalEditar" class="on-default edit modal-basic" data-urlupdate="<?php echo e(route('logros.update', $logro->id )); ?>" data-urledit="<?php echo e(route('logros.edit', $logro->id )); ?>" > <i class="fas fa-pencil-alt"></i></a>
+                        <a href="#modalEditar" class="on-default modal-basic" data-urlupdate="<?php echo e(route('logros.update', $logro->id )); ?>" data-urledit="<?php echo e(route('logros.edit', $logro->id )); ?>" > <i class="fas fa-pencil-alt"></i></a>
                         <a href="#modalEliminar" data-url="<?php echo e(route('logros.destroy',$logro->id)); ?>" data-nlogro="<?php echo e($logro->code); ?>" class="on-default deleted modal-basic" data-nuser="#" data-url="#"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
