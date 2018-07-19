@@ -13,16 +13,17 @@
           <h2 class="card-title">Buscar Logros</h2>
         </header>
     <div class="card-body">
-        @include('admin.notas.partials.fields')
+        @include('admin.logros.partials.fields')
         <hr>
         @if(count($logros) > 0)
-            @include('admin.notas.partials.resultados')
+            @include('admin.logros.partials.resultados')
             @else
             <div class=".col-md-6 .offset-md-3">
                 <h4 class="text-center">No hay resultados para la busqueda ...</h4>
             </div>
         @endif
     </div>
+        @include('admin.logros.partials.modals')
     </section>
 @endsection
 @section('script')
@@ -30,6 +31,12 @@
     <script src="{{asset('vendor/select2/js/select2.js')}}"></script>
     <script src="{{asset('vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('js/examples/examples.datatables.editable.js')}}"></script>
     <script src="{{asset('js/examples/examples.modals.js')}}"></script>
+    <script src="{{asset('js/examples/examples.datatables.editable.js')}}"></script>
+    <script>
+        $(".deleted").click(function (e) {
+           /* $("#form-delete").attr('action', $(this).data('url') );
+            $("#NombreUser").text( $(this).data('nuser') );*/
+        });
+    </script>
     @endsection

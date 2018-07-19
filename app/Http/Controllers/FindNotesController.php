@@ -33,7 +33,7 @@ class FindNotesController extends Controller
                     ['asignatura_id','=',$asignatura],
                     ['grade','=',$grado]
                 ])->get();
-               return view('admin.notas.index',compact('logros'))->with($this->getDataSearch($docente))->withInput($request->all());
+               return view('admin.logros.index',compact('logros'))->with($this->getDataSearch($docente))->withInput($request->all());
                 break;
             case 'secretaria':
                 break;

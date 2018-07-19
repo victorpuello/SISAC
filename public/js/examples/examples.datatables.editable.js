@@ -43,12 +43,17 @@ Theme Version: 	2.1.1
 		build: function() {
 			this.datatable = this.$table.DataTable({
 				dom: '<"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
-				aoColumns: [
-					null,
-					null,
-					null,
-					{ "bSortable": false }
-				]
+                buttons: [
+                    'pdf',
+                    'excel',
+                    'print'
+                ],
+                bAutoWidth:true,
+                aoColumnDefs: [
+                    {aTargets: [0], "bSortable": true},
+                    {aTargets: [-3], "bSortable": true},
+                    {aTargets: [' _all '], "bSortable": false}
+				],
 			});
 
 			window.dt = this.datatable;
@@ -87,7 +92,7 @@ Theme Version: 	2.1.1
 							src: _self.options.dialog.wrapper,
 							type: 'inline'
 						},
-						preloader: false,
+						preloader: true,
 						modal: true,
 						callbacks: {
 							change: function() {

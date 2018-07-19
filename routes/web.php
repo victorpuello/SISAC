@@ -17,7 +17,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('docentes', 'DocenteController');
     Route::resource('asignaturas', 'AsignaturaController');
     Route::resource('aulas', 'SalonController');
-    Route::resource('notas', 'NotaController');
+    Route::resource('logros', 'LogroController');
     Route::post('docentes/addAsignaturas/{id}',['as' => 'docentes.addAsignaturas', 'uses' => 'DocenteController@addAsignaturas']);
     Route::post('findNotes',['as'=>'findNotes', 'uses' => 'FindNotesController']);
     Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'MunicipioController']);

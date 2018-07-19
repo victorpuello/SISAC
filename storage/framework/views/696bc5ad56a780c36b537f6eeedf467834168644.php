@@ -1,6 +1,6 @@
 <ul class="nav nav-main">
     <li>
-        <a class="nav-link" href="{{route('home')}}">
+        <a class="nav-link" href="<?php echo e(route('home')); ?>">
             <i class="fas fa-home" aria-hidden="true"></i>
             <span>Escritorio</span>
         </a>
@@ -12,7 +12,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('users.index')}}">
+                <a class="nav-link" href="<?php echo e(route('users.index')); ?>">
                     Ver usuarios
                 </a>
             </li>
@@ -25,7 +25,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('estudiantes.index')}}">
+                <a class="nav-link" href="<?php echo e(route('estudiantes.index')); ?>">
                     Ver Estudiantes
                 </a>
             </li>
@@ -38,14 +38,14 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('docentes.index')}}">
+                <a class="nav-link" href="<?php echo e(route('docentes.index')); ?>">
                     Ver Docentes
                 </a>
             </li>
         </ul>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('docentes.create')}}">
+                <a class="nav-link" href="<?php echo e(route('docentes.create')); ?>">
                     Agregar Docente
                 </a>
             </li>
@@ -58,7 +58,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('asignaturas.index')}}">
+                <a class="nav-link" href="<?php echo e(route('asignaturas.index')); ?>">
                     Ver Asignaturas
                 </a>
             </li>
@@ -71,7 +71,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('logros.index')}}">
+                <a class="nav-link" href="<?php echo e(route('logros.index')); ?>">
                     Logros
                 </a>
             </li>
@@ -85,7 +85,7 @@
         </ul>
     </li>
     <li >
-        <a class="nav-link" href="{{route('aulas.index')}}">
+        <a class="nav-link" href="<?php echo e(route('aulas.index')); ?>">
             <i class="fas fa-school" aria-hidden="true"></i>
             <span>Aulas</span>
         </a>
