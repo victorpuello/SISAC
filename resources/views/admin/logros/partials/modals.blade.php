@@ -66,8 +66,10 @@
                             {!! Form::text('code', null, ['class' => 'form-control','id'=>'inputDefault', 'placeholder' => 'Codigo identificador de logro']) !!}
                         </div>
                         <div class="col-lg-6">
-                            {!! Form::select('category',['cognitivo'=>'Cognitivo','procedimental'=>'Procedimental','actitudinal'=>'Actitudinal'], null, ['placeholder'=>'Grado','class' => 'form-control mb-3', 'id'=>'category','required']) !!}
+                            {!! Form::select('category',['cognitivo'=>'Cognitivo','procedimental'=>'Procedimental','actitudinal'=>'Actitudinal'], null, ['placeholder'=>'Tipo de logro','class' => 'form-control mb-3', 'id'=>'category','required']) !!}
                         </div>
+                    </div>
+                    <div class="form-group row">
                         <div class="col-lg-12">
                             {!! Form::textarea('description',null, array('class'=>'form-control','rows' => 3, 'cols' => 50,'placeholder'=>'Descripción del Logro')) !!}
                         </div>
