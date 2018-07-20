@@ -5,6 +5,7 @@ namespace Ngsoft\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Ngsoft\Asignatura;
+use Ngsoft\Docente;
 use Ngsoft\Http\Requests\CreateLogroRequest;
 use Ngsoft\Http\Requests\UpdateLogroRequest;
 use Ngsoft\Logro;
@@ -68,7 +69,7 @@ class LogroController extends Controller
      */
     public function show(Logro $logro)
     {
-        //
+        dd($logro);
     }
 
     /**
@@ -139,7 +140,7 @@ class LogroController extends Controller
             $grados = array_unique($grados);
             $asignaturas = Auth::user()->docente->asignaturas->pluck('name', 'id');
             $logros = [];
-            return view('admin.logros.index', compact('periodos', 'asignaturas', 'grados', 'logros'));
+            return view('admin.logros.index', compact('periodos', 'asignaturas', 'grados', 'logros'))->with('mensaje','Logro Creado con exito');
         } catch (\Exception $e) {
             return back()->withErrors($e);
         }
@@ -155,9 +156,52 @@ class LogroController extends Controller
             ->join('logros', 'docentes.id', '=', 'logros.docente_id')
             ->select('logros.*', 'docentes.*', 'users.*')
             ->get();
+        dd($logros);
         $asignaturas = Asignatura::pluck('name', 'id');
         $grados = ['0' => 'Pre-Escolar', '1' => 'Primero', '2' => 'Segundo', '3' => 'Tercero', '4' => 'Cuarto', '5' => 'Quinto', '6' => 'Sexto', '7' => 'Septimo', '8' => 'Octavo', '9' => 'Noveno', '10' => 'Decimo', '11' => 'Once'];
         $periodos = Periodo::pluck('name', 'id');
-        return view('admin.logros.index', compact('logros', 'asignaturas', 'grados', 'periodos'));
+        return view('admin.logros.index', compact('logros', 'asignaturas', 'grados', 'periodos'))->with('mensaje','Logro Creado con exito');
+    }
+    public function FindNotes(Request $request){
+        $periodo = $request->periodo;
+        $docente = $request->user()->docente->id;
+        $grado = $request->grado;
+        $asignatura = $request->asignatura;
+        $user = $request->user()->type;
+        switch ($user){
+            case 'admin':
+                $logros = Logro::all();
+
+                break;
+            case 'coordinador':
+                break;
+            case 'docente':
+                $logros = DB::table('logros')->where([
+                    ['periodo_id','=',$periodo],
+                    ['docente_id','=',$docente],
+                    ['asignatura_id','=',$asignatura],
+                    ['grade','=',$grado]
+                ])->get();
+                return view('admin.logros.index',compact('logros'))->with($this->getDataSearch($docente))->withInput($request->all());
+                break;
+            case 'secretaria':
+                break;
+            default:break;
+        }
+    }
+    public function getDataSearch ($docente)
+    {
+        $periodos = Periodo::pluck('name', 'id');
+        $doc = Docente::find($docente);
+        $salones = $doc->salones;
+        $grados = [];
+        foreach ($salones as $key => $salon) {
+            $grados[$salon->grade] = $salon->getNameGradeAttibute();
+        }
+        $grados = array_unique($grados);
+        $asignaturas = $doc->asignaturas->pluck('name', 'id');
+        return compact('periodos','asignaturas','grados');
     }
 }
+
+

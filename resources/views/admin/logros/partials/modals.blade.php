@@ -66,7 +66,6 @@
         <div class="card-body">
             <div class="modal-wrapper">
                 <div class="modal-text">
-                    @include('admin.logros.partials.messages')
                     @include('admin.logros.partials.fieldsCreate')
                 </div>
             </div>

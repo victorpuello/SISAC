@@ -27,7 +27,10 @@
         ],
         "psr-4": {
             "Ngsoft\\": "app/"
-        }
+        },
+        "files": [
+            "app/Helpers/VariosHelpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

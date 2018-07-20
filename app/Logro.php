@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Logro extends Model
 {
     protected $fillable = [
-        'code','description','category','grade','asignatura_id','docente_id','periodo_id'
+        'code','indicador','description','category','grade','asignatura_id','docente_id','periodo_id'
     ];
 
     public function asignatura()

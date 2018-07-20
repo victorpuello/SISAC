@@ -1,8 +1,8 @@
 <?php if(\Illuminate\Support\Facades\Auth::user()->type === 'docente'): ?>
-    <?php echo Form::hidden('docente_id', \Illuminate\Support\Facades\Auth::user()->docente->id); ?>
+    <?php echo Form::hidden('docente_id', \Illuminate\Support\Facades\Auth::user()->docente->id,['id'=>'docente_id']); ?>
 
 <?php else: ?>
-    <?php echo Form::select('docente_id',array_pluck($logros,'name','docente_id'), null, ['placeholder'=>'Docente','class' => 'form-control mb-3', 'id'=>'periodo_id','required']); ?>
+    <?php echo Form::select('docente_id',array_pluck($logros,'name','docente_id'), null, ['placeholder'=>'Docente','class' => 'form-control mb-3', 'id'=>'docente_id','required']); ?>
 
 <?php endif; ?>
 <div class="form-group row">
@@ -26,14 +26,27 @@
     </div>
 </div>
 <div class="form-group row">
-    <div class="col-lg-6">
-        <?php echo Form::text('code', null, ['class' => 'form-control','id'=>'code', 'placeholder' => 'Codigo identificador de logro']); ?>
+    <div class="col-lg-4">
+        <div class="form-group">
+            <?php echo Form::select('category',['cognitivo'=>'Cognitivo','procedimental'=>'Procedimental','actitudinal'=>'Actitudinal'], null, ['placeholder'=>'Tipo de logro','class' => 'form-control mb-3', 'id'=>'category','required']); ?>
 
+        </div>
     </div>
-    <div class="col-lg-6">
-        <?php echo Form::select('category',['cognitivo'=>'Cognitivo','procedimental'=>'Procedimental','actitudinal'=>'Actitudinal'], null, ['placeholder'=>'Tipo de logro','class' => 'form-control mb-3', 'id'=>'category','required']); ?>
+    <div class="col-lg-4">
+        <div class="form-group">
+            <?php echo Form::select('indicador',['bajo'=>'Bajo','basico'=>'Basico','alto'=>'Alto', 'superior' => 'Superior'], null, ['placeholder'=>'Indicador de logro','class' => 'form-control mb-3', 'id'=>'indicador','required']); ?>
 
+        </div>
     </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            <?php echo Form::text('codeUser', null,['placeholder'=>'Codigo Identificador','class' => 'form-control mb-3', 'id'=>'codeUser','required']); ?>
+
+            <?php echo Form::hidden('code',null,['id'=>'code']); ?>
+
+        </div>
+    </div>
+
 </div>
 <div class="form-group row">
     <div class="col-lg-12">

@@ -20,6 +20,10 @@ Theme Version: 	2.1.1
             const titulo = `${errores[error]}`;
             crearNotificacion(nombre,titulo,'error');
         }
+
+        var msg = $('#msg').data('msg');
+        console.log(msg);
+
 	});
 
 	function crearNotificacion(titulo, text, clase) {

@@ -1,4 +1,4 @@
-<?php echo Form::open(['route' => 'findNotes', 'method' => 'post', 'class' => 'form-horizontal', 'novalidate' => "novalidate"]); ?>
+<?php echo Form::open(['route' => 'logros.findnotes', 'method' => 'post', 'class' => 'form-horizontal', 'novalidate' => "novalidate"]); ?>
 
 <div class="row">
     <div class="col-lg-3">

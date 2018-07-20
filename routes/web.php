@@ -20,7 +20,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('logros', 'LogroController');
     Route::resource('notas', 'NotaController');
     Route::post('docentes/addAsignaturas/{id}',['as' => 'docentes.addAsignaturas', 'uses' => 'DocenteController@addAsignaturas']);
-    Route::post('findNotes',['as'=>'findNotes', 'uses' => 'FindNotesController']);
+    Route::post('logros/findnotes',['as'=>'logros.findnotes', 'uses' => 'LogroController@FindNotes']);
     Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'MunicipioController']);
 });
 

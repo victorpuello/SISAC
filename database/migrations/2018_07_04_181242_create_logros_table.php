@@ -16,7 +16,8 @@ class CreateLogrosTable extends Migration
         Schema::create('logros', function (Blueprint $table) {
             $table->increments('id');
             $table->string('code');
-            $table->string('description');
+            $table->text('description');
+            $table->enum('indicador',['bajo','basico','alto','superior']);
             $table->enum('category',['cognitivo','procedimental','actitudinal']);
             $table->enum('grade',['1','2','3','4','5','6','7','8','9','10','11']);
             $table->integer('asignatura_id')->unsigned();

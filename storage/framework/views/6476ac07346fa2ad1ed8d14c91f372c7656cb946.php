@@ -71,7 +71,6 @@
         <div class="card-body">
             <div class="modal-wrapper">
                 <div class="modal-text">
-                    <?php echo $__env->make('admin.logros.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     <?php echo $__env->make('admin.logros.partials.fieldsCreate', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                 </div>
             </div>

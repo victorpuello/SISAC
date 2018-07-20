@@ -13,6 +13,7 @@
           <h2 class="card-title">Buscar Logros</h2>
         </header>
     <div class="card-body">
+        @include('admin.logros.partials.messages')
         @include('admin.logros.partials.fields')
         <hr>
         @if(count($logros) > 0)
@@ -49,8 +50,29 @@
                 $("#grade").val(data.grade);
                 $("#category").val(data.category);
                 $("#description").val(data.description);
-                $("#code").val(data.code);
+                $("#indicador").val(data.indicador);
+                $("#codeUser").val(data.code.substring(0, 3));
             });
         });
+
+        $("#codeUser").change(function (e) {updateCode();});
+        $("#category").change(function (e) {updateCode();});
+        $("#asignatura_id").change(function (e) {updateCode();});
+        $("#grade").change(function (e) {updateCode();});
+        $("#periodo_id").change(function (e) {updateCode();});
+        $("#docente_id").change(function (e) {updateCode();});
+
+
+        function updateCode() {
+            var category = $("#category").val();
+            var asignatura_id = $("#asignatura_id").val();
+            var docente_id = $("#docente_id").val();
+            var grade = $("#grade").val();
+            var periodo_id = $("#periodo_id").val();
+            var codeorg =$("#codeUser").val();
+            var code = codeorg+category+grade+asignatura_id+docente_id+periodo_id;
+            $("#code").val(code);
+            console.log(code);
+        }
     </script>
     @endsection

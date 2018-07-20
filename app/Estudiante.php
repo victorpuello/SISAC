@@ -34,14 +34,14 @@ class Estudiante extends Model
     public function getFullNameAttribute(){
         return $this->name.' '.$this->lastname;
     }
-    public function setPathAttribute($path)
+    /*public function setPathAttribute($path)
     {
         if (!empty($path)) {
             $name = Carbon::now()->second.$path->getClientOriginalName();
             $this->attributes['path'] = $name;
             \Storage::disk('estudiantes')->put($name,\File::get($path));
         }
-    }
+    }*/
     public function getActiveAttribute ()
     {
         if ($this->stade ==='activo'){

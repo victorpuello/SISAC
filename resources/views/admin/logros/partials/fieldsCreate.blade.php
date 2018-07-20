@@ -1,7 +1,7 @@
 @if(\Illuminate\Support\Facades\Auth::user()->type === 'docente')
-    {!! Form::hidden('docente_id', \Illuminate\Support\Facades\Auth::user()->docente->id) !!}
+    {!! Form::hidden('docente_id', \Illuminate\Support\Facades\Auth::user()->docente->id,['id'=>'docente_id']) !!}
 @else
-    {!! Form::select('docente_id',array_pluck($logros,'name','docente_id'), null, ['placeholder'=>'Docente','class' => 'form-control mb-3', 'id'=>'periodo_id','required']) !!}
+    {!! Form::select('docente_id',array_pluck($logros,'name','docente_id'), null, ['placeholder'=>'Docente','class' => 'form-control mb-3', 'id'=>'docente_id','required']) !!}
 @endif
 <div class="form-group row">
     <div class="col-lg-4">
@@ -21,12 +21,23 @@
     </div>
 </div>
 <div class="form-group row">
-    <div class="col-lg-6">
-        {!! Form::text('code', null, ['class' => 'form-control','id'=>'code', 'placeholder' => 'Codigo identificador de logro']) !!}
+    <div class="col-lg-4">
+        <div class="form-group">
+            {!! Form::select('category',['cognitivo'=>'Cognitivo','procedimental'=>'Procedimental','actitudinal'=>'Actitudinal'], null, ['placeholder'=>'Tipo de logro','class' => 'form-control mb-3', 'id'=>'category','required']) !!}
+        </div>
     </div>
-    <div class="col-lg-6">
-        {!! Form::select('category',['cognitivo'=>'Cognitivo','procedimental'=>'Procedimental','actitudinal'=>'Actitudinal'], null, ['placeholder'=>'Tipo de logro','class' => 'form-control mb-3', 'id'=>'category','required']) !!}
+    <div class="col-lg-4">
+        <div class="form-group">
+            {!! Form::select('indicador',['bajo'=>'Bajo','basico'=>'Basico','alto'=>'Alto', 'superior' => 'Superior'], null, ['placeholder'=>'Indicador de logro','class' => 'form-control mb-3', 'id'=>'indicador','required']) !!}
+        </div>
     </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            {!! Form::text('codeUser', null,['placeholder'=>'Codigo Identificador','class' => 'form-control mb-3', 'id'=>'codeUser','required']) !!}
+            {!! Form::hidden('code',null,['id'=>'code']) !!}
+        </div>
+    </div>
+
 </div>
 <div class="form-group row">
     <div class="col-lg-12">
