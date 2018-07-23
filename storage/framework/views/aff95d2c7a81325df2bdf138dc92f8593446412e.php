@@ -2,7 +2,7 @@
     <?php echo Form::hidden('docente_id', \Illuminate\Support\Facades\Auth::user()->docente->id,['id'=>'docente_id']); ?>
 
 <?php else: ?>
-    <?php echo Form::select('docente_id',array_pluck($logros,'name','docente_id'), null, ['placeholder'=>'Docente','class' => 'form-control mb-3', 'id'=>'docente_id','required']); ?>
+    <?php echo Form::select('docente_id',$docentes, null, ['placeholder'=>'Docente','class' => 'form-control mb-3', 'id'=>'docente_id','required']); ?>
 
 <?php endif; ?>
 <div class="form-group row">
@@ -40,9 +40,14 @@
     </div>
     <div class="col-lg-4">
         <div class="form-group">
-            <?php echo Form::text('codeUser', null,['placeholder'=>'Codigo Identificador','class' => 'form-control mb-3', 'id'=>'codeUser','required']); ?>
+            <?php if(Request::path() === 'admin/logros/create'): ?>
+                <?php echo Form::text('codeUser', null,['placeholder'=>'Codigo Identificador','class' => 'form-control mb-3', 'id'=>'codeUser','required']); ?>
 
-            <?php echo Form::hidden('code',null,['id'=>'code']); ?>
+            <?php else: ?>
+                <?php echo Form::text('codeUser', null,['placeholder'=>'Codigo Identificador','class' => 'form-control mb-3','readonly'=>'readonly', 'id'=>'codeUser','required']); ?>
+
+            <?php endif; ?>
+                <?php echo Form::hidden('code',null,['id'=>'code']); ?>
 
         </div>
     </div>

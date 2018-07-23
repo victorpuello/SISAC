@@ -39,10 +39,8 @@ class UpdateLogroRequest extends FormRequest
      */
     public function rules()
     {
-        $code = $this->code.''.$this->category.''.$this->asignatura_id.''.$this->docente_id.''.$this->periodo_id;
-        $this->merge(array('code'=> $code));
         $this->logro = Logro::find($this->route->parameter('logro'));
-        $this->redirectAction = 'LogroController@index';
+        //$this->redirectAction = 'LogroController@index';
         if (currentPerfil() ==='docente'){
             return [
                 'code' => Rule::unique('logros')->ignore($this->logro->code, 'code'),

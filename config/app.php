@@ -149,6 +149,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Styde\Html\HtmlServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -213,6 +214,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Access' => Styde\Html\Facades\Access::class,
     ],
 
 ];

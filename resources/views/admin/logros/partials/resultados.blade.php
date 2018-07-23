@@ -3,31 +3,26 @@
         <table class="table table-bordered table-striped mb-0 dataTable no-footer" id="datatable-editable">
             <thead>
             <tr>
-                <th>N°</th>
+                <th>Codigo</th>
                 <th>Logro</th>
                 <th>Categoria</th>
-
-                @if(Auth::user()->type <> 'docente')
-                    <th>Docente</th>
-                    <th>Grado</th>
-                @endif
+                <th>Indicador</th>
+                <th>Grado</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
             @foreach($logros as $key => $logro)
                 <tr data-item-id="{{$logro->id}}">
-                    <td>{{$key + 1}}</td>
-                    <td>{{$logro->description}}</td>
+                    <td>{{substr($logro->code,0,3)}}</td>
+                    <td>{{substr($logro->description,0,40).' ...'}}</td>
                     <td>{{$logro->category}}</td>
-                    @if(Auth::user()->type <> 'docente')
-                        <td>{{$logro->name}}</td>
-                        <td>{{$logro->grade}}</td>
-                    @endif
+                    <td>{{$logro->indicador}}</td>
+                    <td>{{$logro->grade}}</td>
                     <td class="actions">
                         <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
                         <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
-                        <a href="#modalEditar" class="on-default edit modal-basic" data-urlupdate="{{ route('logros.update', $logro->id ) }}" data-urledit="{{ route('logros.edit', $logro->id ) }}" > <i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{ route('logros.edit', $logro->id ) }}" class="on-default edit " > <i class="fas fa-pencil-alt"></i></a>
                         <a href="#modalEliminar" data-url="{{route('logros.destroy',$logro->id)}}" data-nlogro="{{$logro->category}}" class="on-default deleted modal-basic" data-nuser="#" data-url="#"><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
