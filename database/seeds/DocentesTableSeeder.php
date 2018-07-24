@@ -16,7 +16,8 @@ class DocentesTableSeeder extends Seeder
         $docentes = User::where('type','=','docente')->get();
         foreach ($docentes as $docente){
             factory(Docente::class)->create([
-                'user_id' => $docente->id
+                'user_id' => $docente->id,
+                'name' => $docente->getFullNameAttribute()
             ]);
         }
     }

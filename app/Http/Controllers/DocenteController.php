@@ -18,7 +18,7 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        $docentes = Docente::where('coordinator','=','0')->get();
+        $docentes = Docente::all();
         $fondos = ['bg-primary','bg-secondary','bg-tertiary','bg-quaternary'];
         $asignaturas = Asignatura::all();
         foreach ($asignaturas as $key => $value){

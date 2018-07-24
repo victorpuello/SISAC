@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AcudientesTableSeeder::class);
         DB::table('periodos')->delete();
         $this->call(PeriodosTableSeeder::class);
-       // DB::table('logros')->delete();
-        //$this->call(LogrosTableSeeder::class);
+        DB::table('asignacions')->delete();
+        $this->call(AsignacionTableSeeder::class);
         DB::table('estudiante_periodo')->delete();
         $this->call(EstudiantePeriodoTableSeeder::class);
         DB::table('departamentos')->delete();

@@ -42,7 +42,6 @@ class UpdateDocenteRequest extends FormRequest
             'address' => 'required|min:3|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%,-]).*$/|max:80',
             'phone' => 'required|numeric',
             'path' => 'image|mimes:jpeg,bmp,png',
-            'coordinator' => 'nullable',
             'user_id' => 'required',Rule::unique('docentes')->ignore($this->docente->user_id,'docente_user_id')
         ];
     }

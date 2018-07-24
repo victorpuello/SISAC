@@ -16,4 +16,7 @@ class Asignatura extends Model
     public function logros(){
         return $this->hasMany(Logro::class);
     }
+    public function asignaciones(){
+        return $this->hasMany(Asignacion::class);
+    }
 }

@@ -14,6 +14,7 @@ class CreateDocentesTable extends Migration
     public function up()
     {
         Schema::create('docentes', function (Blueprint $table) {
+            $table->string('name');
             $table->increments('id');
             $table->enum('typeid',['CC','CE','PT']);
             $table->integer('numberid')->unique();
@@ -22,7 +23,6 @@ class CreateDocentesTable extends Migration
             $table->string('address');
             $table->string('phone');
             $table->string('path');
-            $table->boolean('coordinator');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

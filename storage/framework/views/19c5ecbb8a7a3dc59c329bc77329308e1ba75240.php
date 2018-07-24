@@ -21,29 +21,34 @@
                 <th>Procedimental</th>
                 <th>Actitudinal</th>
                 <th>Inasistencias</th>
-                <th>Acciones</th>
+
             </tr>
             </thead>
             <tbody>
             <?php $__currentLoopData = $estudiantes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $estudiante): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr data-item-id="<?php echo e($estudiante->id); ?>">
                     <td class="id"><?php echo e($key+1); ?></td>
-                    <td class="name"><?php echo e($estudiante->lastname); ?> <?php echo e($estudiante->name); ?></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="actions">
-                        <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
-                        <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
-                        <a href="#" class="on-default edit-row"><i class="fas fa-pencil-alt"></i></a>
-                        <a href="#" class="on-default remove-row"><i class="far fa-trash-alt"></i></a>
+                    <td class="name"><a
+                            class="modal-basic addNote"
+                            data-img="<?php echo e(url('/imgUsers/estudiantes/')); ?>/<?php echo e($estudiante->path); ?>"
+                            data-user = <?php echo e($estudiante->id); ?>
+
+                            href="#modalAdd">
+                            <?php echo e($estudiante->lastname); ?> <?php echo e($estudiante->name); ?>
+
+                        </a>
                     </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
                 </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
     </div>
+    <?php echo $__env->make('admin.notas.partials.modals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
     <script src="<?php echo e(asset('vendor/autosize/autosize.js')); ?>"></script>
@@ -52,6 +57,13 @@
     <script src="<?php echo e(asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')); ?>"></script>
     <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
     <script src="<?php echo e(asset('js/examples/notas.js')); ?>"></script>
+    <script>
+        $(".addNote").click(function (e) {
+            $("#imgEstudiante").attr('src', $(this).data('img') );
+            $("#nameEstudiante").text( $(this).text() );
+            $("#estudiante_id").val( $(this).data('user') );
+        });
+    </script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

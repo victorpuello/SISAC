@@ -18,13 +18,19 @@
                         </div>
                     </header>
                     <div class="card-body">
-                        <h4 class="font-weight-semibold mt-3">{{$docente->user->name}}</h4>
-                        <p><strong>Asignaturas: </strong>{{$docente->getNameAsignaturasAttibute()}}</p>
+                        <h4 class="font-weight-semibold mt-3">{{$docente->name}}</h4>
+                        <p><strong>Asignaturas: </strong>
+                        <ul>
+                            @foreach($docente->asignaturas as $asignatura)
+                                <li>{{$asignatura->name }}</li>
+                            @endforeach
+                        </ul>
+                        </p>
                         <hr class="solid short">
                         <div class="row">
                             <div class="col-lg-6">
                                 <p class="mb-1"><a href="{{route('docentes.edit',$docente->id)}}"><i class="fas fa-user-edit mr-1"></i>Editar</a></p>
-                                <p class="mb-1"><a href="#modalEliminar" class="deleted modal-basic" data-nuser="{{$docente->user->FullName}}" data-url="{{ route('docentes.destroy', $docente->id ) }}"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
+                                <p class="mb-1"><a href="#modalEliminar" class="deleted modal-basic" data-nuser="{{$docente->name}}" data-url="{{ route('docentes.destroy', $docente->id ) }}"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
                                 <p class="mb-1"><a href="#modalAddAsignaturas" data-url="{{route('docentes.addAsignaturas',$docente->id)}}" class="modal-basic addAsignatura"><i class="fas fa-share-square mr-1"></i> Asignaturas</a></p>
                             </div>
                             <div class="col-lg-6">

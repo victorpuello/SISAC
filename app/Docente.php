@@ -4,6 +4,7 @@ namespace Ngsoft;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Docente extends Model
 {
@@ -11,9 +12,10 @@ class Docente extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     protected $fillable = [
-        'id','typeid','numberid','fnac','gender','address','phone','path','coordinator','user_id'
+        'id','typeid','numberid','fnac','gender','address','phone','path','name','user_id'
     ];
     private $name;
+
     public function asignaturas(){
         return $this->belongsToMany(Asignatura::class);
     }
@@ -22,15 +24,15 @@ class Docente extends Model
         return $this->hasMany(Logro::class);
     }
 
-    public function salones()
-    {
-        return $this->belongsToMany(Salon::class);
+    public function asignaciones(){
+        return $this->hasMany(Asignacion::class);
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
 
     /*public function setPathAttribute($path)
     {

@@ -9,25 +9,34 @@
 @section('content')
     <section class="card">
         <header class="card-header bg-primary ">
-            <h2 class="card-title text-color-light">Grupos disponibles para calificar</h2>
+            <h2 class="card-title text-color-light">Planillas disponibles para calificar</h2>
         </header>
             <div class="row">
-            @foreach( $salones as $salon)
+            @foreach( $planillas as $planilla)
             <div class="col-lg-3 mt-2 mb-2">
                 <section class="card">
                     <header class="card-header bg-{{$fondos[rand(0,3)]}}">
                         <div class="card-header-profile-picture">
-                            <img src="{{url('/img')}}/{{$salon->grade}}.jpg">
+                            <img src="{{url('/img')}}/{{$planilla->grade}}.jpg">
                         </div>
                     </header>
                     <div class="card-body">
-                        <h4 class="font-weight-semibold mt-3">{{$salon->NameAula}}</h4>
+                        <ul class="pl-3">
+                            <li><span><strong>Asignatura: </strong>{{$planilla->asignatura}}</span></li>
+                            <li><span><strong>Grupo: </strong>{{$planilla->grade.' - '.$planilla->name}}</span></li>
+                            @if(currentPerfil() <> 'docente')
+                            <li><span><strong>Docente: </strong>{{$planilla->nombre}}</span></li>
+                            @endif
+                        </ul>
+
                         <hr class="solid short">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <p class="mb-1"><a href="{{route('notas.show',$salon->id)}}" class="edit"><i class="fas fa-check mr-1"></i>Calificar</a></p>
+                            <div class="col-lg-12">
+                                @foreach($periodos as $periodo)
+                                <p class="mb-1"><a href="{{route('notas.loadplanilla',['Idsalon'=>$planilla->id,'Iddocente'=>$planilla->idDocente,'Idasignatura'=>$planilla->idAsignaturas,'Idperiodo'=>$periodo->id])}}" class="edit"><i class="fas fa-check mr-1"></i>{{$periodo->name}}</a></p>
+                                @endforeach
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <p class="mb-1"><a href="#" class="deleted modal-basic" ><i class="fas fa-download mr-1"></i>Bajar planilla</a></p>
                             </div>
                         </div>
@@ -36,7 +45,6 @@
             </div>
                 @endforeach
             </div>
-        @include('admin.notas.partials.modals')
     </section>
     @endsection
 @section('script')

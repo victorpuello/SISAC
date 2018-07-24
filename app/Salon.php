@@ -43,4 +43,7 @@ class Salon extends Model
     {
         return $this->hasMany(Estudiante::class);
     }
+    public function asignaciones(){
+        return $this->hasMany(Asignacion::class);
+    }
 }

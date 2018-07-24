@@ -70,13 +70,5 @@
                 </div>
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-lg-4">
-                <div class="form-group">
-                    <label for="coordinator">¿ El docente es coordinador ?</label>
-                    {!! Form::select('coordinator',['0'=>'No','1' => 'Si'], null, ['class' => 'form-control mb-3', 'id'=>'coordinator','required']) !!}
-                </div>
-            </div>
-        </div>
     </div>
 </div>
