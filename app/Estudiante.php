@@ -27,6 +27,7 @@ class Estudiante extends Model
         return $this->belongsToMany(Logro::class)->withPivot('score');
     }
 
+
     public function anotaciones(){
         return $this->hasMany(Anotacion::class);
     }

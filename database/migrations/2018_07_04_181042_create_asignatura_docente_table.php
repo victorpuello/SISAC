@@ -16,9 +16,9 @@ class CreateAsignaturaDocenteTable extends Migration
         Schema::create('asignatura_docente', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('docente_id')->unsigned();
-            $table->foreign('docente_id')->references('id')->on('docentes')->onDelete('cascade');
+            $table->foreign('docente_id')->references('id')->on('docentes');
             $table->integer('asignatura_id')->unsigned();
-            $table->foreign('asignatura_id')->references('id')->on('asignaturas')->onDelete('cascade');
+            $table->foreign('asignatura_id')->references('id')->on('asignaturas');
             $table->timestamps();
         });
     }

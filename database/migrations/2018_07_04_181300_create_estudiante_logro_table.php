@@ -17,9 +17,9 @@ class CreateEstudianteLogroTable extends Migration
             $table->increments('id');
             $table->float('score');
             $table->integer('logro_id')->unsigned();
-            $table->foreign('logro_id')->references('id')->on('logros')->onDelete('cascade');
+            $table->foreign('logro_id')->references('id')->on('logros');
             $table->integer('estudiante_id')->unsigned();
-            $table->foreign('estudiante_id')->references('id')->on('estudiantes')->onDelete('cascade');
+            $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->timestamps();
         });
     }

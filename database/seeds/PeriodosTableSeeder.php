@@ -21,5 +21,10 @@ class PeriodosTableSeeder extends Seeder
             'datestart' => '2018-03-30',
             'dateend' => '2018-06-30'
         ]);
+        factory(\Ngsoft\Periodo::class)->create([
+            'name' => 'Tercer periodo',
+            'datestart' => '2018-06-30',
+            'dateend' => '2018-09-30'
+        ]);
     }
 }

@@ -19,6 +19,9 @@ class Docente extends Model
     public function asignaturas(){
         return $this->belongsToMany(Asignatura::class);
     }
+    public function salones(){
+        return $this->belongsToMany(Salon::class);
+    }
 
     public function logros(){
         return $this->hasMany(Logro::class);

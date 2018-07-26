@@ -44,7 +44,6 @@
             </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
-        <?php echo $__env->make('admin.notas.partials.modals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     </section>
     <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>

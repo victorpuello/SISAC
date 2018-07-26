@@ -17,10 +17,11 @@ class ValidatePeriodo implements Rule
      */
     public function passes($attribute, $value)
     {
-        $marcador = false;
+        $marcador = false;/*
         if (Periodo::find($value)->dateend <= Carbon::now()){
             $marcador = true;
-        }
+        }*/
+        if (currentPerfil() ==='admin'){$marcador = false;}
         return $marcador === false;
     }
 

@@ -10,7 +10,7 @@
             <h2 class="card-title" id="nameEstudiante">Agregar Nota</h2>
         </header>
         <div class="card-body">
-            {!! Form::open(['route' => 'notas.store', 'method' => 'post','class' => 'form-horizontal form-bordered', 'validate'=>"novalidate",'id' => 'form-create']) !!}
+            {!! Form::model($estudiante,['route' => 'notas.store', 'method' => 'post','class' => 'form-horizontal form-bordered', 'validate'=>"novalidate",'id' => 'form-create']) !!}
             <div class="modal-wrapper p-0">
                 {!! Form::hidden('estudiante_id',null,['id'=>'estudiante_id']) !!}
                 {!! Form::hidden('salon_id',$Idsalon,['id'=>'salon_id']) !!}

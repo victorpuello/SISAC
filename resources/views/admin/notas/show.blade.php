@@ -29,15 +29,21 @@
             @foreach($estudiantes as $key => $estudiante)
                 <tr data-item-id="{{$estudiante->id}}">
                     <td class="id">{{$key+1}}</td>
-                    <td class="name"><a
-                            class="modal-basic addNote"
+                    <td class="name">
+                            {{$estudiante->lastname}} {{$estudiante->name}}
+                    </td>
+                    <td><a  class="modal-basic addNote"
                             data-img="{{ url('/imgUsers/estudiantes/')}}/{{$estudiante->path}}"
                             data-user = {{$estudiante->id}}
                             href="#modalAdd">
-                            {{$estudiante->lastname}} {{$estudiante->name}}
+                            <ul>
+                                @foreach($estudiante->logros->where('category','=','cognitivo') as $logro)
+                                    <li>$logro->id</li>
+                                @endforeach
+                            </ul>
+
                         </a>
                     </td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

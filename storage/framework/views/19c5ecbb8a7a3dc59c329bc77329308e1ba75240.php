@@ -28,17 +28,23 @@
             <?php $__currentLoopData = $estudiantes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $estudiante): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr data-item-id="<?php echo e($estudiante->id); ?>">
                     <td class="id"><?php echo e($key+1); ?></td>
-                    <td class="name"><a
-                            class="modal-basic addNote"
+                    <td class="name">
+                            <?php echo e($estudiante->lastname); ?> <?php echo e($estudiante->name); ?>
+
+                    </td>
+                    <td><a  class="modal-basic addNote"
                             data-img="<?php echo e(url('/imgUsers/estudiantes/')); ?>/<?php echo e($estudiante->path); ?>"
                             data-user = <?php echo e($estudiante->id); ?>
 
                             href="#modalAdd">
-                            <?php echo e($estudiante->lastname); ?> <?php echo e($estudiante->name); ?>
+                            <ul>
+                                <?php $__currentLoopData = $estudiante->logros->where('category','=','cognitivo'); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $logro): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <li>$logro->id</li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </ul>
 
                         </a>
                     </td>
-                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
