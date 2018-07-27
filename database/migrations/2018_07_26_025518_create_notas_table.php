@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEstudianteLogroTable extends Migration
+class CreateNotasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateEstudianteLogroTable extends Migration
      */
     public function up()
     {
-        Schema::create('estudiante_logro', function (Blueprint $table) {
+        Schema::create('notas', function (Blueprint $table) {
             $table->increments('id');
             $table->float('score');
-            $table->integer('logro_id')->unsigned();
-            $table->foreign('logro_id')->references('id')->on('logros');
             $table->integer('estudiante_id')->unsigned();
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
+            $table->integer('logro_id')->unsigned();
+            $table->foreign('logro_id')->references('id')->on('logros');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateEstudianteLogroTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estudiante_logro');
+        Schema::dropIfExists('notas');
     }
 }

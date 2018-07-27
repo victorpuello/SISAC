@@ -101,11 +101,12 @@
                         </div>
                     </header>
                     <!-- start: page -->
+                    <div id="principalPanel">
                         <?php echo $__env->yieldContent('content'); ?>
+                    </div>
                     <!-- end: page -->
                 </section>
             </div>
-
             <aside id="sidebar-right" class="sidebar-right">
                 <div class="nano">
                     <div class="nano-content">

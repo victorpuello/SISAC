@@ -17,7 +17,12 @@ class Docente extends Model
     private $name;
 
     public function asignaturas(){
-        return $this->belongsToMany(Asignatura::class);
+        $asignaturas = DB::table('asignacions')->where('docente_id','=',$this->id)
+                ->join('docentes','asignacions.docente_id','=','docentes.id')
+                ->join('asignaturas','asignaturas.id','=','asignacions.asignatura_id')
+                ->select('asignaturas.*')
+                ->get();
+        return array_pluck($asignaturas,'name','id');
     }
     public function salones(){
         return $this->belongsToMany(Salon::class);

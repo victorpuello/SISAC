@@ -16,6 +16,7 @@ class CreateAsignacionsTable extends Migration
         Schema::create('asignacions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('horas');
+            $table->boolean('director')->default(false);
             $table->integer('docente_id')->unsigned();
             $table->foreign('docente_id')->references('id')->on('docentes')->onDelete('cascade');
             $table->integer('salon_id')->unsigned();

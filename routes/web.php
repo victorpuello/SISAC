@@ -19,6 +19,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('aulas', 'SalonController');
     Route::resource('logros', 'LogroController');
     Route::resource('notas', 'NotaController');
+    Route::post('notas/actualizar/{id}',['as'=>'notas.actualizar','uses'=>'NotaController@actualizar']);
+    Route::get('notas/script/',['as'=>'notas.script','uses'=>'NotaController@getscript']);
     Route::post('docentes/addAsignaturas/{id}',['as' => 'docentes.addAsignaturas', 'uses' => 'DocenteController@addAsignaturas']);
     Route::post('logros/findnotes',['as'=>'logros.findnotes', 'uses' => 'LogroController@FindNotes']);
     Route::get('logros/loaddata/{id}',['as'=>'logros.loaddata', 'uses' => 'LogroController@loadDataBuscador']);

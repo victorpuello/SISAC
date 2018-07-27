@@ -2,25 +2,31 @@
 
 namespace Ngsoft\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
 use Ngsoft\Asignacion;
 use Ngsoft\Asignatura;
 use Ngsoft\Estudiante;
 use Ngsoft\Logro;
 use Illuminate\Http\Request;
+use Ngsoft\Nota;
 use Ngsoft\Periodo;
 use Ngsoft\Salon;
 
 class NotaController extends Controller
 {
     private $estudiantes;
+    private $notas;
     private $logros;
     private $fondos =  ['primary','secondary','tertiary','quaternary'];
     public function __construct ()
     {
         // revisar a futuro para delimitar la cantidad de datos que llegan al controlador
-        $this->estudiantes = Estudiante::all();
+        $this->estudiantes = Estudiante::where('stade','=','activo')->get();
+        $this->notas = Nota::all();
+        $this->logros = Logro::all();
     }
 
     /**
@@ -75,25 +81,7 @@ class NotaController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $estudiante = Estudiante::findOrFail($request->estudiante_id);
 
-        $logroCog = $this->getLogro($request,'cognitivo',$request->logro_cog,true);
-        $logroAct = $this->getLogro($request,'actitudinal',$request->logro_ac,true);
-        $logroProc = $this->getLogro($request,'procedimental',$request->logro_pro,true);;
-       /* $estudiante->logros()->attach($logroCog->id, ['score' => $request->logro_cog]);
-        $estudiante->logros()->attach($logroAct->id, ['score' => $request->logro_ac]);
-        $estudiante->logros()->attach($logroProc->id, ['score' => $request->logro_pro]);*/
-        $estudiante->logros()->syncWithoutDetaching([$logroCog->id => ['score' => $request->logro_cog]]);
-        $estudiante->logros()->syncWithoutDetaching([$logroAct->id => ['score' => $request->logro_ac]]);
-        $estudiante->logros()->syncWithoutDetaching([$logroProc->id => ['score' => $request->logro_pro]]);
-        return redirect()->action(
-            'NotaController@cargarPlanilla', [
-                'Idsalon' => $request->salon_id,
-                'Iddocente' => $request->docente_id,
-                'Idasignatura' => $request->asignatura_id,
-                'Idperiodo' => $request->periodo_id
-            ]);
     }
 
     /**
@@ -107,56 +95,50 @@ class NotaController extends Controller
 
     }
 
-    public function cargarPlanilla($Idsalon,$Iddocente,$Idasignatura,$Idperiodo){
+    public function cargarPlanilla(Request $request,$Idsalon,$Iddocente,$Idasignatura,$Idperiodo){
         $grado = Salon::find($Idsalon)->grade;
         //obtengo todos los estudiantes del salon
         $currentEstudiantes =$this->estudiantes->where('salon_id','=',$Idsalon);
-        // obtengos los logros para esa asignuatura periodo y grado requeridos
-        $currentlogros_Cog = $this->getLogros($grado,$Iddocente,$Idasignatura,$Idperiodo,'cognitivo');
-        $currentlogros_Act = $this->getLogros($grado,$Iddocente,$Idasignatura,$Idperiodo,'actitudinal');
-        $currentlogros_Proc = $this->getLogros($grado,$Iddocente,$Idasignatura,$Idperiodo,'procedimental');
-        // verifico si tienen la relacion con los losgros del docente para este periodo
-        // si no existe la relacion la creo vinculandolo con el logro de indicador bajo
-        $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Cog);
-        $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Act);
-        $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Proc);
-
-        /*$estudiantes = DB::table('estudiantes')
-            ->where('salon_id','=',$Idsalon)
-            ->join('logros','estudiantes.grade','=','logros.grade')
-            ->get();*/
-
-
-        /*$estudiantes = Estudiante::whereHas('logros', function ($q) use ($grado,$Idasignatura,$Idperiodo,$Iddocente){
-            $q->where('grade','=',$grado);
-            $q->where('asignatura_id','=',$Idasignatura);
-            $q->where('periodo_id','=',$Idperiodo);
-            $q->where('docente_id','=',$Iddocente);
-        })->get();
-        */
-
-        $estudiantes = DB::table('logros')->where([
-            ['grade','=',$grado],
-            ['asignatura_id','=',$Idasignatura],
-            ['periodo_id','=',$Idperiodo],
-            ['docente_id','=',$Iddocente]])
-            ->join('estudiantes','logro_id','=','estudiante_logro.logro_id')
-            ->select('logros.*')
-            ->get();
-        dd($estudiantes);
-      return view('admin.notas.show',compact('estudiantes','Idsalon','Iddocente','Idasignatura','Idperiodo'));
+        try{
+            // obtengos los logros para esa asignuatura periodo y grado requeridos
+            $currentlogros_Cog = $this->getLogros($grado,$Iddocente,$Idasignatura,$Idperiodo,'cognitivo');
+            $currentlogros_Act = $this->getLogros($grado,$Iddocente,$Idasignatura,$Idperiodo,'actitudinal');
+            $currentlogros_Proc = $this->getLogros($grado,$Iddocente,$Idasignatura,$Idperiodo,'procedimental');
+            // verifico si tienen la relacion con los losgros del docente para este periodo
+            // si no existe la relacion la creo vinculandolo con el logro de indicador bajo
+            $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Cog);
+            $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Act);
+            $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Proc);
+        }catch (\Exception $ex) {
+            return view('error.planilla');
+        }
+        $estudiantes = $currentEstudiantes;
+        $view = View::make('admin.notas.show',compact('estudiantes','Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
+        if($request->ajax()){
+            $sections = $view->renderSections();
+            return response()->json($sections['content']);
+        }
+        return view('admin.notas.show',compact('estudiantes','Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
     }
 
-
+    public function getscript(Request $request){
+        $Idsalon=[];$Iddocente=[];$Idasignatura=[];$Idperiodo=[];$estudiantes=[];$grado=[];
+        $view = View::make('admin.notas.show',compact('estudiantes','Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
+        if($request->ajax()){
+            $sections = $view->renderSections();
+            return response()->json($sections['script']);
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \Ngsoft\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nota $nota)
+    public function edit($id)
     {
-        //
+        $nota = Nota::findOrFail($id);
+        return response()->json($nota);
     }
 
     /**
@@ -166,9 +148,23 @@ class NotaController extends Controller
      * @param  \Ngsoft\Nota  $nota
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nota $nota)
+    public function actualizar(Request $request, $id)
     {
-        //
+
+        $nota = Nota::findOrFail($id);
+        $newLogro = $this->getLogro($request);
+        $request->merge(array('logro_id'=> $newLogro->id));
+        $nota->fill($request->all());
+        $nota->save();
+        $response = array(
+            'status' => 'success',
+            'msg' => 'Nota guardada con exito',
+        );
+        return response()->json($response);
+    }
+    public function update(Request $request, $id)
+    {
+
     }
 
     /**
@@ -190,7 +186,6 @@ class NotaController extends Controller
      */
     public function VerificadorLogrosEstud ($estudiantes,$logros): void
     {
-        //dd($logros);
         foreach ($estudiantes as $estudiante) {
             $isFound = false;
             foreach ($logros as $logro) {
@@ -201,7 +196,12 @@ class NotaController extends Controller
             if (!$isFound) {
                 $logro = $logros->where('indicador', '=', 'bajo')->first();
                 $currentEstudiante = $this->estudiantes->find($estudiante->id);
-                $currentEstudiante->logros()->attach($logro->id, ['score' => '1']);
+                $nota = new Nota([
+                    'score'=>'1',
+                    'estudiante_id' => $currentEstudiante->id,
+                    'logro_id' => $logro->id
+                ]);
+                $nota->save();
             }
         }
     }
@@ -212,9 +212,9 @@ class NotaController extends Controller
      * @return bool
      */
     public function LogroExist($idEstudiante, $idLogro){
-        $estudiante = $this->estudiantes->find($idEstudiante);
-        $logros = $estudiante->logros;
-        $cont_logro = $logros->where('id','=',$idLogro)->count();
+        $logros = $this->notas->where('estudiante_id','=',$idEstudiante);
+        $cont_logro = $logros->where('logro_id','=',$idLogro)->count();
+
         if ($cont_logro > 0){
             return true;
         }
@@ -238,6 +238,7 @@ class NotaController extends Controller
             ->where('periodo_id','=',$periodo)
             ->where('category','=',$category)
             ->get();
+       // dd($logros);
         return  $logros;
     }
 
@@ -247,15 +248,14 @@ class NotaController extends Controller
      * @param $nota
      * @return \Illuminate\Support\Collection
      */
-    public function getLogro($request, $category,$nota){
-        $grado = Salon::find($request->salon_id)->grade;
+    public function getLogro($request){
         $logro = DB::table('logros')
             ->where('docente_id','=',$request->docente_id)
             ->where('asignatura_id','=',$request->asignatura_id)
-            ->where('grade','=',$grado)
+            ->where('grade','=',$request->grado)
             ->where('periodo_id','=',$request->periodo_id)
-            ->where('category','=',$category)
-            ->where('indicador','=',$this->getIndicador($nota))
+            ->where('category','=',$request->category)
+            ->where('indicador','=',$this->getIndicador($request->score))
             ->first();
         return  $logro;
     }

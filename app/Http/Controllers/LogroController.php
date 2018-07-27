@@ -5,6 +5,7 @@ namespace Ngsoft\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Ngsoft\Asignacion;
 use Ngsoft\Asignatura;
 use Ngsoft\Docente;
 use Ngsoft\Http\Requests\CreateLogroRequest;
@@ -22,13 +23,17 @@ class LogroController extends Controller
     public $grados = [];
     public $asignaturas = [];
     public $docentes = [];
+    private $asignaciones;
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
+    public function __construct ()
+    {
+        $this->asignaciones = Asignacion::all();
+    }
 
     public function index()
     {
@@ -166,17 +171,16 @@ class LogroController extends Controller
     public function loadDataBuscador ($id) {
         $data['periodos'] = Periodo::pluck('name', 'id');
         if (currentPerfil() === 'docente'){
-            $salones = Salon::whereHas('docentes',function ($q){
-                $q->where('docente_id','=',Auth::user()->docente->id);
-            })->get();
+            $asignaciones = $this->asignaciones->where('docente_id','=',Auth::user()->docente->id);
             $grados = [];
-            foreach ($salones as  $salon) {
-                $grados[$salon->grade] = $salon->getNameGradeAttibute();
+            $asignaturas=[];
+            foreach ($asignaciones as  $asignacion) {
+                $grados[$asignacion->salon->grade] = $asignacion->salon->getNameGradeAttibute();
+                $asignaturas[$asignacion->asignatura->id] = $asignacion->asignatura->name;
             }
             $data['grados'] = array_unique($grados);
-            $data['asignaturas'] = Asignatura::whereHas('docentes', function ($q){
-                $q->where('docente_id','=',Auth::user()->docente->id);
-            })->get()->pluck('name', 'id');
+            $data['asignaturas'] = array_unique($asignaturas);
+
             $data['docentes'] =[];
         }else{
             $data['grados'] = ['0' => 'Pre-Escolar', '1' => 'Primero', '2' => 'Segundo', '3' => 'Tercero', '4' => 'Cuarto', '5' => 'Quinto', '6' => 'Sexto', '7' => 'Septimo', '8' => 'Octavo', '9' => 'Noveno', '10' => 'Decimo', '11' => 'Once'];
