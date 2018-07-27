@@ -19,13 +19,13 @@ class CreateLogrosTable extends Migration
             $table->text('description');
             $table->enum('indicador',['bajo','basico','alto','superior']);
             $table->enum('category',['cognitivo','procedimental','actitudinal']);
-            $table->enum('grade',['1','2','3','4','5','6','7','8','9','10','11']);
+            $table->enum('grade',['0','1','2','3','4','5','6','7','8','9','10','11']);
             $table->integer('asignatura_id')->unsigned();
-            $table->foreign('asignatura_id')->references('id')->on('asignaturas')->onDelete('cascade');
+            $table->foreign('asignatura_id')->references('id')->on('asignaturas');
             $table->integer('docente_id')->unsigned();
-            $table->foreign('docente_id')->references('id')->on('docentes')->onDelete('cascade');
+            $table->foreign('docente_id')->references('id')->on('docentes');
             $table->integer('periodo_id')->unsigned();
-            $table->foreign('periodo_id')->references('id')->on('periodos')->onDelete('cascade');
+            $table->foreign('periodo_id')->references('id')->on('periodos');
             $table->timestamps();
         });
     }

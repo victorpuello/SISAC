@@ -1,54 +1,40 @@
-<!-- Start Modal agregar -->
-<div id="modalAdd" class="modal-block modal-block-warning mfp-hide">
+<div id="modalAdd" class="modal-block modal-header-color modal-block-primary modal-block-sm mfp-hide">
     <section class="card">
         <header class="card-header">
-              <div class="col-lg-2 offset-lg-9 position-absolute align-top">
-                  <div class="thumb-info mb-3">
-                      <img src="" id="imgEstudiante" class="rounded img-fluid" alt="">
-                  </div>
-              </div>
-            <h2 class="card-title" id="nameEstudiante">Agregar Nota</h2>
+            <h2 class="card-title" id="nameEstudiante">name:estudiante</h2>
         </header>
+        {!! Form::open(['route' => ['notas.actualizar',':NOTA_ID'], 'method' => 'post','class' => 'form-horizontal form-bordered', 'validate'=>"novalidate",'id' => 'form-edit']) !!}
         <div class="card-body">
-            {!! Form::open(['route' => 'notas.store', 'method' => 'post','class' => 'form-horizontal form-bordered', 'validate'=>"novalidate",'id' => 'form-create']) !!}
+            @include('admin.asignaturas.partials.messages')
             <div class="modal-wrapper p-0">
-                {!! Form::hidden('estudiante_id',null,['id'=>'estudiante_id']) !!}
-                {!! Form::hidden('salon_id',$Idsalon,['id'=>'salon_id']) !!}
-                {!! Form::hidden('docente_id',$Iddocente,['id'=>'docente_id']) !!}
-                {!! Form::hidden('asignatura_id',$Idasignatura,['id'=>'asignatura_id']) !!}
-                {!! Form::hidden('periodo_id',$Idperiodo,['id'=>'periodo_id']) !!}
-                <div class="modal-text">
-                    @include('admin.asignaturas.partials.messages')
-                    <div class="row">
-                        <div class="col-md-6">
-                            {!! Form::label('logro_cog', 'Nota Cognitiva',['class'=>'control-label text-lg-right pt-2']) !!}
-                            {!! Form::number('logro_cog', null, ['class' => 'form-control', 'required', 'min'=> 1, 'step'=>'.01']) !!}
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="thumb-info mb-3">
+                            <img src="" id="imgEstudiante" class="rounded img-fluid" alt="">
                         </div>
-                        <div class="col-md-6 col-md-offset-6">
-                            {!! Form::label('logro_pro', 'Nota Procedimental',['class'=>' control-label text-lg-right pt-2']) !!}
-                            {!! Form::number('logro_pro', null, ['class' => 'form-control', 'required', 'min'=> 1, 'step'=>'.01']) !!}
-                        </div>
-                        <div class="col-md-6">
-                            {!! Form::label('logro_ac', 'Nota Actitudinal',['class'=>' control-label text-lg-right pt-2']) !!}
-                            {!! Form::number('logro_ac', null, ['class' => 'form-control',  'required', 'min'=> 1, 'step'=>'.01']) !!}
-                        </div>
-                        <div class="col-md-6 col-md-offset-6">
-                            {!! Form::label('fallas', 'N° de Inasistencias',['class'=>'control-label text-lg-right pt-2']) !!}
-                            {!! Form::number('fallas', 0, ['class' => 'form-control', 'min'=> 0, ]) !!}
-                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        {!! Form::hidden('estudiante_id', null,['id'=>'estudiante_id']) !!}
+                        {!! Form::hidden('logro_id',null,['id'=>'logro_id']) !!}
+                        {!! Form::hidden('grado',$grado,['id'=>'grado']) !!}
+                        {!! Form::hidden('docente_id',$Iddocente,['id'=>'docente_id']) !!}
+                        {!! Form::hidden('asignatura_id',$Idasignatura,['id'=>'asignatura_id']) !!}
+                        {!! Form::hidden('periodo_id',$Idperiodo,['id'=>'periodo_id']) !!}
+                        {!! Form::hidden('category',null,['id'=>'category']) !!}
+                        {!! Form::label('score', 'Nota Cognitiva',['id'=>'label-score','class'=>'control-label text-lg-right pt-2']) !!}
+                        {!! Form::number('score', null, ['class' => 'form-control','autofocus', 'required', 'min'=> 1, 'step'=>'.01']) !!}
                     </div>
                 </div>
             </div>
-            <footer class="card-footer">
-                <div class="row">
-                    <div class="col-md-12 text-right">
-                        <button type="submit" class="btn btn-primary addAsignatura">Guardar</button>
-                        <button class="btn btn-default modal-dismiss">Cancelar</button>
-                    </div>
-                </div>
-            </footer>
-            {!! Form::close() !!}
         </div>
+        <footer class="card-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button class="btn btn-primary " id="update-nota">Confirm</button>
+                    <button class="btn btn-default modal-dismiss">Cancel</button>
+                </div>
+            </div>
+        </footer>
+        {!! Form::close() !!}
     </section>
 </div>
-<!-- End Modal Agregar-->

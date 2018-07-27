@@ -21,8 +21,8 @@
                         <h4 class="font-weight-semibold mt-3">{{$docente->name}}</h4>
                         <p><strong>Asignaturas: </strong>
                         <ul>
-                            @foreach($docente->asignaturas as $asignatura)
-                                <li>{{$asignatura->name }}</li>
+                            @foreach(array_unique($docente->asignaturas()) as $asignatura)
+                                <li>{{$asignatura }}</li>
                             @endforeach
                         </ul>
                         </p>

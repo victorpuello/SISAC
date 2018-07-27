@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEstudiantePeriodoTable extends Migration
+class CreateInasistenciasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateEstudiantePeriodoTable extends Migration
      */
     public function up()
     {
-        Schema::create('estudiante_periodo', function (Blueprint $table) {
+        Schema::create('inasistencias', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('numero');
             $table->integer('estudiante_id')->unsigned();
-            $table->foreign('estudiante_id')->references('id')->on('estudiantes')->onDelete('cascade');
+            $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->integer('periodo_id')->unsigned();
-            $table->foreign('periodo_id')->references('id')->on('periodos')->onDelete('cascade');
-            $table->integer('inasistencias')->default(0);
+            $table->foreign('periodo_id')->references('id')->on('periodos');
+            $table->integer('asignatura_id')->unsigned();
+            $table->foreign('asignatura_id')->references('id')->on('asignaturas');
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ class CreateEstudiantePeriodoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estudiante_periodo');
+        Schema::dropIfExists('inasistencias');
     }
 }

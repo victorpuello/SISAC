@@ -4,12 +4,14 @@ namespace Ngsoft;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Estudiante extends Model
 {
     protected $fillable =[
         'name','lastname','typeid','identification','birthday','birthstate','birthcity','gender','address','EPS','phone','datein','dateout','path','stade','situation','salon_id',
     ];
+
     public function periodos(){
         return $this->belongsToMany(Periodo::class)->withPivot('inasistencias');
     }
@@ -23,12 +25,38 @@ class Estudiante extends Model
         return $this->hasOne(Acudiente::class);
     }
 
-    public function logros(){
-        return $this->belongsToMany(Logro::class)->withPivot('score');
+    public function getLogrosAttribute(){
+        $logros = DB::table('notas')->where('estudiante_id','=',$this->id)
+                ->join('estudiantes','estudiantes.id','=','notas.estudiante_id')
+                ->join('logros','logros.id','=','notas.logro_id')
+                ->select('notas.*','notas.id as nota_id','logros.*','logros.id as original_logro_id')
+                ->get();
+        return $logros;
+    }
+    public function currentNotaID($category,$grade,$asignatura,$docente,$periodo){
+        $nota = $this->logros
+            ->where('category','=',$category)
+            ->where('asignatura_id','=',$asignatura)
+            ->where('docente_id','=',$docente)
+            ->where('periodo_id','=',$periodo)
+            ->where('grade','=',$grade)->first();
+        return $nota->nota_id;
+    }
+    public function currentNotaScore($category,$grade,$asignatura,$docente,$periodo){
+        $nota = $this->logros
+            ->where('category','=',$category)
+            ->where('asignatura_id','=',$asignatura)
+            ->where('docente_id','=',$docente)
+            ->where('periodo_id','=',$periodo)
+            ->where('grade','=',$grade)->first();
+        return $nota->score;
     }
 
+    public function notas(){
+        return $this->hasMany(Nota::class);
+    }
     public function anotaciones(){
-        return $this->hasMany(Anotacion::class);
+            return $this->hasMany(Anotacion::class);
     }
 
     public function getFullNameAttribute(){

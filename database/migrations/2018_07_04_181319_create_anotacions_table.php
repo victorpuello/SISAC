@@ -18,9 +18,10 @@ class CreateAnotacionsTable extends Migration
             $table->string('annotation');
             $table->string('compromises');
             $table->enum('type',['academico','convivencia']);
-            $table->date('date');
             $table->integer('estudiante_id')->unsigned();
-            $table->foreign('estudiante_id')->references('id')->on('estudiantes')->onDelete('cascade');
+            $table->foreign('estudiante_id')->references('id')->on('estudiantes');
+            $table->integer('periodo_id')->unsigned();
+            $table->foreign('periodo_id')->references('id')->on('periodos');
             $table->timestamps();
         });
     }

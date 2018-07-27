@@ -20,12 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call(DocentesTableSeeder::class);
         DB::table('salons')->delete();
         $this->call(SalonsTableSeeder::class);
-        DB::table('docente_salon')->delete();
-        $this->call(DocenteSalonTableSeeder::class);
         DB::table('asignaturas')->delete();
         $this->call(AsignaturasTableSeeder::class);
-        DB::table('asignatura_docente')->delete();
-        $this->call(AsignaturaDocenteTableSeeder::class);
         DB::table('estudiantes')->delete();
         $this->call(EstudiantesTableSeeder::class);
         DB::table('acudientes')->delete();
@@ -34,12 +30,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PeriodosTableSeeder::class);
         DB::table('asignacions')->delete();
         $this->call(AsignacionTableSeeder::class);
-        DB::table('estudiante_periodo')->delete();
-        $this->call(EstudiantePeriodoTableSeeder::class);
         DB::table('departamentos')->delete();
         $this->call(DepartamentosTableSeeder::class);
         DB::table('municipios')->delete();
         $this->call(MunicipiosTableSeeder::class);
-
     }
 }
