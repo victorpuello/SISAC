@@ -42,7 +42,7 @@ Theme Version: 	2.1.1
 
 		build: function() {
 			this.datatable = this.$table.DataTable({
-				dom: '<"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
+				sDom: '<"text-right mb-md"T><"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
                 buttons: [
                     'pdf',
                     'excel',

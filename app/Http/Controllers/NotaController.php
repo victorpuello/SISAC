@@ -6,14 +6,15 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
-use Ngsoft\Asignacion;
-use Ngsoft\Asignatura;
+use Ngsoft\DataTables\NotaDataTablesEditor;
 use Ngsoft\Estudiante;
 use Ngsoft\Logro;
 use Illuminate\Http\Request;
 use Ngsoft\Nota;
 use Ngsoft\Periodo;
 use Ngsoft\Salon;
+use Ngsoft\Transformers\EstudianteTransformer;
+use Yajra\DataTables\Facades\DataTables;
 
 class NotaController extends Controller
 {
@@ -76,12 +77,12 @@ class NotaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param NotaDataTablesEditor $editor
+     * @return void
      */
-    public function store(Request $request)
+    public function store(NotaDataTablesEditor $editor)
     {
-
+        return $editor->process(request());
     }
 
     /**
@@ -113,22 +114,21 @@ class NotaController extends Controller
             return view('error.planilla');
         }
         $estudiantes = $currentEstudiantes;
-        $view = View::make('admin.notas.show',compact('estudiantes','Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
         if($request->ajax()){
-            $sections = $view->renderSections();
-            return response()->json($sections['content']);
+            return datatables()
+                    ->collection($estudiantes)
+                    ->setTransformer( new EstudianteTransformer($grado,$Idasignatura,$Iddocente,$Idperiodo))
+                    ->with('id_salon',$Idsalon)
+                    ->with('grado',$grado)
+                    ->with('id_docente',$Iddocente)
+                    ->with('id_asignatura',$Idasignatura)
+                    ->with('id_periodo',$Idperiodo)
+                    ->toJson();
         }
-        return view('admin.notas.show',compact('estudiantes','Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
+
+        return view('admin.notas.show',compact('Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
     }
 
-    public function getscript(Request $request){
-        $Idsalon=[];$Iddocente=[];$Idasignatura=[];$Idperiodo=[];$estudiantes=[];$grado=[];
-        $view = View::make('admin.notas.show',compact('estudiantes','Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
-        if($request->ajax()){
-            $sections = $view->renderSections();
-            return response()->json($sections['script']);
-        }
-    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -150,7 +150,7 @@ class NotaController extends Controller
      */
     public function actualizar(Request $request, $id)
     {
-
+        /*dd($request->all());
         $nota = Nota::findOrFail($id);
         $newLogro = $this->getLogro($request);
         $request->merge(array('logro_id'=> $newLogro->id));
@@ -160,7 +160,7 @@ class NotaController extends Controller
             'status' => 'success',
             'msg' => 'Nota guardada con exito',
         );
-        return response()->json($response);
+        return response()->json($response);*/
     }
     public function update(Request $request, $id)
     {
@@ -248,31 +248,5 @@ class NotaController extends Controller
      * @param $nota
      * @return \Illuminate\Support\Collection
      */
-    public function getLogro($request){
-        $logro = DB::table('logros')
-            ->where('docente_id','=',$request->docente_id)
-            ->where('asignatura_id','=',$request->asignatura_id)
-            ->where('grade','=',$request->grado)
-            ->where('periodo_id','=',$request->periodo_id)
-            ->where('category','=',$request->category)
-            ->where('indicador','=',$this->getIndicador($request->score))
-            ->first();
-        return  $logro;
-    }
 
-    public function getIndicador($nota){
-        if ($nota <= 5.9 ){
-            return "bajo";
-        }elseif ($nota >= 6 && $nota < 8){
-            return "basico";
-        }elseif ($nota >= 8 && $nota < 9.5){
-            return "alto";
-        }elseif ($nota >= 9.5 && $nota <= 10){
-            return "superior";
-        }
-        else{
-            return "Revisar notas";
-        }
-
-    }
 }

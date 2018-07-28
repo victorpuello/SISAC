@@ -3,7 +3,11 @@
 <?php $__env->startSection('styles'); ?>
     <link rel="stylesheet" href="<?php echo e(asset('vendor/select2/css/select2.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')); ?>" />
-    <link rel="stylesheet" href="<?php echo e(asset('vendor/datatables/media/css/dataTables.bootstrap4.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('css/jquery.dataTables.min.css')); ?>" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="<?php echo e(asset('css/buttons.dataTables.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('css/select.dataTables.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('css/editor.dataTables.min.css')); ?>" />
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="card-body">
@@ -12,140 +16,187 @@
 
             </div>
         </div>
-        <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+        <table class="display nowrap" cellspacing="0" width="100%" id="notas">
             <thead>
-            <tr>
-                <th>N°</th>
-                <th>Nombre</th>
-                <th>Cognitivo</th>
-                <th>Procedimental</th>
-                <th>Actitudinal</th>
-                <th>Inasistencias</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <?php $__currentLoopData = $estudiantes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $estudiante): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <tr data-item-id="<?php echo e($estudiante->id); ?>">
-                    <td class="id"><?php echo e($key+1); ?></td>
-                    <td class="name"><?php echo e($estudiante->full_name); ?></td>
-                    <td>
-                        <a  class="modal-basic btn btn-default w-100 edit"
-                            data-img="<?php echo e(url('/imgUsers/estudiantes/')); ?>/<?php echo e($estudiante->path); ?>"
-                            data-urledit="<?php echo e(url('/admin/notas/')); ?>"
-                            data-user = "<?php echo e($estudiante->id); ?>"
-                            data-category = "Nota logro cognitivo"
-                            data-name = "<?php echo e($estudiante->full_name); ?>"
-                            data-nota = "<?php echo e($estudiante->currentNotaID('cognitivo',$grado,$Idasignatura,$Iddocente,$Idperiodo)); ?>"
-                            href="#modalAdd">
-                            <?php echo e($estudiante->currentNotaScore('cognitivo',$grado,$Idasignatura,$Iddocente,$Idperiodo)); ?>
-
-                        </a>
-                    </td>
-                    <td>
-                        <a  class="modal-basic btn btn-default w-100 edit"
-                            data-img="<?php echo e(url('/imgUsers/estudiantes/')); ?>/<?php echo e($estudiante->path); ?>"
-                            data-urledit="<?php echo e(url('/admin/notas/')); ?>"
-                            data-user = "<?php echo e($estudiante->id); ?>"
-                            data-category = "Nota logro procedimental"
-                            data-name = "<?php echo e($estudiante->full_name); ?>"
-                            data-nota = "<?php echo e($estudiante->currentNotaID('procedimental',$grado,$Idasignatura,$Iddocente,$Idperiodo)); ?>"
-                            href="#modalAdd">
-                            <?php echo e($estudiante->currentNotaScore('procedimental',$grado,$Idasignatura,$Iddocente,$Idperiodo)); ?>
-
-                        </a>
-                    </td>
-                    <td>
-                        <a  class="modal-basic btn btn-default w-100 edit"
-                            data-img="<?php echo e(url('/imgUsers/estudiantes/')); ?>/<?php echo e($estudiante->path); ?>"
-                            data-urledit="<?php echo e(url('/admin/notas/')); ?>"
-                            data-user = "<?php echo e($estudiante->id); ?>"
-                            data-category = "Nota logro actitudinal"
-                            data-name = "<?php echo e($estudiante->full_name); ?>"
-                            data-nota = "<?php echo e($estudiante->currentNotaID('actitudinal',$grado,$Idasignatura,$Iddocente,$Idperiodo)); ?>"
-                            href="#modalAdd">
-                            <?php echo e($estudiante->currentNotaScore('actitudinal',$grado,$Idasignatura,$Iddocente,$Idperiodo)); ?>
-
-                        </a>
-                    </td>
-                    <td></td>
-
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Id_Nota_Act</th>
+                    <th>Actitudinal</th>
+                    <th>Id_Nota_Cog</th>
+                    <th>Cognitivo</th>
+                    <th>Id_Nota_Proc</th>
+                    <th>Procedimental</th>
                 </tr>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            </tbody>
+            </thead>
         </table>
-        <?php echo $__env->make('admin.notas.partials.modals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
     <script src="<?php echo e(asset('vendor/autosize/autosize.js')); ?>"></script>
     <script src="<?php echo e(asset('vendor/select2/js/select2.js')); ?>"></script>
-    <script src="<?php echo e(asset('vendor/datatables/media/js/jquery.dataTables.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/jquery.dataTables.min.js')); ?>"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="<?php echo e(asset('js/dataTables.buttons.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/dataTables.select.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/dataTables.editor.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/examples/notas.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/jquery.numeric.js')); ?>"></script>
     <script>
-        var idnota;
-        $(".edit").on('click',function (e) {
-            $("#imgEstudiante").attr('src', $(this).data('img') );
-            $("#nameEstudiante").text( $(this).data('name') );
-            $("#label-score").text( $(this).data('category') );
-            $("#estudiante_id").val( $(this).data('user') );
-            $("#category").val( $(this).data('category').replace('Nota logro ', '') );
-            $("#form-edit").attr('action', $(this).data('urlupdate') );
-            var ruta = $(this).data('urledit')+'/'+$(this).data('nota')+'/edit';
-            idnota = $(this).data('nota');
-            $.get(ruta , function (data) {
-                $("#score").val(data.score);
-                $("#estudiante_id").val(data.estudiante_id);
-                $("#logro_id").val(data.logro_id);
+        var editor; // use a global for the submit and return data rendering in the examples
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+                }
             });
-            $(this).magnificPopup({
-                type: 'inline',
-                preloader: false,
-                modal: true
-            });
-        });
-        $("#update-nota").on('click',function (e) {
-            e.preventDefault();
-            var form = $('#form-edit');
-            var url = form.attr('action').replace(':NOTA_ID', idnota);
-            var data = form.serialize();
-            console.log(data);
-            var posting = $.post(url,data);
-            posting.done(function (data) {
-                console.log(data);
-                $.magnificPopup.close();
-                var sectionRender = "<?php echo e(route('notas.loadplanilla',['Idsalon'=>$Idsalon,'Iddocente'=>$Iddocente,'Idasignatura'=>$Idasignatura,'Idperiodo'=>$Idperiodo])); ?>";
-                ajaxRenderSection(sectionRender);
-                //location.reload(true);
-                new PNotify({
-                    title: 'Exito!',
-                    text: data.msg,
-                    type: 'success'
-                });
-            });
-        });
+            editor = new $.fn.dataTable.Editor( {
+                    ajax: "<?php echo e(route('notas.store')); ?>",
+                    type: 'POST',
+                    table: "#notas",
+                    idSrc: "id",
+                    fields: [ {
+                        type: "hidden",
+                        name: "id"
+                    },
+                     {
+                        label: "Nota actitudinal:",
+                        name: "notas.data.0.score"
+                    },{
+                        label: "Nota cognitiva:",
+                        name: "notas.data.1.score"
+                    },{
+                        label: "Nota procedimental:",
+                        name: "notas.data.2.score"
+                    },{
+                        name: "notas.data.0.id",
+                        type: "hidden"
+                    },{
+                        name: "notas.data.1.id",
+                        type: "hidden",
+                    }, {
+                        name: "notas.data.2.id",
+                        type: "hidden"
+                       },
+                        {
+                            name:'grado',
+                            type: "hidden",
+                        },
+                        {
+                            name:'docente',
+                            type: "hidden",
+                        },
+                        {
+                            name:'asignatura',
+                            type: "hidden",
+                        },
+                        {
+                            name:'periodo',
+                            type: "hidden",
+                        }
+                    ]
+                } );
+            // Activate an inline edit on click of a table cell
+            // or a DataTables Responsive data cell
+            $('#notas').on( 'click', 'tbody td:not(.child), tbody span.dtr-data', function (e) {
+                // Ignore the Responsive control and checkbox columns
+                if ( $(this).hasClass( 'control' ) || $(this).hasClass('select-checkbox') || $(this).hasClass('no-editable') ) {
+                    return;
+                }
+                editor.inline( this,{
+                    submit: 'allIfChanged'
+                } );
+                console.log(this);
+            } );
 
-        function ajaxRenderSection(url) {
-            $.ajax({
-                type: 'GET',
-                url: url,
-                dataType: 'json',
-                success: function (data) {
-                    $('#principalPanel').empty().append($(data));
-                },
-                error: function (data) {
-                    var errors = data.responseJSON;
-                    if (errors) {
-                        $.each(errors, function (i) {
-                            console.log(errors[i]);
-                        });
+            editor.on('preSubmit',function (e,o,action) {
+                if (action !== 'remove'){
+                    var notaAct = this.field('notas.data.0.score');
+                    var notaCog = this.field('notas.data.1.score');
+                    var notaPro = this.field('notas.data.2.score');
+                    var expreg = /^[0-9]+([,][0-9]+)?$/;
+                    if (! notaAct.isMultiValue()){
+                        if (! notaAct.val()){
+                            notaAct.error( 'Debes ingresar una valoración');
+                        }
+                        if (notaAct.val() > 10 || notaAct.val() < 1){
+                            notaAct.error( 'Solo se aceptan valores entre 1 y 10')
+                        }
+                    }
+                    if (! notaCog.isMultiValue()){
+                        if (! notaCog.val()){
+                            notaCog.error( 'Debes ingresar una valoración');
+                        }
+                        if (notaCog.val() > 10 || notaCog.val() < 1){
+                            notaCog.error( 'Solo se aceptan valores entre 1 y 10')
+                        }
+
+                    }
+                    if (! notaPro.isMultiValue()){
+                        if (! notaPro.val()){
+                            notaPro.error( 'Debes ingresar una valoración');
+                        }
+                        if (notaPro.val() > 10 || notaPro.val() < 1){
+                            notaPro.error( 'Solo se aceptan valores entre 1 y 10')
+                        }
+
+                    }
+                    if (this.inError()){
+                        return false;
                     }
                 }
             });
-        }
+
+            $('#notas').DataTable( {
+                responsive: true,
+                lengthChange: false,
+                serverSide: true,
+                ajax: "<?php echo e(route('notas.loadplanilla',['Idsalon'=>$Idsalon,'Iddocente'=>$Iddocente,'Idasignatura'=>$Idasignatura,'Idperiodo'=>$Idperiodo])); ?>",
+                dom: "Bfrtip",
+                columns: [
+                    {   // Responsive control column
+                        data: null,
+                        defaultContent: '',
+                        className: 'control',
+                        orderable: false
+                    },
+                    {   // Checkbox select column
+                        data: null,
+                        defaultContent: '',
+                        className: 'select-checkbox',
+                        orderable: false
+                    },
+                    { data: "id",editField: "id" ,className: 'never', orderable: false  },
+                    { data: "grado" ,className: 'never', orderable: false  },
+                    { data: "docente" ,className: 'never', orderable: false  },
+                    { data: "asignatura" ,className: 'never', orderable: false  },
+                    { data: "periodo" ,className: 'never', orderable: false  },
+                    { data: "name",className: 'no-editable' },
+                    { data: "notas.data.0.id",className: 'never', orderable: false },
+                    { data: "notas.data.0.score",className: 'editable', orderable: false },
+                    { data: "notas.data.1.id",className: 'never', orderable: false },
+                    { data: "notas.data.1.score",className: 'editable', orderable: false },
+                    { data: "notas.data.2.id",className: 'never', orderable: false},
+                    { data: "notas.data.2.score",className: 'editable', orderable: false}
+                ],
+                order: [ 2, 'asc' ],
+                select: {
+                    style:    'os',
+                    selector: 'td.select-checkbox'
+                },
+                buttons: [
+                    { extend: "edit",   editor: editor },
+                ]
+            } );
+        } );
     </script>
-    <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
-    <script src="<?php echo e(asset('js/examples/notas.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

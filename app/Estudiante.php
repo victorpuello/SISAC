@@ -42,6 +42,22 @@ class Estudiante extends Model
             ->where('grade','=',$grade)->first();
         return $nota->nota_id;
     }
+    public function currentNotas($grade,$asignatura,$docente,$periodo){
+
+        $logros = $this->logros
+            ->where('asignatura_id','=',$asignatura)
+            ->where('docente_id','=',$docente)
+            ->where('periodo_id','=',$periodo)
+            ->where('grade','=',$grade)->sortBy('category');
+        //dd($logros,'Dentro de la entidad',$grade,$asignatura,$docente,$periodo);
+        $notas = collect();
+        foreach ($logros as $logro){
+            $q = Nota::where('logro_id','=',$logro->id)
+                ->where('estudiante_id','=',$this->id)->first();
+            $notas->push($q);
+        }
+        return $notas;
+    }
     public function currentNotaScore($category,$grade,$asignatura,$docente,$periodo){
         $nota = $this->logros
             ->where('category','=',$category)
@@ -61,6 +77,9 @@ class Estudiante extends Model
 
     public function getFullNameAttribute(){
         return $this->name.' '.$this->lastname;
+    }
+    public function getApellidoNameAttribute(){
+        return $this->lastname.' '.$this->name;
     }
     /*public function setPathAttribute($path)
     {
