@@ -4,18 +4,17 @@
     <link rel="stylesheet" href="<?php echo e(asset('vendor/select2/css/select2.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('css/jquery.dataTables.min.css')); ?>" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="<?php echo e(asset('css/responsive.dataTables.min.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('css/buttons.dataTables.min.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('css/select.dataTables.min.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('css/editor.dataTables.min.css')); ?>" />
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
+    <section class="card card-info mb-4">
+    <header class="card-header">
+        <h2 class="card-title">Calificador - Grado <?php echo e(\Ngsoft\Salon::find($Idsalon)->getFullNameAttibute()); ?></h2>
+    </header>
     <div class="card-body">
-        <div class="row">
-            <div class="col-sm-6">
-
-            </div>
-        </div>
         <table class="display nowrap" cellspacing="0" width="100%" id="notas">
             <thead>
                 <tr>
@@ -42,12 +41,13 @@
         </table>
         <div id="inf" data-token ="<?php echo e(csrf_token()); ?>" data-urlproces ="<?php echo e(route('notas.store')); ?>" data-urltabla ="<?php echo e(route('notas.loadplanilla',['Idsalon'=>$Idsalon,'Iddocente'=>$Iddocente,'Idasignatura'=>$Idasignatura,'Idperiodo'=>$Idperiodo])); ?>"></div>
     </div>
+    </section>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
     <script src="<?php echo e(asset('vendor/autosize/autosize.js')); ?>"></script>
     <script src="<?php echo e(asset('vendor/select2/js/select2.js')); ?>"></script>
     <script src="<?php echo e(asset('js/jquery.dataTables.min.js')); ?>"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="<?php echo e(asset('js/dataTables.responsive.min.js')); ?>"></script>
     <script src="<?php echo e(asset('js/dataTables.buttons.min.js')); ?>"></script>
     <script src="<?php echo e(asset('js/dataTables.select.min.js')); ?>"></script>
     <script src="<?php echo e(asset('js/dataTables.editor.min.js')); ?>"></script>

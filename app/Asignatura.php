@@ -3,14 +3,19 @@
 namespace Ngsoft;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Asignatura extends Model
 {
     protected $fillable = [
         'name',
     ];
-    public function docentes (){
-        return $this->belongsToMany(Docente::class);
+    public function getDocentesAttribute (){
+        $docentes = DB::table('asignacions')->where('asignatura_id','=',$this->id)
+            ->join('docentes','docentes.id','=','asignacions.docente_id')
+            ->select('docentes.*')
+            ->get();
+        return $docentes;
     }
 
     public function logros(){

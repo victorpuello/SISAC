@@ -5,18 +5,17 @@
     <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.css')}}" />
     <link rel="stylesheet" href="{{asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('css/jquery.dataTables.min.css')}}" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="{{asset('css/responsive.dataTables.min.css')}}" />
     <link rel="stylesheet" href="{{asset('css/buttons.dataTables.min.css')}}" />
     <link rel="stylesheet" href="{{asset('css/select.dataTables.min.css')}}" />
     <link rel="stylesheet" href="{{asset('css/editor.dataTables.min.css')}}" />
 @endsection
 @section('content')
+    <section class="card card-info mb-4">
+    <header class="card-header">
+        <h2 class="card-title">Planilla - Grado {{\Ngsoft\Salon::find($Idsalon)->getFullNameAttibute()}}</h2>
+    </header>
     <div class="card-body">
-        <div class="row">
-            <div class="col-sm-6">
-
-            </div>
-        </div>
         <table class="display nowrap" cellspacing="0" width="100%" id="notas">
             <thead>
                 <tr>
@@ -43,12 +42,13 @@
         </table>
         <div id="inf" data-token ="{{csrf_token()}}" data-urlproces ="{{route('notas.store')}}" data-urltabla ="{{route('notas.loadplanilla',['Idsalon'=>$Idsalon,'Iddocente'=>$Iddocente,'Idasignatura'=>$Idasignatura,'Idperiodo'=>$Idperiodo])}}"></div>
     </div>
+    </section>
 @endsection
 @section('script')
     <script src="{{asset('vendor/autosize/autosize.js')}}"></script>
     <script src="{{asset('vendor/select2/js/select2.js')}}"></script>
     <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="{{asset('js/dataTables.responsive.min.js')}}"></script>
     <script src="{{asset('js/dataTables.buttons.min.js')}}"></script>
     <script src="{{asset('js/dataTables.select.min.js')}}"></script>
     <script src="{{asset('js/dataTables.editor.min.js')}}"></script>

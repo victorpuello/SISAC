@@ -19,6 +19,6 @@ class UsersTableSeeder extends Seeder
             'username' => 'victor.puello',
             'type' => 'admin'
         ]);
-        factory(User::class,40)->create();
+       // factory(User::class,40)->create();
     }
 }

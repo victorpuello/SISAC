@@ -17,6 +17,13 @@
                 </a>
             </li>
         </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="{{route('import-users.index')}}">
+                    Importar usuarios
+                </a>
+            </li>
+        </ul>
     </li>
     <li class="nav-parent nav-active">
         <a class="nav-link" href="#">

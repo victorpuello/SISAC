@@ -200,6 +200,9 @@
                 },
                 buttons: [
                     { extend: "edit",   editor: editor },
+                    { extend: "excel",   editor: editor },
+                    { extend: "pdf",   editor: editor },
+
                 ],
                 language: {
                     processing:     "Procesando...",

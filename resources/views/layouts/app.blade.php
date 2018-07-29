@@ -101,9 +101,8 @@
                         </div>
                     </header>
                     <!-- start: page -->
-                    <div id="principalPanel">
                         @yield('content')
-                    </div>
+
                     <!-- end: page -->
                 </section>
             </div>
