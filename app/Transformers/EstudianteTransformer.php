@@ -4,12 +4,13 @@ namespace Ngsoft\Transformers;
 
 use League\Fractal\TransformerAbstract;
 use Ngsoft\Estudiante;
+use Ngsoft\Inasistencia;
 use Ngsoft\Nota;
 
 class EstudianteTransformer extends TransformerAbstract
 {
-    protected  $availableIncludes = ['notas'];
-    protected  $defaultIncludes = ['notas'];
+    protected  $availableIncludes = ['notas','inasistencias'];
+    protected  $defaultIncludes = ['notas','inasistencias'];
     /**
      * @param \Ngsoft\Estudiante $estudiante
      * @return array
@@ -52,5 +53,12 @@ class EstudianteTransformer extends TransformerAbstract
         $notas =  $estudiante->currentNotas($this->grado,$this->asignatura,$this->docente,$this->periodo);
         //dd($notas);
         return $this->collection($notas, new NotaTransformer);
+    }
+    // añade al JSON las inasistencia de ese periodo
+    public function includeInasistencias(Estudiante $estudiante)
+    {
+        $inasistencias =  $estudiante->currentInasistencias($this->asignatura,$this->periodo);
+       // dd($inasistencias,'hola');
+        return $this->collection($inasistencias, new InasistenciaTransformer);
     }
 }

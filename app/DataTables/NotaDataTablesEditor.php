@@ -4,6 +4,7 @@ namespace Ngsoft\DataTables;
 
 use Illuminate\Support\Facades\DB;
 use Ngsoft\Estudiante;
+use Ngsoft\Inasistencia;
 use Ngsoft\Nota;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTablesEditor;
@@ -63,11 +64,16 @@ class NotaDataTablesEditor extends DataTablesEditor
         $ScorenotaCog = $data['notas']['data']['1']['score'];
         $IDnotaPro = $data['notas']['data']['2']['id'];
         $ScorenotaPro = $data['notas']['data']['2']['score'];
+        $IDinas = $data['inasistencias']['data']['0']['id'];
+        $NumeroInas = $data['inasistencias']['data']['0']['numero'];
         for ($i = 0; $i <= 2; $i++){
-            if (! is_numeric($data['notas']['data'][$i]['id'])) {
-                unset($data['notas']['data'][$i]['id']);
+            if (! is_numeric($data['notas']['data'][$i]['score'])) {
+                unset($data['notas']['data'][$i]['score']);
             }
         }
+        $inasistencia = Inasistencia::findOrFail($IDinas);
+        $inasistencia->fill(['numero'=>$NumeroInas]);
+        $inasistencia->save();
 
         $logro = $this->getLogro($docente,$asignatura,$grado,$periodo,'actitudinal',$ScorenotaAct);
         $nota = Nota::findOrFail($IDnotaAct);

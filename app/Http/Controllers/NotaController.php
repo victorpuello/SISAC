@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Ngsoft\DataTables\NotaDataTablesEditor;
 use Ngsoft\Estudiante;
+use Ngsoft\Inasistencia;
 use Ngsoft\Logro;
 use Illuminate\Http\Request;
 use Ngsoft\Nota;
@@ -22,12 +23,14 @@ class NotaController extends Controller
     private $notas;
     private $logros;
     private $fondos =  ['primary','secondary','tertiary','quaternary'];
+    private $inasistencias;
     public function __construct ()
     {
         // revisar a futuro para delimitar la cantidad de datos que llegan al controlador
         $this->estudiantes = Estudiante::where('stade','=','activo')->get();
         $this->notas = Nota::all();
         $this->logros = Logro::all();
+        $this->inasistencias = Inasistencia::all();
     }
 
     /**
@@ -110,6 +113,7 @@ class NotaController extends Controller
             $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Cog);
             $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Act);
             $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Proc);
+            $this->VerificadorInasistenciasEstud($currentEstudiantes,$Idasignatura,$Idperiodo);
         }catch (\Exception $ex) {
             return view('error.planilla');
         }
@@ -141,27 +145,7 @@ class NotaController extends Controller
         return response()->json($nota);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Nota  $nota
-     * @return \Illuminate\Http\Response
-     */
-    public function actualizar(Request $request, $id)
-    {
-        /*dd($request->all());
-        $nota = Nota::findOrFail($id);
-        $newLogro = $this->getLogro($request);
-        $request->merge(array('logro_id'=> $newLogro->id));
-        $nota->fill($request->all());
-        $nota->save();
-        $response = array(
-            'status' => 'success',
-            'msg' => 'Nota guardada con exito',
-        );
-        return response()->json($response);*/
-    }
+
     public function update(Request $request, $id)
     {
 
@@ -240,6 +224,35 @@ class NotaController extends Controller
             ->get();
        // dd($logros);
         return  $logros;
+    }
+
+    private function VerificadorInasistenciasEstud ($currentEstudiantes, $Idasignatura, $Idperiodo)
+    {
+        foreach ($currentEstudiantes as $estudiante){
+            $Found = false;
+            if ($this->inasistenciaExist($estudiante->id,$Idasignatura,$Idperiodo)){
+                $Found = true;
+            }
+            if (! $Found){
+                $inasistencia = new Inasistencia([
+                    'numero'=> 0,
+                    'estudiante_id' => $estudiante->id,
+                    'periodo_id' => $Idperiodo,
+                    'asignatura_id' => $Idasignatura]);
+                $inasistencia->save();
+            }
+        }
+    }
+
+    private function inasistenciaExist ($id, $Idasignatura, $Idperiodo)
+    {
+        $Ins = $this->inasistencias->where('asignatura_id','=', $Idasignatura);
+        $InsP = $Ins->where('periodo_id','=', $Idperiodo);
+        $InsE = $InsP->where('estudiante_id','=', $id)->count();
+        if ($InsE > 0){
+            return true;
+        }
+        return false;
     }
 
     /**
