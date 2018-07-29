@@ -10,7 +10,7 @@
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
                 <div class="modal-text">
-                    <p>Estas seguro que deseas eliminar la asignatura: <strong><span id="NombreAsg"></span></strong></p>
+                    <p>Estas seguro que deseas eliminar el salón: <strong><span id="NombreSalon"></span></strong></p>
                 </div>
             </div>
         </div>
@@ -37,19 +37,27 @@
             <h2 class="card-title">Agregar Asignatura</h2>
         </header>
         <div class="card-body">
-            <?php echo Form::open(['route' => 'asignaturas.store', 'method' => 'post','class' => 'form-horizontal form-bordered', 'id' => 'form-create']); ?>
+            <?php echo Form::open(['route' => 'aulas.store', 'method' => 'post','class' => 'form-horizontal form-bordered', 'id' => 'form-create']); ?>
 
             <div class="modal-wrapper">
                 <div class="modal-text">
-                    <?php echo $__env->make('admin.asignaturas.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                        <div class="form-group row">
-                            <?php echo Form::label('name', 'Nombre de Asignatura',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
+                    <?php echo $__env->make('admin.aulas.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    <div class="form-group row">
+                        <?php echo Form::label('name', 'Nombre del salón',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
 
-                            <div class="col-lg-8">
-                                <?php echo Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Por favor introduzca el nombre de la asignatura', 'requiered']); ?>
+                        <div class="col-lg-8">
+                            <?php echo Form::select('name',['1' => '1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6'], null, ['class' => 'form-control mb-3','placeholder'=>'Seleccione el Número de Salón', 'id'=>'typeid','required']); ?>
 
-                            </div>
                         </div>
+                    </div>
+                    <div class="form-group row">
+                        <?php echo Form::label('grade', 'Grado: ',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
+
+                        <div class="col-lg-8">
+                            <?php echo Form::select('grade',['0'=>'Pre-Escolar','1' => 'Primero','2'=>'Segundo','3'=>'Tercero','4'=>'Cuarto','5'=>'Quinto','6'=>'Sexto','7'=>'Septimo','8'=>'Octavo','9'=>'Noveno','10'=>'Decimo','11'=>'Once'], null, ['class' => 'form-control mb-3','placeholder'=>'Seleccione un Grado', 'id'=>'typeid','required']); ?>
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <footer class="card-footer">
@@ -69,7 +77,7 @@
 
 <!-- Start Modal Editar -->
 <div id="modalEditar" class="modal-block modal-block-warning mfp-hide">
-    <?php echo $__env->make('admin.asignaturas.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('admin.aulas.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     <?php echo Form::open(['method' => 'PUT','class' => 'form-horizontal form-bordered', 'id'=>'form-edit']); ?>
 
     <section class="card">
@@ -79,8 +87,22 @@
         <div class="card-body">
             <div class="modal-wrapper">
                 <div class="modal-text">
+                    <?php echo $__env->make('admin.aulas.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     <div class="form-group row">
-                        <?php echo $__env->make('admin.asignaturas.partials.fields', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <?php echo Form::label('name', 'Nombre del salón',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
+
+                        <div class="col-lg-8">
+                            <?php echo Form::select('name',['1' => '1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6'], null, ['class' => 'form-control mb-3','placeholder'=>'Seleccione el Número de Salón', 'id'=>'name','required']); ?>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <?php echo Form::label('grade', 'Grado: ',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
+
+                        <div class="col-lg-8">
+                            <?php echo Form::select('grade',['0'=>'Pre-Escolar','1' => 'Primero','2'=>'Segundo','3'=>'Tercero','4'=>'Cuarto','5'=>'Quinto','6'=>'Sexto','7'=>'Septimo','8'=>'Octavo','9'=>'Noveno','10'=>'Decimo','11'=>'Once'], null, ['class' => 'form-control mb-3','placeholder'=>'Seleccione un Grado', 'id'=>'grade','required']); ?>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -94,8 +116,7 @@
             </div>
         </footer>
     </section>
-    <?php echo Form::close(); ?>
+<?php echo Form::close(); ?>
 
 </div>
-
 <!-- End Modal Editar-->

@@ -113,7 +113,7 @@ class SalonController extends Controller
         $aulas = Salon::all();
         $salones = array();
         foreach ($aulas as $aula){
-            array_push($salones,$aula->getNameForValidationAttibute());
+            array_push($salones,$aula->name_for_validation);
         }
         return (in_array($data,$salones));
     }

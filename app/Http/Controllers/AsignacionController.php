@@ -4,6 +4,10 @@ namespace Ngsoft\Http\Controllers;
 
 use Ngsoft\Asignacion;
 use Illuminate\Http\Request;
+use Ngsoft\Asignatura;
+use Ngsoft\Docente;
+use Ngsoft\Http\Requests\createAsignacionRequest;
+use Ngsoft\Salon;
 
 class AsignacionController extends Controller
 {
@@ -14,7 +18,20 @@ class AsignacionController extends Controller
      */
     public function index()
     {
-        //
+        $asignaciones = Asignacion::all();
+        $docentes = Docente::orderBy('name','ASC')->pluck('name','id');
+        $salones_todos = Salon::orderBy('name','ASC')->get();
+        $asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
+        $sal= collect();
+        foreach ($salones_todos as $salon){
+            $sal->push([
+                'id'=>$salon->id,
+                'nombre'=>$salon->full_name,
+                'grado'=>$salon->grade,
+            ]);
+        }
+        $salones = $sal->sortBy('grado')->pluck('nombre','id');
+        return view('admin.asignaciones.index',compact('asignaciones','docentes','salones','asignaturas'));
     }
 
     /**
@@ -33,9 +50,11 @@ class AsignacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateAsignacionRequest $request)
     {
-        //
+        $asignacion = new Asignacion($request->all());
+        $asignacion->save();
+        return redirect()->route('asignaciones.index');
     }
 
     /**

@@ -78,16 +78,16 @@
                 </div>
             </div>
         </div>
+        <footer class="card-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button type="submit" class="btn btn-primary editAsignatura">Guardar</button>
+                    <button class="btn btn-default modal-dismiss">Cancelar</button>
+                </div>
+            </div>
+        </footer>
+    </section>
+    {!! Form::close() !!}
 </div>
-<footer class="card-footer">
-    <div class="row">
-        <div class="col-md-12 text-right">
-            <button type="submit" class="btn btn-primary editAsignatura">Guardar</button>
-            <button class="btn btn-default modal-dismiss">Cancelar</button>
-        </div>
-    </div>
-</footer>
-</section>
-{!! Form::close() !!}
-</div>
+
 <!-- End Modal Editar-->

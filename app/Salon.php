@@ -25,16 +25,16 @@ class Salon extends Model
         return 'Grupo: ' . $this->nombres[$this->grade] . ' - ' . $this->name;
     }
 
-    public function getNameForValidationAttibute ()
+    public function getNameForValidationAttribute ()
     {
         return $this->grade . '' . $this->name;
     }
 
-    public function getFullNameAttibute ()
+    public function getFullNameAttribute ()
     {
         return $this->nombres[$this->grade] . ' - ' . $this->name;
     }
-    public function getNameGradeAttibute ()
+    public function getNameGradeAttribute ()
     {
         return $this->nombres[$this->grade];
     }

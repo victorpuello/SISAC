@@ -50,15 +50,18 @@ class InportUserController extends Controller
                     'password' => $user->password,
                     'username' =>$user->username,
                     'type' =>$user->type,
-                ]);
-               //$usuario = DB::table('users')->where('email','=',$user->email)->first();
-                factory(Docente::class)->create([
-                    'name' => $user->name,
-                    'typeid' => $user->typeid,
-                    'numberid' => $user->numberid,
-                    'gender' => $user->gender,
-                    'user_id' => $usuario->id
-                ]);
+               ]);
+               if ($user->type === "docente"){
+                    factory(Docente::class)->create([
+                        'name' => $usuario->full_name,
+                        'typeid' => $user->typeid,
+                        'numberid' => $user->numberid,
+                        'gender' => $user->gender,
+                        'user_id' => $usuario->id,
+                        'path' =>'no-user-image.png'
+                    ]);
+               }
+
             }
         },'UTF-8');
         return view('admin.import.importusers');

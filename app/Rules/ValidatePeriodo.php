@@ -17,7 +17,9 @@ class ValidatePeriodo implements Rule
      */
     public function passes($attribute, $value)
     {
-        $marcador = false;/*
+        $marcador = false;
+        // Descomentar para activar la restriccion de periodos en los logros
+        /*
         if (Periodo::find($value)->dateend <= Carbon::now()){
             $marcador = true;
         }*/

@@ -57,6 +57,13 @@
                 </a>
             </li>
         </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="<?php echo e(route('asignaciones.index')); ?>">
+                    Asignación Academica
+                </a>
+            </li>
+        </ul>
     </li>
     <li class="nav-parent">
         <a class="nav-link" href="#">

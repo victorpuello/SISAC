@@ -40,7 +40,6 @@ class UpdateLogroRequest extends FormRequest
     public function rules()
     {
         $this->logro = Logro::find($this->route->parameter('logro'));
-        //$this->redirectAction = 'LogroController@index';
         if (currentPerfil() ==='docente'){
             return [
                 'code' => Rule::unique('logros')->ignore($this->logro->code, 'code'),

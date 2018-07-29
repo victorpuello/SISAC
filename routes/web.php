@@ -18,7 +18,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::resource('asignaturas', 'AsignaturaController');
     Route::resource('aulas', 'SalonController');
     Route::resource('logros', 'LogroController');
-    Route::resource('notas', 'Controller');
+    Route::resource('notas', 'NotaController');
+    Route::resource('asignaciones', 'AsignacionController');
     Route::resource('import-users', 'InportUserController')->only(['index', 'store']);
     Route::get('notas/cargarPlanilla/salon/{Idsalon}/docente/{Iddocente}/asignatura/{Idasignatura}/periodo/{Idperiodo}',['as'=>'notas.loadplanilla', 'uses' => 'NotaController@cargarPlanilla']);
     Route::post('docentes/addAsignaturas/{id}',['as' => 'docentes.addAsignaturas', 'uses' => 'DocenteController@addAsignaturas']);

@@ -117,7 +117,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Salón: </strong></td>
-                                    <td>{{$estudiante->salon->getFullNameAttibute()}}</td>
+                                    <td>{{$estudiante->salon->full_name}}</td>
                                 </tr>
                                 </tbody>
                             </table>

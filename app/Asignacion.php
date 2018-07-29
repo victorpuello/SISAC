@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Asignacion extends Model
 {
     protected $fillable = [
-        'horas','docente_id','salon_id','asignatura_id'
+        'horas','docente_id','salon_id','asignatura_id','director',
     ];
     public function asignatura()
     {
@@ -20,4 +20,13 @@ class Asignacion extends Model
     public function salon(){
         return $this->belongsTo(Salon::class);
     }
+
+    public function getDireccionAttribute(){
+        if ($this->director === 0){
+            return 'No';
+        }
+        return 'Si';
+    }
+
+
 }
