@@ -16,7 +16,7 @@
     </div>
     <div class="row">
         @foreach($aulas as $aula)
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                     <section class="card">
                         <header class="card-header bg-{{$fondos[rand(0,3)]}}">
                             <div class="card-header-profile-picture">
@@ -34,6 +34,11 @@
                                 <div class="col-lg-6">
                                     <p class="mb-1"><a href="#modalEliminar" data-nsl ="{{$aula->NameAula}}" data-url="{{route('aulas.destroy',$aula->id)}}" class="deleted modal-basic" ><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
                                 </div>
+                                @foreach(\Ngsoft\Periodo::all() as $periodo)
+                                <div class="col-lg-6">
+                                    <p class="mb-1"><a href="{{route('reportes.academico', ['periodo'=>$periodo,'aula'=>$aula])}}"   ><i class="fas fa-print mr-1"></i> Informe {{$periodo->name}}</a></p>
+                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </section>

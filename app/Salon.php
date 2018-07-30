@@ -4,6 +4,7 @@ namespace Ngsoft;
 
 use Illuminate\Database\Eloquent\Model;
 use phpDocumentor\Reflection\Types\This;
+use Illuminate\Support\Facades\DB;
 
 class Salon extends Model
 {
@@ -46,4 +47,31 @@ class Salon extends Model
     public function asignaciones(){
         return $this->hasMany(Asignacion::class);
     }
+    public function getAsignaturasAttribute(){
+        $asignaturas = DB::table('asignacions')
+            ->where('salon_id','=',$this->id)
+            ->join('asignaturas','asignacions.asignatura_id','=', 'asignaturas.id')
+            ->select('asignaturas.*')
+            ->get();
+        return $asignaturas;
+    }
+    public function getDocentesAttribute(){
+        $docentes = DB::table('asignacions')
+            ->where('salon_id','=',$this->id)
+            ->join('docentes','asignacions.docente_id','=', 'docentes.id')
+            ->select('docentes.*')
+            ->get();
+        return $docentes;
+    }
+    public function getDirectorAttribute(){
+        $docentes = DB::table('asignacions')
+            ->where('salon_id','=',$this->id)
+            ->join('docentes','asignacions.docente_id','=', 'docentes.id')
+            ->select('asignacions.director','docentes.name')
+            ->get();
+        //dd($docentes);
+        $docente = $docentes->where('director','=', 1)->first();
+        return $docente->name;
+    }
+
 }

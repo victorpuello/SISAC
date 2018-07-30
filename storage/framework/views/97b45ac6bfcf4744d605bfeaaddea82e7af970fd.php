@@ -15,7 +15,7 @@
     </div>
     <div class="row">
         <?php $__currentLoopData = $aulas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $aula): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                     <section class="card">
                         <header class="card-header bg-<?php echo e($fondos[rand(0,3)]); ?>">
                             <div class="card-header-profile-picture">
@@ -33,6 +33,11 @@
                                 <div class="col-lg-6">
                                     <p class="mb-1"><a href="#modalEliminar" data-nsl ="<?php echo e($aula->NameAula); ?>" data-url="<?php echo e(route('aulas.destroy',$aula->id)); ?>" class="deleted modal-basic" ><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
                                 </div>
+                                <?php $__currentLoopData = \Ngsoft\Periodo::all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $periodo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <div class="col-lg-6">
+                                    <p class="mb-1"><a href="<?php echo e(route('reportes.academico', ['periodo'=>$periodo,'aula'=>$aula])); ?>"   ><i class="fas fa-print mr-1"></i> Informe <?php echo e($periodo->name); ?></a></p>
+                                </div>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                         </div>
                     </section>
