@@ -13,7 +13,7 @@ class UpdateAsignacionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateAsignacionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'asignatura_id' => ['required','numeric'],
+            'docente_id' => ['required','numeric'],
+            'salon_id' => ['required','numeric']
         ];
     }
 }

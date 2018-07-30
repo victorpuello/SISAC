@@ -33,7 +33,7 @@
             <h2 class="card-title">Editar Asignación</h2>
         </header>
     <div class="card-body">
-        {!! Form::model($asignacion,['route'=>['asignaciones.update',$asignacion->edit],'method' => 'PUT','class' => 'form-horizontal form-bordered', 'id'=>'form-edit']) !!}
+        {!! Form::model($asignacion,['route'=>['asignaciones.update',$asignacion->id],'method' => 'PUT','class' => 'form-horizontal form-bordered', 'id'=>'form-edit']) !!}
         <div class="modal-wrapper">
                 <div class="modal-text">
                     @include('admin.asignaturas.partials.messages')

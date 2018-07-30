@@ -175,7 +175,7 @@ class LogroController extends Controller
             $grados = [];
             $asignaturas=[];
             foreach ($asignaciones as  $asignacion) {
-                $grados[$asignacion->salon->grade] = $asignacion->salon->getNameGradeAttibute();
+                $grados[$asignacion->salon->grade] = $asignacion->salon->name_grade;
                 $asignaturas[$asignacion->asignatura->id] = $asignacion->asignatura->name;
             }
             $data['grados'] = array_unique($grados);

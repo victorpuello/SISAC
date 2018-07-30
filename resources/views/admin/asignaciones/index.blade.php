@@ -35,7 +35,7 @@
                     <td>{{$asignacion->direccion}}</td>
                     <td class="actions">
                         <a href="#modalEditar" class="on-default edit modal-basic" > <i class="fas fa-pencil-alt"></i></a>
-                        <a href="#modalEliminar" class="on-default deleted modal-basic" ><i class="far fa-trash-alt"></i></a>
+                        <a href="#modalEliminar" class="on-default deleted modal-basic" data-url = "{{ route('asignaciones.destroy', $asignacion->id ) }}" ><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
             @endforeach
@@ -55,7 +55,6 @@
     <script type="text/javascript">
         $(".deleted").click(function (e) {
             $("#form-delete").attr('action', $(this).data('url') );
-            $("#NombreAsg").text( $(this).data('nasg') );
         });
     </script>
     @endsection

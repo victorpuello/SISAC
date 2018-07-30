@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Ngsoft\Asignatura;
 use Ngsoft\Docente;
 use Ngsoft\Http\Requests\createAsignacionRequest;
+use Ngsoft\Http\Requests\UpdateAsignacionRequest;
 use Ngsoft\Salon;
 
 class AsignacionController extends Controller
@@ -86,9 +87,12 @@ class AsignacionController extends Controller
      * @param  \Ngsoft\Asignacion  $asignacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Asignacion $asignacion)
+    public function update(UpdateAsignacionRequest $request, $id)
     {
-        //
+        $asignacion = Asignacion::findOrFail($id);
+        $asignacion->fill($request->all());
+        $asignacion->save();
+        return redirect()->route('asignaciones.index');
     }
 
     /**
@@ -97,8 +101,10 @@ class AsignacionController extends Controller
      * @param  \Ngsoft\Asignacion  $asignacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Asignacion $asignacion)
+    public function destroy($id)
     {
-        //
+        $asignacion = Asignacion::findOrFail($id);
+        $asignacion->delete();
+        return redirect()->route('asignaciones.index');
     }
 }

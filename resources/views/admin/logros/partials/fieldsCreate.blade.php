@@ -35,10 +35,11 @@
         <div class="form-group">
             @if(Request::path() === 'admin/logros/create')
                 {!! Form::text('codeUser', null,['placeholder'=>'Codigo Identificador','class' => 'form-control mb-3', 'id'=>'codeUser','required']) !!}
-            @else
-                {!! Form::text('codeUser', null,['placeholder'=>'Codigo Identificador','class' => 'form-control mb-3','readonly'=>'readonly', 'id'=>'codeUser','required']) !!}
-            @endif
                 {!! Form::hidden('code',null,['id'=>'code']) !!}
+            @else
+                {!! Form::text('codeUser', null,['placeholder'=>'Codigo Identificador','class' => 'form-control mb-3', 'id'=>'codeUser']) !!}
+                {!! Form::hidden('code',null,['id'=>'code']) !!}
+            @endif
         </div>
     </div>
 

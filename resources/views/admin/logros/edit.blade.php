@@ -37,6 +37,18 @@
     <script src="{{asset('js/examples/examples.datatables.editable.js')}}"></script>
     <script>
 
+        var path = "{{\Illuminate\Support\Facades\Request::path()}}";
+        if ( path != 'admin/logros/create'){
+            console.log(path);
+            var codigoDB = $("#code").val();
+            var asignatura = $("#asignatura_id").val();
+            if (codigoDB.indexOf(asignatura) >= 0) {
+                var posicion =  codigoDB.indexOf(asignatura);
+
+                $("#codeUser").val(codigoDB.substr(0,posicion));
+            }
+        }
+
         $("#codeUser").change(function (e) {updateCode();});
         $("#category").change(function (e) {updateCode();});
         $("#asignatura_id").change(function (e) {updateCode();});

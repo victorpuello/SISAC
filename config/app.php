@@ -152,6 +152,7 @@ return [
         Styde\Html\HtmlServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\FractalServiceProvider::class,
+        Barryvdh\Snappy\ServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -218,6 +219,8 @@ return [
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Access' => Styde\Html\Facades\Access::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
 
 ];

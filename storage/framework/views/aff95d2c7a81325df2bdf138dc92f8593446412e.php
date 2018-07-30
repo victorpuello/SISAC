@@ -43,12 +43,14 @@
             <?php if(Request::path() === 'admin/logros/create'): ?>
                 <?php echo Form::text('codeUser', null,['placeholder'=>'Codigo Identificador','class' => 'form-control mb-3', 'id'=>'codeUser','required']); ?>
 
-            <?php else: ?>
-                <?php echo Form::text('codeUser', null,['placeholder'=>'Codigo Identificador','class' => 'form-control mb-3','readonly'=>'readonly', 'id'=>'codeUser','required']); ?>
-
-            <?php endif; ?>
                 <?php echo Form::hidden('code',null,['id'=>'code']); ?>
 
+            <?php else: ?>
+                <?php echo Form::text('codeUser', null,['placeholder'=>'Codigo Identificador','class' => 'form-control mb-3', 'id'=>'codeUser']); ?>
+
+                <?php echo Form::hidden('code',null,['id'=>'code']); ?>
+
+            <?php endif; ?>
         </div>
     </div>
 
