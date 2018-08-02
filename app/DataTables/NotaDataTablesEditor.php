@@ -5,6 +5,7 @@ namespace Ngsoft\DataTables;
 use Illuminate\Support\Facades\DB;
 use Ngsoft\Estudiante;
 use Ngsoft\Inasistencia;
+use Ngsoft\Logro;
 use Ngsoft\Nota;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTablesEditor;
@@ -13,6 +14,12 @@ use Illuminate\Database\Eloquent\Model;
 class NotaDataTablesEditor extends DataTablesEditor
 {
     protected $model = Estudiante::class;
+    private $logros;
+
+    public function __construct ()
+    {
+        $this->logros = Logro::all();
+    }
 
     /**
      * Get create action validation rules.
@@ -35,7 +42,7 @@ class NotaDataTablesEditor extends DataTablesEditor
     public function editRules(Model $model)
     {
         return [
-               'id' => 'required'
+
         ];
     }
 
@@ -52,7 +59,7 @@ class NotaDataTablesEditor extends DataTablesEditor
 
     public function updating(Model $model, array $data)
     {
-        //dd($data);
+
         $idEstudiante = $data['id'];
         $grado = $data['grado'];
         $docente = $data['docente'];
@@ -66,11 +73,11 @@ class NotaDataTablesEditor extends DataTablesEditor
         $ScorenotaPro = $data['notas']['data']['2']['score'];
         $IDinas = $data['inasistencias']['data']['0']['id'];
         $NumeroInas = $data['inasistencias']['data']['0']['numero'];
-        for ($i = 0; $i <= 2; $i++){
+        /*for ($i = 0; $i <= 2; $i++){
             if (! is_numeric($data['notas']['data'][$i]['score'])) {
                 unset($data['notas']['data'][$i]['score']);
             }
-        }
+        }*/
         $inasistencia = Inasistencia::findOrFail($IDinas);
         $inasistencia->fill(['numero'=>$NumeroInas]);
         $inasistencia->save();
@@ -107,7 +114,7 @@ class NotaDataTablesEditor extends DataTablesEditor
      * @return mixed
      */
     public function getLogro($docente_id, $asignatura_id, $grado, $periodo_id, $category, $score){
-        $logro = DB::table('logros')
+        $logro = $this->logros
             ->where('docente_id','=',$docente_id)
             ->where('asignatura_id','=',$asignatura_id)
             ->where('grade','=',$grado)

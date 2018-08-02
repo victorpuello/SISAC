@@ -27,7 +27,7 @@
             </thead>
             <tbody>
             <?php $__currentLoopData = $asignaciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignacion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <tr data-item-id="<?php echo e($asignacion->id); ?>">
+                <tr>
                     <td><?php echo e($asignacion->asignatura->name); ?></td>
                     <td><?php echo e($asignacion->docente->name); ?></td>
                     <td><?php echo e($asignacion->salon->full_name); ?></td>

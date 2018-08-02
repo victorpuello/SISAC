@@ -32,7 +32,6 @@ class CreateEstudianteRequest extends FormRequest
             'birthstate'=>'required',
             'birthcity'=>'required',
             'gender'=>'required|in:M,F',
-            'address'=>'required|min:3|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%]).*$/|max:80',
             'EPS'=>'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',
             'phone'=>'required|numeric',
             'datein'=>'required|date',

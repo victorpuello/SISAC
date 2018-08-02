@@ -215,8 +215,7 @@ class NotaController extends Controller
      */
     public function getLogros($salon, $docente, $asignatura, $periodo, $category){
 
-        $logros = DB::table('logros')
-            ->where('docente_id','=',$docente)
+        $logros = Logro::where('docente_id','=',$docente)
             ->where('asignatura_id','=',$asignatura)
             ->where('grade','=',$salon)
             ->where('periodo_id','=',$periodo)

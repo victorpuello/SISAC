@@ -28,7 +28,7 @@
             </thead>
             <tbody>
             @foreach($asignaciones as $asignacion)
-                <tr data-item-id="{{$asignacion->id}}">
+                <tr>
                     <td>{{$asignacion->asignatura->name}}</td>
                     <td>{{$asignacion->docente->name}}</td>
                     <td>{{$asignacion->salon->full_name}}</td>

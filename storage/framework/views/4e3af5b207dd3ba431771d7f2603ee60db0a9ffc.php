@@ -36,7 +36,7 @@
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <div class="col-lg-12">
-                                <p class="mb-1"><a href="#" class="deleted modal-basic" ><i class="fas fa-download mr-1"></i>Bajar planilla</a></p>
+                                <p class="mb-1"><a href="#" class="modal-basic" ><i class="fas fa-download mr-1"></i>Bajar planilla</a></p>
                             </div>
                         </div>
                     </div>

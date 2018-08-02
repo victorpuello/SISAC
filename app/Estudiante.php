@@ -12,6 +12,14 @@ class Estudiante extends Model
         'name','lastname','typeid','identification','birthday','birthstate','birthcity','gender','address','EPS','phone','datein','dateout','path','stade','situation','salon_id',
     ];
     // Start Relationship of estudent
+    protected $all_notas;
+    public $_inasistencias;
+    public function __construct (array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+    }
+
     public function salon()
     {
     	return $this->belongsTo(Salon::class);
@@ -52,20 +60,20 @@ class Estudiante extends Model
         return $logros;
     }
     public function getEstudianteInasistenciasAttribute(){
-        $inasistencias = DB::table('inasistencias')->where('estudiante_id','=',$this->id)
+        $inasistencias = $this->inasistencias->where('estudiante_id','=',$this->id)
             ->get();
         return $inasistencias;
     }
     // Start Mutators student
     //
-    /*public function setPathAttribute($path)
+    public function setPathAttribute($path)
 {
     if (!empty($path)) {
         $name = Carbon::now()->second.$path->getClientOriginalName();
         $this->attributes['path'] = $name;
         \Storage::disk('estudiantes')->put($name,\File::get($path));
     }
-}*/
+}
 
     // Start Fuctions
 
@@ -77,7 +85,7 @@ class Estudiante extends Model
      * @return \Illuminate\Support\Collection
      */
     public function currentNotas($grade, $asignatura, $docente, $periodo){
-
+        $this->all_notas = Nota::all();
         $logros = $this->logros
             ->where('asignatura_id','=',$asignatura)
             ->where('docente_id','=',$docente)
@@ -85,7 +93,7 @@ class Estudiante extends Model
             ->where('grade','=',$grade)->sortBy('category');
         $notas = collect();
         foreach ($logros as $logro){
-            $q = Nota::where('logro_id','=',$logro->id)
+            $q = $this->all_notas->where('logro_id','=',$logro->id)
                 ->where('estudiante_id','=',$this->id)->first();
             $notas->push($q);
         }
@@ -120,7 +128,6 @@ class Estudiante extends Model
         $inasistenscias = $this->inasistencias
             ->where('asignatura_id','=',$asignatura)
             ->where('periodo_id','=',$periodo);
-       // dd($inasistenscias,'modelo');
         return collect($inasistenscias);
     }
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Ngsoft\Docente;
+use Ngsoft\Estudiante;
 use Ngsoft\User;
 
 class InportUserController extends Controller
@@ -43,6 +44,12 @@ class InportUserController extends Controller
             //dd($reader->get());
             foreach ($reader->get() as $user) {
                // dd($user);
+
+                factory(Estudiante::class)->create([
+                    'name' => $user->name,
+                    'lastname' => $user->lastname,
+                    'salon_id' => $user->salon_id
+                ]);/*
                $usuario =  User::create([
                     'name' => $user->name,
                     'lastname' =>$user->lastname,
@@ -60,7 +67,7 @@ class InportUserController extends Controller
                         'user_id' => $usuario->id,
                         'path' =>'no-user-image.png'
                     ]);
-               }
+               }*/
 
             }
         },'UTF-8');

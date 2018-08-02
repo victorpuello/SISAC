@@ -47,7 +47,6 @@
                 var posicion =  codigoDB.indexOf(asignatura);
 
                 $("#codeUser").val(codigoDB.substr(0,posicion));
-                updateCode();
             }
         }
 

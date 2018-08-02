@@ -19,10 +19,11 @@ class ValidatePeriodo implements Rule
     {
         $marcador = false;
         // Descomentar para activar la restriccion de periodos en los logros
-        /*
-        if (Periodo::find($value)->dateend <= Carbon::now()){
-            $marcador = true;
-        }*/
+
+
+        //if (Periodo::find($value)->dateend <= Carbon::now()){
+          //  $marcador = true;
+        //}*/
         if (currentPerfil() ==='admin'){$marcador = false;}
         return $marcador === false;
     }

@@ -6,7 +6,7 @@ $factory->define(Ngsoft\Estudiante::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'lastname' => $faker->lastName,
-        'typeid' => $faker->randomElement(['RC','TI','CC']),
+        'typeid' => $faker->randomElement(['RC','TI']),
         'identification' => $faker->numberBetween(),
         'birthday' => $faker->date($format = 'Y-m-d', $max = '-5 years'),
         'birthstate' => 14,
@@ -17,9 +17,9 @@ $factory->define(Ngsoft\Estudiante::class, function (Faker $faker) {
         'phone' => $faker->phoneNumber,
         'datein' => $faker->dateTimeThisYear(),
         'dateout' => Null,
-        'path' => $faker->randomElement(['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg']),
-        'stade'  => $faker->randomElement(['activo','retirado','activo','activo','graduado']),
-        'situation' => $faker->randomElement(['repitente','promovido','promovido','promovido','promovido']),
+        'path' => $faker->randomElement(['no-user-image.png','no-user-image.png']),
+        'stade'  => 'activo',
+        'situation' => $faker->randomElement(['normal','normal']),
         'salon_id' => $faker->numberBetween($min=1,$max=19)
     ];
 });
