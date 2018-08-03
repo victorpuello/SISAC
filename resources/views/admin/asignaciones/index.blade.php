@@ -8,6 +8,7 @@
 @endsection
 @section('content')
     <div class="card-body">
+        @if(currentPerfil() <> 'docente')
         <div class="row">
             <div class="col-sm-6">
                 <div class="mb-3">
@@ -15,6 +16,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <table class="table table-bordered table-striped mb-0" id="datatable-editable">
             <thead>
             <tr>
@@ -22,21 +24,24 @@
                 <th>Docente</th>
                 <th>Grupo</th>
                 <th>Director</th>
+                @if(currentPerfil() <> 'docente')
                 <th>Acciones</th>
-
+                @endif
             </tr>
             </thead>
             <tbody>
             @foreach($asignaciones as $asignacion)
-                <tr>
+                <tr data-item-id="{{$asignacion->id}}">
                     <td>{{$asignacion->asignatura->name}}</td>
                     <td>{{$asignacion->docente->name}}</td>
                     <td>{{$asignacion->salon->full_name}}</td>
                     <td>{{$asignacion->direccion}}</td>
+                    @if(currentPerfil() <> 'docente')
                     <td class="actions">
                         <a href="#modalEditar" class="on-default edit modal-basic" > <i class="fas fa-pencil-alt"></i></a>
                         <a href="#modalEliminar" class="on-default deleted modal-basic" data-url = "{{ route('asignaciones.destroy', $asignacion->id ) }}" ><i class="far fa-trash-alt"></i></a>
                     </td>
+                        @endif
                 </tr>
             @endforeach
             </tbody>

@@ -69,7 +69,6 @@ class Salon extends Model
             ->join('docentes','asignacions.docente_id','=', 'docentes.id')
             ->select('asignacions.director','docentes.name')
             ->get();
-        //dd($docentes);
         $docente = $docentes->where('director','=', 1)->first();
         return $docente->name;
     }

@@ -11,7 +11,7 @@
 |
 */
 Route::get('/','Auth\LoginController@showLoginForm')->name('login');
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::resource('users', 'UserController');
     Route::resource('estudiantes', 'EstudianteController');
     Route::resource('docentes', 'DocenteController');
@@ -29,7 +29,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('logros/loaddata/{id}',['as'=>'logros.loaddata', 'uses' => 'LogroController@loadDataBuscador']);
     Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'MunicipioController']);
 });
-
+Route::group(['prefix' => 'docente'], function () {
+    //Route::get();
+});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

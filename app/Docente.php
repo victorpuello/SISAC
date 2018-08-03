@@ -52,6 +52,22 @@ class Docente extends Model
     }*/
 
 
+    public function getSalonDirectorAttribute(){
+        $asignacion = DB::table('asignacions')->where('docente_id','=',$this->id);
+        $asg = $asignacion->where('director','=', 1)->first();
+        $salon = Salon::find($asg->salon_id);
+        return $salon;
+    }
+
+    public function getIsDirectorAttribute(){
+        $asignacion = DB::table('asignacions')->where('docente_id','=',$this->id);
+        $asg = $asignacion->where('director','=', 1)->count();
+        if ($asg > 0){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * @return string
      */

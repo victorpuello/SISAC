@@ -7,6 +7,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="card-body">
+        <?php if(currentPerfil() <> 'docente'): ?>
         <div class="row">
             <div class="col-sm-6">
                 <div class="mb-3">
@@ -14,6 +15,7 @@
                 </div>
             </div>
         </div>
+        <?php endif; ?>
         <table class="table table-bordered table-striped mb-0" id="datatable-editable">
             <thead>
             <tr>
@@ -21,21 +23,24 @@
                 <th>Docente</th>
                 <th>Grupo</th>
                 <th>Director</th>
+                <?php if(currentPerfil() <> 'docente'): ?>
                 <th>Acciones</th>
-
+                <?php endif; ?>
             </tr>
             </thead>
             <tbody>
             <?php $__currentLoopData = $asignaciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignacion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <tr>
+                <tr data-item-id="<?php echo e($asignacion->id); ?>">
                     <td><?php echo e($asignacion->asignatura->name); ?></td>
                     <td><?php echo e($asignacion->docente->name); ?></td>
                     <td><?php echo e($asignacion->salon->full_name); ?></td>
                     <td><?php echo e($asignacion->direccion); ?></td>
+                    <?php if(currentPerfil() <> 'docente'): ?>
                     <td class="actions">
                         <a href="#modalEditar" class="on-default edit modal-basic" > <i class="fas fa-pencil-alt"></i></a>
                         <a href="#modalEliminar" class="on-default deleted modal-basic" data-url = "<?php echo e(route('asignaciones.destroy', $asignacion->id )); ?>" ><i class="far fa-trash-alt"></i></a>
                     </td>
+                        <?php endif; ?>
                 </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>

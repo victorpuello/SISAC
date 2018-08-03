@@ -97,6 +97,18 @@
                 </a>
             </li>
         </ul>
+        @if(currentPerfil() === 'docente')
+            @if(\Illuminate\Support\Facades\Auth::user()->docente->is_director)
+                <ul class="nav nav-children">
+                    <li>
+                        <a class="nav-link" href="{{route('notas.index')}}">
+                            Dirección de grupo
+                        </a>
+                    </li>
+                </ul>
+            @endif
+        @endif
+
     </li>
     <li >
         <a class="nav-link" href="{{route('aulas.index')}}">
