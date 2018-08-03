@@ -42,7 +42,7 @@ class NotaDataTablesEditor extends DataTablesEditor
     public function editRules(Model $model)
     {
         return [
-
+            'id' => 'required'
         ];
     }
 
@@ -59,7 +59,7 @@ class NotaDataTablesEditor extends DataTablesEditor
 
     public function updating(Model $model, array $data)
     {
-
+        //dd($data);
         $idEstudiante = $data['id'];
         $grado = $data['grado'];
         $docente = $data['docente'];
@@ -73,11 +73,11 @@ class NotaDataTablesEditor extends DataTablesEditor
         $ScorenotaPro = $data['notas']['data']['2']['score'];
         $IDinas = $data['inasistencias']['data']['0']['id'];
         $NumeroInas = $data['inasistencias']['data']['0']['numero'];
-        /*for ($i = 0; $i <= 2; $i++){
+        for ($i = 0; $i <= 2; $i++){
             if (! is_numeric($data['notas']['data'][$i]['score'])) {
                 unset($data['notas']['data'][$i]['score']);
             }
-        }*/
+        }
         $inasistencia = Inasistencia::findOrFail($IDinas);
         $inasistencia->fill(['numero'=>$NumeroInas]);
         $inasistencia->save();

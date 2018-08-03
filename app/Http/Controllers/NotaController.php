@@ -13,6 +13,7 @@ use Ngsoft\Logro;
 use Illuminate\Http\Request;
 use Ngsoft\Nota;
 use Ngsoft\Periodo;
+use Ngsoft\Planilla;
 use Ngsoft\Salon;
 use Ngsoft\Transformers\EstudianteTransformer;
 use Yajra\DataTables\Facades\DataTables;
@@ -64,6 +65,7 @@ class NotaController extends Controller
         //hay que filtrar por el utlimo año
         $periodos = Periodo::all();
        // dd($planillas);
+
         return view('admin.notas.index',compact('planillas','fondos','periodos'));
     }
 
@@ -100,14 +102,47 @@ class NotaController extends Controller
     }
 
     public function cargarPlanilla(Request $request,$Idsalon,$Iddocente,$Idasignatura,$Idperiodo){
-        $grado = Salon::find($Idsalon)->grade;
+        $salon = Salon::find($Idsalon);
+        $codigo = $Idsalon.''.$Iddocente.''.$Idasignatura.''.$Idperiodo;
+        $planilla = Planilla::where('codigo','=',$codigo)->get();
+        $currentEstudiantes =$this->estudiantes->where('salon_id','=',$salon->id);
+        if ($planilla->count() === 0){
+            $this->verificador ($salon,$Iddocente,$Idasignatura,$Idperiodo);
+            Planilla::create([
+                'grado' => $Idsalon,
+                'docente' => $Iddocente,
+                'asignatura' => $Idasignatura,
+                'periodo' => $Idperiodo,
+                'codigo' => $codigo,
+                'creada' => 1
+            ]);
+        }
+        $estudiantes = $currentEstudiantes;
+        //dd($salon->grade,$Idasignatura,$Iddocente,$Idperiodo);
+        if($request->ajax()){
+            return datatables()
+                    ->collection($estudiantes)
+                    ->setTransformer( new EstudianteTransformer($salon->grade,$Idasignatura,$Iddocente,$Idperiodo))
+                    ->with('id_salon',$Idsalon)
+                    ->with('grado',$salon->grade)
+                    ->with('id_docente',$Iddocente)
+                    ->with('id_asignatura',$Idasignatura)
+                    ->with('id_periodo',$Idperiodo)
+                    ->toJson();
+        }
+        $grado = $salon->grade;
+        return view('admin.notas.show',compact('Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
+    }
+
+
+    public function verificador ($salon,$Iddocente,$Idasignatura,$Idperiodo){
         //obtengo todos los estudiantes del salon
-        $currentEstudiantes =$this->estudiantes->where('salon_id','=',$Idsalon);
+        $currentEstudiantes =$this->estudiantes->where('salon_id','=',$salon->id);
         try{
             // obtengos los logros para esa asignuatura periodo y grado requeridos
-            $currentlogros_Cog = $this->getLogros($grado,$Iddocente,$Idasignatura,$Idperiodo,'cognitivo');
-            $currentlogros_Act = $this->getLogros($grado,$Iddocente,$Idasignatura,$Idperiodo,'actitudinal');
-            $currentlogros_Proc = $this->getLogros($grado,$Iddocente,$Idasignatura,$Idperiodo,'procedimental');
+            $currentlogros_Cog = $this->getLogros($salon->grade,$Iddocente,$Idasignatura,$Idperiodo,'cognitivo');
+            $currentlogros_Act = $this->getLogros($salon->grade,$Iddocente,$Idasignatura,$Idperiodo,'actitudinal');
+            $currentlogros_Proc = $this->getLogros($salon->grade,$Iddocente,$Idasignatura,$Idperiodo,'procedimental');
             // verifico si tienen la relacion con los losgros del docente para este periodo
             // si no existe la relacion la creo vinculandolo con el logro de indicador bajo
             $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Cog);
@@ -117,20 +152,6 @@ class NotaController extends Controller
         }catch (\Exception $ex) {
             return view('error.planilla');
         }
-        $estudiantes = $currentEstudiantes;
-        if($request->ajax()){
-            return datatables()
-                    ->collection($estudiantes)
-                    ->setTransformer( new EstudianteTransformer($grado,$Idasignatura,$Iddocente,$Idperiodo))
-                    ->with('id_salon',$Idsalon)
-                    ->with('grado',$grado)
-                    ->with('id_docente',$Iddocente)
-                    ->with('id_asignatura',$Idasignatura)
-                    ->with('id_periodo',$Idperiodo)
-                    ->toJson();
-        }
-
-        return view('admin.notas.show',compact('Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
     }
 
     /**
