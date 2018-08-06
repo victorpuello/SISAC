@@ -4,6 +4,7 @@ namespace Ngsoft\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+
 class Kernel extends HttpKernel
 {
     /**
@@ -53,6 +54,10 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+        'admin' =>  \Ngsoft\Http\Middleware\Admin::class,
+        'secretaria' =>  \Ngsoft\Http\Middleware\Secretaria::class,
+        'docente' =>  \Ngsoft\Http\Middleware\Docente::class,
+        'coordinador' =>  \Ngsoft\Http\Middleware\Coordinador::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

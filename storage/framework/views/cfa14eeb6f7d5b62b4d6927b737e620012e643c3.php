@@ -72,7 +72,12 @@
                     <div class="nano">
                         <div class="nano-content">
                             <nav id="menu" class="nav-main" role="navigation">
-                                <?php echo $__env->make('partials.menuLateral', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                <?php if (\Illuminate\Support\Facades\Blade::check('admin')): ?>
+                                    <?php echo $__env->make('partials.menuLateral', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                <?php endif; ?>
+                                <?php if (\Illuminate\Support\Facades\Blade::check('docente')): ?>
+                                    <?php echo $__env->make('partials.menuLateralDocentes', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                <?php endif; ?>
                             </nav>
                         </div>
                         <script>

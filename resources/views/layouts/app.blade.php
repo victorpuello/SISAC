@@ -72,7 +72,12 @@
                     <div class="nano">
                         <div class="nano-content">
                             <nav id="menu" class="nav-main" role="navigation">
-                                @include('partials.menuLateral')
+                                @admin
+                                    @include('partials.menuLateral')
+                                @endadmin
+                                @docente
+                                    @include('partials.menuLateralDocentes')
+                                @enddocente
                             </nav>
                         </div>
                         <script>

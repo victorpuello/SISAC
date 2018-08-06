@@ -78,10 +78,11 @@
             </li>
         </ul>
     </li>
+
     <li class="nav-parent">
         <a class="nav-link" href="#">
             <i class="fas fa-book-open" aria-hidden="true"></i>
-            <span>Academia</span>
+            <span>Academico</span>
         </a>
         <ul class="nav nav-children">
             <li>
@@ -97,19 +98,8 @@
                 </a>
             </li>
         </ul>
-        <?php if(currentPerfil() === 'docente'): ?>
-            <?php if(\Illuminate\Support\Facades\Auth::user()->docente->is_director): ?>
-                <ul class="nav nav-children">
-                    <li>
-                        <a class="nav-link" href="<?php echo e(route('notas.index')); ?>">
-                            Dirección de grupo
-                        </a>
-                    </li>
-                </ul>
-            <?php endif; ?>
-        <?php endif; ?>
-
     </li>
+
     <li >
         <a class="nav-link" href="<?php echo e(route('aulas.index')); ?>">
             <i class="fas fa-school" aria-hidden="true"></i>
@@ -131,5 +121,4 @@
                 </li>
             </ul>
     </li>
-
 </ul>
