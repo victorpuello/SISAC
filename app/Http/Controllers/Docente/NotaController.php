@@ -10,6 +10,7 @@ use Ngsoft\DataTables\NotaDataTablesEditor;
 use Ngsoft\Estudiante;
 use Ngsoft\Inasistencia;
 use Ngsoft\Logro;
+use Ngsoft\Definitiva;
 use Illuminate\Http\Request;
 use Ngsoft\Nota;
 use Ngsoft\Periodo;
@@ -18,6 +19,7 @@ use Ngsoft\Salon;
 use Ngsoft\Transformers\EstudianteTransformer;
 use Yajra\DataTables\Facades\DataTables;
 use Ngsoft\Http\Controllers\Controller;
+
 class NotaController extends Controller
 {
     private $estudiantes;
@@ -25,6 +27,8 @@ class NotaController extends Controller
     private $logros;
     private $fondos =  ['primary','secondary','tertiary','quaternary'];
     private $inasistencias;
+    private $definitivas;
+
     public function __construct ()
     {
         // revisar a futuro para delimitar la cantidad de datos que llegan al controlador
@@ -32,6 +36,7 @@ class NotaController extends Controller
         $this->notas = Nota::all();
         $this->logros = Logro::all();
         $this->inasistencias = Inasistencia::all();
+        $this->definitivas = Definitiva::all();
     }
 
     /**
@@ -66,7 +71,7 @@ class NotaController extends Controller
         $periodos = Periodo::all();
        // dd($planillas);
 
-        return view('admin.notas.index',compact('planillas','fondos','periodos'));
+        return view('docente.notas.index',compact('planillas','fondos','periodos'));
     }
 
     /**
@@ -131,7 +136,7 @@ class NotaController extends Controller
                     ->toJson();
         }
         $grado = $salon->grade;
-        return view('admin.notas.show',compact('Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
+        return view('docente.notas.show',compact('Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
     }
 
 
@@ -148,9 +153,10 @@ class NotaController extends Controller
             $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Cog);
             $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Act);
             $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Proc);
+            $this->VerificadorDefinitivaEstud($currentEstudiantes, $Idasignatura,$Idperiodo);
             $this->VerificadorInasistenciasEstud($currentEstudiantes,$Idasignatura,$Idperiodo);
         }catch (\Exception $ex) {
-            return view('error.planilla');
+            return view('errors.planilla');
         }
     }
 
@@ -275,11 +281,45 @@ class NotaController extends Controller
         return false;
     }
 
-    /**
-     * @param $request
-     * @param $category
-     * @param $nota
-     * @return \Illuminate\Support\Collection
+     /**
+     * @param $currentEstudiantes
+     * @param $Idasignatura
+     * @param $Idperiodo
      */
+    private function VerificadorDefinitivaEstud ($currentEstudiantes, $Idasignatura, $Idperiodo)
+    {
+        foreach ($currentEstudiantes as $estudiante){
+            $Found = false;
+            if ($this->definitivaExist($estudiante->id,$Idasignatura,$Idperiodo)){
+                $Found = true;
+            }
+
+            if (! $Found){
+                $definitiva = new Definitiva([
+                    'score'=> 1,
+                    'estudiante_id' => $estudiante->id,
+                    'periodo_id' => $Idperiodo,
+                    'asignatura_id' => $Idasignatura]);
+                $definitiva->save();
+            }
+        }
+    }
+
+    /**
+     * @param $id
+     * @param $Idasignatura
+     * @param $Idperiodo
+     * @return bool
+     */
+    private function definitivaExist ($id, $Idasignatura, $Idperiodo)
+    {
+        $Ins = $this->definitivas->where('asignatura_id','=', $Idasignatura);
+        $InsP = $Ins->where('periodo_id','=', $Idperiodo);
+        $InsE = $InsP->where('estudiante_id','=', $id)->count();
+        if ($InsE > 0){
+            return true;
+        }
+        return false;
+    }
 
 }

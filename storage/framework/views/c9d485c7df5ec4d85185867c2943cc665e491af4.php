@@ -27,16 +27,16 @@
         <?php if (\Illuminate\Support\Facades\Blade::check('director')): ?>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="<?php echo e(route('docente.notas.index')); ?>">
+                <a class="nav-link" href="<?php echo e(route('docente.direccion.index')); ?>">
                     Dirección de grupo
                 </a>
             </li>
         </ul>
         <?php endif; ?>
     </li>
-    <li class="nav">
+    <li>
         <a class="nav-link" href="<?php echo e(route('asignaciones.index')); ?>">
-            <i class="fas fa-chalkboard-teacher" ></i>
+            <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
             <span>Asignación Academica</span>
         </a>
     </li>

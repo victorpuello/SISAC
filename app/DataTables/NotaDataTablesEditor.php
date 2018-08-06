@@ -59,7 +59,6 @@ class NotaDataTablesEditor extends DataTablesEditor
 
     public function updating(Model $model, array $data)
     {
-        //dd($data);
         $idEstudiante = $data['id'];
         $grado = $data['grado'];
         $docente = $data['docente'];
@@ -73,11 +72,11 @@ class NotaDataTablesEditor extends DataTablesEditor
         $ScorenotaPro = $data['notas']['data']['2']['score'];
         $IDinas = $data['inasistencias']['data']['0']['id'];
         $NumeroInas = $data['inasistencias']['data']['0']['numero'];
-        for ($i = 0; $i <= 2; $i++){
-            if (! is_numeric($data['notas']['data'][$i]['score'])) {
-                unset($data['notas']['data'][$i]['score']);
+            for ($i = 0; $i <= 2; $i++){
+                if (! is_numeric($data['notas']['data'][$i]['score'])) {
+                    unset($data['notas']['data'][$i]['score']);
+                }
             }
-        }
         $inasistencia = Inasistencia::findOrFail($IDinas);
         $inasistencia->fill(['numero'=>$NumeroInas]);
         $inasistencia->save();
@@ -94,13 +93,15 @@ class NotaDataTablesEditor extends DataTablesEditor
         $notacoc->fill($datoscoc);
         $notacoc->save();
 
-
         $logropro = $this->getLogro($docente,$asignatura,$grado,$periodo,'procedimental',$ScorenotaPro);
         $notapro = Nota::findOrFail($IDnotaPro);
         $datospro = ['logro_id'=>$logropro->id,'score'=>$ScorenotaPro];
         $notapro->fill($datospro);
         $notapro->save();
 
+        $score = ($ScorenotaCog * 0.6) + ($ScorenotaAct * 0.1) + ($ScorenotaPro * 0.3);
+        $estudiante = Estudiante::findOrFail($idEstudiante);
+        $estudiante->editDef($score,$asignatura,$periodo);
         return $data;
     }
 

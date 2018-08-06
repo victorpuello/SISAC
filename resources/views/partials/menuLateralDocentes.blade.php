@@ -27,16 +27,16 @@
         @director
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('docente.notas.index')}}">
+                <a class="nav-link" href="{{route('docente.direccion.index')}}">
                     Dirección de grupo
                 </a>
             </li>
         </ul>
         @enddirector
     </li>
-    <li class="nav">
+    <li>
         <a class="nav-link" href="{{route('asignaciones.index')}}">
-            <i class="fas fa-chalkboard-teacher" ></i>
+            <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
             <span>Asignación Academica</span>
         </a>
     </li>

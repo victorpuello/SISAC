@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Ngsoft\DataTables\NotaDataTablesEditor;
+use Ngsoft\Definitiva;
 use Ngsoft\Estudiante;
 use Ngsoft\Inasistencia;
 use Ngsoft\Logro;
@@ -25,6 +26,7 @@ class NotaController extends Controller
     private $logros;
     private $fondos =  ['primary','secondary','tertiary','quaternary'];
     private $inasistencias;
+    private $definitivas;
     public function __construct ()
     {
         // revisar a futuro para delimitar la cantidad de datos que llegan al controlador
@@ -32,6 +34,7 @@ class NotaController extends Controller
         $this->notas = Nota::all();
         $this->logros = Logro::all();
         $this->inasistencias = Inasistencia::all();
+        $this->definitivas = Definitiva::all();
     }
 
     /**
@@ -148,9 +151,10 @@ class NotaController extends Controller
             $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Cog);
             $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Act);
             $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Proc);
+            $this->VerificadorDefinitivaEstud($currentEstudiantes, $Idasignatura,$Idperiodo);
             $this->VerificadorInasistenciasEstud($currentEstudiantes,$Idasignatura,$Idperiodo);
         }catch (\Exception $ex) {
-            return view('error.planilla');
+            return view('errors.planilla');
         }
     }
 
@@ -276,10 +280,44 @@ class NotaController extends Controller
     }
 
     /**
-     * @param $request
-     * @param $category
-     * @param $nota
-     * @return \Illuminate\Support\Collection
+     * @param $currentEstudiantes
+     * @param $Idasignatura
+     * @param $Idperiodo
      */
+    private function VerificadorDefinitivaEstud ($currentEstudiantes, $Idasignatura, $Idperiodo)
+    {
+        foreach ($currentEstudiantes as $estudiante){
+            $Found = false;
+            if ($this->definitivaExist($estudiante->id,$Idasignatura,$Idperiodo)){
+                $Found = true;
+            }
+            if (! $Found){
+                $definitiva = new Inasistencia([
+                    'score'=> 1,
+                    'estudiante_id' => $estudiante->id,
+                    'periodo_id' => $Idperiodo,
+                    'asignatura_id' => $Idasignatura]);
+                $definitiva->save();
+            }
+        }
+    }
+
+    /**
+     * @param $id
+     * @param $Idasignatura
+     * @param $Idperiodo
+     * @return bool
+     */
+    private function definitivaExist ($id, $Idasignatura, $Idperiodo)
+    {
+        $Ins = $this->definitivas->where('asignatura_id','=', $Idasignatura);
+        $InsP = $Ins->where('periodo_id','=', $Idperiodo);
+        $InsE = $InsP->where('estudiante_id','=', $id)->count();
+        if ($InsE > 0){
+            return true;
+        }
+        return false;
+    }
+
 
 }

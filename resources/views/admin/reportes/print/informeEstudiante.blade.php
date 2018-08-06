@@ -74,42 +74,22 @@
             <th>Indicador</th>
         </tr>
         <tr class="text-dark">
-            <th id="cell-id"     class="font-weight-semibold">[]</th>
+            <th id="cell-id"     class="font-weight-semibold">Categoria</th>
             <th id="cell-item"   class="font-weight-semibold">Logro</th>
             <th id="cell-qty"    class="text-center font-weight-semibold">Nota</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>123456</td>
-            <td class="font-weight-semibold text-dark">Porto HTML5 Template</td>
-            <td>Multipourpouse Website Template</td>
+        @foreach($estudiante->NotasInforme($asignatura->id,$periodo->id) as $nota)
+            <tr>
+            <td>{{ucwords($nota->logro->category)}}</td>
+            <td class="font-weight-semibold text-left text-dark">{{$nota->logro->description}}</td>
+            <td>{{$nota->score}}</td>
         </tr>
+            @endforeach
         </tbody>
     </table>
     @endforeach
-    <div class="invoice-summary">
-        <div class="row justify-content-end">
-            <div class="col-sm-4">
-                <table class="table h6 text-dark">
-                    <tbody>
-                    <tr class="b-top-0">
-                        <td colspan="2">Subtotal</td>
-                        <td class="text-left">$73.00</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">Shipping</td>
-                        <td class="text-left">$0.00</td>
-                    </tr>
-                    <tr class="h4">
-                        <td colspan="2">Grand Total</td>
-                        <td class="text-left">$73.00</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 </div>
     @endforeach
 </body>

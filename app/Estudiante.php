@@ -30,6 +30,9 @@ class Estudiante extends Model
     public function notas(){
         return $this->hasMany(Nota::class);
     }
+    public function definitivas(){
+        return $this->hasMany(Definitiva::class);
+    }
     public function inasistencias(){
         return $this->hasMany(Inasistencia::class);
     }
@@ -100,6 +103,27 @@ class Estudiante extends Model
         return $notas;
     }
 
+    public function NotasInforme($asignatura, $periodo){
+        $this->all_notas = $this->notas;
+        $logros = $this->logros
+            ->where('asignatura_id','=',$asignatura)
+            ->where('periodo_id','=',$periodo)->sortBy('category');
+        $notas = collect();
+        foreach ($logros as $logro){
+            $q = $this->all_notas->where('logro_id','=',$logro->id)
+                ->where('estudiante_id','=',$this->id)->first();
+            $notas->push($q);
+        }
+        return $notas;
+    }
+    public function NotaDefinitiva($asignatura, $periodo){
+        $notas= $this->NotasInforme($asignatura, $periodo);
+        $contador = 0;
+        if (count($notas) > 0){
+            dd($notas);
+        }
+    }
+
     /**
      * @param $category
      * @param $grade
@@ -129,6 +153,16 @@ class Estudiante extends Model
             ->where('asignatura_id','=',$asignatura)
             ->where('periodo_id','=',$periodo);
         return collect($inasistenscias);
+    }
+
+    public  function  editDef($score,$asignatura,$periodo){
+        $definitiva = $this->definitivas
+            ->where('asignatura_id','=',$asignatura)
+            ->where('periodo_id','=',$periodo)->first();
+        $definitiva->fill([
+            'score' => $score
+        ]);
+        $definitiva->save();
     }
 
 }

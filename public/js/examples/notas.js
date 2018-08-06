@@ -4,12 +4,13 @@
 
     var editor; // use a global for the submit and return data rendering in the examples
     $(document).ready(function() {
+        console.log($('#inf').data('urltabla') +'-------'+  $('#inf').data('urlproces'));
         function trunc (x, posiciones = 0) {
-            var s = x.toString()
-            var l = s.length
-            var decimalLength = s.indexOf('.') + 1
-            var numStr = s.substr(0, decimalLength + posiciones)
-            return Number(numStr)
+            var s = x.toString();
+            var l = s.length;
+            var decimalLength = s.indexOf('.') + 1;
+            var numStr = s.substr(0, decimalLength + posiciones);
+            return Number(numStr);
         }
 
         $.ajaxSetup({
@@ -27,15 +28,18 @@
                 name: "id"
             },
                 {
-                    label: "Nota actitudinal:",
-                    name: "notas.data.0.score"
-                },{
                     label: "Nota cognitiva:",
                     name: "notas.data.1.score"
-                },{
+                },
+                {
                     label: "Nota procedimental:",
                     name: "notas.data.2.score"
-                },{
+                },
+                {
+                    label: "Nota actitudinal:",
+                    name: "notas.data.0.score"
+                },
+                {
                     name: "notas.data.0.id",
                     type: "hidden"
                 },{

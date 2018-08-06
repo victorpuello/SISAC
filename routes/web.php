@@ -11,9 +11,5 @@
 |
 */
 Route::get('/','Auth\LoginController@showLoginForm')->name('login');
-Route::group(['prefix' => 'docente', 'namespace' => 'Docente'], function () {
-    //Route::get();
-});
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
