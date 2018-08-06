@@ -8,6 +8,7 @@
                 <th>Categoria</th>
                 <th>Indicador</th>
                 <th>Grado</th>
+                <th>Periodo</th>
                 <th>Acciones</th>
             </tr>
             </thead>
@@ -19,6 +20,7 @@
                     <td><?php echo e($logro->category); ?></td>
                     <td><?php echo e($logro->indicador); ?></td>
                     <td><?php echo e($logro->grade); ?></td>
+                    <td><?php echo e($logro->periodo->name); ?></td>
                     <td class="actions">
                         <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
                         <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>

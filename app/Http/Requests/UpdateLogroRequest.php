@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use Ngsoft\Logro;
 use Ngsoft\Periodo;
 use Ngsoft\Rules\CountCodeLogro;
+use Ngsoft\Rules\UpdateLogro;
 use Ngsoft\Rules\ValidatePeriodo;
 
 class UpdateLogroRequest extends FormRequest
@@ -40,10 +41,12 @@ class UpdateLogroRequest extends FormRequest
      */
     public function rules()
     {
+
         $this->logro = Logro::find($this->route->parameter('logro'));
+       // dd($this->logro);
         if (currentPerfil() ==='docente'){
             return [
-                'code' => new CountCodeLogro($this->request),
+                'code' => ['required','numeric', new UpdateLogro($this->request,$this->logro)],
                 'indicador' => 'required|in:bajo,basico,alto,superior',
                 'description'  => 'required|min:3|string|max:400',
                 'category'  => 'required|in:cognitivo,procedimental,actitudinal',
@@ -54,7 +57,7 @@ class UpdateLogroRequest extends FormRequest
             ];
         };
         return [
-            'code' => Rule::unique('logros')->ignore($this->logro->code, 'code'),
+            'code' => ['required','numeric', new UpdateLogro($this->request)],
             'indicador' => 'required|in:bajo,basico,alto,superior',
             'description'  => 'required|min:3|string|max:400',
             'category'  => 'required|in:cognitivo,procedimental,actitudinal',

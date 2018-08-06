@@ -31,8 +31,6 @@ class CountCodeLogro implements Rule
         for ($i=0; $i < count($indicadores); $i++) {
             $contador += DB::table('logros')->where('code', '=', $this->codeGen($indicadores[$i]))->count();
         }
-        dd($contador);
-
         if ($contador < 0){
             $marcador = true;
         }

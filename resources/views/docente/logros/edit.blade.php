@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-12 text-right">
                     <button type="submit" class="btn btn-primary editAsignatura">Guardar</button>
-                    <a href="{{route('logros.index')}}" class="btn btn-default">Cancelar</a>
+                    <a href="{{route('docente.logros.index')}}" class="btn btn-default">Cancelar</a>
                 </div>
             </div>
         </footer>

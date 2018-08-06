@@ -52,10 +52,8 @@ class LogroController extends Controller
         $periodos = $datos->periodos;
         $asignaturas = $datos->asignaturas;
         $grados = $datos->grados;
-        $logros = DB::table('logros')
-                ->where('docente_id','=', $this->docente->id)
-                ->orderBy('created_at', 'desc')
-                ->get(['id','description','category','grade','indicador','code']);
+        $logros = Logro::where('docente_id','=', $this->docente->id)
+                ->orderBy('created_at', 'desc')->get();
         return view('docente.logros.index',compact('logros','docentes','periodos','asignaturas','grados'));
     }
 

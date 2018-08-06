@@ -8,6 +8,7 @@
                 <th>Categoria</th>
                 <th>Indicador</th>
                 <th>Grado</th>
+                <th>Periodo</th>
                 <th>Acciones</th>
             </tr>
             </thead>
@@ -19,6 +20,7 @@
                     <td>{{$logro->category}}</td>
                     <td>{{$logro->indicador}}</td>
                     <td>{{$logro->grade}}</td>
+                    <td>{{$logro->periodo->name}}</td>
                     <td class="actions">
                         <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
                         <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
