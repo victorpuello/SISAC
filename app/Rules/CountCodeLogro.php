@@ -5,13 +5,14 @@ namespace Ngsoft\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
+
 class CountCodeLogro implements Rule
 {
 
-    protected $codigo;
-    public function __construct ($codigo)
+    protected $request;
+    public function __construct ($request)
     {
-        $this->codigo = $codigo;
+        $this->request = $request->all();
     }
 
     /**
@@ -23,9 +24,19 @@ class CountCodeLogro implements Rule
      */
     public function passes($attribute, $value)
     {
-        $contador = DB::table('logros')->where('code','=',$this->codigo)->count();
-        //dd($this->codigo , $contador,var_dump($contador <= 0));
-        return var_dump($contador <= 0) == true ;
+        $indicadores = array('bajo','basico','alto','superior');
+        $marcador = false;
+        $contador = 0;
+        $aux ="";
+        for ($i=0; $i < count($indicadores); $i++) {
+            $contador += DB::table('logros')->where('code', '=', $this->codeGen($indicadores[$i]))->count();
+        }
+        dd($contador);
+
+        if ($contador < 0){
+            $marcador = true;
+        }
+        return $marcador === false;
     }
 
     /**
@@ -37,4 +48,10 @@ class CountCodeLogro implements Rule
     {
         return 'El CODIGO esta duplicado.';
     }
+    public function codeGen($indicador){
+
+        $code = $this->request['code'].''.$this->request['category'].''.$indicador.''.$this->request['grade'].''.$this->request['asignatura_id'].''.$this->request['docente_id'].''.$this->request['periodo_id'];
+        return $code;
+    }
+
 }

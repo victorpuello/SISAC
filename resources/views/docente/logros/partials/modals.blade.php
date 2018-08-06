@@ -1,4 +1,4 @@
-<!-- Start Modal -->
+<!-- Start Modal Eliminar -->
 <div id="modalEliminar" class="modal-block modal-block-warning mfp-hide">
     <section class="card">
         <header class="card-header">
@@ -10,7 +10,7 @@
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
                 <div class="modal-text">
-                    <p>Estas seguro que deseas eliminar el usuario: <strong><span id="NombreUser"></span></strong></p>
+                    <p>Estas seguro que deseas eliminar este Logro: <strong><span id="NombreLogro"></span></strong></p>
                 </div>
             </div>
         </div>
@@ -18,14 +18,13 @@
             <div class="row">
                 <div class="col-md-12 text-right">
                     <button class="btn btn-danger modal-dismiss">Cancelar</button>
-                    <?php echo Form::open(['method' => 'DELETE', 'id' => "form-delete" ,'style' => 'display: inline-block;']); ?>
-
+                    {!! Form::open(['method' => 'DELETE', 'id' => "form-delete" ,'style' => 'display: inline-block;']) !!}
                     <button type="submit" class="btn btn-warning">Confirmar</button>
-                    <?php echo Form::close(); ?>
-
+                    {!! Form::close() !!}
                 </div>
             </div>
         </footer>
     </section>
 </div>
-<!-- End Modal -->
+<!-- End Modal Eliminar-->
+

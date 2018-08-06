@@ -69,7 +69,12 @@
     <div id="userbox" class="userbox">
         <a href="#" data-toggle="dropdown">
             <figure class="profile-picture">
-                <img src="{{asset('img/!logged-user.jpg')}}" alt="Joseph Doe" class="rounded-circle" data-lock-picture="{{asset('img/!logged-user.jpg')}}" />
+                @docente
+                    <img src="{{ url('/imgUsers/')}}/{{\Illuminate\Support\Facades\Auth::user()->docente->path}}" alt="Joseph Doe" class="rounded-circle" data-lock-picture="{{asset('img/!logged-user.jpg')}}" />
+                @enddocente
+                @admin
+                    <img src="{{asset('img/!logged-user.jpg')}}" alt="Joseph Doe" class="rounded-circle" data-lock-picture="{{asset('img/!logged-user.jpg')}}" />
+                @endadmin
             </figure>
             <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
                 <span class="name">{{Auth::user()->FullName}}</span>

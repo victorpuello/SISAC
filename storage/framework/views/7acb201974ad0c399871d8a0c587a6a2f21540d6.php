@@ -69,7 +69,12 @@
     <div id="userbox" class="userbox">
         <a href="#" data-toggle="dropdown">
             <figure class="profile-picture">
-                <img src="<?php echo e(asset('img/!logged-user.jpg')); ?>" alt="Joseph Doe" class="rounded-circle" data-lock-picture="<?php echo e(asset('img/!logged-user.jpg')); ?>" />
+                <?php if (\Illuminate\Support\Facades\Blade::check('docente')): ?>
+                    <img src="<?php echo e(url('/imgUsers/')); ?>/<?php echo e(\Illuminate\Support\Facades\Auth::user()->docente->path); ?>" alt="Joseph Doe" class="rounded-circle" data-lock-picture="<?php echo e(asset('img/!logged-user.jpg')); ?>" />
+                <?php endif; ?>
+                <?php if (\Illuminate\Support\Facades\Blade::check('admin')): ?>
+                    <img src="<?php echo e(asset('img/!logged-user.jpg')); ?>" alt="Joseph Doe" class="rounded-circle" data-lock-picture="<?php echo e(asset('img/!logged-user.jpg')); ?>" />
+                <?php endif; ?>
             </figure>
             <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
                 <span class="name"><?php echo e(Auth::user()->FullName); ?></span>

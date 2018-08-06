@@ -22,39 +22,41 @@ class LogroController extends Controller
     public $logros = [];
     public $grados = [];
     public $asignaturas = [];
-    public $docentes = [];
-    private $asignaciones;
+    protected  $docente;
+    protected $asignaciones;
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct ()
+    public function __construct (Request $request)
     {
-        $this->asignaciones = Asignacion::all();
+
+        $this->middleware(function ($request, $next) {
+            $this->docente = Auth::user()->docente;
+            $this->asignaciones = Asignacion::where('docente_id','=',$this->docente->id)->get();
+            return $next($request);
+        });
+
+
+        // $this->asignaciones = Asignacion::where('docente_id','=',$this->docente->id);
     }
 
     public function index()
     {
+
         Session::forget('busqueda');
         $datos = $this->loadDataBuscador(1);
         $datos = json_decode($datos->content());
         $periodos = $datos->periodos;
         $asignaturas = $datos->asignaturas;
-        $docentes = $datos->docentes;
         $grados = $datos->grados;
-        if(currentPerfil() === 'docente'){
-            $logros = DB::table('logros')
-                ->where('docente_id','=', Auth::user()->docente->id)
+        $logros = DB::table('logros')
+                ->where('docente_id','=', $this->docente->id)
                 ->orderBy('created_at', 'desc')
                 ->get(['id','description','category','grade','indicador','code']);
-        }else{
-            $logros = DB::table('logros')
-                ->orderBy('created_at', 'desc')
-                ->get(['id','description','category','grade','indicador','code']);
-        }
-        return view('admin.logros.index',compact('logros','docentes','periodos','asignaturas','grados'));
+        return view('docente.logros.index',compact('logros','docentes','periodos','asignaturas','grados'));
     }
 
     /**
@@ -68,9 +70,8 @@ class LogroController extends Controller
         $datos = json_decode($datos->content());
         $periodos = $datos->periodos;
         $asignaturas = $datos->asignaturas;
-        $docentes = $datos->docentes;
         $grados = $datos->grados;
-        return view('admin.logros.create',compact('docentes','periodos','asignaturas','grados'));
+        return view('docente.logros.create',compact('docentes','periodos','asignaturas','grados'));
     }
 
     /**
@@ -84,10 +85,10 @@ class LogroController extends Controller
         $indicadores = array('bajo','basico','alto','superior');
         if ($request->multiple === '0'){
             for ($i=0; $i < count($indicadores); $i++){
-               $request->merge(array('code'=> $this->codeGen($request,$indicadores[$i])));
+               //$request->merge(array('code'=> $this->codeGen($request,$indicadores[$i])));
                 $request->merge(array('indicador'=> $indicadores[$i]));
                 if ($i > 0){
-                    $request->merge(array('description'=> " "));
+                    $request->merge(array('description'=> "Agregar descripción "));
                 }
                 $logro = new Logro($request->all());
                 $logro->save();
@@ -98,7 +99,7 @@ class LogroController extends Controller
             $logro->save();
         }
 
-        return redirect()->action('LogroController@index');
+        return redirect()->action('Docente\LogroController@index');
     }
 
     /**
@@ -135,9 +136,8 @@ class LogroController extends Controller
         $datos = json_decode($datos->content());
         $periodos = $datos->periodos;
         $asignaturas = $datos->asignaturas;
-        $docentes = $datos->docentes;
         $grados = $datos->grados;
-        return view('admin.logros.edit',compact('logro','docentes','periodos','asignaturas','grados'));
+        return view('docente.logros.edit',compact('logro','docentes','periodos','asignaturas','grados'));
     }
 
     /**
@@ -152,7 +152,7 @@ class LogroController extends Controller
         $logro = Logro::findOrFail($id);
         $logro->fill($request->all());
         $logro->save();
-        return redirect()->action('LogroController@index');
+        return redirect()->action('Docente\LogroController@index');
     }
 
     /**
@@ -170,8 +170,7 @@ class LogroController extends Controller
 
     public function loadDataBuscador ($id) {
         $data['periodos'] = Periodo::pluck('name', 'id');
-        if (currentPerfil() === 'docente'){
-            $asignaciones = $this->asignaciones->where('docente_id','=',Auth::user()->docente->id);
+            $asignaciones = $this->asignaciones;
             $grados = [];
             $asignaturas=[];
             foreach ($asignaciones as  $asignacion) {
@@ -180,13 +179,6 @@ class LogroController extends Controller
             }
             $data['grados'] = array_unique($grados);
             $data['asignaturas'] = array_unique($asignaturas);
-
-            $data['docentes'] =[];
-        }else{
-            $data['grados'] = ['0' => 'Pre-Escolar', '1' => 'Primero', '2' => 'Segundo', '3' => 'Tercero', '4' => 'Cuarto', '5' => 'Quinto', '6' => 'Sexto', '7' => 'Septimo', '8' => 'Octavo', '9' => 'Noveno', '10' => 'Decimo', '11' => 'Once'];
-            $data['asignaturas'] = Asignatura::pluck('name', 'id');
-            $data['docentes'] = User::has('docente')->pluck('name', 'id');
-        }
         return response()->json($data);
     }
 
@@ -195,36 +187,20 @@ class LogroController extends Controller
         $grado = $request->grado;
         $asignatura = $request->asignatura;
         $request->session()->put('busqueda', true);
-        switch (currentPerfil()){
-            case 'admin':
-                $logros = DB::table('logros')->where([
-                    ['periodo_id','=',$periodo],
-                    ['asignatura_id','=',$asignatura],
-                    ['grade','=',$grado]
-                ])->get(['id','description','category','grade','indicador','code']);
-                break;
-            case 'coordinador':
-                break;
-            case 'docente':
-                $docente = $request->user()->docente->id;
+        $docente = $this->docente->id;
                 $logros = DB::table('logros')->where([
                     ['periodo_id','=',$periodo],
                     ['docente_id','=',$docente],
                     ['asignatura_id','=',$asignatura],
                     ['grade','=',$grado]
                 ])->get(['id','description','category','grade','indicador','code']);
-                break;
-            case 'secretaria':
-                break;
-            default:break;
-        }
         $datos = $this->loadDataBuscador(1);
         $datos = json_decode($datos->content());
         $periodos = $datos->periodos;
         $asignaturas = $datos->asignaturas;
-        $docentes = $datos->docentes;
         $grados = $datos->grados;
-        return view('admin.logros.index',compact('logros','periodos','asignaturas','grados','docentes'));
+        return view('docente.logros.index',compact('logros','periodos','asignaturas','grados','docentes'));
     }
+
 }
 

@@ -1,6 +1,6 @@
-<?php echo Form::open(['route' => 'logros.findnotes', 'method' => 'post', 'class' => 'form-horizontal', 'validate' => "novalidate" ,"id"=>"form-busqueda" ]); ?>
+<?php echo Form::open(['route' => 'docente.logros.findnotes', 'method' => 'post', 'class' => 'form-horizontal', 'validate' => "novalidate" ,"id"=>"form-busqueda" ]); ?>
 
-<div id="URL-LOAD" data-user="<?php echo e(currentPerfil()); ?>" data-urlload = "<?php echo e(route('logros.loaddata',1)); ?>" style="display: none"></div>
+<div id="URL-LOAD" data-user="<?php echo e(currentPerfil()); ?>" data-urlload = "<?php echo e(route('docente.logros.loaddata',1)); ?>" style="display: none"></div>
 <div class="row">
     <div class="col-lg-3">
         <div class="form-group">
@@ -25,7 +25,7 @@
     </div>
     <div class="col-sm-2">
         <div class="mb-3">
-            <a  href="<?php echo e(route('logros.create')); ?>" class="btn btn-success ">Agregar logro <i class="fas fa-plus"></i></a>
+            <a  href="<?php echo e(route('docente.logros.create')); ?>" class="btn btn-success ">Agregar logro <i class="fas fa-plus"></i></a>
         </div>
     </div>
 </div>

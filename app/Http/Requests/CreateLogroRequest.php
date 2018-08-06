@@ -26,7 +26,7 @@ class CreateLogroRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'unique:logros,code',
+            'code' => ['required','numeric', new CountCodeLogro($this->request)],
             'indicador' => 'required|in:bajo,basico,alto,superior',
             'description'  => 'required|min:3|string|max:400',
             'category'  => 'required|in:cognitivo,procedimental,actitudinal',

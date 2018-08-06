@@ -8,14 +8,24 @@
 <?php $__env->startSection('content'); ?>
     <section class="card">
         <header class="card-header ">
-          <h2 class="card-title">Buscar Logros</h2>
+          <h2 class="card-title">Editar Logro: <?php echo e(substr($logro->code,0,3)); ?></h2>
         </header>
     <div class="card-body">
-        <?php echo $__env->make('admin.logros.partials.buscador', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-        <hr>
-        <?php echo $__env->make('admin.logros.partials.resultados', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->make('admin.logros.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo Form::model($logro,['route' => ['docente.logros.update', $logro->id ],'method' => 'PUT','class' => 'form-horizontal form-bordered', 'id'=>'form-edit']); ?>
+
+        <?php echo $__env->make('docente.logros.partials.fieldsCreate', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <footer class="card-footer">
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button type="submit" class="btn btn-primary editAsignatura">Guardar</button>
+                    <a href="<?php echo e(route('logros.index')); ?>" class="btn btn-default">Cancelar</a>
+                </div>
+            </div>
+        </footer>
+        <?php echo Form::close(); ?>
+
     </div>
-        <?php echo $__env->make('admin.logros.partials.modals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     </section>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
@@ -26,13 +36,7 @@
     <script src="<?php echo e(asset('js/logros.js')); ?>"></script>
     <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
     <script src="<?php echo e(asset('js/examples/examples.datatables.editable.js')); ?>"></script>
-    <script>
 
-        $(".deleted").click(function (e) {
-            $("#form-delete").attr('action', $(this).data('url') );
-            $("#NombreLogro").text( $(this).data('nlogro') );
-        });
-    </script>
     <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
