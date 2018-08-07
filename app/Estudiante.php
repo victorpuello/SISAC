@@ -164,5 +164,15 @@ class Estudiante extends Model
         ]);
         $definitiva->save();
     }
+    public  function getDef ($asignatura,$periodo){
+        $def = $this->definitivas->where('asignatura_id','=',$asignatura)->where('periodo_id','=',$periodo)->first();
+        if ($def){
+            return $def->attributes["score"];
+        }
+        return 1;
+    }
+    public  function getDefPeriodo ($periodo){
+        return $this->definitivas->where('periodo_id','=',$periodo);
+    }
 
 }

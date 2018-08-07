@@ -9,10 +9,17 @@
 
     <!-- Invoice Print Style -->
     <link rel="stylesheet" href="<?php echo e(asset('css/invoice-print.css')); ?>" />
+    <style type="text/css" media="print">
+        .page
+        {
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+    </style>
 </head>
 <body>
 <?php $__currentLoopData = $estudiantes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $estudiante): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-<div class="invoice">
+<div class="invoice page">
     <header class="clearfix">
         <div class="row">
             <div class="col-sm-6 mt-3">
@@ -51,7 +58,8 @@
                         Grupo: <?php echo e($estudiante->salon->full_name); ?>
 
                         <br/>
-                        Puesto:
+                        Puesto: <?php echo e($estudiante->puesto); ?>
+
                         <br/>
                         Director: <?php echo e($estudiante->salon->director); ?>
 
@@ -75,10 +83,10 @@
     <?php $__currentLoopData = $estudiante->salon->asignaturas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignatura): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <table class="table table-responsive-md invoice-items">
         <thead>
-        <tr style="width: 100%">
+        <tr style="width: 100%; background-color: #A9E2F3;">
             <th>Asignatura: <?php echo e($asignatura->name); ?> </th>
-            <th>Nota</th>
-            <th>Indicador</th>
+            <th>Nota: <?php echo e($estudiante->getDef($asignatura->id,$periodo->id)); ?></th>
+            <th>Indicador: <?php echo e(indicador($estudiante->getDef($asignatura->id,$periodo->id))); ?> </th>
         </tr>
         <tr class="text-dark">
             <th id="cell-id"     class="font-weight-semibold">Categoria</th>
@@ -89,15 +97,29 @@
         <tbody>
         <?php $__currentLoopData = $estudiante->NotasInforme($asignatura->id,$periodo->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $nota): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <tr>
-            <td><?php echo e(ucwords($nota->logro->category)); ?></td>
-            <td class="font-weight-semibold text-left text-dark"><?php echo e($nota->logro->description); ?></td>
-            <td><?php echo e($nota->score); ?></td>
-        </tr>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <td><?php echo e(ucwords($nota->logro->category)); ?></td>
+                <td class="font-weight-semibold text-left text-dark"><?php echo e($nota->logro->description); ?></td>
+                <td><?php echo e($nota->score); ?></td>
+            </tr>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </tbody>
     </table>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    <div class="invoice-summary mt-5">
+        <div class="row justify-content-end">
+            <div class="col-sm-4 mt-5">
+                <table class="table h6 text-dark">
+                    <tbody>
+                    <tr class=" b-top-0">
+                            <td colspan="2">Director de grupo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<br><br><br><br><br>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </body>
 </html>

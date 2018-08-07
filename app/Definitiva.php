@@ -20,6 +20,5 @@ class Definitiva extends Model
     public function asignatura(){
         return $this->belongsTo(Asignatura::class);
     }
-
-
+    
 }

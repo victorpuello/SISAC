@@ -9,10 +9,17 @@
 
     <!-- Invoice Print Style -->
     <link rel="stylesheet" href="{{asset('css/invoice-print.css')}}" />
+    <style type="text/css" media="print">
+        .page
+        {
+            page-break-after: always;
+            page-break-inside: avoid;
+        }
+    </style>
 </head>
 <body>
 @foreach($estudiantes as $estudiante)
-<div class="invoice">
+<div class="invoice page">
     <header class="clearfix">
         <div class="row">
             <div class="col-sm-6 mt-3">
@@ -45,7 +52,7 @@
                         <br/>
                         Grupo: {{$estudiante->salon->full_name}}
                         <br/>
-                        Puesto:
+                        Puesto: {{$estudiante->puesto}}
                         <br/>
                         Director: {{$estudiante->salon->director}}
                     </address>
@@ -68,10 +75,10 @@
     @foreach($estudiante->salon->asignaturas as $asignatura)
     <table class="table table-responsive-md invoice-items">
         <thead>
-        <tr style="width: 100%">
+        <tr style="width: 100%; background-color: #A9E2F3;">
             <th>Asignatura: {{$asignatura->name}} </th>
-            <th>Nota</th>
-            <th>Indicador</th>
+            <th>Nota: {{$estudiante->getDef($asignatura->id,$periodo->id)}}</th>
+            <th>Indicador: {{indicador($estudiante->getDef($asignatura->id,$periodo->id))}} </th>
         </tr>
         <tr class="text-dark">
             <th id="cell-id"     class="font-weight-semibold">Categoria</th>
@@ -82,15 +89,29 @@
         <tbody>
         @foreach($estudiante->NotasInforme($asignatura->id,$periodo->id) as $nota)
             <tr>
-            <td>{{ucwords($nota->logro->category)}}</td>
-            <td class="font-weight-semibold text-left text-dark">{{$nota->logro->description}}</td>
-            <td>{{$nota->score}}</td>
-        </tr>
-            @endforeach
+                <td>{{ucwords($nota->logro->category)}}</td>
+                <td class="font-weight-semibold text-left text-dark">{{$nota->logro->description}}</td>
+                <td>{{$nota->score}}</td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
     @endforeach
+    <div class="invoice-summary mt-5">
+        <div class="row justify-content-end">
+            <div class="col-sm-4 mt-5">
+                <table class="table h6 text-dark">
+                    <tbody>
+                    <tr class=" b-top-0">
+                            <td colspan="2">Director de grupo</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
+<br><br><br><br><br>
     @endforeach
 </body>
 </html>

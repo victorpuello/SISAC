@@ -2,13 +2,17 @@
 
 namespace Ngsoft\Http\Controllers\Admin;
 
+use App;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Ngsoft\Estudiante;
 use Ngsoft\Institucion;
 use Ngsoft\Periodo;
 use Ngsoft\Salon;
 use Ngsoft\Transformers\EstudianteTransformer;
 use Ngsoft\Http\Controllers\Controller;
+use PDF;
+
 class ReportesController extends Controller
 {
     public function index(){
@@ -16,10 +20,34 @@ class ReportesController extends Controller
     }
     public function reporteAcademico (Periodo $periodo, Salon $aula){
         $institucion = Institucion::all()->first();
-        $estudiantes = Estudiante::orderBy('lastname','ASC')->where('salon_id','=',$aula->id)->where('stade','=','activo')->get();
+        $estudiantes = Estudiante::with('notas')
+            ->with('definitivas')
+            ->with('inasistencias')
+            ->with('salon')
+            ->orderBy('lastname','ASC')
+            ->where('salon_id','=',$aula->id)
+            ->where('stade','=','activo')
+            ->get();
+        $puesto = 0;
+        foreach ($estudiantes as $estudiante){
+            $_count = 0;
+            $puesto += 1;
+            $_nasg = count($estudiante->definitivas->where('periodo_id','=',$periodo->id));
+            foreach ($estudiante->definitivas->where('periodo_id','=',$periodo->id) as $definitiva){
+                $_count += $definitiva->score;
+            }
+            $estudiante->setAttribute('scoreTotal',($_count/$_nasg));
+            $estudiante->setAttribute('puesto',$puesto);
+        }
+        $estudiantes->sortByDesc('scoreTotal');
+        //$pdf = App::make('snappy.pdf.wrapper');
+        $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('estudiantes','institucion','salon','periodo'))
+                    ->setPaper('legal')
+                    ->setOrientation('portrait')
+                    ->setOption('margin-bottom', 10)
+                    ->setOption('encoding', 'UTF-8');
 
-        //new EstudianteTransformer($aula->grade,$Idasignatura,$Iddocente,$Idperiodo)
-        //dd($estudiantes);
-        return view('admin.reportes.print.informeEstudiante',compact('estudiantes','institucion','salon','periodo'));
+        return $pdf->download('Informe.pdf');
+       // return view('admin.reportes.print.informeEstudiante',compact('estudiantes','institucion','salon','periodo'));
     }
 }
