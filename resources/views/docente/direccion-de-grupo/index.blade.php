@@ -9,9 +9,8 @@
 @section('content')
     <div class="row">
         @foreach($estudiantes as $estudiante)
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <section class="card">
-
                     <header class="card-header {{$fondos[rand(0,3)]}}">
                         <div class="card-header-profile-picture">
                             <img src="{{ url('/imgUsers/')}}/{{$estudiante->path}}">
@@ -22,12 +21,12 @@
                         <hr class="solid short">
                         <div class="row">
                             <div class="col-lg-6">
-                                <p class="mb-1"><a href="{{route('docentes.edit',$estudiante->id)}}"><i class="fas fa-user-edit mr-1"></i>Editar</a></p>
-                                <p class="mb-1"><a href="#modalEliminar" class="deleted modal-basic" data-nuser="{{$estudiante->name}}" data-url="{{ route('docentes.destroy', $estudiante->id ) }}"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
-                                <p class="mb-1"><a href="#modalAddAsignaturas" data-url="{{route('docentes.addAsignaturas',$estudiante->id)}}" class="modal-basic addAsignatura"><i class="fas fa-share-square mr-1"></i> Asignaturas</a></p>
+                                <p class="mb-1"><a href="#"><i class="fas fa-user-tie mr-1"></i>Acudiente</a></p>
+                                <p class="mb-1"><a href="#"><i class="fas fa-clipboard-check mr-1"></i>Matricula</a></p>
                             </div>
                             <div class="col-lg-6">
-                                <p class="mb-1"><a href="#"><i class="fas fa-chalkboard mr-1"></i>Salones</a></p>
+                                <p class="mb-1"><a href="#"><i class="fas fa-list-alt mr-1"></i>Notas</a></p>
+                                <p class="mb-1"><a href="#"><i class="fas fa-eye mr-1"></i>Observador</a></p>
                             </div>
                         </div>
                     </div>

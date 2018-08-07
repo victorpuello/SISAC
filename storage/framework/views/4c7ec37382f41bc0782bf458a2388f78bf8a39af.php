@@ -8,9 +8,8 @@
 <?php $__env->startSection('content'); ?>
     <div class="row">
         <?php $__currentLoopData = $estudiantes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $estudiante): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="col-lg-3">
+            <div class="col-lg-4">
                 <section class="card">
-
                     <header class="card-header <?php echo e($fondos[rand(0,3)]); ?>">
                         <div class="card-header-profile-picture">
                             <img src="<?php echo e(url('/imgUsers/')); ?>/<?php echo e($estudiante->path); ?>">
@@ -21,12 +20,12 @@
                         <hr class="solid short">
                         <div class="row">
                             <div class="col-lg-6">
-                                <p class="mb-1"><a href="<?php echo e(route('docentes.edit',$estudiante->id)); ?>"><i class="fas fa-user-edit mr-1"></i>Editar</a></p>
-                                <p class="mb-1"><a href="#modalEliminar" class="deleted modal-basic" data-nuser="<?php echo e($estudiante->name); ?>" data-url="<?php echo e(route('docentes.destroy', $estudiante->id )); ?>"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
-                                <p class="mb-1"><a href="#modalAddAsignaturas" data-url="<?php echo e(route('docentes.addAsignaturas',$estudiante->id)); ?>" class="modal-basic addAsignatura"><i class="fas fa-share-square mr-1"></i> Asignaturas</a></p>
+                                <p class="mb-1"><a href="#"><i class="fas fa-user-tie mr-1"></i>Acudiente</a></p>
+                                <p class="mb-1"><a href="#"><i class="fas fa-clipboard-check mr-1"></i>Matricula</a></p>
                             </div>
                             <div class="col-lg-6">
-                                <p class="mb-1"><a href="#"><i class="fas fa-chalkboard mr-1"></i>Salones</a></p>
+                                <p class="mb-1"><a href="#"><i class="fas fa-list-alt mr-1"></i>Notas</a></p>
+                                <p class="mb-1"><a href="#"><i class="fas fa-eye mr-1"></i>Observador</a></p>
                             </div>
                         </div>
                     </div>
