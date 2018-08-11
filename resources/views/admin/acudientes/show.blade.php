@@ -20,15 +20,16 @@
                     <div class="widget-toggle-expand mb-3">
                         <div class="widget-content-expanded">
                             <ul class="simple-todo-list mt-3">
-                                <li class="completed">Actualiza la foto de perfil</li>
-                                <li class="completed">Cambia información personal</li>
-                                <li>Editar el estado</li>
+                                <li class="completed">Update Profile Picture</li>
+                                <li class="completed">Change Personal Information</li>
+                                <li>Update Social Media</li>
+                                <li>Follow Someone</li>
                             </ul>
                         </div>
                     </div>
                     <hr class="dotted short">
                     <div class="clearfix">
-                        <a class="text-uppercase text-muted float-right" href="{{route('estudiantes.edit', $estudiante->id)}}">(Editar)</a>
+                        <a class="text-uppercase text-muted float-right" href="#">(View All)</a>
                     </div>
                     <hr class="dotted short">
                     <div class="social-icons-list">
@@ -40,14 +41,17 @@
                 </div>
             </section>
         </div>
-        <div class="col-lg-8 col-xl-9">
+        <div class="col-lg-8 col-xl-6">
             <div class="tabs">
                 <ul class="nav nav-tabs tabs-primary">
                     <li class="nav-item active">
                         <a class="nav-link" href="#infPers" data-toggle="tab">Información Personal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#acudiente" data-toggle="tab">Acudiente</a>
+                        <a class="nav-link" href="#edit" data-toggle="tab">Observador</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#edit" data-toggle="tab">Acudiente</a>
                     </li>
                 </ul>
                 <div class="tab-content">
@@ -120,46 +124,29 @@
                         </div>
 
                     </div>
-                    <div id="acudiente" class="tab-pane">
+                    <div id="edit" class="tab-pane">
                         <h4 class="mb-3">Acudiente</h4>
-                        <hr class="dotted short">
-                        <div class="row">
-                            @acudiente($estudiante)
-                                <div class="mt-3">
-                                    <a href="{{route('acudiente.create',$estudiante)}}" class="btn btn-primary ml-3"> Agregar acudiente</a>
-                                </div>
-                                @else
-                                <table class=" ml-3 mr-3 table table-responsive-lg table-bordered table-striped table-sm mb-0">
-                                    <tbody>
-                                    <tr>
-                                        <td><strong>Nombre: </strong></td>
-                                        <td>{{$estudiante->acudiente->name}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Apellidos: </strong></td>
-                                        <td>{{$estudiante->acudiente->lastname}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Parentesco: </strong></td>
-                                        <td>{{$estudiante->acudiente->relationship}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Tel. : </strong></td>
-                                        <td>{{$estudiante->acudiente->phone}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Email: </strong></td>
-                                        <td>{{$estudiante->acudiente->email}}</td>
-                                    </tbody>
-                                </table>
-                                <div class="mt-3">
-                                    <a href="{{route('acudiente.edit',$estudiante->acudiente)}}" class="btn btn-primary ml-3"> Editar</a>
-                                </div>
-                                @endacudiente
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-xl-3">
+
+            <h4 class="mb-3 mt-0">Sale Stats</h4>
+            <ul class="simple-card-list mb-3">
+                <li class="primary">
+                    <h3>488</h3>
+                    <p class="text-light">Nullam quris ris.</p>
+                </li>
+                <li class="primary">
+                    <h3>$ 189,000.00</h3>
+                    <p class="text-light">Nullam quris ris.</p>
+                </li>
+                <li class="primary">
+                    <h3>16</h3>
+                    <p class="text-light">Nullam quris ris.</p>
+                </li>
+            </ul>
         </div>
 
     </div>

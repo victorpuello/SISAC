@@ -4,6 +4,7 @@ $( document ).ready(function() {
     addAttibuteToDateOrNumberInput('date','#dateout', 'Introduzca fecha de retiro');
     addAttibuteToDateOrNumberInput('date','#birthday', 'Introduzca fecha de nacimiento');
     addAttibuteToDateOrNumberInput('number','#identification', 'Introduzca número ID');
+    addAttibuteToDateOrNumberInput('number','#document', 'Introduzca número identificación');
 });
 
 $("#birthstate").change(event => {

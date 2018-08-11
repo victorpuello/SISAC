@@ -24,6 +24,12 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('director', function (){
             return optional(auth()->user()->docente)->is_director;
         });
+        Blade::if('acudiente', function ($estudiante){
+            return is_null($estudiante->acudiente);
+        });
+        Blade::if('editar', function ($estudiante){
+            return is_null($estudiante);
+        });
     }
 
     /**

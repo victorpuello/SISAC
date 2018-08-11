@@ -8,6 +8,8 @@ Route::resource('logros', 'LogroController');
 Route::resource('notas', 'NotaController');
 Route::resource('asignaciones', 'AsignacionController');
 Route::resource('reportes', 'ReportesController')->only(['index']);
+Route::resource('acudiente', 'AcudienteController')->only(['edit','store','update','destroy']);
+Route::get('acudiente/{estudiante}', 'AcudienteController@create')->name('acudiente.create');
 Route::get('reportes/academico/{periodo}/{aula}', 'ReportesController@reporteAcademico')->name('reportes.academico');
 Route::resource('import-users', 'InportUserController')->only(['index', 'store']);
 Route::resource('import-estudiantes', 'ImportEstudianteController')->only(['index', 'store']);

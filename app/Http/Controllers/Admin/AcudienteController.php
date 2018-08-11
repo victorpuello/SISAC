@@ -4,7 +4,11 @@ namespace Ngsoft\Http\Controllers\Admin;
 
 use Ngsoft\Acudiente;
 use Illuminate\Http\Request;
+use Ngsoft\Estudiante;
 use Ngsoft\Http\Controllers\Controller;
+use Ngsoft\Http\Requests\CreateAcudienteRequest;
+use Ngsoft\Http\Requests\UpdateAcudienteRequest;
+use Ngsoft\Municipio;
 
 class AcudienteController extends Controller
 {
@@ -18,14 +22,14 @@ class AcudienteController extends Controller
         //
     }
 
+
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Estudiante $estudiante
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create(Estudiante $estudiante)
     {
-        //
+        return view('admin.acudientes.create',compact('estudiante'));
     }
 
     /**
@@ -34,9 +38,11 @@ class AcudienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateAcudienteRequest $request)
     {
-        //
+        $acudiente = new Acudiente($request->all());
+        $acudiente->save();
+        return redirect()->action('Admin\EstudianteController@show',$request->estudiante_id);
     }
 
     /**
@@ -58,7 +64,8 @@ class AcudienteController extends Controller
      */
     public function edit(Acudiente $acudiente)
     {
-        //
+        $estudiante = null;
+        return view('admin.acudientes.edit',compact('acudiente','estudiante'));
     }
 
     /**
@@ -68,9 +75,11 @@ class AcudienteController extends Controller
      * @param  \Ngsoft\Acudiente  $acudiente
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Acudiente $acudiente)
+    public function update(UpdateAcudienteRequest $request, Acudiente $acudiente)
     {
-        //
+        $acudiente->fill($request->all());
+        $acudiente->save();
+        return redirect()->action('Admin\EstudianteController@show',$request->estudiante_id);
     }
 
     /**

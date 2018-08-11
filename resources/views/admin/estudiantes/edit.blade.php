@@ -25,7 +25,7 @@
             </div>
             @include('admin.estudiantes.partials.fields')
             <div class="card-footer">
-                <a href="{{route('users.index')}}" class="btn btn-danger">Cancelar</a>
+                <a href="{{ URL::previous() }}" class="btn btn-danger">Cancelar</a>
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             </div>
             {!! Form::close() !!}

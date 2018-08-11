@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Ngsoft\Asignatura;
 use Ngsoft\Docente;
 use Ngsoft\Http\Controllers\Controller;
-use Ngsoft\Http\Requests\createAsignacionRequest;
+use Ngsoft\Http\Requests\CreateAsignacionRequest;
 use Ngsoft\Http\Requests\UpdateAsignacionRequest;
 use Ngsoft\Salon;
 
