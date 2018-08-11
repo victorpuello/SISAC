@@ -14,6 +14,7 @@
             </thead>
             <tbody>
             @foreach($logros as $key => $logro)
+
                 <tr data-item-id="{{$logro->id}}">
                     <td>{{substr($logro->code,0,3)}}</td>
                     <td>{{substr($logro->description,0,40).' ...'}}</td>

@@ -14,6 +14,7 @@
             </thead>
             <tbody>
             <?php $__currentLoopData = $logros; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $logro): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
                 <tr data-item-id="<?php echo e($logro->id); ?>">
                     <td><?php echo e(substr($logro->code,0,3)); ?></td>
                     <td><?php echo e(substr($logro->description,0,40).' ...'); ?></td>

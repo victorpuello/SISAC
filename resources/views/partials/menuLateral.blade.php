@@ -37,6 +37,13 @@
                 </a>
             </li>
         </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="{{route('import-estudiantes.index')}}">
+                    Importar estudiantes
+                </a>
+            </li>
+        </ul>
     </li>
     <li class="nav-parent">
         <a class="nav-link" href="#">

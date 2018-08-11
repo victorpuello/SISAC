@@ -3,13 +3,11 @@
 namespace Ngsoft\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use Ngsoft\Docente;
 use Ngsoft\Estudiante;
-use Ngsoft\User;
 use Ngsoft\Http\Controllers\Controller;
-class InportUserController extends Controller
+
+class ImportEstudianteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +16,7 @@ class InportUserController extends Controller
      */
     public function index()
     {
-        return view('admin.import.importusers');
+        return view('admin.import.importestudiantes');
     }
 
     /**
@@ -41,39 +39,16 @@ class InportUserController extends Controller
     {
         $file = $request->file('archivo')->getRealPath();
         Excel::load($file, function($reader) {
-            //dd($reader->get());
-            foreach ($reader->get() as $user) {
-               // dd($user);
-
+            foreach ($reader->get() as $estudiante) {
                 factory(Estudiante::class)->create([
-                    'name' => $user->name,
-                    'lastname' => $user->lastname,
-                    'birthday' => $user->birthday,
-                    'identification' => $user->identification,
-                    'salon_id' => $user->salon_id
-                ]);/*
-               $usuario =  User::create([
-                    'name' => $user->name,
-                    'lastname' =>$user->lastname,
-                    'email' =>$user->email,
-                    'password' => $user->password,
-                    'username' =>$user->username,
-                    'type' =>$user->type,
-               ]);
-               if ($user->type === "docente"){
-                    factory(Docente::class)->create([
-                        'name' => $usuario->full_name,
-                        'typeid' => $user->typeid,
-                        'numberid' => $user->numberid,
-                        'gender' => $user->gender,
-                        'user_id' => $usuario->id,
-                        'path' =>'no-user-image.png'
-                    ]);
-               }*/
-
+                    'name' => $estudiante->name,
+                    'lastname' => $estudiante->lastname,
+                    'birthday' => $estudiante->birthday,
+                    'salon_id' => $estudiante->salon_id
+                ]);
             }
         },'UTF-8');
-        return view('admin.import.importusers');
+        return view('admin.import.importestudiantes');
     }
 
     /**

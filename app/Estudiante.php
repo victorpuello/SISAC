@@ -69,14 +69,14 @@ class Estudiante extends Model
     }
     // Start Mutators student
     //
-    public function setPathAttribute($path)
-{
-    if (!empty($path)) {
-        $name = Carbon::now()->second.$path->getClientOriginalName();
-        $this->attributes['path'] = $name;
-        \Storage::disk('estudiantes')->put($name,\File::get($path));
-    }
-}
+    /*public function setPathAttribute($path)
+    {
+        if (!empty($path)) {
+            $name = Carbon::now()->second.$path->getClientOriginalName();
+            $this->attributes['path'] = $name;
+            \Storage::disk('estudiantes')->put($name,\File::get($path));
+        }
+    }*/
 
     // Start Fuctions
 

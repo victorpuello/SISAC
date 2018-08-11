@@ -3,19 +3,17 @@
 namespace Ngsoft\Http\Controllers\Docente;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Ngsoft\Asignacion;
-use Ngsoft\Asignatura;
-use Ngsoft\Docente;
 use Ngsoft\Http\Requests\CreateLogroRequest;
 use Ngsoft\Http\Requests\UpdateLogroRequest;
 use Ngsoft\Logro;
 use Illuminate\Http\Request;
 use Ngsoft\Periodo;
-use Ngsoft\Salon;
-use Ngsoft\User;
 use Ngsoft\Http\Controllers\Controller;
+use Ngsoft\Rules\CountCodeLogro;
+use Validator;
+
 class LogroController extends Controller
 {
     public $periodos = [];
@@ -83,14 +81,12 @@ class LogroController extends Controller
         $indicadores = array('bajo','basico','alto','superior');
         if ($request->multiple === '0'){
             for ($i=0; $i < count($indicadores); $i++){
-               //$request->merge(array('code'=> $this->codeGen($request,$indicadores[$i])));
                 $request->merge(array('indicador'=> $indicadores[$i]));
                 if ($i > 0){
                     $request->merge(array('description'=> "Agregar descripción "));
                 }
                 $logro = new Logro($request->all());
                 $logro->save();
-                //dd($indicadores[$i]);
             }
         }else{
             $logro = new Logro($request->all());
@@ -163,7 +159,7 @@ class LogroController extends Controller
     {
         $logro = Logro::findOrFail($id);
         $logro->delete();
-        return redirect()->action('LogroController@index');
+        return redirect()->action('Docente\LogroController@index');
     }
 
     public function loadDataBuscador ($id) {
@@ -186,17 +182,18 @@ class LogroController extends Controller
         $asignatura = $request->asignatura;
         $request->session()->put('busqueda', true);
         $docente = $this->docente->id;
-                $logros = DB::table('logros')->where([
+        $logros = Logro::where([
                     ['periodo_id','=',$periodo],
                     ['docente_id','=',$docente],
                     ['asignatura_id','=',$asignatura],
                     ['grade','=',$grado]
-                ])->get(['id','description','category','grade','indicador','code']);
+                ])->get(['id','description','category','grade','indicador','code','periodo_id']);
         $datos = $this->loadDataBuscador(1);
         $datos = json_decode($datos->content());
         $periodos = $datos->periodos;
         $asignaturas = $datos->asignaturas;
         $grados = $datos->grados;
+        //dd($logros);
         return view('docente.logros.index',compact('logros','periodos','asignaturas','grados','docentes'));
     }
 

@@ -27,11 +27,14 @@ class CountCodeLogro implements Rule
         $indicadores = array('bajo','basico','alto','superior');
         $marcador = false;
         $contador = 0;
-        $aux ="";
-        for ($i=0; $i < count($indicadores); $i++) {
-            $contador += DB::table('logros')->where('code', '=', $this->codeGen($indicadores[$i]))->count();
+        if ($this->request['multiple'] === 1){
+            for ($i=0; $i < count($indicadores); $i++) {
+                $contador += DB::table('logros')->where('code', '=', $this->codeGen($indicadores[$i]))->count();
+            }
+        }else{
+            $contador += DB::table('logros')->where('code', '=', $this->codeGen($this->request['indicador']))->count();
         }
-        if ($contador < 0){
+        if ($contador > 0){
             $marcador = true;
         }
         return $marcador === false;

@@ -35,7 +35,7 @@
         <?php endif; ?>
     </li>
     <li>
-        <a class="nav-link" href="<?php echo e(route('asignaciones.index')); ?>">
+        <a class="nav-link" href="<?php echo e(route('docente.asignaciones.index')); ?>">
             <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
             <span>Asignación Academica</span>
         </a>

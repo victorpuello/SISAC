@@ -10,6 +10,7 @@ Route::resource('asignaciones', 'AsignacionController');
 Route::resource('reportes', 'ReportesController')->only(['index']);
 Route::get('reportes/academico/{periodo}/{aula}', 'ReportesController@reporteAcademico')->name('reportes.academico');
 Route::resource('import-users', 'InportUserController')->only(['index', 'store']);
+Route::resource('import-estudiantes', 'ImportEstudianteController')->only(['index', 'store']);
 Route::get('notas/cargarPlanilla/salon/{Idsalon}/docente/{Iddocente}/asignatura/{Idasignatura}/periodo/{Idperiodo}',['as'=>'notas.loadplanilla', 'uses' => 'NotaController@cargarPlanilla']);
 Route::post('docentes/addAsignaturas/{id}',['as' => 'docentes.addAsignaturas', 'uses' => 'DocenteController@addAsignaturas']);
 Route::post('logros/findnotes',['as'=>'logros.findnotes', 'uses' => 'LogroController@FindNotes']);

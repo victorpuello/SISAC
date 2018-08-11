@@ -50,7 +50,7 @@ class AsignacionController extends Controller
             ]);
         }
         $salones = $sal->sortBy('grado')->pluck('nombre','id');
-        return view('admin.asignaciones.index',compact('asignaciones','docentes','salones','asignaturas'));
+        return view('docente.asignaciones.index',compact('asignaciones','docentes','salones','asignaturas'));
     }
 
     /**
