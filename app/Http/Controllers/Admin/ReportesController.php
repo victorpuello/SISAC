@@ -31,23 +31,26 @@ class ReportesController extends Controller
         $puesto = 0;
         foreach ($estudiantes as $estudiante){
             $_count = 0;
-            $puesto += 1;
+
             $_nasg = count($estudiante->definitivas->where('periodo_id','=',$periodo->id));
             foreach ($estudiante->definitivas->where('periodo_id','=',$periodo->id) as $definitiva){
                 $_count += $definitiva->score;
             }
             $estudiante->setAttribute('scoreTotal',($_count/$_nasg));
+
+        }
+        foreach ($estudiantes->sortByDesc('scoreTotal') as $estudiante){
+            $puesto += 1;
             $estudiante->setAttribute('puesto',$puesto);
         }
-        $estudiantes->sortByDesc('scoreTotal');
-        //$pdf = App::make('snappy.pdf.wrapper');
+        //$estudiantes = $estudiantes->take(2);
         $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('estudiantes','institucion','salon','periodo'))
                     ->setPaper('legal')
                     ->setOrientation('portrait')
                     ->setOption('margin-bottom', 10)
                     ->setOption('encoding', 'UTF-8');
 
-        return $pdf->download('Informe.pdf');
+       return $pdf->stream('Informe.pdf');
        // return view('admin.reportes.print.informeEstudiante',compact('estudiantes','institucion','salon','periodo'));
     }
 }

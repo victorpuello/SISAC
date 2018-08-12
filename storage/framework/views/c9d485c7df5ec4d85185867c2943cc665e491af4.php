@@ -1,6 +1,6 @@
 <ul class="nav nav-main">
     <li>
-        <a class="nav-link" href="{{route('home')}}">
+        <a class="nav-link" href="<?php echo e(route('home')); ?>">
             <i class="fas fa-home" aria-hidden="true"></i>
             <span>Escritorio</span>
         </a>
@@ -12,30 +12,30 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('docente.logros.index')}}">
+                <a class="nav-link" href="<?php echo e(route('docente.logros.index')); ?>">
                     Logros
                 </a>
             </li>
         </ul>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('docente.notas.index')}}">
+                <a class="nav-link" href="<?php echo e(route('docente.notas.index')); ?>">
                     Calificar
                 </a>
             </li>
         </ul>
-        @director
+        <?php if (\Illuminate\Support\Facades\Blade::check('director')): ?>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('docente.direccion.index')}}">
+                <a class="nav-link" href="<?php echo e(route('docente.direccion.index')); ?>">
                     Dirección de grupo
                 </a>
             </li>
         </ul>
-        @enddirector
+        <?php endif; ?>
     </li>
     <li>
-        <a class="nav-link" href="{{route('docente.asignaciones.index')}}">
+        <a class="nav-link" href="<?php echo e(route('docente.asignaciones.index')); ?>">
             <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
             <span>Asignación Academica</span>
         </a>
@@ -47,7 +47,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('docente.reportes.index')}}">
+                <a class="nav-link" href="<?php echo e(route('docente.reportes.index')); ?>">
                     Reporte Academico
                 </a>
             </li>

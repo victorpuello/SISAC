@@ -10,3 +10,13 @@
 @import "../../modules/pages/css/invoice";
 
 */
+div.page
+{
+    overflow: hidden;
+    page-break-after: always;
+}
+.page
+{
+    page-break-after: always;
+    page-break-inside: avoid;
+}

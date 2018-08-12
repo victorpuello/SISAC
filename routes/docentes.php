@@ -2,6 +2,8 @@
 Route::resource('logros', 'LogroController');
 Route::resource('notas', 'NotaController');
 Route::resource('asignaciones', 'AsignacionController');
+Route::resource('reportes', 'ReportesController')->only(['index']);
+Route::get('reportes/academico/logros', 'ReportesController@reporteLogros')->name('reportes.academico.logros');
 Route::get('logros/loaddata/{id}',['as'=>'logros.loaddata', 'uses' => 'LogroController@loadDataBuscador']);
 Route::post('logros/findnotes',['as'=>'logros.findnotes', 'uses' => 'LogroController@FindNotes']);
 Route::get('notas/cargarPlanilla/salon/{Idsalon}/docente/{Iddocente}/asignatura/{Idasignatura}/periodo/{Idperiodo}',['as'=>'notas.loadplanilla', 'uses' => 'NotaController@cargarPlanilla']);
