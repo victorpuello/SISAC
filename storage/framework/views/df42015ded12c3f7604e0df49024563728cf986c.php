@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('vendor/bootstrap/css/bootstrap.css')); ?>" />
     <!-- Invoice Print Style -->
     <link rel="stylesheet" href="<?php echo e(asset('css/invoice-print.css')); ?>" />
+
 </head>
 <body>
 <div class="invoice">

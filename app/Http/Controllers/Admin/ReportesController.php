@@ -20,6 +20,7 @@ class ReportesController extends Controller
     }
     public function reporteAcademico (Periodo $periodo, Salon $aula){
         $institucion = Institucion::all()->first();
+        $periodos = Periodo::all();
         $estudiantes = Estudiante::with('notas')
             ->with('definitivas')
             ->with('inasistencias')
@@ -43,14 +44,15 @@ class ReportesController extends Controller
             $puesto += 1;
             $estudiante->setAttribute('puesto',$puesto);
         }
-        //$estudiantes = $estudiantes->take(2);
-        $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('estudiantes','institucion','salon','periodo'))
+
+        $estudiantes = $estudiantes->take(2);
+        $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('estudiantes','institucion','salon','periodo','periodos'))
                     ->setPaper('legal')
                     ->setOrientation('portrait')
                     ->setOption('margin-bottom', 10)
                     ->setOption('encoding', 'UTF-8');
 
        return $pdf->stream('Informe.pdf');
-       // return view('admin.reportes.print.informeEstudiante',compact('estudiantes','institucion','salon','periodo'));
+       // return view('admin.reportes.print.informeEstudiante',compact('estudiantes','institucion','salon','periodo','periodos'));
     }
 }

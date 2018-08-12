@@ -19,6 +19,9 @@ function currentPerfil(){
  * @return string
  */
 function indicador($score){
+    if ($score === ""){
+        return "";
+    }
     if ($score < 6){
         return 'Bajo';
     }

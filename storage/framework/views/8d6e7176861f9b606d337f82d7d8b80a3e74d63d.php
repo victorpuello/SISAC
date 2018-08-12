@@ -14,6 +14,7 @@
         .card{
             border-radius: 0;
         }
+
     </style>
 </head>
 <body>
@@ -57,28 +58,37 @@
             </tr>
             </tbody>
         </table>
+        <table class="table table-bordered">
+            <tbody>
+                <tr class="p-0">
+                    <td class="p-1" style=" width: 30%; vertical-align: middle" rowspan="2"><strong>AREAS - ASIGNATURAS / VALORACIONES</strong></td>
+                    <td class="p-1 text-center text-uppercase" style="vertical-align: middle" rowspan="2">Faltas</td>
+                    <td class="p-1 text-center text-uppercase" colspan="4">Desarrollo anual / periodos</td>
+                </tr>
+                <tr class="p-0">
+                    <td class="p-1 text-center">1°</td>
+                    <td class="p-1 text-center">2°</td>
+                    <td class="p-1 text-center">3°</td>
+                    <td class="p-1 text-center">4°</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <?php $__currentLoopData = $estudiante->salon->asignaturas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignatura): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <section class="card card-featured card-featured-primary mb-4">
-            <div class="card-body">
-                <table class="table table-responsive-md invoice-items">
-                    <thead>
+                <table class="table table-bordered mb-0">
+                    <tbody>
                     <tr class="table-bordered p-0">
-                        <th class="p-2 text-left text-uppercase " rowspan="2" colspan="6"><?php echo e($asignatura->name); ?> </th>
-                        <th style="border-left: none" rowspan="2"></th>
-                        <th class="p-1"><?php echo e($estudiante->getDef($asignatura->id,1)); ?></th>
-                        <th class="p-1"><?php echo e($estudiante->getDef($asignatura->id,2)); ?></th>
-                        <th class="p-1"><?php echo e($estudiante->getDef($asignatura->id,3)); ?></th>
-                        <th class="p-1"><?php echo e($estudiante->getDef($asignatura->id,4)); ?></th>
+                        <td class="p-2 text-left text-uppercase" style="width: 30%; vertical-align: middle;" rowspan="2" ><strong> <?php echo e($asignatura->name); ?></strong> </td>
+                        <td style="border-left: none" rowspan="2"> <?php echo e(count($estudiante->currentInasistencias($asignatura->id,$periodo->id))); ?> </td>
+                        <?php $__currentLoopData = $periodos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $_periodo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <td class="p-1 text-center"><?php echo e($estudiante->getDefInforme($asignatura->id,$_periodo->id)); ?></td>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tr>
                     <tr class="text-dark">
-                        <th class="p-1" ><?php echo e(indicador($estudiante->getDef($asignatura->id,1))); ?> </th>
-                        <th class="p-1" ><?php echo e(indicador($estudiante->getDef($asignatura->id,2))); ?> </th>
-                        <th class="p-1" ><?php echo e(indicador($estudiante->getDef($asignatura->id,3))); ?> </th>
-                        <th class="p-1" ><?php echo e(indicador($estudiante->getDef($asignatura->id,4))); ?> </th>
+                        <?php $__currentLoopData = $periodos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $_periodo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <td class="p-1 text-center"><?php echo e(indicador($estudiante->getDefInforme($asignatura->id,$_periodo->id))); ?> </td>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tr>
-                    </thead>
-                    <tbody>
                     <?php $__currentLoopData = $estudiante->NotasInforme($asignatura->id,$periodo->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $nota): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="table-bordered p-0">
                             <td><?php echo e(ucwords($nota->logro->category)); ?></td>
@@ -88,23 +98,26 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>
                 </table>
-            </div>
-        </section>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     <div class="invoice-summary mt-5">
         <div class="row justify-content-end">
             <div class="col-sm-4 mt-5">
                 <table class="table h6 text-dark">
                     <tbody>
-                    <tr class=" b-top-0">
-                        &nbsp;&nbsp;
-                    </tr>
                     <tr>
-                        <td colspan="2">Observaciones</td>
+                        <td colspan="3">Observaciones</td>
+                        <td></td>
+                        <td class="mt-5 pt-5 text-center"> <hr class="mt-5">Director de Grupo</td>
                     </tr>
-                    </tbody>
 
+                    </tbody>
                 </table>
+                <div>
+                    <p class="text-center" style="font-size: 13px">Equivalencias escala institucional con la escala nacional: Bajo: 1.00 - 5.99, Básico: 6.00 - 7.99, Alto: 8.00 - 9.49, Superior: 9.50 - 10.00 </p>
+                </div>
+                <div class="col-sm-4">
+
+                </div>
             </div>
         </div>
     </div>
