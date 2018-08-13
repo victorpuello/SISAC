@@ -23,12 +23,12 @@
 <div class="form-group row">
     <div class="col-lg-4">
         <div class="form-group">
-            {!! Form::select('category',['cognitivo'=>'Cognitivo','procedimental'=>'Procedimental','actitudinal'=>'Actitudinal'], null, ['placeholder'=>'Tipo de logro','class' => 'form-control mb-3', 'id'=>'category','required']) !!}
+            {!! Form::select('category',['cognitivo'=>'Cognitivo','procedimental'=>'Procedimental','actitudinal'=>'Actitudinal'], null, ['placeholder'=>'Categoria','class' => 'form-control mb-3', 'id'=>'category','required']) !!}
         </div>
     </div>
     <div class="col-lg-4">
         <div class="form-group">
-            {!! Form::select('indicador',['bajo'=>'Bajo','basico'=>'Basico','alto'=>'Alto', 'superior' => 'Superior'], null, ['placeholder'=>'Indicador de logro','class' => 'form-control mb-3', 'id'=>'indicador','required']) !!}
+            {!! Form::select('indicador',['bajo'=>'Bajo','basico'=>'Basico','alto'=>'Alto', 'superior' => 'Superior'], null, ['placeholder'=>'Indicador','class' => 'form-control mb-3', 'id'=>'indicador','required']) !!}
         </div>
     </div>
     <div class="col-lg-4">

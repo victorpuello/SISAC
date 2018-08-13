@@ -1,12 +1,11 @@
-@extends('layouts.app')
-@section('titulo', "Reportes")
-@section('namePage', "Reportes: Academicos")
-@section('styles')
-    <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.css')}}" />
-    <link rel="stylesheet" href="{{asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('vendor/pnotify/pnotify.custom.css')}}" />
-@endsection
-@section('content')
+<?php $__env->startSection('titulo', "Reportes"); ?>
+<?php $__env->startSection('namePage', "Reportes: Academicos"); ?>
+<?php $__env->startSection('styles'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/select2/css/select2.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/pnotify/pnotify.custom.css')); ?>" />
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <div class="row">
         <div class="col-xl-3">
             <section class="card card-featured-left card-featured-primary mb-3">
@@ -20,7 +19,7 @@
                         <div class="widget-summary-col">
                             <h4 class="title">Reporte de Logros</h4>
                             <div class="summary-footer">
-                                <a class="text-muted text-uppercase" href="{{route('docente.reportes.academico.logros')}}">Descargar</a>
+                                <a class="text-muted text-uppercase" href="<?php echo e(route('docente.reportes.academico.logros')); ?>">Descargar</a>
                             </div>
                         </div>
                     </div>
@@ -99,12 +98,14 @@
                 </div>
             </section>
         </div>
-        @include('admin.reportes.partials.modals')
+        <?php echo $__env->make('admin.reportes.partials.modals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     </div>
-@endsection
-@section('script')
-    <script src="{{asset('vendor/select2/js/select2.js')}}"></script>
-    <script src="{{asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('js/examples/examples.modals.js')}}"></script>
-    <script src="{{asset('vendor/pnotify/pnotify.custom.js"')}}"></script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(asset('vendor/select2/js/select2.js')); ?>"></script>
+    <script src="<?php echo e(asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
+    <script src="<?php echo e(asset('vendor/pnotify/pnotify.custom.js"')); ?>"></script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

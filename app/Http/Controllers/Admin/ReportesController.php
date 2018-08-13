@@ -15,8 +15,23 @@ use PDF;
 
 class ReportesController extends Controller
 {
+    private $salones_todos;
+    public function __construct ()
+    {
+        $this->salones_todos = Salon::orderBy('name','ASC')->get();
+    }
     public function index(){
-        return view('admin.reportes.index');
+        $periodos = Periodo::pluck('name','id');
+        $sal= collect();
+        foreach ($this->salones_todos as $salon){
+            $sal->push([
+                'id'=>$salon->id,
+                'nombre'=>$salon->full_name,
+                'grado'=>$salon->grade,
+            ]);
+        }
+        $salones = $sal->sortBy('grado')->pluck('nombre','id');
+        return view('admin.reportes.index',compact('periodos','salones'));
     }
     public function reporteAcademico (Periodo $periodo, Salon $aula){
         $institucion = Institucion::all()->first();
@@ -44,8 +59,6 @@ class ReportesController extends Controller
             $puesto += 1;
             $estudiante->setAttribute('puesto',$puesto);
         }
-
-        $estudiantes = $estudiantes->take(2);
         $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('estudiantes','institucion','salon','periodo','periodos'))
                     ->setPaper('legal')
                     ->setOrientation('portrait')
@@ -54,5 +67,23 @@ class ReportesController extends Controller
 
        return $pdf->stream('Informe.pdf');
        // return view('admin.reportes.print.informeEstudiante',compact('estudiantes','institucion','salon','periodo','periodos'));
+    }
+
+    public function  sabana(Request $request){
+        $periodo = Periodo::findOrFail($request->periodo);
+        $salon = Salon::where('id','=', $request->salon)->with('estudiantes')->first();
+        $numero = 0;
+        foreach ($salon->estudiantes->sortBy('lastname') as $estudiante){
+            $numero += 1;
+            $estudiante->setAttribute('numero',$numero);
+        }
+        $pdf = PDF::loadView('admin.reportes.print.sabana', compact('salon','periodo'))
+            ->setPaper('legal')
+            ->setOrientation('landscape')
+            ->setOption('margin-bottom', 10)
+            ->setOption('encoding', 'UTF-8');
+
+        return $pdf->stream('Sabana'.$salon->name.''.$periodo.''.'.pdf');
+       // return view('admin.reportes.print.sabana',compact('salon','periodo'));
     }
 }

@@ -116,12 +116,9 @@ class Estudiante extends Model
         }
         return $notas;
     }
-    public function NotaDefinitiva($asignatura, $periodo){
-        $notas= $this->NotasInforme($asignatura, $periodo);
-        $contador = 0;
-        if (count($notas) > 0){
-            dd($notas);
-        }
+    public function NotasDefinitivas($periodo){
+        //dd( $this->definitivas->where('periodo_id','=',$periodo));
+        return $this->definitivas->where('periodo_id','=',$periodo)->sortBy('asignatura_id');
     }
 
     /**

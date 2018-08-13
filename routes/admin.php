@@ -11,6 +11,7 @@ Route::resource('reportes', 'ReportesController')->only(['index']);
 Route::resource('acudiente', 'AcudienteController')->only(['edit','store','update','destroy']);
 Route::get('acudiente/{estudiante}', 'AcudienteController@create')->name('acudiente.create');
 Route::get('reportes/academico/{periodo}/{aula}', 'ReportesController@reporteAcademico')->name('reportes.academico');
+Route::post('reportes/academico/sabana', 'ReportesController@sabana')->name('reportes.academico.sabana');
 Route::resource('import-users', 'InportUserController')->only(['index', 'store']);
 Route::resource('import-estudiantes', 'ImportEstudianteController')->only(['index', 'store']);
 Route::get('notas/cargarPlanilla/salon/{Idsalon}/docente/{Iddocente}/asignatura/{Idasignatura}/periodo/{Idperiodo}',['as'=>'notas.loadplanilla', 'uses' => 'NotaController@cargarPlanilla']);
