@@ -2,6 +2,8 @@
 
 namespace Ngsoft\Http\Controllers\Admin;
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
 use Ngsoft\Departamento;
 use Ngsoft\Estudiante;
 use Illuminate\Http\Request;

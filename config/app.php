@@ -153,6 +153,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Yajra\DataTables\FractalServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -165,6 +166,7 @@ return [
         // Ngsoft\Providers\BroadcastServiceProvider::class,
         Ngsoft\Providers\EventServiceProvider::class,
         Ngsoft\Providers\RouteServiceProvider::class,
+
 
     ],
 
@@ -221,6 +223,7 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

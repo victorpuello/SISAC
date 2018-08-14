@@ -3,7 +3,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-08-14 00:53:34.
+    * Generated on 2018-08-14 19:32:14.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -41,6 +41,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
+        'image' => \Intervention\Image\ImageManager::class,
         'excel.identifier' => \Maatwebsite\Excel\Classes\FormatIdentifier::class,
         'excel.parsers.css' => \Maatwebsite\Excel\Parsers\CssParser::class,
         'excel.reader' => \Maatwebsite\Excel\Readers\LaravelExcelReader::class,
@@ -204,6 +205,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
+        'image' => \Intervention\Image\ImageManager::class,
         'excel.identifier' => \Maatwebsite\Excel\Classes\FormatIdentifier::class,
         'excel.parsers.css' => \Maatwebsite\Excel\Parsers\CssParser::class,
         'excel.reader' => \Maatwebsite\Excel\Readers\LaravelExcelReader::class,
@@ -367,6 +369,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
+        'image' => \Intervention\Image\ImageManager::class,
         'excel.identifier' => \Maatwebsite\Excel\Classes\FormatIdentifier::class,
         'excel.parsers.css' => \Maatwebsite\Excel\Parsers\CssParser::class,
         'excel.reader' => \Maatwebsite\Excel\Readers\LaravelExcelReader::class,
@@ -530,6 +533,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
+        'image' => \Intervention\Image\ImageManager::class,
         'excel.identifier' => \Maatwebsite\Excel\Classes\FormatIdentifier::class,
         'excel.parsers.css' => \Maatwebsite\Excel\Parsers\CssParser::class,
         'excel.reader' => \Maatwebsite\Excel\Readers\LaravelExcelReader::class,
@@ -693,6 +697,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
+        'image' => \Intervention\Image\ImageManager::class,
         'excel.identifier' => \Maatwebsite\Excel\Classes\FormatIdentifier::class,
         'excel.parsers.css' => \Maatwebsite\Excel\Parsers\CssParser::class,
         'excel.reader' => \Maatwebsite\Excel\Readers\LaravelExcelReader::class,
@@ -856,6 +861,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
+        'image' => \Intervention\Image\ImageManager::class,
         'excel.identifier' => \Maatwebsite\Excel\Classes\FormatIdentifier::class,
         'excel.parsers.css' => \Maatwebsite\Excel\Parsers\CssParser::class,
         'excel.reader' => \Maatwebsite\Excel\Readers\LaravelExcelReader::class,
@@ -1019,6 +1025,7 @@ namespace PHPSTORM_META {
         'view.engine.resolver' => \Illuminate\View\Engines\EngineResolver::class,
         'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
         'command.debugbar.clear' => \Barryvdh\Debugbar\Console\ClearCommand::class,
+        'image' => \Intervention\Image\ImageManager::class,
         'excel.identifier' => \Maatwebsite\Excel\Classes\FormatIdentifier::class,
         'excel.parsers.css' => \Maatwebsite\Excel\Parsers\CssParser::class,
         'excel.reader' => \Maatwebsite\Excel\Readers\LaravelExcelReader::class,

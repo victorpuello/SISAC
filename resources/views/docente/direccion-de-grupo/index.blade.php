@@ -15,7 +15,7 @@
                 <section class="card">
                     <header class="card-header {{$fondos[rand(0,3)]}}">
                         <div class="card-header-profile-picture">
-                            <img src="{{ url('/imgUsers/')}}/{{$estudiante->path}}">
+                            <img src="{{ url('/imgUsers/estudiantes/')}}/{{$estudiante->path}}">
                         </div>
                     </header>
                     <div class="card-body">

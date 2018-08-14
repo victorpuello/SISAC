@@ -5,6 +5,7 @@ namespace Ngsoft;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class Estudiante extends Model
 {
@@ -72,9 +73,10 @@ class Estudiante extends Model
     public function setPathAttribute($path)
     {
         if (!empty($path)) {
+            $image = \Image::make(Input::file('path'))->resize(250,270)->encode('jpg',90);
             $name = Carbon::now()->second.$path->getClientOriginalName();
             $this->attributes['path'] = $name;
-            \Storage::disk('estudiantes')->put($name,\File::get($path));
+           \Storage::disk('estudiantes')->put($name,$image);
         }
     }
 
