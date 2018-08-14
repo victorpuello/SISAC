@@ -39,7 +39,7 @@
         <script src="{{asset('vendor/modernizr/modernizr.js')}}"></script>
 
     </head>
-    <body class="loading-overlay-showing " data-loading-overlay>
+    <body class="loading-overlay-showing "  data-loading-overlay>
     <div class="loading-overlay">
         <div class="bounce-loader">
             <div class="bounce1"></div>
@@ -142,14 +142,15 @@
         <script src="{{asset('vendor/nanoscroller/nanoscroller.js')}}"></script>
         <script src="{{asset('vendor/magnific-popup/jquery.magnific-popup.js')}}"></script>
         <script src="{{asset('vendor/jquery-placeholder/jquery-placeholder.js')}}"></script>
-        <!-- Specific Page Vendor -->
-        @yield('script')
         <script src="{{asset('vendor/pnotify/pnotify.custom.js')}}"></script>
         <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
         <!-- Theme Base, Components and Settings -->
         <script src="{{asset('js/theme.js')}}"></script>
         <!-- Theme Initialization Files -->
         <script src="{{asset('js/theme.init.js')}}"></script>
+        <!-- Specific Page Vendor -->
+        @yield('script')
+
 
     </body>
 </html>

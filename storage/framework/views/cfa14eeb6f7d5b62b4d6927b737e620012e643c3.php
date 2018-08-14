@@ -39,7 +39,7 @@
         <script src="<?php echo e(asset('vendor/modernizr/modernizr.js')); ?>"></script>
 
     </head>
-    <body class="loading-overlay-showing " data-loading-overlay>
+    <body class="loading-overlay-showing "  data-loading-overlay>
     <div class="loading-overlay">
         <div class="bounce-loader">
             <div class="bounce1"></div>
@@ -142,14 +142,15 @@
         <script src="<?php echo e(asset('vendor/nanoscroller/nanoscroller.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/magnific-popup/jquery.magnific-popup.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/jquery-placeholder/jquery-placeholder.js')); ?>"></script>
-        <!-- Specific Page Vendor -->
-        <?php echo $__env->yieldContent('script'); ?>
         <script src="<?php echo e(asset('vendor/pnotify/pnotify.custom.js')); ?>"></script>
         <script src="<?php echo e(asset('js/examples/examples.notifications.js')); ?>"></script>
         <!-- Theme Base, Components and Settings -->
         <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
         <!-- Theme Initialization Files -->
         <script src="<?php echo e(asset('js/theme.init.js')); ?>"></script>
+        <!-- Specific Page Vendor -->
+        <?php echo $__env->yieldContent('script'); ?>
+
 
     </body>
 </html>

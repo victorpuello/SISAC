@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.6.33 on 2018-08-12 05:10:02.
+ * Generated for Laravel 5.6.33 on 2018-08-14 00:53:23.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -15364,14 +15364,6 @@ namespace Barryvdh\Snappy\Facades {
  
 }
 
-namespace LaravelEnso\Helpers\app\Exceptions { 
-
-    class EnsoException {
-         
-    }
- 
-}
-
 namespace Maatwebsite\Excel\Facades { 
 
     class Excel {
@@ -17899,8 +17891,6 @@ namespace  {
     class PDF extends \Barryvdh\Snappy\Facades\SnappyPdf {}
 
     class SnappyImage extends \Barryvdh\Snappy\Facades\SnappyImage {}
-
-    class EnsoException extends \LaravelEnso\Helpers\app\Exceptions\EnsoException {}
 
     class Excel extends \Maatwebsite\Excel\Facades\Excel {}
 

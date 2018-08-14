@@ -9,11 +9,22 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import axios from 'axios';
+import VueTable from './components/enso/vuedatatable/VueTable.vue';
+import fontawesome from '@fortawesome/fontawesome-free';
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
+import Toastr from './components/enso/bulma/toastr';
+import { faSearch, faSync, faAngleDown, faInfoCircle } from '@fortawesome/vue-fontawesome';
+
+fontawesome.library.add(faSearch, faSync, faAngleDown, faInfoCircle);
+
+Vue.use(Toastr, {
+    position: 'right',
+    duration: 3000,
+    closeButton: true,
+});
+
+window.axios = axios;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
