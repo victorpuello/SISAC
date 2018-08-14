@@ -28,6 +28,7 @@ class CreateEstudianteRequest extends FormRequest
             'lastname'=>'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',
             'typeid'=>'required|in:RC,TI,CC,DE',
             'identification'=>'required|numeric|max:9999999999|min:1000000|unique:estudiantes,identification',
+            'address' => 'required|regex:/([- ,\/0-9a-zA-Z]+)/',
             'birthday' => 'required|date',
             'birthstate'=>'required',
             'birthcity'=>'required',

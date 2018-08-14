@@ -20,7 +20,7 @@
                         <div class="widget-summary-col">
                             <h4 class="title">Reporte de Logros</h4>
                             <div class="summary-footer">
-                                <a class="text-muted text-uppercase" href="{{route('docente.reportes.academico.logros')}}">Descargar</a>
+                                <a class="text-muted text-uppercase modal-basic" href="#modalLogros">Generar</a>
                             </div>
                         </div>
                     </div>
@@ -37,14 +37,9 @@
                             </div>
                         </div>
                         <div class="widget-summary-col">
-                            <div class="summary">
-                                <h4 class="title">Sabana de notas</h4>
-                                <div class="info">
-                                    <strong class="amount">14,890.30</strong>
-                                </div>
-                            </div>
+                            <h4 class="title">Sabana de notas</h4>
                             <div class="summary-footer">
-                                <a class="text-muted text-uppercase modal-basic" href="#modalSabana">Descargar</a>
+                                <a class="text-muted text-uppercase modal-basic" href="#modalSabana">Generar</a>
                             </div>
                         </div>
                     </div>
@@ -61,14 +56,9 @@
                             </div>
                         </div>
                         <div class="widget-summary-col">
-                            <div class="summary">
-                                <h4 class="title">Observadores </h4>
-                                <div class="info">
-                                    <strong class="amount">38</strong>
-                                </div>
-                            </div>
+                            <h4 class="title">Observadores estudiantil</h4>
                             <div class="summary-footer">
-                                <a class="text-muted text-uppercase" href="#">Descargar</a>
+                                <a class="text-muted text-uppercase" href="#">Generar</a>
                             </div>
                         </div>
                     </div>
@@ -81,18 +71,13 @@
                     <div class="widget-summary">
                         <div class="widget-summary-col widget-summary-col-icon">
                             <div class="summary-icon bg-quaternary">
-                                <i class="fas fa-calendar-check"></i>
+                                <i class="fas fa-th-list"></i>
                             </div>
                         </div>
                         <div class="widget-summary-col">
-                            <div class="summary">
-                                <h4 class="title">Directorio</h4>
-                                <div class="info">
-                                    <strong class="amount">3765</strong>
-                                </div>
-                            </div>
+                            <h4 class="title">Informes Academicos</h4>
                             <div class="summary-footer">
-                                <a class="text-muted text-uppercase " href="#">Descargar</a>
+                                <a class="text-muted text-uppercase modal-basic" href="#modalInforme">Generar</a>
                             </div>
                         </div>
                     </div>

@@ -28,7 +28,7 @@ class CreateDocenteRequest extends FormRequest
             'numberid' => 'required|numeric|max:9999999999|min:1000000|unique:docentes,numberid',
             'fnac' => 'required|date',
             'gender' => 'required|in:M,F',
-            'address' => 'required|min:3|regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\X])(?=.*[!$#%,-]).*$/|max:80',
+            'address' => 'required|regex:/([- ,\/0-9a-zA-Z]+)/',
             'phone' => 'required|numeric',
             'path' => 'image|mimes:jpeg,bmp,png',
             'user_id' => 'required|unique:docentes,user_id'

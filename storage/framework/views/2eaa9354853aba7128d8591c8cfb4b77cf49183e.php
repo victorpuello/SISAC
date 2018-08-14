@@ -66,11 +66,11 @@
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tr>
                     <?php $__currentLoopData = $salon->estudiantes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $estudiante): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr>
-                            <td><?php echo e($estudiante->numero); ?></td>
-                            <td><?php echo e($estudiante->apellido_name); ?></td>
+                        <tr class="m-0">
+                            <td class="m-0"><?php echo e($estudiante->numero); ?></td>
+                            <td class="m-0"><?php echo e($estudiante->apellido_name); ?></td>
                             <?php $__currentLoopData = $salon->asignaturas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignatura): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <td><?php echo e($estudiante->getDefInforme($asignatura->id,$periodo->id)); ?></td>
+                                <td class="m-0"><?php echo e($estudiante->getDefInforme($asignatura->id,$periodo->id)); ?></td>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

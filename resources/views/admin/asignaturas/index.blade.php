@@ -17,25 +17,25 @@
         </div>
         <table class="table table-bordered table-striped mb-0" id="datatable-editable">
             <thead>
-            <tr>
-                <th>Id</th>
-                <th>Asignatura</th>
-                <th>Docentes</th>
-                <th>Acciones</th>
-            </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>Asignatura</th>
+                    <th>Docentes</th>
+                    <th>Acciones</th>
+                </tr>
             </thead>
             <tbody>
             @foreach($asignaturas as $asignatura)
-            <tr data-item-id="{{$asignatura->id}}">
-                <td>{{$asignatura->id}}</td>
-                <td>{{$asignatura->name}}</td>
-                <td>{{$asignatura->docentes->count()}}</td>
-                <td class="actions">
-                    <a href="#modalEditar" class="on-default edit modal-basic" data-urlupdate="{{ route('asignaturas.update', $asignatura->id ) }}" data-urledit="{{ route('asignaturas.edit', $asignatura->id ) }}"> <i class="fas fa-pencil-alt"></i></a>
-                    <a href="#modalEliminar" class="on-default deleted modal-basic" data-nasg="{{$asignatura->name}}" data-url="{{ route('asignaturas.destroy', $asignatura->id ) }}"><i class="far fa-trash-alt"></i></a>
-                </td>
-            </tr>
-                @endforeach
+                <tr data-item-id="{{$asignatura->id}}">
+                    <td>{{$asignatura->id}}</td>
+                    <td>{{$asignatura->name}}</td>
+                    <td>{{$asignatura->docentes->count()}}</td>
+                    <td class="actions">
+                        <a href="#modalEditar" class="on-default edit modal-basic" data-urlupdate="{{ route('asignaturas.update', $asignatura->id ) }}" data-urledit="{{ route('asignaturas.edit', $asignatura->id ) }}"> <i class="fas fa-pencil-alt"></i></a>
+                        <a href="#modalEliminar" class="on-default deleted modal-basic" data-nasg="{{$asignatura->name}}" data-url="{{ route('asignaturas.destroy', $asignatura->id ) }}"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
         @include('admin.asignaturas.partials.modals')

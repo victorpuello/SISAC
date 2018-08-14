@@ -9,22 +9,6 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import axios from 'axios';
-import VueTable from './components/enso/vuedatatable/VueTable.vue';
-import fontawesome from '@fortawesome/fontawesome-free';
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
-import Toastr from './components/enso/bulma/toastr';
-import { faSearch, faSync, faAngleDown, faInfoCircle } from '@fortawesome/vue-fontawesome';
-
-fontawesome.library.add(faSearch, faSync, faAngleDown, faInfoCircle);
-
-Vue.use(Toastr, {
-    position: 'right',
-    duration: 3000,
-    closeButton: true,
-});
-
-window.axios = axios;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 

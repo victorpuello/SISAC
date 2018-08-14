@@ -33,6 +33,17 @@
         </div>
     </header>
     <div class="page">
+        <table class="table">
+            <tbody>
+            <tr>
+                <td>Docente: <strong>{{$docente->name}}</strong> </td>
+                <td>Periodo: <strong>{{$periodo->name}}</strong> </td>
+                <td>Docente: <strong>{{$asignatura->name}}</strong> </td>
+                <td>Grado: <strong>{{$grado}}°</strong> </td>
+                <td>Total logros: <strong>{{$logros->count()}}</strong> </td>
+            </tr>
+            </tbody>
+        </table>
         <table class="table table-responsive-md invoice-items mb-5">
             <thead>
             <tr class="text-dark">
@@ -59,25 +70,6 @@
             @endforeach
             </tbody>
         </table>
-    </div>
-
-    <div class="invoice-summary">
-        <div class="row justify-content-end">
-            <div class="col-sm-4">
-                <table class="table h6 text-dark">
-                    <tbody>
-                    <tr class="b-top-0">
-                        <td colspan="2">Docente:</td>
-                        <td class="text-left">{{auth()->user()->docente->name}}</td>
-                    </tr>
-                    <tr class="h4">
-                        <td colspan="2">Total logros</td>
-                        <td class="text-left">{{$logros->count()}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
 </div>
 

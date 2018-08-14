@@ -38,6 +38,7 @@ class UpdateDocenteRequest extends FormRequest
             'typeid' => 'required|in:CC,CE,PT',
             'numberid' => 'required|numeric|max:9999999999|min:1000000',Rule::unique('docentes')->ignore($this->docente->numberid, 'docente_numberid'),
             'fnac' => 'required|date',
+            'address' => 'required|regex:/([- ,\/0-9a-zA-Z]+)/',
             'gender' => 'required|in:M,F',
             'phone' => 'required|numeric',
             'path' => 'image|mimes:jpeg,bmp,png',

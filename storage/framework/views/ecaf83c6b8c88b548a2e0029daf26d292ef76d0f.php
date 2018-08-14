@@ -13,7 +13,7 @@
                         <div class="summary-icon bg-<?php echo e($fondos[rand(0,3)]); ?>">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-square-o fa-stack-2x"></i>
-                                <strong class="fa-stack-1x" style="font-size:80%; margin: -17%;"><?php echo e($salones->where('grade','=',$i)->count()); ?></strong>
+                                <strong class="fa-stack-1x" style="font-size:80%; margin: -17%;"><?php echo e($i); ?></strong>
                             </span>
                         </div>
                     </div>
