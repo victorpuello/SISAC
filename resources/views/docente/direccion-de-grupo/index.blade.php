@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('vendor/datatables/media/css/dataTables.bootstrap4.css')}}" />
     <link rel="stylesheet" href="{{asset('vendor/pnotify/pnotify.custom.css')}}" />
+    <link rel="stylesheet" href="{{asset('vendor/animate/animate.css')}}" />
 @endsection
 @section('content')
     <div class="row">
@@ -34,8 +35,8 @@
                                 </p>
                             </div>
                             <div class="col-lg-6">
-                                <p class="mb-1"><a href="#"><i class="fas fa-list-alt mr-1"></i>Notas</a></p>
-                                <p class="mb-1"><a href="#"><i class="fas fa-eye mr-1"></i>Observador</a></p>
+                                <p class="mb-1"><a class="simple-ajax-modal" href="{{route('docente.direccion.getdefinitivas',$estudiante)}}"><i class="fas fa-list-alt mr-1"></i>Notas</a></p>
+                                <p class="mb-1"><a href="{{route('docente.direccion.getobservador',$estudiante)}}"><i class="fas fa-eye mr-1"></i>Observador</a></p>
                             </div>
                         </div>
                     </div>
@@ -47,8 +48,12 @@
 @endsection
 
 @section('script')
+    <script src="{{asset('vendor/jquery-browser-mobile/jquery.browser.mobile.js')}}"></script>
+    <script src="{{asset('vendor/popper/umd/popper.min.js')}}"></script>
     <script src="{{asset('vendor/select2/js/select2.js')}}"></script>
     <script src="{{asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('js/examples/examples.modals.js')}}"></script>
     <script src="{{asset('vendor/pnotify/pnotify.custom.js"')}}"></script>
+    <script src="{{asset('vendor/jquery-placeholder/jquery-placeholder.js')}}"></script>
+
 @endsection

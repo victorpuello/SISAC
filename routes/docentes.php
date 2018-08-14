@@ -12,6 +12,8 @@ Route::get('notas/cargarPlanilla/salon/{Idsalon}/docente/{Iddocente}/asignatura/
 Route::get('/direccion', 'DireccionController@index')->name('direccion.index');
 Route::get('/direccion/getacudiente/{estudiante}', 'DireccionController@getAcudiente')->name('direccion.getacudiente');
 Route::get('/direccion/getmatricula/{estudiante}', 'DireccionController@getMatricula')->name('direccion.getmatricula');
+Route::get('/direccion/getDefinitivas/{estudiante}', 'DefinitivaController@getDefinitivas')->name('direccion.getdefinitivas');
+Route::get('/direccion/getObservador/{estudiante}', 'AnotacionController@getObservador')->name('direccion.getobservador');
 Route::resource('acudiente', 'AcudienteController')->only(['edit','store','update','destroy']);
 Route::get('acudiente/{estudiante}', 'AcudienteController@create')->name('acudiente.create');
 Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'MunicipioController']);

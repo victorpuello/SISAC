@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('titulo', "Error 403")
-@section('namePage', "Error 403 ")
+@section('titulo', "Error 404")
+@section('namePage', "Error 404 ")
 @section('styles')
 
 @endsection
@@ -12,7 +12,7 @@
                 <div class="col-lg-8">
                     <div class="main-error mb-3">
                         <h2 class="error-code text-dark text-center font-weight-semibold m-0">403 <i class="fas fa-file"></i></h2>
-                        <p class="error-explanation text-center">Acceso no permitido</p>
+                        <p class="error-explanation text-center">Lo sentimos, pero la página que estabas buscando no existe</p>
                     </div>
                 </div>
                 <div class="col-md-4">

@@ -1,9 +1,12 @@
 <?php
 
-namespace Ngsoft\Http\Controllers;
+namespace Ngsoft\Http\Controllers\Docente;
 
 use Ngsoft\Definitiva;
 use Illuminate\Http\Request;
+use Ngsoft\Estudiante;
+use Ngsoft\Http\Controllers\Controller;
+use Ngsoft\Periodo;
 
 class DefinitivaController extends Controller
 {
@@ -14,7 +17,7 @@ class DefinitivaController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -22,9 +25,10 @@ class DefinitivaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getDefinitivas(Estudiante $estudiante)
     {
-        //
+        $periodos = Periodo::all();
+       return view('docente.direccion-de-grupo.ajax.notas',compact('estudiante','periodos'));
     }
 
     /**
