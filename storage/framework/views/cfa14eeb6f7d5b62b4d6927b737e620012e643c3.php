@@ -144,13 +144,13 @@
         <script src="<?php echo e(asset('vendor/jquery-placeholder/jquery-placeholder.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/pnotify/pnotify.custom.js')); ?>"></script>
         <script src="<?php echo e(asset('js/examples/examples.notifications.js')); ?>"></script>
+        <?php echo $__env->yieldContent('script'); ?>
         <!-- Theme Base, Components and Settings -->
         <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
         <!-- Theme Initialization Files -->
         <script src="<?php echo e(asset('js/theme.init.js')); ?>"></script>
         <!-- Specific Page Vendor -->
-        <?php echo $__env->yieldContent('script'); ?>
-
+        <?php echo $__env->yieldContent('scriptfin'); ?>
 
     </body>
 </html>

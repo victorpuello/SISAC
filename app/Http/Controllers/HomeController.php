@@ -3,6 +3,10 @@
 namespace Ngsoft\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Ngsoft\Docente;
+use Ngsoft\Estudiante;
+use Ngsoft\Logro;
+use Ngsoft\User;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        switch (currentPerfil()){
+            case 'docente':
+                return view('docente.home');
+            break;
+            case 'admin':
+                $Nestudiantes = Estudiante::all()->count();
+                $Ndocentes = Docente::all()->count();
+                $Nusers = User::all()->count();
+                $Nlogros = Logro::all()->count();
+                return view('admin.home',compact('Nestudiantes','Ndocentes','Nusers','Nlogros'));
+            break;
+            default:
+                break;
+        }
     }
 }
