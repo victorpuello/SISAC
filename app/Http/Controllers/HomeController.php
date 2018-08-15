@@ -3,6 +3,7 @@
 namespace Ngsoft\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Ngsoft\Asignacion;
 use Ngsoft\Docente;
 use Ngsoft\Estudiante;
 use Ngsoft\Logro;
@@ -29,7 +30,19 @@ class HomeController extends Controller
     {
         switch (currentPerfil()){
             case 'docente':
-                return view('docente.home');
+
+                $asignaciones = Asignacion::where('docente_id','=',\Auth::user()->docente->id)->with('salon')->get();
+                $Nlogros = Logro::where('docente_id','=',\Auth::user()->docente->id)->count();
+                $Nasignaciones = $asignaciones->count();
+                $Nestudiantes = 0;
+                if (! \Auth::user()->docente->is_director){
+                    foreach ($asignaciones as $asignacion){
+                        $Nestudiantes += $asignacion->salon->estudiantes->count();
+                    }
+                }else{
+                    $Nestudiantes = \Auth::user()->docente->salon_director->estudiantes->count();
+                }
+                return view('docente.home',compact('Nlogros','Nasignaciones','Nestudiantes'));
             break;
             case 'admin':
                 $Nestudiantes = Estudiante::all()->count();

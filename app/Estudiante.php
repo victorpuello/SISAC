@@ -47,6 +47,9 @@ class Estudiante extends Model
     public function getApellidoNameAttribute(){
         return $this->lastname.' '.$this->name;
     }
+    public function getAnotacionPeriodo($periodo){
+        return $this->anotaciones->where('periodo_id','=',$periodo->id);
+    }
 
     public function getActiveAttribute ()
     {

@@ -47,6 +47,10 @@ return [
             'driver' => 'local',
             'root' => public_path('imgUsers'),
         ],
+        'documentos' => [
+            'driver' => 'local',
+            'root' => public_path('imgUsers/documentos'),
+        ],
         'estudiantes' => [
             'driver' => 'local',
             'root' => public_path('imgUsers/estudiantes'),

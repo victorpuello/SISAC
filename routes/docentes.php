@@ -4,6 +4,7 @@ Route::resource('notas', 'NotaController');
 Route::resource('asignaciones', 'AsignacionController');
 Route::resource('estudiantes', 'EstudianteController')->only(['update','edit']);;
 Route::resource('reportes', 'ReportesController')->only(['index']);
+Route::resource('/direccion/anotaciones', 'AnotacionController');
 Route::post('reportes/academico/sabana', 'ReportesController@sabana')->name('reportes.academico.sabana');
 Route::post('reportes/academico/logros', 'ReportesController@reporteLogros')->name('reportes.academico.logros');
 Route::get('logros/loaddata/{id}',['as'=>'logros.loaddata', 'uses' => 'LogroController@loadDataBuscador']);

@@ -25,9 +25,6 @@ class Docente extends Model
                 ->get();
         return array_pluck($asignaturas,'name','id');
     }
-    public function salones(){
-        return $this->belongsToMany(Salon::class);
-    }
 
     public function logros(){
         return $this->hasMany(Logro::class);

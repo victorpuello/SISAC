@@ -6,6 +6,9 @@ use Ngsoft\Anotacion;
 use Illuminate\Http\Request;
 use Ngsoft\Estudiante;
 use Ngsoft\Http\Controllers\Controller;
+use Ngsoft\Http\Requests\CreateAnotacionRequest;
+use Ngsoft\Http\Requests\UpdateAnotacionRequest;
+use Ngsoft\Periodo;
 
 class AnotacionController extends Controller
 {
@@ -35,9 +38,15 @@ class AnotacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateAnotacionRequest $request)
     {
-        //
+        $estudiante = Estudiante::findOrFail($request->estudiante_id);
+        if (! $request->has('path')){
+            $request->merge(['path' => '']);
+        }
+        $anotacion = new Anotacion($request->all());
+        $anotacion->save();
+        return redirect()->route('docente.direccion.getobservador',$estudiante);
     }
 
     /**
@@ -57,9 +66,12 @@ class AnotacionController extends Controller
      * @param  \Ngsoft\Anotacion  $anotacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Anotacion $anotacion)
+    public function edit($id)
     {
-        //
+        $anotacion = Anotacion::findOrFail($id);
+        $estudiante = $anotacion->estudiante;
+        $periodos = Periodo::all();
+        return view('docente.observador.ajax.edit',compact('anotacion','estudiante','periodos'));
     }
 
     /**
@@ -69,9 +81,13 @@ class AnotacionController extends Controller
      * @param  \Ngsoft\Anotacion  $anotacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Anotacion $anotacion)
+    public function update(UpdateAnotacionRequest $request, $id)
     {
-        //
+        $anotacion = Anotacion::findOrFail($id);
+        $anotacion->fill($request->all());
+        $anotacion->save();
+        $estudiante = Estudiante::findOrFail($request->estudiante_id);
+        return redirect()->route('docente.direccion.getobservador',$estudiante);
     }
 
     /**
@@ -80,12 +96,16 @@ class AnotacionController extends Controller
      * @param  \Ngsoft\Anotacion  $anotacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Anotacion $anotacion)
+    public function destroy($id)
     {
-        //
+        $anotacion = Anotacion::findOrFail($id);
+        $estudiante = $anotacion->estudiante;
+        $anotacion->delete();
+        return redirect()->route('docente.direccion.getobservador',$estudiante);
     }
     public function getObservador(Estudiante $estudiante)
     {
-        return view('docente.observador.index');
+        $periodos = Periodo::all();
+        return view('docente.observador.index', compact('estudiante','periodos'));
     }
 }
