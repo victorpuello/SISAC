@@ -16,25 +16,25 @@
         </div>
         <table class="table table-bordered table-striped mb-0" id="datatable-editable">
             <thead>
-            <tr>
-                <th>Id</th>
-                <th>Asignatura</th>
-                <th>Docentes</th>
-                <th>Acciones</th>
-            </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>Asignatura</th>
+                    <th>Docentes</th>
+                    <th>Acciones</th>
+                </tr>
             </thead>
             <tbody>
             <?php $__currentLoopData = $asignaturas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignatura): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <tr data-item-id="<?php echo e($asignatura->id); ?>">
-                <td><?php echo e($asignatura->id); ?></td>
-                <td><?php echo e($asignatura->name); ?></td>
-                <td><?php echo e($asignatura->docentes->count()); ?></td>
-                <td class="actions">
-                    <a href="#modalEditar" class="on-default edit modal-basic" data-urlupdate="<?php echo e(route('asignaturas.update', $asignatura->id )); ?>" data-urledit="<?php echo e(route('asignaturas.edit', $asignatura->id )); ?>"> <i class="fas fa-pencil-alt"></i></a>
-                    <a href="#modalEliminar" class="on-default deleted modal-basic" data-nasg="<?php echo e($asignatura->name); ?>" data-url="<?php echo e(route('asignaturas.destroy', $asignatura->id )); ?>"><i class="far fa-trash-alt"></i></a>
-                </td>
-            </tr>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <tr data-item-id="<?php echo e($asignatura->id); ?>">
+                    <td><?php echo e($asignatura->id); ?></td>
+                    <td><?php echo e($asignatura->name); ?></td>
+                    <td><?php echo e($asignatura->docentes->count()); ?></td>
+                    <td class="actions">
+                        <a href="#modalEditar" class="on-default edit modal-basic" data-urlupdate="<?php echo e(route('asignaturas.update', $asignatura->id )); ?>" data-urledit="<?php echo e(route('asignaturas.edit', $asignatura->id )); ?>"> <i class="fas fa-pencil-alt"></i></a>
+                        <a href="#modalEliminar" class="on-default deleted modal-basic" data-nasg="<?php echo e($asignatura->name); ?>" data-url="<?php echo e(route('asignaturas.destroy', $asignatura->id )); ?>"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
         <?php echo $__env->make('admin.asignaturas.partials.modals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

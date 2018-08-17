@@ -2,9 +2,11 @@
 
 namespace Ngsoft\Http\Controllers\Admin;
 
+use Excel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Files\ExcelFile;
 use Ngsoft\Asignacion;
 use Ngsoft\Asignatura;
 use Ngsoft\Docente;
@@ -226,5 +228,31 @@ class LogroController extends Controller
         $grados = $datos->grados;
         return view('admin.logros.index',compact('logros','periodos','asignaturas','grados','docentes'));
     }
+
+
+    public function getViewImport(){
+        return view('admin.import.importlogros');
+    }
+    public function inportar(Request $request){
+        $file = $request->file('archivo')->getRealPath();
+        Excel::load($file, function($reader) {
+            foreach ($reader->get() as $logro){
+                Logro::create([
+                    'code'=> $logro->code,
+                    'indicador'=> $logro->indicador,
+                    'description'=> $logro->description,
+                    'category'=> $logro->category,
+                    'grade'=> $logro->grade,
+                    'asignatura_id'=> $logro->asignatura_id,
+                    'docente_id'=> $logro->docente_id,
+                    'periodo_id'=> $logro->periodo_id
+                ]);
+            }
+        },'UTF-8');
+        return view('admin.import.importusers');
+    }
+
+
+
 }
 

@@ -24,9 +24,7 @@
                 <th>Docente</th>
                 <th>Grupo</th>
                 <th>Director</th>
-                @if(currentPerfil() <> 'docente')
                 <th>Acciones</th>
-                @endif
             </tr>
             </thead>
             <tbody>
@@ -36,12 +34,10 @@
                     <td>{{$asignacion->docente->name}}</td>
                     <td>{{$asignacion->salon->full_name}}</td>
                     <td>{{$asignacion->direccion}}</td>
-                    @if(currentPerfil() <> 'docente')
                     <td class="actions">
-                        <a href="#modalEditar" class="on-default edit modal-basic" > <i class="fas fa-pencil-alt"></i></a>
+                        <a href="{{route('asignaciones.edit',$asignacion)}}" class="on-default simple-ajax-modal" > <i class="fas fa-pencil-alt"></i></a>
                         <a href="#modalEliminar" class="on-default deleted modal-basic" data-url = "{{ route('asignaciones.destroy', $asignacion->id ) }}" ><i class="far fa-trash-alt"></i></a>
                     </td>
-                        @endif
                 </tr>
             @endforeach
             </tbody>
@@ -56,7 +52,6 @@
     <script src="{{asset('js/examples/examples.datatables.editable.js')}}"></script>
     <script src="{{asset('js/examples/examples.modals.js')}}"></script>
     <script src="{{asset('js/custom.js')}}"></script>
-    <script src="{{asset('js/ModalsAsignaturas.js')}}"></script>
     <script type="text/javascript">
         $(".deleted").click(function (e) {
             $("#form-delete").attr('action', $(this).data('url') );

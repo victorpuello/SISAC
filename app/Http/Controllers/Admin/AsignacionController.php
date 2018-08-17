@@ -19,13 +19,12 @@ class AsignacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private $asignaciones;
+
     private $docentes;
     private $salones_todos;
     private $asignaturas;
     public function __construct ()
     {
-        $this->asignaciones = Asignacion::all();
         $this->docentes = Docente::orderBy('name','ASC')->pluck('name','id');
         $this->salones_todos = Salon::orderBy('name','ASC')->get();
         $this->asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
@@ -33,14 +32,13 @@ class AsignacionController extends Controller
 
     public function index()
     {
-        if (currentPerfil() <> 'docente'){
-            $asignaciones = $this->asignaciones;
-        }else{
-            $asignaciones = $this->asignaciones->where('docente_id','=', Auth::user()->docente->id);
-        }
+        $asignaciones = Asignacion::with('docente')
+                                    ->with('asignatura')
+                                    ->with('salon')
+                                    ->orderBy('created_at','desc')
+                                    ->get();
         $docentes = $this->docentes;
         $asignaturas = $this->asignaturas;
-        //dd($this->salones_todos);
         $sal= collect();
         foreach ($this->salones_todos as $salon){
             $sal->push([
@@ -93,9 +91,21 @@ class AsignacionController extends Controller
      * @param  \Ngsoft\Asignacion  $asignacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Asignacion $asignacion)
+    public function edit($id)
     {
-        //
+        $asignacion = Asignacion::findOrFail($id);
+        $docentes = $this->docentes;
+        $asignaturas = $this->asignaturas;
+        $sal= collect();
+        foreach ($this->salones_todos as $salon){
+            $sal->push([
+                'id'=>$salon->id,
+                'nombre'=>$salon->full_name,
+                'grado'=>$salon->grade,
+            ]);
+        }
+        $salones = $sal->sortBy('grado')->pluck('nombre','id');
+        return view('admin.asignaciones.ajax.edit',compact('asignacion','docentes','salones','asignaturas'));
     }
 
     /**

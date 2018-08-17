@@ -37,13 +37,6 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav nav-children">
-            <li>
-                <a class="nav-link" href="{{route('import-estudiantes.index')}}">
-                    Importar estudiantes
-                </a>
-            </li>
-        </ul>
     </li>
     <li class="nav-parent">
         <a class="nav-link" href="#">
@@ -92,10 +85,29 @@
             <span>Academico</span>
         </a>
         <ul class="nav nav-children">
-            <li>
-                <a class="nav-link" href="{{route('logros.index')}}">
+            <li class="nav-parent">
+                <a class="nav-link" href="#">
                     Logros
                 </a>
+                <ul class="nav nav-children">
+                    <li>
+                        <a href="{{route('logros.index')}}">
+                           Logros Individuales
+                        </a>
+                    </li>
+                    <li class="nav-parent">
+                        <a class="nav-link" href="#">
+                            Paquetes de Logros
+                        </a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="{{route('logros.import')}}">
+                                    Cargar Logros
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </li>
         </ul>
         <ul class="nav nav-children">

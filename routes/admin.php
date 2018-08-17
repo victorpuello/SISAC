@@ -5,6 +5,8 @@ Route::resource('docentes', 'DocenteController');
 Route::resource('asignaturas', 'AsignaturaController');
 Route::resource('aulas', 'SalonController');
 Route::resource('logros', 'LogroController');
+Route::post('import-logros', 'LogroController@inportar')->name('import-logros');
+Route::get('inportar/logros/',['as'=>'logros.import','uses'=>'LogroController@getViewImport']);
 Route::resource('notas', 'NotaController');
 Route::resource('asignaciones', 'AsignacionController');
 Route::resource('reportes', 'ReportesController')->only(['index']);

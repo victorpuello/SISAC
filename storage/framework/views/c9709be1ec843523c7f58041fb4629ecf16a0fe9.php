@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="main-error mb-3">
-                        <h2 class="error-code text-dark text-center font-weight-semibold m-0">403 <i class="fas fa-file"></i></h2>
+                        <h2 class="error-code text-dark text-center font-weight-semibold m-0">404 <i class="fas fa-file"></i></h2>
                         <p class="error-explanation text-center">Lo sentimos, pero la página que estabas buscando no existe</p>
                     </div>
                 </div>
