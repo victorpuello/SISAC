@@ -19,7 +19,7 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th ></th>
+                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -39,7 +39,7 @@
                 </tr>
             </thead>
         </table>
-        <div id="inf" data-token ="<?php echo e(csrf_token()); ?>" data-urlproces ="<?php echo e(route('notas.store')); ?>" data-urltabla ="<?php echo e(route('notas.loadplanilla',['Idsalon'=>$Idsalon,'Iddocente'=>$Iddocente,'Idasignatura'=>$Idasignatura,'Idperiodo'=>$Idperiodo])); ?>"></div>
+        <div id="inf" data-token ="<?php echo e(csrf_token()); ?>" data-urlproces ="<?php echo e(route('docente.notas.store')); ?>" data-urltabla ="<?php echo e(route('docente.notas.loadplanilla',['Idsalon'=>$Idsalon,'Iddocente'=>$Iddocente,'Idasignatura'=>$Idasignatura,'Idperiodo'=>$Idperiodo])); ?>"></div>
     </div>
     </section>
 <?php $__env->stopSection(); ?>

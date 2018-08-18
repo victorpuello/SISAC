@@ -45,6 +45,10 @@ class Estudiante extends Model
         return $this->name.' '.$this->lastname;
     }
     public function getApellidoNameAttribute(){
+        $name = $this->lastname.' '.$this->name;
+        if (strlen($name) > 29){
+            return substr($name,0,26).'...';
+        }
         return $this->lastname.' '.$this->name;
     }
     public function getAnotacionPeriodo($periodo){
