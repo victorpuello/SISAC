@@ -37,7 +37,7 @@ class EstudianteTransformer extends TransformerAbstract
     public function transform(Estudiante $estudiante)
     {
         return [
-            'estudiante_id' => (int) $estudiante->id,
+            'id' => (int) $estudiante->id,
             'asignacion_id' => (int) $this->asignacion,
             'periodo_id' => (int) $this->periodo,
             'name'    => $estudiante->apellido_name

@@ -31,7 +31,7 @@ class NotaDataTablesEditor extends DataTablesEditor
     public function createRules()
     {
         return [
-           'estudiante_id' => 'required',
+           'id' => 'required',
         ];
     }
 
@@ -44,7 +44,7 @@ class NotaDataTablesEditor extends DataTablesEditor
     public function editRules(Model $model)
     {
         return [
-            'estudiante_id' => 'required',
+            'id' => 'required',
             'asignacion_id' => 'required',
             'periodo_id' => 'required'
         ];

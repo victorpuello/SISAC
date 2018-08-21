@@ -4,7 +4,8 @@
 
     var editor; // use a global for the submit and return data rendering in the examples
     $(document).ready(function() {
-        console.log($('#inf').data('urltabla') +'-------'+  $('#inf').data('urlproces'));
+        console.log($('#inf').data('urltabla'));
+        console.log($('#inf').data('urlproces'));
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -14,11 +15,11 @@
             ajax: $('#inf').data('urlproces'),
             type: 'POST',
             table: "#notas",
-            idSrc: "estudiante_id",
+            idSrc: "id",
             fields: [
                 {
                     type: "hidden",
-                    name: "estudiante_id"
+                    name: "id"
                 },
                 {
                     label: "Nota cognitiva:",
@@ -126,9 +127,14 @@
 
         $('#notas').DataTable( {
                 responsive: true,
+                paging: false,
                 lengthChange: false,
+                pageLength :15,
                 processing: true,
                 serverSide: true,
+                search: {
+                    smart: true,
+                },
                 ajax: $('#inf').data('urltabla'),
                 dom: "Bfrtip",
                 columns: [
@@ -144,7 +150,7 @@
                         className: 'select-checkbox',
                         orderable: false
                     },
-                    { data: "estudiante_id",editField: "id" ,className: 'never', orderable: false  },
+                    { data: "id",editField: "id" ,className: 'never', orderable: false  },
                     { data: "asignacion_id" ,className: 'never', orderable: false  },
                     { data: "periodo_id" ,className: 'never', orderable: false  },
                     { data: "name",className: 'no-editable' },
@@ -156,8 +162,6 @@
                     { data: "notas.data.2.actitudinal.score",className: 'editable', orderable: false },
                     { data: "inasistencias.data.0.id",className: 'never', orderable: false},
                     { data: "inasistencias.data.0.numero",className: 'editable', orderable: false},
-                    { data: null,orderable: false},
-                    { data: null,orderable: false }
                 ],
                 order: [ 2, 'asc' ],
                 select: {

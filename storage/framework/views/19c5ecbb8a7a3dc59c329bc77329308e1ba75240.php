@@ -32,8 +32,6 @@
                     <th>Actitudinal 10%</th>
                     <th>Inasistencias ID</th>
                     <th>Inasistencias</th>
-                    <th>Definitiva</th>
-                    <th>Desempeño</th>
                 </tr>
             </thead>
         </table>

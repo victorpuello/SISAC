@@ -97,9 +97,10 @@ class NotaController extends Controller
                     'creada' => 1
                 ]);
             }
-            $manager = new Manager();
+           /* $manager = new Manager();
             $resource = new Collection($estudiantes,  new  EstudianteTransformer($asignacion,$periodo,$logros));
-            return response()->json($manager->createData($resource)->toArray());
+            return response()->json($manager->createData($resource)->toArray());*/
+           return datatables()->collection($estudiantes)->setTransformer( new EstudianteTransformer($asignacion,$periodo,$logros))->toJson();
        //}
     }
 
