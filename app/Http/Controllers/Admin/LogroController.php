@@ -18,6 +18,8 @@ use Ngsoft\Periodo;
 use Ngsoft\Salon;
 use Ngsoft\User;
 use Ngsoft\Http\Controllers\Controller;
+use PhpParser\Node\Expr\New_;
+
 class LogroController extends Controller
 {
     public $periodos = [];
@@ -237,19 +239,22 @@ class LogroController extends Controller
         $file = $request->file('archivo')->getRealPath();
         Excel::load($file, function($reader) {
             foreach ($reader->get() as $logro){
-                Logro::create([
+                $_logro = new Logro([
                     'code'=> $logro->code,
                     'indicador'=> $logro->indicador,
                     'description'=> $logro->description,
                     'category'=> $logro->category,
-                    'grade'=> $logro->grade,
-                    'asignatura_id'=> $logro->asignatura_id,
-                    'docente_id'=> $logro->docente_id,
-                    'periodo_id'=> $logro->periodo_id
+                    'grade'=> strval($logro->grade),
+                    'asignatura_id'=>  intval($logro->asignatura_id),
+                    'docente_id'=>  intval($logro->docente_id),
+                    'periodo_id'=>  intval($logro->periodo_id)
                 ]);
+                $_logro->save();
+                dd($_logro);
             }
         },'UTF-8');
-        return view('admin.import.importusers');
+
+        return view('admin.import.importlogros');
     }
 
 

@@ -2,12 +2,11 @@
 
 namespace Ngsoft\DataTables;
 
-use Illuminate\Support\Facades\DB;
+use Ngsoft\Asignacion;
 use Ngsoft\Estudiante;
 use Ngsoft\Inasistencia;
-use Ngsoft\Logro;
 use Ngsoft\Nota;
-use Illuminate\Validation\Rule;
+use Ngsoft\Periodo;
 use Yajra\DataTables\DataTablesEditor;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,7 +17,7 @@ class NotaDataTablesEditor extends DataTablesEditor
 
     public function __construct ()
     {
-        $this->logros = Logro::all();
+
     }
 
     /**
@@ -29,7 +28,7 @@ class NotaDataTablesEditor extends DataTablesEditor
     public function createRules()
     {
         return [
-            'id' => 'required',
+           'id' => 'required',
         ];
     }
 
@@ -42,7 +41,9 @@ class NotaDataTablesEditor extends DataTablesEditor
     public function editRules(Model $model)
     {
         return [
-            'id' => 'required'
+            'id' => 'required',
+            'asignacion_id' => 'required',
+            'periodo_id' => 'required'
         ];
     }
 
@@ -59,71 +60,42 @@ class NotaDataTablesEditor extends DataTablesEditor
 
     public function updating(Model $model, array $data)
     {
-        $idEstudiante = $data['id'];
-        $grado = $data['grado'];
-        $docente = $data['docente'];
-        $asignatura = $data['asignatura'];
-        $periodo = $data['periodo'];
-        $IDnotaAct = $data['notas']['data']['0']['id'];
-        $ScorenotaAct = $data['notas']['data']['0']['score'];
-        $IDnotaCog = $data['notas']['data']['1']['id'];
-        $ScorenotaCog = $data['notas']['data']['1']['score'];
-        $IDnotaPro = $data['notas']['data']['2']['id'];
-        $ScorenotaPro = $data['notas']['data']['2']['score'];
-        $IDinas = $data['inasistencias']['data']['0']['id'];
-        $NumeroInas = $data['inasistencias']['data']['0']['numero'];
-            for ($i = 0; $i <= 2; $i++){
-                if (! is_numeric($data['notas']['data'][$i]['score'])) {
-                    unset($data['notas']['data'][$i]['score']);
-                }
-            }
-        $inasistencia = Inasistencia::findOrFail($IDinas);
-        $inasistencia->fill(['numero'=>$NumeroInas]);
-        $inasistencia->save();
-
-        $logro = $this->getLogro($docente,$asignatura,$grado,$periodo,'actitudinal',$ScorenotaAct);
-        $nota = Nota::findOrFail($IDnotaAct);
-        $datos = ['logro_id'=>$logro->id,'score'=>$ScorenotaAct];
-        $nota->fill($datos);
-        $nota->save();
-
-        $logrococ = $this->getLogro($docente,$asignatura,$grado,$periodo,'cognitivo',$ScorenotaCog);
-        $notacoc = Nota::findOrFail($IDnotaCog);
-        $datoscoc = ['logro_id'=>$logrococ->id,'score'=>$ScorenotaCog];
-        $notacoc->fill($datoscoc);
-        $notacoc->save();
-
-        $logropro = $this->getLogro($docente,$asignatura,$grado,$periodo,'procedimental',$ScorenotaPro);
-        $notapro = Nota::findOrFail($IDnotaPro);
-        $datospro = ['logro_id'=>$logropro->id,'score'=>$ScorenotaPro];
-        $notapro->fill($datospro);
-        $notapro->save();
-
-        $score = ($ScorenotaCog * 0.6) + ($ScorenotaAct * 0.1) + ($ScorenotaPro * 0.3);
-        $estudiante = Estudiante::findOrFail($idEstudiante);
-        $estudiante->editDef($score,$asignatura,$periodo);
+        $notas =  $data['notas']['data'];
+        $inasistencia = $this->getInasistencia($data['inasistencias']['data']['0']['id']);
+        $asignacion = $this->getAsignacion(intval($data['asignacion_id']));
+        $periodo = $this->getPeriodo(intval($data['periodo_id']));
+        $logros = $periodo->getlogros($asignacion);
+        foreach ($model->currentNotas($logros) as $nota){
+             $this->verificadorCambios($nota, $notas, $logros);
+        }
+        if ($data['inasistencias']['data']['0']['numero'] <> $inasistencia->numero){
+            $inasistencia->update([
+                'numero' => $data['inasistencias']['data']['0']['numero']
+            ]);
+        }
+        $score = ($notas['0']['cognitivo']['score'] * 0.6) + ($notas['1']['procedimental']['score'] * 0.3) + ($notas['2']['actitudinal']['score'] * 0.1);
+        $model->editDef($score,$asignacion->asignatura->id,$periodo->id);
         return $data;
     }
+    public function getEstudiante($id){
+        return Estudiante::findOrFail($id);
+    }
 
-    /**
-     * @param $docente_id
-     * @param $asignatura_id
-     * @param $grado
-     * @param $periodo_id
-     * @param $category
-     * @param $score
-     * @return mixed
-     */
-    public function getLogro($docente_id, $asignatura_id, $grado, $periodo_id, $category, $score){
-        $logro = $this->logros
-            ->where('docente_id','=',$docente_id)
-            ->where('asignatura_id','=',$asignatura_id)
-            ->where('grade','=',$grado)
-            ->where('periodo_id','=',$periodo_id)
-            ->where('category','=',$category)
-            ->where('indicador','=',$this->getIndicador($score))
-            ->first();
-        return  $logro;
+    public function getInasistencia($id){
+        return Inasistencia::findOrFail($id);
+    }
+    public function getAsignacion($id){
+        return Asignacion::findOrFail($id);
+    }
+    public function getPeriodo($id){
+        return Periodo::findOrFail($id);
+    }
+    public function getNota($id){
+        return Nota::findOrFail($id);
+    }
+
+    public function getLogro($logros,$category,$score){
+        return  $logros->where('category','=',$category)->where('indicador','=',$this->getIndicador($score))->first();
     }
 
     /**
@@ -145,4 +117,56 @@ class NotaDataTablesEditor extends DataTablesEditor
         }
 
     }
+
+
+    /**
+     * @param $notas
+     * @param $_nota
+     * @param $logro
+     * @param $pos
+     * @return \Illuminate\Database\Eloquent\Collection|Model|Nota|Nota[]
+     */
+    public function setNota ($notas, $_nota, $logro , $pos)
+    {
+       $score = $notas[$pos][$_nota->category]['score'];
+        $nota = $this->getNota($_nota->id);
+        $nota->update([
+            'logro_id' => $logro->id,
+            'score' => $score
+        ]);
+        return $nota;
+    }
+
+    /**
+     * @param $nota
+     * @param $notas
+     * @param $logros
+     */
+    public function verificadorCambios ($nota, $notas, $logros):void
+    {
+        switch ($nota->category){
+            case 'cognitivo':
+                if ($notas['0'][$nota->category]['score'] <> $nota->score) {
+                    $logro = $this->getLogro($logros, $nota->category, $nota->score);
+                    $this->setNota($notas, $nota, $logro, '0');
+                }
+                break;
+            case 'procedimental':
+                if ($notas['1'][$nota->category]['score'] <> $nota->score) {
+                    $logro = $this->getLogro($logros, $nota->category, $nota->score);
+                    $this->setNota($notas, $nota, $logro, '1');
+                }
+                break;
+            case 'actitudinal':
+                if ($notas['2'][$nota->category]['score'] <> $nota->score) {
+                    $logro = $this->getLogro($logros, $nota->category, $nota->score);
+                    $this->setNota($notas, $nota, $logro, '2');
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }

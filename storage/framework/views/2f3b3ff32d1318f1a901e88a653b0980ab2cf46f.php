@@ -11,17 +11,15 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <section class="card card-info mb-4">
-    <header class="card-header">
-        <h2 class="card-title">Planilla - Grado <?php echo e(\Ngsoft\Salon::find($Idsalon)->full_name); ?></h2>
-    </header>
-    <div class="card-body">
-        <table class="display nowrap" cellspacing="0" width="100%" id="notas">
-            <thead>
+        <header class="card-header">
+            <h2 class="card-title">Planilla - Grado <?php echo e($asignacion->salon->full_name); ?> </h2>
+        </header>
+        <div class="card-body">
+            <table class="display nowrap" cellspacing="0" width="100%" id="notas">
+                <thead>
                 <tr>
                     <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th ></th>
                     <th></th>
                     <th></th>
                     <th>Id</th>
@@ -35,12 +33,12 @@
                     <th>Inasistencias ID</th>
                     <th>Inasistencias</th>
                     <th>Definitiva</th>
-                    <th>Desempeño</th>
+                    <th>Indicador</th>
                 </tr>
-            </thead>
-        </table>
-        <div id="inf" data-token ="<?php echo e(csrf_token()); ?>" data-urlproces ="<?php echo e(route('docente.notas.store')); ?>" data-urltabla ="<?php echo e(route('docente.notas.loadplanilla',['Idsalon'=>$Idsalon,'Iddocente'=>$Iddocente,'Idasignatura'=>$Idasignatura,'Idperiodo'=>$Idperiodo])); ?>"></div>
-    </div>
+                </thead>
+            </table>
+            <div id="inf" data-token ="<?php echo e(csrf_token()); ?>" data-urlproces ="<?php echo e(route('docente.notas.store')); ?>" data-urltabla ="<?php echo e(route('docente.notas.dataplanilla',['planilla'=>$asignacion,'periodo'=>$periodo])); ?>"></div>
+        </div>
     </section>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
