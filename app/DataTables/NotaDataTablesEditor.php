@@ -2,13 +2,10 @@
 
 namespace Ngsoft\DataTables;
 
-use Illuminate\Support\Facades\DB;
 use Ngsoft\Asignacion;
 use Ngsoft\Estudiante;
 use Ngsoft\Inasistencia;
-use Ngsoft\Logro;
 use Ngsoft\Nota;
-use Illuminate\Validation\Rule;
 use Ngsoft\Periodo;
 use Yajra\DataTables\DataTablesEditor;
 use Illuminate\Database\Eloquent\Model;

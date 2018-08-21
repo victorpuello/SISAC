@@ -6,6 +6,13 @@
     $(document).ready(function() {
         console.log($('#inf').data('urltabla'));
         console.log($('#inf').data('urlproces'));
+        function trunc (x, posiciones = 0) {
+            var s = x.toString();
+            var l = s.length;
+            var decimalLength = s.indexOf('.') + 1;
+            var numStr = s.substr(0, decimalLength + posiciones);
+            return Number(numStr);
+        }
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -162,6 +169,30 @@
                     { data: "notas.data.2.actitudinal.score",className: 'editable', orderable: false },
                     { data: "inasistencias.data.0.id",className: 'never', orderable: false},
                     { data: "inasistencias.data.0.numero",className: 'editable', orderable: false},
+                    { data: null,
+                        render: function ( data, type, row ) {
+                            return trunc((row.notas.data[0].cognitivo.score * 0.6)+(row.notas.data[1].procedimental.score * 0.3)+(row.notas.data[2].actitudinal.score * 0.1),2);
+                        },
+                        orderable: false
+                    },
+                    { data: null,
+                        render: function ( data, type, row ) {
+                            var def = trunc((row.notas.data[0].cognitivo.score * 0.6)+(row.notas.data[1].procedimental.score * 0.3)+(row.notas.data[2].actitudinal.score * 0.1),2);
+                            if (def <= 5.9 ){
+                                return "Bajo";
+                            }
+                            if (def >= 6 && def < 8){
+                                return "Basico";
+                            }
+                            if (def >= 8 && def < 9.5){
+                                return "Alto";
+                            }
+                            if (def >= 9.5 && def <= 10){
+                                return "Superior";
+                            }
+                        },
+                        orderable: false
+                    },
                 ],
                 order: [ 2, 'asc' ],
                 select: {

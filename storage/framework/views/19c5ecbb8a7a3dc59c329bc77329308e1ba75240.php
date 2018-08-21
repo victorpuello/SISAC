@@ -32,6 +32,8 @@
                     <th>Actitudinal 10%</th>
                     <th>Inasistencias ID</th>
                     <th>Inasistencias</th>
+                    <th>Definitiva</th>
+                    <th>Indicador</th>
                 </tr>
             </thead>
         </table>

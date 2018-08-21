@@ -77,7 +77,7 @@ class NotaController extends Controller
     }
 
     public function dataPlanilla(Request $request,Asignacion $asignacion , Periodo $periodo){
-       //if($request->ajax()){
+       if($request->ajax()){
             $logros = $periodo->getlogros($asignacion);
             $codigo = $asignacion->salon->id.''.$asignacion->docente->id.''.$asignacion->asignatura->id.''.$periodo->id;
             $planilla = Planilla::where('codigo','=',$codigo)->get();
@@ -101,7 +101,7 @@ class NotaController extends Controller
             $resource = new Collection($estudiantes,  new  EstudianteTransformer($asignacion,$periodo,$logros));
             return response()->json($manager->createData($resource)->toArray());*/
            return datatables()->collection($estudiantes)->setTransformer( new EstudianteTransformer($asignacion,$periodo,$logros))->toJson();
-       //}
+       }
     }
 
 
