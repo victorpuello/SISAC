@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 @foreach($periodos as $periodo)
-                                <p class="mb-1"><a href="{{route('notas.getplanilla',['planilla'=>$asignacion,'periodo'=>$periodo])}}" class="edit"><i class="fas fa-check mr-1"></i>{{$periodo->name}}</a></p>
+                                    <p class="mb-1"><a href="{{route('notas.getplanilla',['planilla'=>$asignacion,'periodo'=>$periodo])}}" class="edit"><i class="fas fa-check mr-1"></i>{{$periodo->name}}</a></p>
                                 @endforeach
                             </div>
                             <div class="col-lg-12">

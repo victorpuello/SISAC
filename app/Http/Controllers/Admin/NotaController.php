@@ -3,9 +3,6 @@
 namespace Ngsoft\Http\Controllers\Admin;
 
 use Illuminate\Http\Response;
-use League\Fractal\Resource\Collection;
-use League\Fractal\Manager;
-use League\Fractal\Serializer\JsonApiSerializer;
 use Ngsoft\Asignacion;
 use Ngsoft\Asignatura;
 use Ngsoft\DataTables\NotaDataTablesEditor;
@@ -17,7 +14,6 @@ use Ngsoft\Nota;
 use Ngsoft\Periodo;
 use Ngsoft\Planilla;
 use Ngsoft\Transformers\EstudianteTransformer;
-use Yajra\DataTables\Facades\DataTables;
 use Ngsoft\Http\Controllers\Controller;
 class NotaController extends Controller
 {
