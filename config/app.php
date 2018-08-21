@@ -154,6 +154,8 @@ return [
         Yajra\DataTables\FractalServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

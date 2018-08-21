@@ -12,28 +12,26 @@
             <h2 class="card-title text-color-light">Planillas disponibles para calificar</h2>
         </header>
             <div class="row">
-            @foreach( $planillas as $planilla)
+            @foreach( $asignaciones as $asignacion)
             <div class="col-lg-3 mt-2 mb-2">
                 <section class="card">
                     <header class="card-header bg-{{$fondos[rand(0,3)]}}">
                         <div class="card-header-profile-picture">
-                            <img src="{{url('/img')}}/{{$planilla->grade}}.jpg">
+                            <img src="{{url('/img')}}/{{$asignacion->salon->grade}}.jpg">
                         </div>
                     </header>
                     <div class="card-body">
                         <ul class="pl-3">
-                            <li><span><strong>Asignatura: </strong>{{$planilla->asignatura}}</span></li>
-                            <li><span><strong>Grupo: </strong>{{$planilla->grade.' - '.$planilla->name}}</span></li>
-                            @if(currentPerfil() <> 'docente')
-                            <li><span><strong>Docente: </strong>{{$planilla->nombre}}</span></li>
-                            @endif
+                            <li><span><strong>Asignatura: </strong>{{$asignacion->asignatura->name}}</span></li>
+                            <li><span><strong>Grupo: </strong>{{$asignacion->salon->full_name}}</span></li>
+                            <li><span><strong>Docente: </strong>{{$asignacion->docente->name}}</span></li>
                         </ul>
 
                         <hr class="solid short">
                         <div class="row">
                             <div class="col-lg-12">
                                 @foreach($periodos as $periodo)
-                                <p class="mb-1"><a href="{{route('notas.loadplanilla',['Idsalon'=>$planilla->id,'Iddocente'=>$planilla->idDocente,'Idasignatura'=>$planilla->idAsignaturas,'Idperiodo'=>$periodo->id])}}" class="edit"><i class="fas fa-check mr-1"></i>{{$periodo->name}}</a></p>
+                                <p class="mb-1"><a href="{{route('notas.getplanilla',['planilla'=>$asignacion,'periodo'=>$periodo])}}" class="edit"><i class="fas fa-check mr-1"></i>{{$periodo->name}}</a></p>
                                 @endforeach
                             </div>
                             <div class="col-lg-12">

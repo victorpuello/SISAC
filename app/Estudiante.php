@@ -31,11 +31,39 @@ class Estudiante extends Model
     public function notas(){
         return $this->hasMany(Nota::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function definitivas(){
         return $this->hasMany(Definitiva::class);
     }
+
+    /**
+     * @param $idPeriodo
+     * @param $idAsignatura
+     * @return mixed
+     */
+    public  function getDefinitivaExist($idPeriodo, $idAsignatura){
+        return $this->definitivas->where('periodo_id','=',$idPeriodo)
+            ->where('asignatura_id','=',$idAsignatura);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function inasistencias(){
         return $this->hasMany(Inasistencia::class);
+    }
+
+    /**
+     * @param $idPeriodo
+     * @param $idAsignatura
+     * @return mixed
+     */
+    public  function getInasistenciaExist($idPeriodo, $idAsignatura){
+        return $this->inasistencias->where('periodo_id','=',$idPeriodo)
+            ->where('asignatura_id','=',$idAsignatura);
     }
     public function anotaciones(){
             return $this->hasMany(Anotacion::class);
@@ -86,6 +114,12 @@ class Estudiante extends Model
            \Storage::disk('estudiantes')->put($name,$image);
         }
     }
+    public function setCategoryAttribute($category = "")
+    {
+        if (!empty($category)) {
+            unset($category);
+        }
+    }
 
     // Start Fuctions
 
@@ -96,18 +130,14 @@ class Estudiante extends Model
      * @param $periodo
      * @return \Illuminate\Support\Collection
      */
-    public function currentNotas($grade, $asignatura, $docente, $periodo){
-        $this->all_notas = Nota::all();
-        $logros = $this->logros
-            ->where('asignatura_id','=',$asignatura)
-            ->where('docente_id','=',$docente)
-            ->where('periodo_id','=',$periodo)
-            ->where('grade','=',$grade)->sortBy('category');
+    public function currentNotas($logros){
         $notas = collect();
         foreach ($logros as $logro){
-            $q = $this->all_notas->where('logro_id','=',$logro->id)
-                ->where('estudiante_id','=',$this->id)->first();
-            $notas->push($q);
+            if (! is_null($this->notas->where('logro_id','=',$logro->id)->first())){
+                $nota = $this->notas->where('logro_id','=',$logro->id)->first();
+                $nota->setAttribute('category',$logro->category);
+                $notas->push($nota);
+            }
         }
         return $notas;
     }
@@ -165,10 +195,9 @@ class Estudiante extends Model
         $definitiva = $this->definitivas
             ->where('asignatura_id','=',$asignatura)
             ->where('periodo_id','=',$periodo)->first();
-        $definitiva->fill([
+        $definitiva->update([
             'score' => $score
         ]);
-        $definitiva->save();
     }
     public  function getDef ($asignatura,$periodo){
         $def = $this->definitivas->where('asignatura_id','=',$asignatura)->where('periodo_id','=',$periodo)->first();

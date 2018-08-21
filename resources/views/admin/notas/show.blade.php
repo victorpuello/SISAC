@@ -13,7 +13,7 @@
 @section('content')
     <section class="card card-info mb-4">
     <header class="card-header">
-        <h2 class="card-title">Planilla - Grado {{\Ngsoft\Salon::find($Idsalon)->full_name }}</h2>
+        <h2 class="card-title">Planilla - Grado {{$asignacion->salon->full_name}} </h2>
     </header>
     <div class="card-body">
         <table class="display nowrap" cellspacing="0" width="100%" id="notas">
@@ -21,8 +21,6 @@
                 <tr>
                     <th></th>
                     <th ></th>
-                    <th></th>
-                    <th></th>
                     <th></th>
                     <th></th>
                     <th>Id</th>
@@ -40,7 +38,7 @@
                 </tr>
             </thead>
         </table>
-        <div id="inf" data-token ="{{csrf_token()}}" data-urlproces ="{{route('notas.store')}}" data-urltabla ="{{route('notas.loadplanilla',['Idsalon'=>$Idsalon,'Iddocente'=>$Iddocente,'Idasignatura'=>$Idasignatura,'Idperiodo'=>$Idperiodo])}}"></div>
+        <div id="inf" data-token ="{{csrf_token()}}" data-urlproces ="{{route('notas.store')}}" data-urltabla ="{{route('notas.dataplanilla',['planilla'=>$asignacion,'periodo'=>$periodo])}}"></div>
     </div>
     </section>
 @endsection

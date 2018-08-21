@@ -5,71 +5,64 @@
     var editor; // use a global for the submit and return data rendering in the examples
     $(document).ready(function() {
         console.log($('#inf').data('urltabla') +'-------'+  $('#inf').data('urlproces'));
-        function trunc (x, posiciones = 0) {
-            var s = x.toString();
-            var l = s.length;
-            var decimalLength = s.indexOf('.') + 1;
-            var numStr = s.substr(0, decimalLength + posiciones);
-            return Number(numStr);
-        }
-
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': $("#inf").data('token')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
         editor = new $.fn.dataTable.Editor( {
             ajax: $('#inf').data('urlproces'),
             type: 'POST',
             table: "#notas",
-            idSrc: "id",
-            fields: [ {
-                type: "hidden",
-                name: "id"
-            },
+            idSrc: "estudiante_id",
+            fields: [
+                {
+                    type: "hidden",
+                    name: "estudiante_id"
+                },
                 {
                     label: "Nota cognitiva:",
-                    name: "notas.data.1.score"
+                    name: "notas.data.0.cognitivo.score"
                 },
                 {
                     label: "Nota procedimental:",
-                    name: "notas.data.2.score"
+                    name: "notas.data.1.procedimental.score"
                 },
                 {
                     label: "Nota actitudinal:",
-                    name: "notas.data.0.score"
+                    name: "notas.data.2.actitudinal.score"
                 },
                 {
-                    name: "notas.data.0.id",
+                    name: "notas.data.0.cognitivo.id",
                     type: "hidden"
-                },{
-                    name: "notas.data.1.id",
+                },
+                {
+                    name: "notas.data.1.procedimental.id",
                     type: "hidden",
-                }, {
-                    name: "notas.data.2.id",
+
+                },
+                {
+                    name: "notas.data.2.actitudinal.id",
                     type: "hidden"
-                },{
+                },
+                {
                     name: "inasistencias.data.0.id",
                     type: "hidden",
-                }, {
+
+                },
+                {
                     name: "inasistencias.data.0.numero",
                     label: "Inasistencias:"
                 },
                 {
-                    name:'grado',
+                    name: 'asignacion_id',
                     type: "hidden",
+
                 },
                 {
-                    name:'docente',
+                    name: 'periodo_id',
                     type: "hidden",
-                },
-                {
-                    name:'asignatura',
-                    type: "hidden",
-                },
-                {
-                    name:'periodo',
-                    type: "hidden",
+
                 }
             ],i18n: {
                 edit: {
@@ -96,10 +89,9 @@
 
         editor.on('preSubmit',function (e,o,action) {
             if (action !== 'remove'){
-                var notaAct = this.field('notas.data.0.score');
-                var notaCog = this.field('notas.data.1.score');
-                var notaPro = this.field('notas.data.2.score');
-                var expreg = /^[0-9]+([,][0-9]+)?$/;
+                var notaAct = this.field('notas.data.2.actitudinal.score');
+                var notaCog = this.field('notas.data.0.cognitivo.score');
+                var notaPro = this.field('notas.data.1.procedimental.score');
                 if (! notaAct.isMultiValue()){
                     if (! notaAct.val()){
                         notaAct.error( 'Debes ingresar una valoración');
@@ -152,51 +144,20 @@
                         className: 'select-checkbox',
                         orderable: false
                     },
-                    { data: "id",editField: "id" ,className: 'never', orderable: false  },
-                    { data: "grado" ,className: 'never', orderable: false  },
-                    { data: "docente" ,className: 'never', orderable: false  },
-                    { data: "asignatura" ,className: 'never', orderable: false  },
-                    { data: "periodo" ,className: 'never', orderable: false  },
+                    { data: "estudiante_id",editField: "id" ,className: 'never', orderable: false  },
+                    { data: "asignacion_id" ,className: 'never', orderable: false  },
+                    { data: "periodo_id" ,className: 'never', orderable: false  },
                     { data: "name",className: 'no-editable' },
-                    { data: "notas.data.1.id",className: 'never', orderable: false },
-                    { data: "notas.data.1.score",className: 'editable', orderable: false },
-                    { data: "notas.data.2.id",className: 'never', orderable: false},
-                    { data: "notas.data.2.score",className: 'editable', orderable: false},
-                    { data: "notas.data.0.id",className: 'never', orderable: false },
-                    { data: "notas.data.0.score",className: 'editable', orderable: false },
+                    { data: "notas.data.0.cognitivo.id",className: 'never', orderable: false },
+                    { data: "notas.data.0.cognitivo.score",className: 'editable', orderable: false },
+                    { data: "notas.data.1.procedimental.id",className: 'never', orderable: false},
+                    { data: "notas.data.1.procedimental.score",className: 'editable', orderable: false},
+                    { data: "notas.data.2.actitudinal.id",className: 'never', orderable: false },
+                    { data: "notas.data.2.actitudinal.score",className: 'editable', orderable: false },
                     { data: "inasistencias.data.0.id",className: 'never', orderable: false},
                     { data: "inasistencias.data.0.numero",className: 'editable', orderable: false},
-                    { data: null,
-                        render: function ( data, type, row ) {
-                            var notaAct = row.notas.data[0].score * 0.1;
-                            var notaCog = row.notas.data[1].score * 0.6;
-                            var notaPro= row.notas.data[2].score * 0.3;
-                            return trunc((notaPro+notaAct+notaCog),2);
-                        },
-                        orderable: false
-                    },
-                    {  data: null,
-                        render: function ( data, type, row ) {
-                            var notaAct = row.notas.data[0].score * 0.1;
-                            var notaCog = row.notas.data[1].score * 0.6;
-                            var notaPro= row.notas.data[2].score * 0.3;
-                            var def = trunc((notaPro+notaAct+notaCog),2);
-                            var indicador
-                            if (def <= 5.9 ){
-                                return "Bajo";
-                            }
-                            if (def >= 6 && def < 8){
-                                    return "Basico";
-                            }
-                            if (def >= 8 && def < 9.5){
-                                return "Alto";
-                            }
-                            if (def >= 9.5 && def <= 10){
-                                return "Superior";
-                            }
-                        },
-                        orderable: false
-                    }
+                    { data: null,orderable: false},
+                    { data: null,orderable: false }
                 ],
                 order: [ 2, 'asc' ],
                 select: {
@@ -205,9 +166,6 @@
                 },
                 buttons: [
                     { extend: "edit",   editor: editor },
-                    { extend: "excel",   editor: editor },
-                    { extend: "pdf",   editor: editor },
-
                 ],
                 language: {
                     processing:     "Procesando...",

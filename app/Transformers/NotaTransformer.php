@@ -14,10 +14,28 @@ use Ngsoft\Nota;
 
 class NotaTransformer extends TransformerAbstract
 {
-    public function transform($nota){
+    public function transform(Nota $nota){
+
+        if ($nota->category === 'cognitivo'){
+            return [
+                'cognitivo' => $this->getNota($nota)
+            ];
+        }
+        if ($nota->category === 'procedimental'){
+            return [
+                'procedimental' => $this->getNota($nota)
+            ];
+        }
+        if ($nota->category === 'actitudinal'){
+            return [
+                'actitudinal' => $this->getNota($nota)
+            ];
+        }
+    }
+    public function getNota(Nota $nota){
         return [
-            'id'         => $nota->id,
-            'score'    => $nota->score
+            'score' => $nota->score,
+            'id'=> $nota->id
         ];
     }
 }

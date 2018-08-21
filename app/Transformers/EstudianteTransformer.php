@@ -3,10 +3,9 @@
 namespace Ngsoft\Transformers;
 
 use League\Fractal\TransformerAbstract;
+use Ngsoft\Asignacion;
 use Ngsoft\Estudiante;
-use Ngsoft\Inasistencia;
-use Ngsoft\Nota;
-
+use Ngsoft\Periodo;
 class EstudianteTransformer extends TransformerAbstract
 {
     protected  $availableIncludes = ['notas','inasistencias'];
@@ -15,50 +14,43 @@ class EstudianteTransformer extends TransformerAbstract
      * @param \Ngsoft\Estudiante $estudiante
      * @return array
      */
-    protected $grado;
     protected $asignatura;
     protected $periodo;
-    protected $docente;
+    protected $asignacion;
+    protected $logros;
+
 
     /**
      * EstudianteTransformer constructor.
-     * @param $grado
-     * @param $asignatura
-     * @param $docente
-     * @param $periodo
+     * @param Asignacion $asignacion
+     * @param Periodo $periodo
+     * @param $logros
      */
-    public function __construct ($grado, $asignatura, $docente, $periodo)
+    public function __construct (Asignacion $asignacion, Periodo $periodo, $logros)
     {
-        //dd($grado, $asignatura, $docente, $periodo);
-        $this->grado = $grado;
-        $this->asignatura = $asignatura;
-        $this->docente = $docente;
-        $this->periodo = $periodo;
+        $this->asignatura = $asignacion->asignatura->id;
+        $this->asignacion = $asignacion->id;
+        $this->periodo = $periodo->id;
+        $this->logros = $logros;
     }
 
     public function transform(Estudiante $estudiante)
     {
         return [
-            'id' => (int) $estudiante->id,
-            'name'    => $estudiante->apellido_name,
-            'grado'  => $this->grado,
-            'asignatura'  => $this->asignatura,
-            'docente'  => $this->docente,
-            'periodo'  => $this->periodo,
+            'estudiante_id' => (int) $estudiante->id,
+            'asignacion_id' => (int) $this->asignacion,
+            'periodo_id' => (int) $this->periodo,
+            'name'    => $estudiante->apellido_name
         ];
     }
-    // añade al JSON las notas de ese periodo
     public function includeNotas(Estudiante $estudiante)
     {
-        $notas =  $estudiante->currentNotas($this->grado,$this->asignatura,$this->docente,$this->periodo);
-        //dd($notas);
+        $notas =  $estudiante->currentNotas($this->logros);
         return $this->collection($notas, new NotaTransformer);
     }
-    // añade al JSON las inasistencia de ese periodo
     public function includeInasistencias(Estudiante $estudiante)
     {
         $inasistencias =  $estudiante->currentInasistencias($this->asignatura,$this->periodo);
-       // dd($inasistencias,'hola');
         return $this->collection($inasistencias, new InasistenciaTransformer);
     }
 }

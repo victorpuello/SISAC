@@ -139,5 +139,12 @@
                     </a>
                 </li>
             </ul>
+            <ul class="nav nav-children">
+                <li>
+                    <a class="nav-link" href="{{route('logs')}}">
+                        Logs
+                    </a>
+                </li>
+            </ul>
     </li>
 </ul>
