@@ -176,7 +176,7 @@ class NotaController extends Controller
     {
         foreach ($estudiantes as $estudiante){
             $Found = false;
-            if ($estudiante->getInasistenciaExist($periodo->id,$asignatura->id)){
+            if ($estudiante->getInasistenciaExist($periodo->id,$asignatura->id)->count() > 0){
                 $Found = true;
             }
             if (! $Found){
