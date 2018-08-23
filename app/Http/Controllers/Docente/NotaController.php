@@ -85,6 +85,7 @@ class NotaController extends Controller
                 ->with('definitivas')
                 ->get();
             if ($planilla->count() === 0){
+
                 $this->verificador ($asignacion,$periodo,$logros);
                 Planilla::create([
                     'grado' => $asignacion->salon->grade,
@@ -106,6 +107,7 @@ class NotaController extends Controller
             ->with('definitivas')
             ->with('inasistencias')
             ->get();
+
         try{
             $this->VerificadorLogrosEstud($currentEstudiantes, $logros);
             $this->VerificadorDefinitivaEstud($currentEstudiantes, $asignacion->asignatura,$periodo);
@@ -175,7 +177,7 @@ class NotaController extends Controller
     {
         foreach ($estudiantes as $estudiante){
             $Found = false;
-            if ($estudiante->getInasistenciaExist($periodo->id,$asignatura->id)){
+            if ($estudiante->getInasistenciaExist($periodo->id,$asignatura->id)->count() > 0){
                 $Found = true;
             }
             if (! $Found){

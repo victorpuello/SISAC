@@ -134,9 +134,9 @@
 
         $('#notas').DataTable( {
                 responsive: true,
-                paging: false,
+                paging: true,
                 lengthChange: false,
-                pageLength :15,
+                pageLength :10,
                 processing: true,
                 serverSide: true,
                 search: {
