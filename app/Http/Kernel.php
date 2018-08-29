@@ -58,6 +58,7 @@ class Kernel extends HttpKernel
         'secretaria' =>  \Ngsoft\Http\Middleware\Secretaria::class,
         'docente' =>  \Ngsoft\Http\Middleware\Docente::class,
         'coordinador' =>  \Ngsoft\Http\Middleware\Coordinador::class,
+        'verifyAsignacion' =>  \Ngsoft\Http\Middleware\VerifyAsignacion::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
