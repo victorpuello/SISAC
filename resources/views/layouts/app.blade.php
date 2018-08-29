@@ -4,7 +4,7 @@
 
         <!-- Basic -->
         <meta charset="UTF-8">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@yield('titulo') - ATS</title>
         <meta name="keywords" content="Inelmu Institución Educativa Las Mujeres" />
         <meta name="description" content="Sitio Web Institución Educativa Las Mujeres">

@@ -12,17 +12,15 @@
 @endsection
 @section('content')
     <section class="card card-info mb-4">
-    <header class="card-header">
-        <h2 class="card-title">Planilla - Grado {{\Ngsoft\Salon::find($Idsalon)->full_name }}</h2>
-    </header>
-    <div class="card-body">
-        <table class="display nowrap" cellspacing="0" width="100%" id="notas">
-            <thead>
+        <header class="card-header">
+            <h2 class="card-title">Planilla - Grado {{$asignacion->salon->full_name}} </h2>
+        </header>
+        <div class="card-body">
+            <table class="display nowrap" cellspacing="0" width="100%" id="notas">
+                <thead>
                 <tr>
                     <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th ></th>
                     <th></th>
                     <th></th>
                     <th>Id</th>
@@ -36,12 +34,12 @@
                     <th>Inasistencias ID</th>
                     <th>Inasistencias</th>
                     <th>Definitiva</th>
-                    <th>Desempeño</th>
+                    <th>Indicador</th>
                 </tr>
-            </thead>
-        </table>
-        <div id="inf" data-token ="{{csrf_token()}}" data-urlproces ="{{route('docente.notas.store')}}" data-urltabla ="{{route('docente.notas.loadplanilla',['Idsalon'=>$Idsalon,'Iddocente'=>$Iddocente,'Idasignatura'=>$Idasignatura,'Idperiodo'=>$Idperiodo])}}"></div>
-    </div>
+                </thead>
+            </table>
+            <div id="inf" data-token ="{{csrf_token()}}" data-urlproces ="{{route('docente.notas.store')}}" data-urltabla ="{{route('docente.notas.dataplanilla',['planilla'=>$asignacion,'periodo'=>$periodo])}}"></div>
+        </div>
     </section>
 @endsection
 @section('script')

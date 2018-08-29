@@ -4,7 +4,7 @@
 
         <!-- Basic -->
         <meta charset="UTF-8">
-
+        <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
         <title><?php echo $__env->yieldContent('titulo'); ?> - ATS</title>
         <meta name="keywords" content="Inelmu Institución Educativa Las Mujeres" />
         <meta name="description" content="Sitio Web Institución Educativa Las Mujeres">

@@ -3,39 +3,21 @@
 namespace Ngsoft\Http\Controllers\Admin;
 
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\View;
+use Ngsoft\Asignacion;
+use Ngsoft\Asignatura;
 use Ngsoft\DataTables\NotaDataTablesEditor;
 use Ngsoft\Definitiva;
 use Ngsoft\Estudiante;
 use Ngsoft\Inasistencia;
-use Ngsoft\Logro;
 use Illuminate\Http\Request;
 use Ngsoft\Nota;
 use Ngsoft\Periodo;
 use Ngsoft\Planilla;
-use Ngsoft\Salon;
 use Ngsoft\Transformers\EstudianteTransformer;
-use Yajra\DataTables\Facades\DataTables;
 use Ngsoft\Http\Controllers\Controller;
 class NotaController extends Controller
 {
-    private $estudiantes;
-    private $notas;
-    private $logros;
     private $fondos =  ['primary','secondary','tertiary','quaternary'];
-    private $inasistencias;
-    private $definitivas;
-    public function __construct ()
-    {
-        // revisar a futuro para delimitar la cantidad de datos que llegan al controlador
-        $this->estudiantes = Estudiante::where('stade','=','activo')->get();
-        $this->notas = Nota::all();
-        $this->logros = Logro::all();
-        $this->inasistencias = Inasistencia::all();
-        $this->definitivas = Definitiva::all();
-    }
 
     /**
      * Display a listing of the resource.
@@ -45,31 +27,13 @@ class NotaController extends Controller
     public function index()
     {
         $fondos = $this->fondos;
-        switch (Auth::user()->type){
-            case 'docente':
-                $docente = Auth::user()->docente;
-                $planillas = DB::table('asignacions')
-                    ->where('docente_id','=',$docente->id)
-                    ->join('salons','salons.id','=','asignacions.salon_id')
-                    ->join('docentes','docentes.id','=','asignacions.docente_id')
-                    ->join('asignaturas','asignaturas.id','=','asignacions.asignatura_id')
-                    ->select('salons.*','docentes.name as nombre','docentes.id as idDocente','asignaturas.id as idAsignaturas','asignaturas.name as asignatura')
+        $asignaciones = Asignacion::with('docente')
+                    ->with('asignatura')
+                    ->with('salon')
                     ->get();
-                break;
-            default:
-                $planillas = DB::table('asignacions')
-                    ->join('salons','salons.id','=','asignacions.salon_id')
-                    ->join('docentes','asignacions.docente_id','=','docentes.id')
-                    ->join('asignaturas','asignaturas.id','=','asignacions.asignatura_id')
-                    ->select('salons.*','docentes.name as nombre','docentes.id as idDocente','asignaturas.id as idAsignaturas','asignaturas.name as asignatura')
-                    ->get();
-                break;
-        }
         //hay que filtrar por el utlimo año
         $periodos = Periodo::all();
-       // dd($planillas);
-
-        return view('admin.notas.index',compact('planillas','fondos','periodos'));
+        return view('admin.notas.index',compact('asignaciones','fondos','periodos'));
     }
 
     /**
@@ -103,56 +67,50 @@ class NotaController extends Controller
     {
 
     }
+    public function getPlanilla(Asignacion $asignacion , Periodo $periodo)
+    {
+        return view('admin.notas.show',compact('asignacion','periodo'));
+    }
 
-    public function cargarPlanilla(Request $request,$Idsalon,$Iddocente,$Idasignatura,$Idperiodo){
-        $salon = Salon::find($Idsalon);
-        $codigo = $Idsalon.''.$Iddocente.''.$Idasignatura.''.$Idperiodo;
-        $planilla = Planilla::where('codigo','=',$codigo)->get();
-        $currentEstudiantes =$this->estudiantes->where('salon_id','=',$salon->id);
-        if ($planilla->count() === 0){
-            $this->verificador ($salon,$Iddocente,$Idasignatura,$Idperiodo);
-            Planilla::create([
-                'grado' => $Idsalon,
-                'docente' => $Iddocente,
-                'asignatura' => $Idasignatura,
-                'periodo' => $Idperiodo,
-                'codigo' => $codigo,
-                'creada' => 1
-            ]);
-        }
-        $estudiantes = $currentEstudiantes;
-        //dd($salon->grade,$Idasignatura,$Iddocente,$Idperiodo);
-        if($request->ajax()){
-            return datatables()
-                    ->collection($estudiantes)
-                    ->setTransformer( new EstudianteTransformer($salon->grade,$Idasignatura,$Iddocente,$Idperiodo))
-                    ->with('id_salon',$Idsalon)
-                    ->with('grado',$salon->grade)
-                    ->with('id_docente',$Iddocente)
-                    ->with('id_asignatura',$Idasignatura)
-                    ->with('id_periodo',$Idperiodo)
-                    ->toJson();
-        }
-        $grado = $salon->grade;
-        return view('admin.notas.show',compact('Idsalon','grado','Iddocente','Idasignatura','Idperiodo'));
+    public function dataPlanilla(Request $request,Asignacion $asignacion , Periodo $periodo){
+       if($request->ajax()){
+            $logros = $periodo->getlogros($asignacion);
+            $codigo = $asignacion->salon->id.''.$asignacion->docente->id.''.$asignacion->asignatura->id.''.$periodo->id;
+            $planilla = Planilla::where('codigo','=',$codigo)->get();
+            $estudiantes = Estudiante::where('salon_id','=',$asignacion->salon->id)
+                                        ->with('notas')
+                                        ->with('inasistencias')
+                                        ->with('definitivas')
+                                        ->get();
+            if ($planilla->count() === 0){
+                $this->verificador ($asignacion,$periodo,$logros);
+                Planilla::create([
+                    'grado' => $asignacion->salon->grade,
+                    'docente' => $asignacion->docente->id,
+                    'asignatura' => $asignacion->asignatura->id,
+                    'periodo' => $periodo->id,
+                    'codigo' => $codigo,
+                    'creada' => 1
+                ]);
+            }
+           /* $manager = new Manager();
+            $resource = new Collection($estudiantes,  new  EstudianteTransformer($asignacion,$periodo,$logros));
+            return response()->json($manager->createData($resource)->toArray());*/
+           return datatables()->collection($estudiantes)->setTransformer( new EstudianteTransformer($asignacion,$periodo,$logros))->toJson();
+       }
     }
 
 
-    public function verificador ($salon,$Iddocente,$Idasignatura,$Idperiodo){
-        //obtengo todos los estudiantes del salon
-        $currentEstudiantes =$this->estudiantes->where('salon_id','=',$salon->id);
+    public function verificador (Asignacion $asignacion,Periodo $periodo, $logros){
+        $currentEstudiantes = Estudiante::where('salon_id','=',$asignacion->salon->id)
+                                          ->where('stade','=','activo')
+                                          ->with('definitivas')
+                                          ->with('inasistencias')
+                                          ->get();
         try{
-            // obtengos los logros para esa asignuatura periodo y grado requeridos
-            $currentlogros_Cog = $this->getLogros($salon->grade,$Iddocente,$Idasignatura,$Idperiodo,'cognitivo');
-            $currentlogros_Act = $this->getLogros($salon->grade,$Iddocente,$Idasignatura,$Idperiodo,'actitudinal');
-            $currentlogros_Proc = $this->getLogros($salon->grade,$Iddocente,$Idasignatura,$Idperiodo,'procedimental');
-            // verifico si tienen la relacion con los losgros del docente para este periodo
-            // si no existe la relacion la creo vinculandolo con el logro de indicador bajo
-            $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Cog);
-            $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Act);
-            $this->VerificadorLogrosEstud($currentEstudiantes, $currentlogros_Proc);
-            $this->VerificadorDefinitivaEstud($currentEstudiantes, $Idasignatura,$Idperiodo);
-            $this->VerificadorInasistenciasEstud($currentEstudiantes,$Idasignatura,$Idperiodo);
+            $this->VerificadorLogrosEstud($currentEstudiantes, $logros);
+            $this->VerificadorDefinitivaEstud($currentEstudiantes, $asignacion->asignatura,$periodo);
+            $this->VerificadorInasistenciasEstud($currentEstudiantes,$asignacion->asignatura,$periodo);
         }catch (\Exception $ex) {
             return view('errors.planilla');
         }
@@ -189,135 +147,68 @@ class NotaController extends Controller
 
 
     /**
-     * @param Estudiante $estudiantes
-     * @param Logro $logros
-     * @param $categoria
+     * @param $estudiantes
+     * @param $logros
      */
-    public function VerificadorLogrosEstud ($estudiantes,$logros): void
+    public function VerificadorLogrosEstud ($estudiantes, $logros): void
     {
         foreach ($estudiantes as $estudiante) {
             $isFound = false;
             foreach ($logros as $logro) {
-                if ($this->LogroExist($estudiante->id, $logro->id)) {
+                if ($logro->getNotaExist($estudiante->id)->count() > 0) {
                     $isFound = true;
                 }
             }
             if (!$isFound) {
-                $logro = $logros->where('indicador', '=', 'bajo')->first();
-                $currentEstudiante = $this->estudiantes->find($estudiante->id);
-                $nota = new Nota([
-                    'score'=>'1',
-                    'estudiante_id' => $currentEstudiante->id,
-                    'logro_id' => $logro->id
-                ]);
-                $nota->save();
+                $_logros = $logros->where('indicador', '=', 'bajo');
+                foreach ($_logros as $logro){
+                    Nota::create([
+                        'score'=>'1',
+                        'estudiante_id' => $estudiante->id,
+                        'logro_id' => $logro->id
+                    ]);
+                }
             }
         }
     }
-    /**
-     * Metodo para verificar si el logro esta relacionado con el estudiante
-     * @param $idEstudiante
-     * @param $idLogro
-     * @return bool
-     */
-    public function LogroExist($idEstudiante, $idLogro){
-        $logros = $this->notas->where('estudiante_id','=',$idEstudiante);
-        $cont_logro = $logros->where('logro_id','=',$idLogro)->count();
 
-        if ($cont_logro > 0){
-            return true;
-        }
-        return false;
-    }
-    /**
-     * Metodo para Buscar los logros por categorias para este periodo
-     * @param $salon
-     * @param $docente
-     * @param $asignatura
-     * @param $periodo
-     * @param $category
-     * @return \Illuminate\Support\Collection
-     */
-    public function getLogros($salon, $docente, $asignatura, $periodo, $category){
-
-        $logros = Logro::where('docente_id','=',$docente)
-            ->where('asignatura_id','=',$asignatura)
-            ->where('grade','=',$salon)
-            ->where('periodo_id','=',$periodo)
-            ->where('category','=',$category)
-            ->get();
-       // dd($logros);
-        return  $logros;
-    }
-
-    private function VerificadorInasistenciasEstud ($currentEstudiantes, $Idasignatura, $Idperiodo)
+    private function VerificadorInasistenciasEstud ($estudiantes,Asignatura $asignatura, Periodo $periodo)
     {
-        foreach ($currentEstudiantes as $estudiante){
+        foreach ($estudiantes as $estudiante){
             $Found = false;
-            if ($this->inasistenciaExist($estudiante->id,$Idasignatura,$Idperiodo)){
+            if ($estudiante->getInasistenciaExist($periodo->id,$asignatura->id)->count() > 0){
                 $Found = true;
             }
             if (! $Found){
-                $inasistencia = new Inasistencia([
+                Inasistencia::create([
                     'numero'=> 0,
                     'estudiante_id' => $estudiante->id,
-                    'periodo_id' => $Idperiodo,
-                    'asignatura_id' => $Idasignatura]);
-                $inasistencia->save();
+                    'periodo_id' => $periodo->id,
+                    'asignatura_id' => $asignatura->id
+                ]);
             }
         }
     }
-
-    private function inasistenciaExist ($id, $Idasignatura, $Idperiodo)
-    {
-        $Ins = $this->inasistencias->where('asignatura_id','=', $Idasignatura);
-        $InsP = $Ins->where('periodo_id','=', $Idperiodo);
-        $InsE = $InsP->where('estudiante_id','=', $id)->count();
-        if ($InsE > 0){
-            return true;
-        }
-        return false;
-    }
-
     /**
-     * @param $currentEstudiantes
-     * @param $Idasignatura
-     * @param $Idperiodo
+     * @param $estudiantes
+     * @param Asignatura $asignatura
+     * @param Periodo $periodo
      */
-    private function VerificadorDefinitivaEstud ($currentEstudiantes, $Idasignatura, $Idperiodo)
+    private function VerificadorDefinitivaEstud ($estudiantes, Asignatura $asignatura, Periodo $periodo)
     {
-        foreach ($currentEstudiantes as $estudiante){
+        foreach ($estudiantes as $estudiante) {
             $Found = false;
-            if ($this->definitivaExist($estudiante->id,$Idasignatura,$Idperiodo)){
+            if ($estudiante->getDefinitivaExist($periodo->id, $asignatura->id)->count() > 0) {
                 $Found = true;
             }
-            if (! $Found){
-                $definitiva = new Inasistencia([
-                    'score'=> 1,
+            if (!$Found) {
+                Definitiva::create([
+                    'score' => 1,
                     'estudiante_id' => $estudiante->id,
-                    'periodo_id' => $Idperiodo,
-                    'asignatura_id' => $Idasignatura]);
-                $definitiva->save();
+                    'periodo_id' => $periodo->id,
+                    'asignatura_id' => $asignatura->id
+                ]);
             }
         }
     }
-
-    /**
-     * @param $id
-     * @param $Idasignatura
-     * @param $Idperiodo
-     * @return bool
-     */
-    private function definitivaExist ($id, $Idasignatura, $Idperiodo)
-    {
-        $Ins = $this->definitivas->where('asignatura_id','=', $Idasignatura);
-        $InsP = $Ins->where('periodo_id','=', $Idperiodo);
-        $InsE = $InsP->where('estudiante_id','=', $id)->count();
-        if ($InsE > 0){
-            return true;
-        }
-        return false;
-    }
-
-
 }

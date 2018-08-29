@@ -12,9 +12,8 @@ class InasistenciaTransformer extends TransformerAbstract
      * @param \Ngsoft\Inasistencia $inasistencia
      * @return array
      */
-    public function transform( $inasistencia)
+    public function transform( Inasistencia $inasistencia)
     {
-        //dd($inasistencia,'trnasforme');
         return [
             'id' => (int) $inasistencia->id,
             'numero' => $inasistencia->numero,
