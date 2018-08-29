@@ -9,6 +9,7 @@ class Asignatura extends Model
 {
     protected $fillable = [
         'name',
+        'short_name'
     ];
     public function getDocentesAttribute (){
         $docentes = DB::table('asignacions')->where('asignatura_id','=',$this->id)

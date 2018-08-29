@@ -42,7 +42,8 @@ class AsignaturaController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'name' => 'regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40|unique:asignaturas'
+            'name' => 'string|max:40|unique:asignaturas',
+            'short_name' => 'string|max:5|unique:asignaturas'
         ]);
         if ($validator->fails()){
             return redirect()->route('asignaturas.index')->withErrors($validator)->withInput();
@@ -86,7 +87,8 @@ class AsignaturaController extends Controller
     {
         $asignatura = Asignatura::findOrFail($id);
         $validator = Validator::make($request->all(),[
-            'name' => 'regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',Rule::unique('asignaturas')->ignore($asignatura->id, 'asignaturas_id')
+            'name' => 'string|max:40',Rule::unique('asignaturas')->ignore($asignatura->id, 'asignaturas_id'),
+            'short_name' => 'string|max:5',Rule::unique('asignaturas')->ignore($asignatura->id, 'asignaturas_id')
         ]);
         if ($validator->fails()){
             return redirect()->route('asignaturas.index')->withErrors($validator)->withInput();

@@ -50,6 +50,14 @@
 
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <?php echo Form::label('short_name', 'Nombre corto',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
+
+                            <div class="col-lg-8">
+                                <?php echo Form::text('short_name', null, ['class' => 'form-control', 'placeholder' => 'Por favor introduzca un nombre corto', 'requiered']); ?>
+
+                            </div>
+                        </div>
                 </div>
             </div>
             <footer class="card-footer">

@@ -58,9 +58,11 @@
         $(".edit").click(function (e) {
             $("#form-edit").attr('action', $(this).data('urlupdate') );
             var ruta = $(this).data('urledit');
+            console.log(ruta);
             $.get(ruta , function (data) {
                 $("#idEditAsg").val(data.id);
                 $("#nameEditAsg").val(data.name);
+                $("#short_name").val(data.short_name);
             });
         });
     </script>

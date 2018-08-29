@@ -45,6 +45,12 @@
                                 {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Por favor introduzca el nombre de la asignatura', 'requiered']) !!}
                             </div>
                         </div>
+                        <div class="form-group row">
+                            {!! Form::label('short_name', 'Nombre corto',['class'=>'col-lg-4 control-label text-lg-right pt-2']) !!}
+                            <div class="col-lg-8">
+                                {!! Form::text('short_name', null, ['class' => 'form-control', 'placeholder' => 'Por favor introduzca un nombre corto', 'requiered']) !!}
+                            </div>
+                        </div>
                 </div>
             </div>
             <footer class="card-footer">

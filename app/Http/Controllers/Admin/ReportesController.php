@@ -50,6 +50,7 @@ class ReportesController extends Controller
             ->orderBy('lastname','ASC')
             ->where('salon_id','=',$aula->id)
             ->where('stade','=','activo')
+            //->take(10)
             ->get();
         $puesto = 0;
         foreach ($estudiantes as $estudiante){
@@ -72,8 +73,8 @@ class ReportesController extends Controller
                     ->setOption('margin-bottom', 10)
                     ->setOption('encoding', 'UTF-8');
 
-       return $pdf->download('Informe'.$aula->full_name.''.$periodo->name.''.'.pdf');
-       // return view('admin.reportes.print.informeEstudiante',compact('estudiantes','institucion','salon','periodo','periodos'));
+        //return view('admin.reportes.print.informeEstudiante',compact('estudiantes','institucion','salon','periodo','periodos'));
+        return $pdf->stream('Informe'.$aula->full_name.''.$periodo->name.''.'.pdf');
     }
 
     public function  sabana(Request $request){
@@ -84,12 +85,14 @@ class ReportesController extends Controller
             $numero += 1;
             $estudiante->setAttribute('numero',$numero);
         }
+       // return view('admin.reportes.print.sabana', compact('salon','periodo'));
         $pdf = PDF::loadView('admin.reportes.print.sabana', compact('salon','periodo'))
             ->setPaper('legal')
             ->setOrientation('landscape')
             ->setOption('margin-bottom', 10)
             ->setOption('encoding', 'UTF-8');
         return $pdf->download('Sabana_'.$salon->full_name.'_'.$periodo->name.''.'.pdf');
+
     }
     public function reporteLogros (ReportesLogrosRequest $request){
         $docente = Docente::find($request->docente);

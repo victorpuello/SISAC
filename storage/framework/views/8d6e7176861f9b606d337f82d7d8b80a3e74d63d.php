@@ -84,19 +84,23 @@
                         <td class="p-2 text-left text-uppercase" style="width: 30%; vertical-align: middle;" rowspan="2" ><strong> <?php echo e($asignatura->name); ?></strong> </td>
                         <td style="border-left: none" rowspan="2"> <?php echo e(count($estudiante->currentInasistencias($asignatura->id,$periodo->id))); ?> </td>
                         <?php $__currentLoopData = $periodos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $_periodo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <td class="p-1 text-center"><?php echo e($estudiante->getDefInforme($asignatura->id,$_periodo->id)); ?></td>
+                            <?php if($_periodo->id === 2): ?>
+                                <td class="p-0 pl-1 text-center"><strong><?php echo e($estudiante->getDefInforme($asignatura->id,$_periodo->id)); ?></strong></td>
+                            <?php endif; ?>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tr>
                     <tr class="text-dark">
                         <?php $__currentLoopData = $periodos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $_periodo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <td class="p-1 text-center"><?php echo e(indicador($estudiante->getDefInforme($asignatura->id,$_periodo->id))); ?> </td>
+                            <?php if($_periodo->id === 2): ?>
+                                <td class="p-0 pl-1 text-center"><strong><?php echo e(indicador($estudiante->getDefInforme($asignatura->id,$_periodo->id))); ?></strong> </td>
+                            <?php endif; ?>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tr>
                     <?php $__currentLoopData = $estudiante->NotasInforme($asignatura->id,$periodo->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $nota): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="table-bordered p-0">
-                            <td><?php echo e(ucwords($nota->logro->category)); ?></td>
-                            <td><?php echo e($nota->score); ?></td>
-                            <td class="font-weight-semibold text-left text-dark" colspan="9"><?php echo e($nota->logro->description); ?></td>
+                            <td class="p-0 pl-1" style="vertical-align: middle"><?php echo e(ucwords($nota->logro->category)); ?></td>
+                            <td class="p-0 pl-1 text-center " style="vertical-align: middle"><?php echo e($nota->score); ?></td>
+                            <td class="font-weight-semibold text-left text-dark p-0 pl-1" style="vertical-align: middle" colspan="9"><?php echo e($nota->logro->description); ?></td>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tbody>

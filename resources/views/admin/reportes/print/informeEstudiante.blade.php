@@ -84,19 +84,23 @@
                         <td class="p-2 text-left text-uppercase" style="width: 30%; vertical-align: middle;" rowspan="2" ><strong> {{$asignatura->name}}</strong> </td>
                         <td style="border-left: none" rowspan="2"> {{count($estudiante->currentInasistencias($asignatura->id,$periodo->id))}} </td>
                         @foreach($periodos as $_periodo)
-                            <td class="p-1 text-center">{{$estudiante->getDefInforme($asignatura->id,$_periodo->id)}}</td>
+                            @if($_periodo->id === 2)
+                                <td class="p-0 pl-1 text-center"><strong>{{$estudiante->getDefInforme($asignatura->id,$_periodo->id)}}</strong></td>
+                            @endif
                         @endforeach
                     </tr>
                     <tr class="text-dark">
                         @foreach($periodos as $_periodo)
-                            <td class="p-1 text-center">{{indicador($estudiante->getDefInforme($asignatura->id,$_periodo->id))}} </td>
+                            @if($_periodo->id === 2)
+                                <td class="p-0 pl-1 text-center"><strong>{{indicador($estudiante->getDefInforme($asignatura->id,$_periodo->id))}}</strong> </td>
+                            @endif
                         @endforeach
                     </tr>
                     @foreach($estudiante->NotasInforme($asignatura->id,$periodo->id) as $nota)
                         <tr class="table-bordered p-0">
-                            <td>{{ucwords($nota->logro->category)}}</td>
-                            <td>{{$nota->score}}</td>
-                            <td class="font-weight-semibold text-left text-dark" colspan="9">{{$nota->logro->description}}</td>
+                            <td class="p-0 pl-1" style="vertical-align: middle">{{ucwords($nota->logro->category)}}</td>
+                            <td class="p-0 pl-1 text-center " style="vertical-align: middle">{{$nota->score}}</td>
+                            <td class="font-weight-semibold text-left text-dark p-0 pl-1" style="vertical-align: middle" colspan="9">{{$nota->logro->description}}</td>
                         </tr>
                     @endforeach
                     </tbody>

@@ -55,25 +55,25 @@
             </table>
             <table class="table table-bordered">
                 <tbody>
-                    <tr>
-                        <td rowspan="2">N°</td>
-                        <td rowspan="2">APELLIDOS NOMBRE(S)</td>
-                        <td class="text-center" colspan="11">AREAS Y ASIGNATURAS</td>
-                    </tr>
-                    <tr>
+                <tr class="text-center " >
+                    <td class="p-0" rowspan="2" style="vertical-align: middle"><strong>N°</strong></td>
+                    <td class="p-0" rowspan="2" style="vertical-align: middle"><strong>APELLIDOS NOMBRE(S)</strong></td>
+                    <td class="text-center p-0" colspan="12"><strong>AREAS Y ASIGNATURAS</strong></td>
+                </tr>
+                <tr>
+                    @foreach($salon->asignaturas as $asignatura)
+                        <td class="p-0 text-center"><strong>{{$asignatura->short_name}}</strong></td>
+                    @endforeach
+                </tr>
+                @foreach($salon->estudiantes as $estudiante)
+                    <tr class="m-0 p-0">
+                        <td class="text-center m-0 p-0">{{$estudiante->numero}}</td>
+                        <td class="m-0 pl-1 pt-0 pb-0 pr-0">{{$estudiante->apellido_name}}</td>
                         @foreach($salon->asignaturas as $asignatura)
-                            <td>{{substr($asignatura->name,0,4)}}</td>
+                            <td class="text-center m-0 p-0">{{$estudiante->getDefInforme($asignatura->id,$periodo->id)}}</td>
                         @endforeach
                     </tr>
-                    @foreach($salon->estudiantes as $estudiante)
-                        <tr class="m-0">
-                            <td class="m-0">{{$estudiante->numero}}</td>
-                            <td class="m-0">{{$estudiante->apellido_name}}</td>
-                            @foreach($salon->asignaturas as $asignatura)
-                                <td class="m-0">{{$estudiante->getDefInforme($asignatura->id,$periodo->id)}}</td>
-                            @endforeach
-                        </tr>
-                    @endforeach
+                @endforeach
                 </tbody>
             </table>
         </section>

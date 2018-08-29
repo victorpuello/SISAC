@@ -55,22 +55,22 @@
             </table>
             <table class="table table-bordered">
                 <tbody>
-                    <tr>
-                        <td rowspan="2">N°</td>
-                        <td rowspan="2">APELLIDOS NOMBRE(S)</td>
-                        <td class="text-center" colspan="11">AREAS Y ASIGNATURAS</td>
+                    <tr class="text-center " >
+                        <td class="p-0" rowspan="2" style="vertical-align: middle"><strong>N°</strong></td>
+                        <td class="p-0" rowspan="2" style="vertical-align: middle"><strong>APELLIDOS NOMBRE(S)</strong></td>
+                        <td class="text-center p-0" colspan="12"><strong>AREAS Y ASIGNATURAS</strong></td>
                     </tr>
                     <tr>
                         <?php $__currentLoopData = $salon->asignaturas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignatura): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <td><?php echo e(substr($asignatura->name,0,4)); ?></td>
+                            <td class="p-0 text-center"><strong><?php echo e($asignatura->short_name); ?></strong></td>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </tr>
                     <?php $__currentLoopData = $salon->estudiantes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $estudiante): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr class="m-0">
-                            <td class="m-0"><?php echo e($estudiante->numero); ?></td>
-                            <td class="m-0"><?php echo e($estudiante->apellido_name); ?></td>
+                        <tr class="m-0 p-0">
+                            <td class="text-center m-0 p-0"><?php echo e($estudiante->numero); ?></td>
+                            <td class="m-0 pl-1 pt-0 pb-0 pr-0"><?php echo e($estudiante->apellido_name); ?></td>
                             <?php $__currentLoopData = $salon->asignaturas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignatura): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <td class="m-0"><?php echo e($estudiante->getDefInforme($asignatura->id,$periodo->id)); ?></td>
+                                <td class="text-center m-0 p-0"><?php echo e($estudiante->getDefInforme($asignatura->id,$periodo->id)); ?></td>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
