@@ -7,6 +7,7 @@ Route::resource('reportes', 'ReportesController')->only(['index']);
 Route::resource('/direccion/anotaciones', 'AnotacionController');
 Route::post('reportes/academico/sabana', 'ReportesController@sabana')->name('reportes.academico.sabana');
 Route::post('reportes/academico/logros', 'ReportesController@reporteLogros')->name('reportes.academico.logros');
+
 Route::get('logros/loaddata/{id}',['as'=>'logros.loaddata', 'uses' => 'LogroController@loadDataBuscador']);
 Route::post('logros/findnotes',['as'=>'logros.findnotes', 'uses' => 'LogroController@FindNotes']);
 Route::get('/direccion', 'DireccionController@index')->name('direccion.index');
@@ -18,5 +19,9 @@ Route::resource('acudiente', 'AcudienteController')->only(['edit','store','updat
 Route::get('acudiente/{estudiante}', 'AcudienteController@create')->name('acudiente.create');
 Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'MunicipioController']);
 
-Route::get('notas/dataPlanilla/asignacion/{asignacion}/periodo/{periodo}','NotaController@dataPlanilla')->name('notas.dataplanilla');
-Route::get('notas/getPlanilla/asignacion/{asignacion}/periodo/{periodo}','NotaController@getPlanilla')->name('notas.getplanilla');
+Route::get('notas/dataPlanilla/asignacion/{asignacion}/periodo/{periodo}','NotaController@dataPlanilla')
+        ->name('notas.dataplanilla')
+        ->middleware(['verifyAsignacion']);
+Route::get('notas/getPlanilla/asignacion/{asignacion}/periodo/{periodo}','NotaController@getPlanilla')
+        ->name('notas.getplanilla')
+        ->middleware(['verifyAsignacion']);

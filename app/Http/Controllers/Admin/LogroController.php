@@ -250,7 +250,6 @@ class LogroController extends Controller
                     'periodo_id'=>  intval($logro->periodo_id)
                 ]);
                 $_logro->save();
-                dd($_logro);
             }
         },'UTF-8');
 

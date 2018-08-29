@@ -178,7 +178,7 @@
                     { data: null,
                         render: function ( data, type, row ) {
                             var def = trunc((row.notas.data[0].cognitivo.score * 0.6)+(row.notas.data[1].procedimental.score * 0.3)+(row.notas.data[2].actitudinal.score * 0.1),2);
-                            if (def <= 5.9 ){
+                            if (def < 6 ){
                                 return "Bajo";
                             }
                             if (def >= 6 && def < 8){
