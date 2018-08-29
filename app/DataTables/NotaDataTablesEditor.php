@@ -60,7 +60,7 @@ class NotaDataTablesEditor extends DataTablesEditor
 
     public function updating(Model $model, array $data)
     {
-        $notas =  $data['notas']['data'];
+        $notas = $data['notas']['data'];
         $inasistencia = $this->getInasistencia($data['inasistencias']['data']['0']['id']);
         $asignacion = $this->getAsignacion(intval($data['asignacion_id']));
         $periodo = $this->getPeriodo(intval($data['periodo_id']));
@@ -89,6 +89,15 @@ class NotaDataTablesEditor extends DataTablesEditor
     }
     public function getPeriodo($id){
         return Periodo::findOrFail($id);
+    }
+    public function getNotas($arreglo){
+        $notas = collect();
+        foreach ($arreglo as $key=>$value) {
+            foreach ($value as $cat) {
+                $notas->push(Nota::findOrFail($cat['id']));
+            }
+        }
+        return $notas;
     }
     public function getNota($id){
         return Nota::findOrFail($id);
@@ -144,28 +153,28 @@ class NotaDataTablesEditor extends DataTablesEditor
      */
     public function verificadorCambios ($nota, $notas, $logros):void
     {
-        switch ($nota->category){
-            case 'cognitivo':
-                if ($notas['0'][$nota->category]['score'] <> $nota->score) {
-                    $logro = $this->getLogro($logros, $nota->category, $nota->score);
-                    $this->setNota($notas, $nota, $logro, '0');
-                }
-                break;
-            case 'procedimental':
-                if ($notas['1'][$nota->category]['score'] <> $nota->score) {
-                    $logro = $this->getLogro($logros, $nota->category, $nota->score);
-                    $this->setNota($notas, $nota, $logro, '1');
-                }
-                break;
-            case 'actitudinal':
-                if ($notas['2'][$nota->category]['score'] <> $nota->score) {
-                    $logro = $this->getLogro($logros, $nota->category, $nota->score);
-                    $this->setNota($notas, $nota, $logro, '2');
-                }
-                break;
-            default:
-                break;
-        }
+             switch ($nota->category){
+                case 'cognitivo':
+                    if (floatval($notas['0'][$nota->category]['score']) <> $nota->score) {
+                        $logro = $this->getLogro($logros, $nota->category, floatval($notas['0'][$nota->category]['score']));
+                        $this->setNota($notas, $nota, $logro, '0');
+                    }
+                    break;
+                case 'procedimental':
+                    if (floatval($notas['1'][$nota->category]['score']) <> $nota->score) {
+                        $logro = $this->getLogro($logros, $nota->category, floatval($notas['0'][$nota->category]['score']));
+                        $this->setNota($notas, $nota, $logro, '1');
+                    }
+                    break;
+                case 'actitudinal':
+                    if (floatval($notas['2'][$nota->category]['score']) <> $nota->score) {
+                        $logro = $this->getLogro($logros, $nota->category, floatval($notas['0'][$nota->category]['score']));
+                        $this->setNota($notas, $nota, $logro, '2');
+                    }
+                    break;
+                default:
+                    break;
+            }
     }
 
 

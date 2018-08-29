@@ -98,7 +98,7 @@
                     </tr>
                     <?php $__currentLoopData = $estudiante->NotasInforme($asignatura->id,$periodo->id); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $nota): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <tr class="table-bordered p-0">
-                            <td class="p-0 pl-1" style="vertical-align: middle"><?php echo e(ucwords($nota->logro->category)); ?></td>
+                            <td class="p-0 pl-1" style="vertical-align: middle"><?php echo e(ucwords($nota->logro->category)); ?>  <small>(<?php echo e($nota->porcentaje); ?>)</small></td>
                             <td class="p-0 pl-1 text-center " style="vertical-align: middle"><?php echo e($nota->score); ?></td>
                             <td class="font-weight-semibold text-left text-dark p-0 pl-1" style="vertical-align: middle" colspan="9"><?php echo e($nota->logro->description); ?></td>
                         </tr>

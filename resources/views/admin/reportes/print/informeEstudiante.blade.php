@@ -98,7 +98,7 @@
                     </tr>
                     @foreach($estudiante->NotasInforme($asignatura->id,$periodo->id) as $nota)
                         <tr class="table-bordered p-0">
-                            <td class="p-0 pl-1" style="vertical-align: middle">{{ucwords($nota->logro->category)}}</td>
+                            <td class="p-0 pl-1" style="vertical-align: middle">{{ucwords($nota->logro->category)}}  <small>({{$nota->porcentaje}})</small></td>
                             <td class="p-0 pl-1 text-center " style="vertical-align: middle">{{$nota->score}}</td>
                             <td class="font-weight-semibold text-left text-dark p-0 pl-1" style="vertical-align: middle" colspan="9">{{$nota->logro->description}}</td>
                         </tr>

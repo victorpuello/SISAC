@@ -70,11 +70,11 @@ class ReportesController extends Controller
         $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('estudiantes','institucion','salon','periodo','periodos'))
                     ->setPaper('legal')
                     ->setOrientation('portrait')
-                    ->setOption('margin-bottom', 10)
+                    ->setOption('margin-bottom', 15)
                     ->setOption('encoding', 'UTF-8');
 
         //return view('admin.reportes.print.informeEstudiante',compact('estudiantes','institucion','salon','periodo','periodos'));
-        return $pdf->stream('Informe'.$aula->full_name.''.$periodo->name.''.'.pdf');
+        return $pdf->download('Informe'.$aula->full_name.''.$periodo->name.''.'.pdf');
     }
 
     public function  sabana(Request $request){

@@ -151,6 +151,19 @@ class Estudiante extends Model
         foreach ($logros as $logro){
             $q = $this->all_notas->where('logro_id','=',$logro->id)
                 ->where('estudiante_id','=',$this->id)->first();
+            switch ($logro->category){
+                case 'cognitivo':
+                    $q->setAttribute('porcentaje','60%');
+                    break;
+                case 'procedimental':
+                    $q->setAttribute('porcentaje','30%');
+                    break;
+                case 'actitudinal':
+                    $q->setAttribute('porcentaje','10%');
+                    break;
+                default:
+                    break;
+            }
             $notas->push($q);
         }
         return $notas;
