@@ -18,11 +18,9 @@
             <div class="row">
                 <div class="col-md-12 text-right">
                     <button class="btn btn-danger modal-dismiss">Cancelar</button>
-                    <?php echo Form::open(['method' => 'DELETE', 'id' => "form-delete" ,'style' => 'display: inline-block;']); ?>
-
+                    {!! Form::open(['method' => 'DELETE', 'id' => "form-delete" ,'style' => 'display: inline-block;']) !!}
                     <button type="submit" class="btn btn-warning">Confirmar</button>
-                    <?php echo Form::close(); ?>
-
+                    {!! Form::close() !!}
                 </div>
             </div>
         </footer>
@@ -37,25 +35,20 @@
             <h2 class="card-title">Agregar Asignatura</h2>
         </header>
         <div class="card-body">
-            <?php echo Form::open(['route' => 'asignaturas.store', 'method' => 'post','class' => 'form-horizontal form-bordered', 'id' => 'form-create']); ?>
-
+            {!! Form::open(['route' => 'asignaturas.store', 'method' => 'post','class' => 'form-horizontal form-bordered', 'id' => 'form-create']) !!}
             <div class="modal-wrapper">
                 <div class="modal-text">
-                    <?php echo $__env->make('admin.asignaturas.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    @include('admin.asignaturas.partials.messages')
                         <div class="form-group row">
-                            <?php echo Form::label('name', 'Nombre de Asignatura',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
-
+                            {!! Form::label('name', 'Nombre de Asignatura',['class'=>'col-lg-4 control-label text-lg-right pt-2']) !!}
                             <div class="col-lg-8">
-                                <?php echo Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Por favor introduzca el nombre de la asignatura', 'requiered']); ?>
-
+                                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Por favor introduzca el nombre de la asignatura', 'requiered']) !!}
                             </div>
                         </div>
                         <div class="form-group row">
-                            <?php echo Form::label('short_name', 'Nombre corto',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
-
+                            {!! Form::label('short_name', 'Nombre corto',['class'=>'col-lg-4 control-label text-lg-right pt-2']) !!}
                             <div class="col-lg-8">
-                                <?php echo Form::text('short_name', null, ['class' => 'form-control', 'placeholder' => 'Por favor introduzca un nombre corto', 'requiered']); ?>
-
+                                {!! Form::text('short_name', null, ['class' => 'form-control', 'placeholder' => 'Por favor introduzca un nombre corto', 'requiered']) !!}
                             </div>
                         </div>
                 </div>
@@ -68,8 +61,7 @@
                     </div>
                 </div>
             </footer>
-            <?php echo Form::close(); ?>
-
+            {!! Form::close() !!}
         </div>
     </section>
 </div>
@@ -77,9 +69,8 @@
 
 <!-- Start Modal Editar -->
 <div id="modalEditar" class="modal-block modal-block-warning mfp-hide">
-    <?php echo $__env->make('admin.asignaturas.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-    <?php echo Form::open(['method' => 'PUT','class' => 'form-horizontal form-bordered', 'id'=>'form-edit']); ?>
-
+    @include('admin.asignaturas.partials.messages')
+    {!! Form::open(['method' => 'PUT','class' => 'form-horizontal form-bordered', 'id'=>'form-edit']) !!}
     <section class="card">
         <header class="card-header">
             <h2 class="card-title">Editar Asignatura</h2>
@@ -88,7 +79,7 @@
             <div class="modal-wrapper">
                 <div class="modal-text">
                     <div class="form-group row">
-                        <?php echo $__env->make('admin.asignaturas.partials.fields', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        @include('admin.asignaturas.partials.fields')
                     </div>
                 </div>
             </div>
@@ -102,8 +93,7 @@
             </div>
         </footer>
     </section>
-    <?php echo Form::close(); ?>
-
+    {!! Form::close() !!}
 </div>
 
 <!-- End Modal Editar-->

@@ -21,7 +21,7 @@ Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'Munic
 
 Route::get('notas/dataPlanilla/asignacion/{asignacion}/periodo/{periodo}','NotaController@dataPlanilla')
         ->name('notas.dataplanilla')
-        ->middleware(['verifyAsignacion']);
+        ->middleware(['verifyAsignacion','verifyPeriodo']);
 Route::get('notas/getPlanilla/asignacion/{asignacion}/periodo/{periodo}','NotaController@getPlanilla')
         ->name('notas.getplanilla')
-        ->middleware(['verifyAsignacion']);
+        ->middleware(['verifyAsignacion','verifyPeriodo']);

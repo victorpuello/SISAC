@@ -78,6 +78,9 @@
                                 <?php if (\Illuminate\Support\Facades\Blade::check('docente')): ?>
                                     <?php echo $__env->make('partials.menuLateralDocentes', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                 <?php endif; ?>
+                                <?php if (\Illuminate\Support\Facades\Blade::check('secretaria')): ?>
+                                    <?php echo $__env->make('partials.menuLateralSecretaria', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                <?php endif; ?>
                             </nav>
                         </div>
                         <script>

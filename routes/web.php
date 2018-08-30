@@ -13,4 +13,3 @@
 Route::get('/','Auth\LoginController@showLoginForm')->name('login');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/fixdb/{salon}', 'fixNotaTable')->name('fixdb');

@@ -161,14 +161,15 @@ class NotaDataTablesEditor extends DataTablesEditor
                     }
                     break;
                 case 'procedimental':
+
                     if (floatval($notas['1'][$nota->category]['score']) <> $nota->score) {
-                        $logro = $this->getLogro($logros, $nota->category, floatval($notas['0'][$nota->category]['score']));
+                        $logro = $this->getLogro($logros, $nota->category, floatval($notas['1'][$nota->category]['score']));
                         $this->setNota($notas, $nota, $logro, '1');
                     }
                     break;
                 case 'actitudinal':
                     if (floatval($notas['2'][$nota->category]['score']) <> $nota->score) {
-                        $logro = $this->getLogro($logros, $nota->category, floatval($notas['0'][$nota->category]['score']));
+                        $logro = $this->getLogro($logros, $nota->category, floatval($notas['2'][$nota->category]['score']));
                         $this->setNota($notas, $nota, $logro, '2');
                     }
                     break;

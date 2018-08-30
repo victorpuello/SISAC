@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Periodo extends Model
 {
     protected $fillable = [
-        'name','datestart','dateend',
+        'name','datestart','dateend','cierre','estado',
     ];
 
     public function estudiantes(){

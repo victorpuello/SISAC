@@ -19,6 +19,7 @@ class VerifyAsignacion
     {
         $asignacion = $request->asignacion;
         $docente = $request->user()->docente;
+
         if ( $docente->id <> $asignacion->docente->id){
             throw new AuthorizationException;
         }

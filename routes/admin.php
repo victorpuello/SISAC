@@ -9,6 +9,7 @@ Route::post('import-logros', 'LogroController@inportar')->name('import-logros');
 Route::get('inportar/logros/',['as'=>'logros.import','uses'=>'LogroController@getViewImport']);
 Route::resource('notas', 'NotaController');
 Route::resource('asignaciones', 'AsignacionController');
+Route::resource('periodos', 'PeriodoController');
 Route::resource('reportes', 'ReportesController')->only(['index']);
 Route::resource('acudiente', 'AcudienteController')->only(['edit','store','update','destroy']);
 Route::get('acudiente/{estudiante}', 'AcudienteController@create')->name('acudiente.create');

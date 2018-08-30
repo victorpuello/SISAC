@@ -4,6 +4,8 @@ namespace Ngsoft\Http\Controllers\Docente;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use League\Fractal\Manager;
+use League\Fractal\Resource\Collection;
 use Ngsoft\Asignacion;
 use Ngsoft\Asignatura;
 use Ngsoft\DataTables\NotaDataTablesEditor;
@@ -79,7 +81,7 @@ class NotaController extends Controller
             $logros = $periodo->getlogros($asignacion);
             $codigo = $asignacion->salon->id.''.$asignacion->docente->id.''.$asignacion->asignatura->id.''.$periodo->id;
             $planilla = Planilla::where('codigo','=',$codigo)->get();
-            $estudiantes = Estudiante::where('salon_id','=',$asignacion->salon->id)
+            $estudiantes = Estudiante::where('salon_id','=',$asignacion->salon->id)->where('stade','=','activo')
                 ->with('notas')
                 ->with('inasistencias')
                 ->with('definitivas')
@@ -96,7 +98,10 @@ class NotaController extends Controller
                     'creada' => 1
                 ]);
             }
-            return datatables()->collection($estudiantes)->setTransformer( new EstudianteTransformer($asignacion,$periodo,$logros))->toJson();
+            return datatables()
+                ->collection($estudiantes)
+                ->setTransformer( new EstudianteTransformer($asignacion,$periodo,$logros))
+                ->toJson();
        // }
     }
 

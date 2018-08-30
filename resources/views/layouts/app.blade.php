@@ -78,6 +78,9 @@
                                 @docente
                                     @include('partials.menuLateralDocentes')
                                 @enddocente
+                                @secretaria
+                                    @include('partials.menuLateralSecretaria')
+                                @endsecretaria
                             </nav>
                         </div>
                         <script>

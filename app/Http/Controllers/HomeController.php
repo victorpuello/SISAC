@@ -51,6 +51,13 @@ class HomeController extends Controller
                 $Nlogros = Logro::all()->count();
                 return view('admin.home',compact('Nestudiantes','Ndocentes','Nusers','Nlogros'));
             break;
+            case 'secretaria':
+                $Nestudiantes = Estudiante::all()->count();
+                $Ndocentes = Docente::all()->count();
+                $Nusers = User::all()->count();
+                $Nlogros = Logro::all()->count();
+                return view('admin.home',compact('Nestudiantes','Ndocentes','Nusers','Nlogros'));
+            break;
             default:
                 break;
         }

@@ -1,11 +1,12 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace Ngsoft\Http\Controllers\Secretaria;
 
-use Ngsoft\Periodo;
+use Ngsoft\Departamento;
 use Illuminate\Http\Request;
 use Ngsoft\Http\Controllers\Controller;
-class PeriodoController extends Controller
+
+class DepartamentoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,7 @@ class PeriodoController extends Controller
      */
     public function index()
     {
-        $periodos = Periodo::all();
-        return view('admin.periodos.index',compact('periodos'));
+        //
     }
 
     /**
@@ -42,10 +42,10 @@ class PeriodoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Periodo  $periodo
+     * @param  \Ngsoft\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function show(Periodo $periodo)
+    public function show(Departamento $departamento)
     {
         //
     }
@@ -53,10 +53,10 @@ class PeriodoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Periodo  $periodo
+     * @param  \Ngsoft\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function edit(Periodo $periodo)
+    public function edit(Departamento $departamento)
     {
         //
     }
@@ -65,10 +65,10 @@ class PeriodoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Periodo  $periodo
+     * @param  \Ngsoft\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Periodo $periodo)
+    public function update(Request $request, Departamento $departamento)
     {
         //
     }
@@ -76,10 +76,10 @@ class PeriodoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Periodo  $periodo
+     * @param  \Ngsoft\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Periodo $periodo)
+    public function destroy(Departamento $departamento)
     {
         //
     }

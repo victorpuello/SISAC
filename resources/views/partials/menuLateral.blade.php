@@ -129,6 +129,19 @@
 
     <li class="nav-parent">
         <a class="nav-link" href="#">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span>Periodos</span>
+        </a>
+            <ul class="nav nav-children">
+                <li>
+                    <a class="nav-link" href="{{route('periodos.index')}}">
+                        Ver Periodos
+                    </a>
+                </li>
+            </ul>
+    </li>
+    <li class="nav-parent">
+        <a class="nav-link" href="#">
             <i class="fas fa-print" aria-hidden="true"></i>
             <span>Reportes</span>
         </a>

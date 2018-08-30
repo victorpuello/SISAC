@@ -2,10 +2,11 @@
 
 namespace Ngsoft\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
 
-class Admin
+class VerifyPeriodo
 {
     /**
      * Handle an incoming request.
@@ -17,7 +18,8 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (! $request->user()->isAdmin() || $request->user()->isSecretaria() ){
+        $periodo = $request->periodo;
+        if ($periodo->cierre < Carbon::now()){
             throw new AuthorizationException;
         }
         return $next($request);

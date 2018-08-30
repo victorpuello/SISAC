@@ -45,5 +45,8 @@ class User extends Authenticatable
     public function isDocente(){
         return $this->type === 'docente';
     }
+    public function isSecretaria(){
+        return $this->type === 'secretaria';
+    }
 
 }
