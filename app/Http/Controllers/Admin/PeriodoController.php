@@ -58,7 +58,7 @@ class PeriodoController extends Controller
      */
     public function edit(Periodo $periodo)
     {
-        //
+        return view('admin.periodos.ajax.edit',compact('periodo'));
     }
 
     /**
@@ -70,7 +70,9 @@ class PeriodoController extends Controller
      */
     public function update(Request $request, Periodo $periodo)
     {
-        //
+        $periodo->fill($request->all());
+        $periodo->save();
+        return redirect()->action('Admin\PeriodoController@index');
     }
 
     /**

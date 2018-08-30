@@ -35,8 +35,8 @@
                     <td>{{$periodo->cierre}}</td>
                     <td>{{$periodo->estado}}</td>
                     <td class="actions">
-                        <a href="#modalEditar" class="on-default edit modal-basic" > <i class="fas fa-pencil-alt"></i></a>
-                        <a href="#modalEliminar" class="on-default deleted modal-basic"  ><i class="far fa-trash-alt"></i></a>
+                        <a href="{{route('periodos.edit',$periodo)}}" class="on-default edit simple-ajax-modal" > <i class="fas fa-pencil-alt"></i></a>
+                        <a href="#modalEliminar" class="on-default deleted simple-ajax-modal"  ><i class="far fa-trash-alt"></i></a>
                     </td>
                 </tr>
             @endforeach
