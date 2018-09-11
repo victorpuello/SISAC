@@ -14,7 +14,7 @@ class UpdatePeriodosTable extends Migration
     public function up()
     {
         Schema::table('periodos', function (Blueprint $table) {
-            $table->dateTime('cierre');
+            $table->dateTime('cierre')->nullable($value = true);
             $table->enum('estado',['finalizado','activo'])->default('activo');
         });
     }
