@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnotacionsTable extends Migration
+class CreateObservacionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateAnotacionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('anotacions', function (Blueprint $table) {
+        Schema::create('observaciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('annotation');
-            $table->string('compromises')->nullable();
-            $table->enum('type',['academico','convivencia']);
-            $table->string('path')->nullable();
+            $table->string('valoracion');
+            $table->integer('aspecto_id')->unsigned();
+            $table->foreign('aspecto_id')->references('id')->on('aspectos');
             $table->integer('estudiante_id')->unsigned();
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->integer('periodo_id')->unsigned();
@@ -34,6 +33,6 @@ class CreateAnotacionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anotacions');
+        Schema::dropIfExists('observaciones');
     }
 }

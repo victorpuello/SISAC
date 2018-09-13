@@ -9,7 +9,7 @@ use Ngsoft\Http\Requests\CreateEstudianteRequest;
 use Ngsoft\Http\Requests\UpdateDocenteRequest;
 use Ngsoft\Http\Requests\UpdateEstudianteRequest;
 use Ngsoft\Municipio;
-use Ngsoft\Salon;
+use Ngsoft\Grupo;
 use Ngsoft\Http\Controllers\Controller;
 
 class EstudianteController extends Controller

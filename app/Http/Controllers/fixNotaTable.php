@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use Log;
 use Ngsoft\Logro;
 use Ngsoft\Nota;
-use Ngsoft\Salon;
+use Ngsoft\Grupo;
 
 class fixNotaTable extends Controller
 {
-    public function __invoke(Salon $salon)
+    public function __invoke(Grupo $salon)
     {
         try{
             foreach ($salon->estudiantes as $estudiante){

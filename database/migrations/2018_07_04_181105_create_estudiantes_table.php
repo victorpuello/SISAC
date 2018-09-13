@@ -31,8 +31,8 @@ class CreateEstudiantesTable extends Migration
             $table->string('path');//ok
             $table->enum('stade',['activo','retirado','graduado']);//ok
             $table->enum('situation',['nuevo','repitente','promovido','normal'])->default('nuevo');//ok
-            $table->integer('salon_id')->unsigned();
-            $table->foreign('salon_id')->references('id')->on('salons')->onDelete('cascade');
+            $table->integer('grupo_id')->unsigned();
+            $table->foreign('grupo_id')->references('id')->on('grupos');
             $table->timestamps();
         });
     }

@@ -3,7 +3,7 @@
 namespace Ngsoft\Http\Controllers\Admin;
 
 use Validator;
-use Ngsoft\Salon;
+use Ngsoft\Grupo;
 use Illuminate\Http\Request;
 use Ngsoft\Http\Controllers\Controller;
 class SalonController extends Controller
@@ -18,7 +18,7 @@ class SalonController extends Controller
     public function index()
     {
         $fondos = $this->fondos;
-        $salones = Salon::all();
+        $salones = Grupo::all();
         return view('admin.aulas.index',compact('fondos','salones'));
     }
 
@@ -44,7 +44,7 @@ class SalonController extends Controller
         if ($validator->fails()){
             return redirect()->route('aulas.show',$request->grade)->withErrors($validator)->withInput();
         }
-        $salon = new Salon($request->all());
+        $salon = new Grupo($request->all());
         $salon->save();
         return redirect()->route('aulas.show',$salon->grade);
     }
@@ -52,12 +52,12 @@ class SalonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Salon  $salon
+     * @param  \Ngsoft\Grupo  $salon
      * @return \Illuminate\Http\Response
      */
     public function show($grado)
     {
-        $aulas = Salon::where('grade','=',$grado)->get();
+        $aulas = Grupo::where('grade','=',$grado)->get();
         $fondos = $this->fondos;
         return view('admin.aulas.salones',compact('aulas','fondos'));
     }
@@ -70,7 +70,7 @@ class SalonController extends Controller
      */
     public function edit($id)
     {
-        $salon = Salon::findOrFail($id);
+        $salon = Grupo::findOrFail($id);
         return response()->json($salon);
     }
 
@@ -78,12 +78,12 @@ class SalonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Salon  $salon
+     * @param  \Ngsoft\Grupo  $salon
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $salon = Salon::findOrFail($id);
+        $salon = Grupo::findOrFail($id);
         $validator = $this->ValidateNameOfAula($request);
         if ($validator->fails()){
             return redirect()->back()->withErrors($validator)->withInput();
@@ -96,12 +96,12 @@ class SalonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Salon  $salon
+     * @param  \Ngsoft\Grupo  $salon
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $salon = Salon::findOrFail($id);
+        $salon = Grupo::findOrFail($id);
         $salon->delete();
         return redirect()->back();
     }
@@ -110,7 +110,7 @@ class SalonController extends Controller
      * @param $data Valor concatenado de Grado con Nombre
      */
     public function validationAulas($data){
-        $aulas = Salon::all();
+        $aulas = Grupo::all();
         $salones = array();
         foreach ($aulas as $aula){
             array_push($salones,$aula->name_for_validation);

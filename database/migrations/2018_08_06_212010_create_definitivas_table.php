@@ -16,6 +16,7 @@ class CreateDefinitivasTable extends Migration
         Schema::create('definitivas', function (Blueprint $table) {
             $table->increments('id');
             $table->float('score');
+            $table->enum('indicador',['bajo','basico','alto','superior']);
             $table->integer('estudiante_id')->unsigned();
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->integer('asignatura_id')->unsigned();

@@ -10,7 +10,7 @@ namespace Ngsoft\Transformers\Asignacion;
 
 
 use League\Fractal\TransformerAbstract;
-use Ngsoft\Salon;
+use Ngsoft\Grupo;
 
 class SalonTransformer extends TransformerAbstract
 {
@@ -18,7 +18,7 @@ class SalonTransformer extends TransformerAbstract
     /**
      * SalonTransformer constructor.
      */
-    public function transform(Salon $salon) {
+    public function transform(Grupo $salon) {
         return [
             'id' => $salon->id,
             'name' => $salon->full_name,

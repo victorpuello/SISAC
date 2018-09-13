@@ -11,7 +11,7 @@ use Ngsoft\Http\Requests\CreateEstudianteRequest;
 use Ngsoft\Http\Requests\UpdateDocenteRequest;
 use Ngsoft\Http\Requests\UpdateEstudianteRequest;
 use Ngsoft\Municipio;
-use Ngsoft\Salon;
+use Ngsoft\Grupo;
 use Ngsoft\Http\Controllers\Controller;
 
 class EstudianteController extends Controller
@@ -112,7 +112,7 @@ class EstudianteController extends Controller
      */
     public function getSalon (): array
     {
-        $data = Salon::all();
+        $data = Grupo::all();
         $grados = [];
         foreach ($data as $key => $value) {
             $grados[$key + 1] = $value->NameAula;

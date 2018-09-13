@@ -20,6 +20,7 @@ $factory->define(User::class, function (Faker $faker) {
         'lastname' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'username' => $faker->unique()->userName,
+        'path' => null,
         'password' => 'secret', // secret
         'remember_token' => str_random(10),
         'type' => $faker->randomElement(['docente','coordinador','secretaria']),

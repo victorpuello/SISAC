@@ -11,7 +11,7 @@ use Ngsoft\Http\Requests\ReportesLogrosRequest;
 use Ngsoft\Institucion;
 use Ngsoft\Logro;
 use Ngsoft\Periodo;
-use Ngsoft\Salon;
+use Ngsoft\Grupo;
 use Ngsoft\Http\Controllers\Controller;
 use PDF;
 
@@ -20,7 +20,7 @@ class ReportesController extends Controller
     private $salones_todos;
     public function __construct ()
     {
-        $this->salones_todos = Salon::orderBy('name','ASC')->get();
+        $this->salones_todos = Grupo::orderBy('name','ASC')->get();
     }
     public function index(){
         $periodos = Periodo::pluck('name','id');
@@ -39,7 +39,7 @@ class ReportesController extends Controller
         return view('admin.reportes.index',compact('periodos','salones','docentes','asignaturas','grados'));
     }
     public function reporteAcademico (Request $request){
-        $aula = Salon::find($request->salon);
+        $aula = Grupo::find($request->salon);
         $institucion = Institucion::all()->first();
         $periodos = Periodo::all();
         $periodo = $periodos->where('id','=',$request->periodo)->first();
@@ -79,7 +79,7 @@ class ReportesController extends Controller
 
     public function  sabana(Request $request){
         $periodo = Periodo::findOrFail($request->periodo);
-        $salon = Salon::where('id','=', $request->salon)->with('estudiantes')->first();
+        $salon = Grupo::where('id','=', $request->salon)->with('estudiantes')->first();
         $numero = 0;
         foreach ($salon->estudiantes->sortBy('lastname') as $estudiante){
             $numero += 1;

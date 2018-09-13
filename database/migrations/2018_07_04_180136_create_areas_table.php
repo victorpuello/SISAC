@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateAsignaturasTable extends Migration
+class CreateAreasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class UpdateAsignaturasTable extends Migration
      */
     public function up()
     {
-        Schema::table('asignaturas', function (Blueprint $table) {
-            $table->string('short_name');
+        Schema::create('areas', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->float('porcentaje')->default(100);
+            $table->timestamps();
         });
     }
 
@@ -25,6 +28,6 @@ class UpdateAsignaturasTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('areas');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLogrosTable extends Migration
+class CreateGruposTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,14 @@ class CreateLogrosTable extends Migration
      */
     public function up()
     {
-        Schema::create('logros', function (Blueprint $table) {
+        Schema::create('grupos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code');
-            $table->string('verbo');
-            $table->text('description');
-            $table->enum('category',['cognitivo','procedimental','actitudinal']);
+            $table->enum('name',['1','2','3','4','5','6']);
+            $table->enum('modelo',['tradicional','escuela nueva','etnoeducación','Aceleración','decreto 3011']);
             $table->integer('grado_id')->unsigned();
             $table->foreign('grado_id')->references('id')->on('grados');
-            $table->integer('asignatura_id')->unsigned();
-            $table->foreign('asignatura_id')->references('id')->on('asignaturas');
-            $table->unique('code');
+            $table->integer('jornada_id')->unsigned();
+            $table->foreign('jornada_id')->references('id')->on('jornadas');
             $table->timestamps();
         });
     }
@@ -35,6 +32,6 @@ class CreateLogrosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logros');
+        Schema::dropIfExists('grupos');
     }
 }

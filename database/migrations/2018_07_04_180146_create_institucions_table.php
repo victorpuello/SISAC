@@ -17,14 +17,16 @@ class CreateInstitucionsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('siglas');
+            $table->string('resolucion');
             $table->string('dane');
+            $table->string('nit');
             $table->string('address');
             $table->string('phone');
             $table->string('email');
             $table->string('rector');
             $table->string('idrector');
-            $table->string('resolucion');
             $table->string('slogan');
+            $table->string('path');
             $table->timestamps();
         });
     }

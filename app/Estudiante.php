@@ -23,7 +23,7 @@ class Estudiante extends Model
 
     public function salon()
     {
-    	return $this->belongsTo(Salon::class);
+    	return $this->belongsTo(Grupo::class);
     }
     public function acudiente(){
         return $this->hasOne(Acudiente::class);

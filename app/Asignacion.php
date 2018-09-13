@@ -18,7 +18,7 @@ class Asignacion extends Model
     }
 
     public function salon(){
-        return $this->belongsTo(Salon::class);
+        return $this->belongsTo(Grupo::class);
     }
 
     public function getDireccionAttribute(){

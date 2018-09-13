@@ -10,7 +10,7 @@ use Ngsoft\Docente;
 use Ngsoft\Http\Controllers\Controller;
 use Ngsoft\Http\Requests\createAsignacionRequest;
 use Ngsoft\Http\Requests\UpdateAsignacionRequest;
-use Ngsoft\Salon;
+use Ngsoft\Grupo;
 
 class AsignacionController extends Controller
 {
@@ -27,7 +27,7 @@ class AsignacionController extends Controller
     {
         $this->asignaciones = Asignacion::all();
         $this->docentes = Docente::orderBy('name','ASC')->pluck('name','id');
-        $this->salones_todos = Salon::orderBy('name','ASC')->get();
+        $this->salones_todos = Grupo::orderBy('name','ASC')->get();
         $this->asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
     }
 

@@ -15,8 +15,9 @@ class UsersTableSeeder extends Seeder
         factory(User::class)->create([
             'lastname' => 'Puello Gonzalez',
             'name' => 'Victor',
-           'email' => 'victor.puello@gmail.com',
+            'email' => 'victor.puello@gmail.com',
             'username' => 'victor.puello',
+            'path'=> null,
             'type' => 'admin'
         ]);
        // factory(User::class,40)->create();

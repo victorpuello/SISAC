@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateUsersTable extends Migration
+class CreateJornadasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class UpdateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table){
-            $table->string('lastname');
-            $table->string('username')->unique();
-            $table->enum('type',['admin','docente','coordinador','secretaria']);
+        Schema::create('jornadas', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +27,6 @@ class UpdateUsersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('jornadas');
     }
 }

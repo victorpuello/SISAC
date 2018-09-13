@@ -22,7 +22,6 @@ class CreateDocentesTable extends Migration
             $table->enum('gender',['M','F']);
             $table->string('address');
             $table->string('phone');
-            $table->string('path');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

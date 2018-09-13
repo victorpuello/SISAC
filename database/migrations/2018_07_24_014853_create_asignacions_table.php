@@ -19,8 +19,8 @@ class CreateAsignacionsTable extends Migration
             $table->boolean('director')->default(false);
             $table->integer('docente_id')->unsigned();
             $table->foreign('docente_id')->references('id')->on('docentes')->onDelete('cascade');
-            $table->integer('salon_id')->unsigned();
-            $table->foreign('salon_id')->references('id')->on('salons')->onDelete('cascade');
+            $table->integer('grupo_id')->unsigned();
+            $table->foreign('grupo_id')->references('id')->on('grupos')->onDelete('cascade');
             $table->integer('asignatura_id')->unsigned();
             $table->foreign('asignatura_id')->references('id')->on('asignaturas')->onDelete('cascade');
             $table->timestamps();

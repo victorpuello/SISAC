@@ -45,7 +45,13 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => public_path('imgUsers'),
+            'root' => storage_path('app'),
+        ],
+        'public' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
         ],
         'documentos' => [
             'driver' => 'local',
@@ -54,6 +60,12 @@ return [
         'estudiantes' => [
             'driver' => 'local',
             'root' => public_path('imgUsers/estudiantes'),
+        ],
+        'users' => [
+            'driver' => 'local',
+            'root' => storage_path('app/usersdata/img/users'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
         ],
 
         'public' => [

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSalonsTable extends Migration
+class CreateGradosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateSalonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('salons', function (Blueprint $table) {
+        Schema::create('grados', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('name',['1','2','3','4','5','6']);
-            $table->enum('grade',['0','1','2','3','4','5','6','7','8','9','10','11']);
+            $table->string('name');
+            $table->enum('nivel',['preescolar','primaria','secundaria','media']);
             $table->timestamps();
         });
     }
@@ -28,6 +28,8 @@ class CreateSalonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('salons');
+        Schema::table('grados', function (Blueprint $table) {
+            //
+        });
     }
 }

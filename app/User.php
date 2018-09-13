@@ -2,8 +2,10 @@
 
 namespace Ngsoft;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Input;
 
 class User extends Authenticatable
 {
@@ -15,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','lastname','username','type',
+        'name', 'email', 'password','lastname','username','type','path',
     ];
 
     /**
@@ -35,6 +37,10 @@ class User extends Authenticatable
     {
         return $this->name .' '.$this->lastname;
     }
+    public function getTypeUserAttribute()
+    {
+        return ucwords($this->type);
+    }
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
@@ -48,5 +54,16 @@ class User extends Authenticatable
     public function isSecretaria(){
         return $this->type === 'secretaria';
     }
-
+    public function setPathAttribute($path)
+    {
+        if (is_null($path)){
+            $this->attributes['path'] = "no-user-image.png";
+        }
+        if (!empty($path)) {
+            $image = \Image::make(Input::file('path'))->resize(250,270)->encode('jpg',90);
+            $name = Carbon::now()->second.$path->getClientOriginalName();
+            $this->attributes['path'] = $name;
+            \Storage::disk('users')->put($name,$image);
+        }
+    }
 }

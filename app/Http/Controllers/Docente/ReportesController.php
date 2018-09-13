@@ -9,7 +9,7 @@ use Ngsoft\Asignatura;
 use Ngsoft\Logro;
 use Ngsoft\Http\Controllers\Controller;
 use Ngsoft\Periodo;
-use Ngsoft\Salon;
+use Ngsoft\Grupo;
 use PDF;
 
 class ReportesController extends Controller
@@ -30,7 +30,7 @@ class ReportesController extends Controller
     public function  sabana(Request $request){
         $periodo = Periodo::findOrFail($request->periodo);
         $sl = Auth::user()->docente->salon_director;
-        $salon = Salon::where('id','=', $sl->id)->with('estudiantes')->first();
+        $salon = Grupo::where('id','=', $sl->id)->with('estudiantes')->first();
         $numero = 0;
         foreach ($salon->estudiantes->sortBy('lastname') as $estudiante){
             $numero += 1;

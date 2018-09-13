@@ -15,7 +15,7 @@ use Ngsoft\Http\Requests\UpdateLogroRequest;
 use Ngsoft\Logro;
 use Illuminate\Http\Request;
 use Ngsoft\Periodo;
-use Ngsoft\Salon;
+use Ngsoft\Grupo;
 use Ngsoft\User;
 use Ngsoft\Http\Controllers\Controller;
 use PhpParser\Node\Expr\New_;

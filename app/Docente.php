@@ -54,7 +54,7 @@ class Docente extends Model
     public function getSalonDirectorAttribute(){
         $asignacion = DB::table('asignacions')->where('docente_id','=',$this->id);
         $asg = $asignacion->where('director','=', 1)->first();
-        $salon = Salon::find($asg->salon_id);
+        $salon = Grupo::find($asg->salon_id);
         return $salon;
     }
 

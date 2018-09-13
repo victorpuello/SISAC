@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePeriodosTable extends Migration
+class CreateAspectosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreatePeriodosTable extends Migration
      */
     public function up()
     {
-        Schema::create('periodos', function (Blueprint $table) {
+        Schema::create('aspectos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->date('datestart');
-            $table->date('dateend')->nullable();
-            $table->dateTime('cierre')->nullable($value = true);
-            $table->enum('estado',['finalizado','activo'])->default('activo');
+            $table->enum('category',['academico','convivencia']);
+            $table->enum('escala',['numerica','texto']);
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -31,6 +29,8 @@ class CreatePeriodosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('periodos');
+        Schema::table('aspectos', function (Blueprint $table) {
+            //
+        });
     }
 }

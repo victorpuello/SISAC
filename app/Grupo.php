@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use phpDocumentor\Reflection\Types\This;
 use Illuminate\Support\Facades\DB;
 
-class Salon extends Model
+class Grupo extends Model
 {
     protected $fillable = [
         'name', 'grade',
