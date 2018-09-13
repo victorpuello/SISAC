@@ -3,58 +3,59 @@
 <?php $__env->startSection('styles'); ?>
     <link rel="stylesheet" href="<?php echo e(asset('vendor/select2/css/select2.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('css/jquery.dataTables.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('css/responsive.dataTables.min.css')); ?>" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.17/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.6/css/select.bootstrap4.min.css" />
+    <link rel="stylesheet" href="<?php echo e(asset('css/editor.bootstrap4.min.css')); ?>" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.6/css/select.bootstrap4.min.css" />
     <link rel="stylesheet" href="<?php echo e(asset('vendor/datatables/media/css/dataTables.bootstrap4.css')); ?>" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" />
+    <style>
+        .dataTables_wrapper .dataTables_paginate .paginate_button{
+            padding: 0em !important;
+        }
+    </style>
     <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="card-body">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="mb-3">
-                    <a href="<?php echo e(route('users.create')); ?>"  class="btn btn-primary">Agregar <i class="fas fa-plus"></i></a>
-                </div>
-            </div>
-        </div>
-        <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+        <table class="table table-bordered table-striped mb-0" id="users">
             <thead>
             <tr>
+                <th></th>
+                <th></th>
+                <th>id</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
                 <th>Usuario</th>
                 <th>Email</th>
                 <th>Tipo</th>
-                <th>Acciones</th>
             </tr>
             </thead>
-            <tbody>
-            <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <tr data-item-id="<?php echo e($user->id); ?>">
-                <td><?php echo e($user->username); ?></td>
-                <td><?php echo e($user->email); ?></td>
-                <td><?php echo e($user->type); ?></td>
-                <td class="actions">
-                    <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
-                    <a href="#" class="hidden on-editing cancel-row"><i class="fas fa-times"></i></a>
-                    <a href="<?php echo e(route('users.edit', $user->id)); ?>" class="on-default " > <i class="fas fa-pencil-alt"></i></a>
-                    <a href="#modalEliminar" class="on-default deleted modal-basic" data-nuser="<?php echo e($user->username); ?>" data-url="<?php echo e(route('users.destroy', $user->id )); ?>"><i class="far fa-trash-alt"></i></a>
-                </td>
-            </tr>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            </tbody>
         </table>
-        <?php echo $__env->make('admin.users.partials.modals', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <div id="inf" data-token ="<?php echo e(csrf_token()); ?>" data-urlproces ="<?php echo e(route('notas.store')); ?>" data-urltabla ="<?php echo e(route('users.index')); ?>"></div>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
+    <script src="<?php echo e(asset('vendor/autosize/autosize.js')); ?>"></script>
     <script src="<?php echo e(asset('vendor/select2/js/select2.js')); ?>"></script>
     <script src="<?php echo e(asset('vendor/datatables/media/js/jquery.dataTables.min.js')); ?>"></script>
     <script src="<?php echo e(asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('js/examples/examples.datatables.editable.js')); ?>"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo e(asset('js/buttons.bootstrap4.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/dataTables.responsive.min.js')); ?>"></script>
+    <script src="https://cdn.datatables.net/select/1.2.6/js/dataTables.select.min.js"></script>
+    <script src="<?php echo e(asset('js/dataTables.editor.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/editor.bootstrap4.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js')); ?>"></script>
+    <script src="<?php echo e(asset('https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js')); ?>"></script>
     <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
     <script src="<?php echo e(asset('js/custom.js')); ?>"></script>
-    <script type="text/javascript">
-        $(".deleted").click(function (e) {
-            $("#form-delete").attr('action', $(this).data('url') );
-            $("#NombreUser").text( $(this).data('nuser') );
-        });
-    </script>
+    <script src="<?php echo e(asset('js/tablas/users.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 
