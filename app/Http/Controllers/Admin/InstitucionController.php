@@ -2,6 +2,8 @@
 
 namespace Ngsoft\Http\Controllers\Admin;
 
+use Ngsoft\Http\Requests\CreateInstitucionRequest;
+use Ngsoft\Http\Requests\UpdateInstitucionRequest;
 use Ngsoft\Institucion;
 use Illuminate\Http\Request;
 use Ngsoft\Http\Controllers\Controller;
@@ -14,7 +16,8 @@ class InstitucionController extends Controller
      */
     public function index()
     {
-        //
+        $institucion = Institucion::first();
+        return view('admin.institucion.index',compact('institucion'));
     }
 
     /**
@@ -24,7 +27,7 @@ class InstitucionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.institucion.ajax.create');
     }
 
     /**
@@ -33,9 +36,12 @@ class InstitucionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateInstitucionRequest $request)
     {
-        //
+
+        $institucion = new Institucion($request->all());
+        $institucion->save();
+        return view('admin.institucion.index',compact('institucion'));
     }
 
     /**
@@ -46,7 +52,7 @@ class InstitucionController extends Controller
      */
     public function show(Institucion $institucion)
     {
-        //
+
     }
 
     /**
@@ -57,19 +63,19 @@ class InstitucionController extends Controller
      */
     public function edit(Institucion $institucion)
     {
-        //
+        return view('admin.institucion.ajax.edit',compact('institucion'));
     }
 
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Institucion  $institucion
-     * @return \Illuminate\Http\Response
+     * @param UpdateInstitucionRequest $request
+     * @param Institucion $institucion
      */
-    public function update(Request $request, Institucion $institucion)
+    public function update(UpdateInstitucionRequest $request, Institucion $institucion)
     {
-        //
+        $institucion->fill($request->all());
+        $institucion->save();
+        return view('admin.institucion.index',compact('institucion'));
     }
 
     /**

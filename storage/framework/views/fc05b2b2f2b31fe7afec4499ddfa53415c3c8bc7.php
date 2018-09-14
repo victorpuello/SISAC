@@ -5,6 +5,28 @@
             <span>Escritorio</span>
         </a>
     </li>
+    <li class="nav-parent">
+        <a class="nav-link" href="#">
+            <i class="fas fa-school" aria-hidden="true"></i>
+            <span>Institución</span>
+        </a>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="<?php echo e(route('institucion.index')); ?>">
+                    <i class="fas fa-cog" aria-hidden="true"></i>
+                    <span>Configuración</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="<?php echo e(route('aulas.index')); ?>">
+                    <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+                    <span>Grupos</span>
+                </a>
+            </li>
+        </ul>
+    </li>
     <li class="nav-parent nav-active">
         <a class="nav-link" href="#">
             <i class="fas fa-user" aria-hidden="true"></i>
@@ -118,15 +140,6 @@
             </li>
         </ul>
     </li>
-
-    <li >
-        <a class="nav-link" href="<?php echo e(route('aulas.index')); ?>">
-            <i class="fas fa-school" aria-hidden="true"></i>
-            <span>Aulas</span>
-        </a>
-    </li>
-
-
     <li class="nav-parent">
         <a class="nav-link" href="#">
             <i class="fas fa-clock" aria-hidden="true"></i>

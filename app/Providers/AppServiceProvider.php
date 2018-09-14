@@ -33,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('editar', function ($estudiante){
             return is_null($estudiante);
         });
+
+        Blade::if('institucion', function ($institucion){
+            return is_null($institucion);
+        });
     }
 
     /**

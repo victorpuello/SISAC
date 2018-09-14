@@ -4,6 +4,7 @@ Route::post('users','UserController@store')->name('users.store');
 Route::put('users','UserController@update')->name('users.update');
 Route::delete('users','UserController@destroy')->name('users.destroy');
 Route::resource('estudiantes', 'EstudianteController');
+Route::resource('institucion', 'InstitucionController');
 Route::resource('docentes', 'DocenteController');
 Route::resource('asignaturas', 'AsignaturaController');
 Route::resource('aulas', 'SalonController');
