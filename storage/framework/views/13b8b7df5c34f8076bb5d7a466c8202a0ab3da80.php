@@ -34,7 +34,12 @@
             </tr>
             </thead>
         </table>
-        <div id="inf" data-token ="<?php echo e(csrf_token()); ?>" data-urlproces ="<?php echo e(route('notas.store')); ?>" data-urltabla ="<?php echo e(route('users.index')); ?>"></div>
+        <div id="inf"
+             data-urlcreate ="<?php echo e(route('users.store')); ?>"
+             data-urledit ="<?php echo e(route('users.update')); ?>"
+             data-urlremove ="<?php echo e(route('users.destroy')); ?>"
+             data-urltabla ="<?php echo e(route('users.index')); ?>">
+        </div>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>

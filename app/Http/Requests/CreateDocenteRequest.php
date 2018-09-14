@@ -30,7 +30,6 @@ class CreateDocenteRequest extends FormRequest
             'gender' => 'required|in:M,F',
             'address' => 'required|regex:/([- ,\/0-9a-zA-Z]+)/',
             'phone' => 'required|numeric',
-            'path' => 'image|mimes:jpeg,bmp,png',
             'user_id' => 'required|unique:docentes,user_id'
         ];
     }

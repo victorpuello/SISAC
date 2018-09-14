@@ -1,13 +1,26 @@
 var editor;
 $(document).ready(function() {
+    const inf = $('#inf');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
     editor = new $.fn.dataTable.Editor( {
-        ajax: $('#inf').data('urlproces'),
-        type: 'POST',
+        ajax: {
+            create: {
+                type: 'POST',
+                url:  inf.data('urlcreate')
+            },
+            edit: {
+                type: 'PUT',
+                url:  inf.data('urledit')
+            },
+            remove: {
+                type: 'DELETE',
+                url:  inf.data('urlremove')
+            }
+        },
         table: "#users",
         idSrc: "id",
         fields: [
@@ -28,6 +41,11 @@ $(document).ready(function() {
                 name: "username"
             },
             {
+                label: "Contraseña:",
+                name: "password",
+                type: "password"
+            },
+            {
                 label: "Email:",
                 name: "email"
             },
@@ -43,15 +61,10 @@ $(document).ready(function() {
                 name: "type"
             },
             {
-                label: "Foto de perfil:",
                 name: "path",
-                type: "upload",
-                display: function ( file_id ) {
-                    return '<img src="'+editor.file( 'files', file_id ).web_path+'"/>';
-                },
-                clearText: "Borrar",
-                noImageText: 'imagen vacia'
-            },
+                type:    "hidden",
+                default: null
+            }
         ],i18n: {
             edit: {
                 button: "Editar",
@@ -75,14 +88,16 @@ $(document).ready(function() {
     } );
     $('#users').on( 'click', 'tbody td:not(.child), tbody span.dtr-data', function (e) {
         // Ignore the Responsive control and checkbox columns
-        if ( $(this).hasClass( 'control' ) || $(this).hasClass('select-checkbox') || $(this).hasClass('no-editable') ) {
+        if ( $(this).hasClass( 'control' ) || $(this).hasClass('select-checkbox') ) {
             return;
         }
-        editor.inline( this,{
+        editor.inline( this, {
             submit: 'allIfChanged'
         } );
     } );
     var table = $('#users').DataTable({
+        pageLength: 10,
+        paging: true,
         responsive: true,
         processing: true,
         serverSide: true,
@@ -106,9 +121,7 @@ $(document).ready(function() {
             { data: "lastname" },
             { data: "username" },
             { data: "email" },
-            { data: "password" },
-            { data: "path" },
-            { data: "type" },
+            { data: "type" }
         ],
         select: {
             style:    'os',
@@ -132,6 +145,6 @@ $(document).ready(function() {
             }
         ],
     });
-    table.buttons().container()
-        .appendTo( $('.col-md-6:eq(0)', table.table().container() ) );
+    table.buttons().container().appendTo( $('.col-md-6:eq(0)', table.table().container() ) );
+    $.fn.dataTable.ext.errMode = 'throw';
 } );

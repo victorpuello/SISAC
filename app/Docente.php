@@ -13,7 +13,7 @@ class Docente extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     protected $fillable = [
-        'id','typeid','numberid','fnac','gender','address','phone','path','name','user_id'
+        'id','typeid','numberid','fnac','gender','address','phone','name','user_id'
     ];
     private $name;
 
@@ -38,18 +38,6 @@ class Docente extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-
-    public function setPathAttribute($path)
-    {
-        if (!empty($path)) {
-            $image = \Image::make(Input::file('path'))->resize(250,270)->encode('jpg',90);
-            $name = Carbon::now()->second.$path->getClientOriginalName();
-            $this->attributes['path'] = $name;
-            \Storage::disk('local')->put($name,$image);
-        }
-    }
-
 
     public function getSalonDirectorAttribute(){
         $asignacion = DB::table('asignacions')->where('docente_id','=',$this->id);

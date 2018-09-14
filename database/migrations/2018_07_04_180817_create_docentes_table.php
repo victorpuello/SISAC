@@ -14,14 +14,14 @@ class CreateDocentesTable extends Migration
     public function up()
     {
         Schema::create('docentes', function (Blueprint $table) {
-            $table->string('name');
             $table->increments('id');
-            $table->enum('typeid',['CC','CE','PT']);
-            $table->integer('numberid')->unique();
-            $table->date('fnac');
-            $table->enum('gender',['M','F']);
-            $table->string('address');
-            $table->string('phone');
+            $table->string('name');
+            $table->enum('typeid',['CC','CE','PT'])->nullable();
+            $table->integer('numberid')->unique()->nullable();
+            $table->date('fnac')->nullable();
+            $table->enum('gender',['M','F'])->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

@@ -3,9 +3,7 @@
 namespace Ngsoft\Http\Controllers\Admin;
 
 use Illuminate\Validation\Rule;
-use Ngsoft\Docente;
 use Ngsoft\Http\Controllers\Controller;
-use Ngsoft\Grupo;
 use Validator;
 use Ngsoft\Asignatura;
 use Illuminate\Http\Request;

@@ -35,7 +35,12 @@
             </tr>
             </thead>
         </table>
-        <div id="inf" data-token ="{{csrf_token()}}" data-urlproces ="{{route('notas.store')}}" data-urltabla ="{{route('users.index')}}"></div>
+        <div id="inf"
+             data-urlcreate ="{{route('users.store')}}"
+             data-urledit ="{{route('users.update')}}"
+             data-urlremove ="{{route('users.destroy')}}"
+             data-urltabla ="{{route('users.index')}}">
+        </div>
     </div>
 @endsection
 @section('script')
