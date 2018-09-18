@@ -1,14 +1,14 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use Ngsoft\Docente;
-use Ngsoft\Estudiante;
-use Ngsoft\User;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Docente;
+use ATS\Estudiante;
+use ATS\User;
+use ATS\Http\Controllers\Controller;
 class InportUserController extends Controller
 {
     /**

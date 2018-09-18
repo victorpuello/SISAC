@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft\Http\Requests;
+namespace ATS\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

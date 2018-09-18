@@ -6,11 +6,11 @@
  * Time: 5:53 PM
  */
 
-namespace Ngsoft\Transformers;
+namespace ATS\Transformers;
 
 
 use League\Fractal\TransformerAbstract;
-use Ngsoft\Logro;
+use ATS\Logro;
 
 class LogroTransformer extends  TransformerAbstract
 {

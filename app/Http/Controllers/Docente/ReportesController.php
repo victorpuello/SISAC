@@ -1,15 +1,15 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Docente;
+namespace ATS\Http\Controllers\Docente;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use Ngsoft\Asignatura;
-use Ngsoft\Logro;
-use Ngsoft\Http\Controllers\Controller;
-use Ngsoft\Periodo;
-use Ngsoft\Grupo;
+use ATS\Asignatura;
+use ATS\Logro;
+use ATS\Http\Controllers\Controller;
+use ATS\Periodo;
+use ATS\Grupo;
 use PDF;
 
 class ReportesController extends Controller

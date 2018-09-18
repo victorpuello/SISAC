@@ -1,9 +1,9 @@
 <?php
 
-namespace Ngsoft\Rules;
+namespace ATS\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Ngsoft\Asignacion;
+use ATS\Asignacion;
 
 class ValidateAsignacion implements Rule
 {

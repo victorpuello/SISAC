@@ -1,14 +1,14 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Docente;
+namespace ATS\Http\Controllers\Docente;
 
-use Ngsoft\Acudiente;
+use ATS\Acudiente;
 use Illuminate\Http\Request;
-use Ngsoft\Estudiante;
-use Ngsoft\Http\Controllers\Controller;
-use Ngsoft\Http\Requests\CreateAcudienteRequest;
-use Ngsoft\Http\Requests\UpdateAcudienteRequest;
-use Ngsoft\Municipio;
+use ATS\Estudiante;
+use ATS\Http\Controllers\Controller;
+use ATS\Http\Requests\CreateAcudienteRequest;
+use ATS\Http\Requests\UpdateAcudienteRequest;
+use ATS\Municipio;
 
 class AcudienteController extends Controller
 {
@@ -48,7 +48,7 @@ class AcudienteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Acudiente  $acudiente
+     * @param  \ATS\Acudiente  $acudiente
      * @return \Illuminate\Http\Response
      */
     public function show(Acudiente $acudiente)
@@ -59,7 +59,7 @@ class AcudienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Acudiente  $acudiente
+     * @param  \ATS\Acudiente  $acudiente
      * @return \Illuminate\Http\Response
      */
     public function edit(Acudiente $acudiente)
@@ -72,7 +72,7 @@ class AcudienteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Acudiente  $acudiente
+     * @param  \ATS\Acudiente  $acudiente
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAcudienteRequest $request, Acudiente $acudiente)
@@ -85,7 +85,7 @@ class AcudienteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Acudiente  $acudiente
+     * @param  \ATS\Acudiente  $acudiente
      * @return \Illuminate\Http\Response
      */
     public function destroy(Acudiente $acudiente)

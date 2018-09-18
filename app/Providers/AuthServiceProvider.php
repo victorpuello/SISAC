@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft\Providers;
+namespace ATS\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'Ngsoft\Model' => 'Ngsoft\Policies\ModelPolicy',
+        'ATS\Model' => 'ATS\Policies\ModelPolicy',
     ];
 
     /**

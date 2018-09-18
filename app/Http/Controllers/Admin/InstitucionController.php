@@ -1,12 +1,12 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
-use Ngsoft\Http\Requests\CreateInstitucionRequest;
-use Ngsoft\Http\Requests\UpdateInstitucionRequest;
-use Ngsoft\Institucion;
+use ATS\Http\Requests\CreateInstitucionRequest;
+use ATS\Http\Requests\UpdateInstitucionRequest;
+use ATS\Institucion;
 use Illuminate\Http\Request;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Http\Controllers\Controller;
 class InstitucionController extends Controller
 {
     /**
@@ -47,7 +47,7 @@ class InstitucionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Institucion  $institucion
+     * @param  \ATS\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
     public function show(Institucion $institucion)
@@ -58,7 +58,7 @@ class InstitucionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Institucion  $institucion
+     * @param  \ATS\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
     public function edit(Institucion $institucion)
@@ -81,7 +81,7 @@ class InstitucionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Institucion  $institucion
+     * @param  \ATS\Institucion  $institucion
      * @return \Illuminate\Http\Response
      */
     public function destroy(Institucion $institucion)

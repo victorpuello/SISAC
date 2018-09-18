@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Ngsoft\Asignatura;
+use ATS\Asignatura;
 
 class AsignaturasTableSeeder extends Seeder
 {

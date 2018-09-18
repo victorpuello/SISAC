@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft\Providers;
+namespace ATS\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;

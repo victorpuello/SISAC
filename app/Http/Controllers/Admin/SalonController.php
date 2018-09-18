@@ -1,11 +1,11 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
 use Validator;
-use Ngsoft\Grupo;
+use ATS\Grupo;
 use Illuminate\Http\Request;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Http\Controllers\Controller;
 class SalonController extends Controller
 {
     /**
@@ -52,7 +52,7 @@ class SalonController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Grupo  $salon
+     * @param  \ATS\Grupo  $salon
      * @return \Illuminate\Http\Response
      */
     public function show($grado)
@@ -78,7 +78,7 @@ class SalonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Grupo  $salon
+     * @param  \ATS\Grupo  $salon
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -96,7 +96,7 @@ class SalonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Grupo  $salon
+     * @param  \ATS\Grupo  $salon
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

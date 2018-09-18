@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft;
+namespace ATS;
 
 use Illuminate\Database\Eloquent\Model;
 use phpDocumentor\Reflection\Types\This;
@@ -9,14 +9,21 @@ use Illuminate\Support\Facades\DB;
 class Grupo extends Model
 {
     protected $fillable = [
-        'name', 'grade',
+        'name', 'grado_id','modelo','jornada_id'
     ];
     private $nombres = ['0' => 'Pre-Escolar', '1' => 'Primero', '2' => 'Segundo', '3' => 'Tercero', '4' => 'Cuarto', '5' => 'Quinto', '6' => 'Sexto', '7' => 'Septimo', '8' => 'Octavo', '9' => 'Noveno', '10' => 'Decimo', '11' => 'Once'];
 
-
+    public function grado()
+    {
+        return $this->belongsTo(Grado::class);
+    }
+    public function jornada()
+    {
+        return $this->belongsTo(Jornada::class);
+    }
     public function getNameAulaAttribute ()
     {
-        return 'Grupo: ' . $this->nombres[$this->grade] . ' - ' . $this->name;
+        return $this->grado->name.' - '.$this->name;
     }
 
     public function getNameForValidationAttribute ()

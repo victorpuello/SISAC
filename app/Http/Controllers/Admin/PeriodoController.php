@@ -1,10 +1,10 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
-use Ngsoft\Periodo;
+use ATS\Periodo;
 use Illuminate\Http\Request;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Http\Controllers\Controller;
 class PeriodoController extends Controller
 {
     /**
@@ -42,7 +42,7 @@ class PeriodoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Periodo  $periodo
+     * @param  \ATS\Periodo  $periodo
      * @return \Illuminate\Http\Response
      */
     public function show(Periodo $periodo)
@@ -53,7 +53,7 @@ class PeriodoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Periodo  $periodo
+     * @param  \ATS\Periodo  $periodo
      * @return \Illuminate\Http\Response
      */
     public function edit(Periodo $periodo)
@@ -65,7 +65,7 @@ class PeriodoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Periodo  $periodo
+     * @param  \ATS\Periodo  $periodo
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Periodo $periodo)
@@ -78,7 +78,7 @@ class PeriodoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Periodo  $periodo
+     * @param  \ATS\Periodo  $periodo
      * @return \Illuminate\Http\Response
      */
     public function destroy(Periodo $periodo)

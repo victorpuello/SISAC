@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Ngsoft\Municipio;
+use ATS\Municipio;
 
 class MunicipiosTableSeeder extends Seeder
 {

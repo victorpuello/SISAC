@@ -1,18 +1,18 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Secretaria;
+namespace ATS\Http\Controllers\Secretaria;
 
 use App;
 use Illuminate\Http\Request;
-use Ngsoft\Asignatura;
-use Ngsoft\Docente;
-use Ngsoft\Estudiante;
-use Ngsoft\Http\Requests\ReportesLogrosRequest;
-use Ngsoft\Institucion;
-use Ngsoft\Logro;
-use Ngsoft\Periodo;
-use Ngsoft\Grupo;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Asignatura;
+use ATS\Docente;
+use ATS\Estudiante;
+use ATS\Http\Requests\ReportesLogrosRequest;
+use ATS\Institucion;
+use ATS\Logro;
+use ATS\Periodo;
+use ATS\Grupo;
+use ATS\Http\Controllers\Controller;
 use PDF;
 
 class ReportesController extends Controller

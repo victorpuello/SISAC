@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft\Http\Requests;
+namespace ATS\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -37,10 +37,10 @@ class CreateEstudianteRequest extends FormRequest
             'phone'=>'required|numeric',
             'datein'=>'required|date',
             'dateout'=>'required_if:stade,retirado|date|nullable',
-            'path'=>'image|mimes:jpeg,bmp,png',
+            'path'=>'required|image|mimes:jpeg,bmp,png',
             'stade'=>'required|in:activo,retirado,graduado',
             'situation'=>'required|in:nuevo,repitente,promovido,normal',
-            'salon_id'=>'required|numeric'
+            'grupo_id'=>'required|numeric'
         ];
     }
 }

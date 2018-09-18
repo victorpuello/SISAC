@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft\Http\Middleware;
+namespace ATS\Http\Middleware;
 
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;

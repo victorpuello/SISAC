@@ -1,14 +1,14 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Ngsoft\DataTables\UsersDataTablesEditor;
-use Ngsoft\Http\Requests\CreateUserRequest;
-use Ngsoft\Http\Requests\UpdateUserRequest;
-use Ngsoft\Transformers\Users\UserTransformer;
-use Ngsoft\User;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\DataTables\UsersDataTablesEditor;
+use ATS\Http\Requests\CreateUserRequest;
+use ATS\Http\Requests\UpdateUserRequest;
+use ATS\Transformers\Users\UserTransformer;
+use ATS\User;
+use ATS\Http\Controllers\Controller;
 class UserController extends Controller
 {
     /**
@@ -23,7 +23,7 @@ class UserController extends Controller
         if($request->ajax()){
             return datatables()->collection($users)->setTransformer( new UserTransformer())->toJson();
         }
-        return view('admin.users.index',compact('users'));
+        return view('admin.users.index');
     }
 
     public function store(UsersDataTablesEditor $editor)

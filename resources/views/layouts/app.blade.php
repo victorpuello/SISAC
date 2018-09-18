@@ -146,7 +146,6 @@
         <script src="{{asset('vendor/magnific-popup/jquery.magnific-popup.js')}}"></script>
         <script src="{{asset('vendor/jquery-placeholder/jquery-placeholder.js')}}"></script>
         <script src="{{asset('vendor/pnotify/pnotify.custom.js')}}"></script>
-        <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
         @yield('script')
         <!-- Theme Base, Components and Settings -->
         <script src="{{asset('js/theme.js')}}"></script>

@@ -1,16 +1,16 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Docente;
+namespace ATS\Http\Controllers\Docente;
 
-use Ngsoft\Departamento;
-use Ngsoft\Estudiante;
+use ATS\Departamento;
+use ATS\Estudiante;
 use Illuminate\Http\Request;
-use Ngsoft\Http\Requests\CreateEstudianteRequest;
-use Ngsoft\Http\Requests\UpdateDocenteRequest;
-use Ngsoft\Http\Requests\UpdateEstudianteRequest;
-use Ngsoft\Municipio;
-use Ngsoft\Grupo;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Http\Requests\CreateEstudianteRequest;
+use ATS\Http\Requests\UpdateDocenteRequest;
+use ATS\Http\Requests\UpdateEstudianteRequest;
+use ATS\Municipio;
+use ATS\Grupo;
+use ATS\Http\Controllers\Controller;
 
 class EstudianteController extends Controller
 {
@@ -29,7 +29,7 @@ class EstudianteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Estudiante  $estudiante
+     * @param  \ATS\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateEstudianteRequest $request, $id)

@@ -1,15 +1,15 @@
 <?php
 
-namespace Ngsoft\Transformers;
+namespace ATS\Transformers;
 
 use League\Fractal\Resource\Collection;
 use League\Fractal\TransformerAbstract;
-use Ngsoft\Inasistencia;
+use ATS\Inasistencia;
 
 class InasistenciaTransformer extends TransformerAbstract
 {
     /**
-     * @param \Ngsoft\Inasistencia $inasistencia
+     * @param \ATS\Inasistencia $inasistencia
      * @return array
      */
     public function transform( Inasistencia $inasistencia)

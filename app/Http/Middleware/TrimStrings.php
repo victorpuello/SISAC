@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft\Http\Middleware;
+namespace ATS\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\TrimStrings as Middleware;
 

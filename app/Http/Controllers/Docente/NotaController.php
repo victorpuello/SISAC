@@ -1,23 +1,23 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Docente;
+namespace ATS\Http\Controllers\Docente;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use League\Fractal\Manager;
 use League\Fractal\Resource\Collection;
-use Ngsoft\Asignacion;
-use Ngsoft\Asignatura;
-use Ngsoft\DataTables\NotaDataTablesEditor;
-use Ngsoft\Definitiva;
-use Ngsoft\Estudiante;
-use Ngsoft\Inasistencia;
+use ATS\Asignacion;
+use ATS\Asignatura;
+use ATS\DataTables\NotaDataTablesEditor;
+use ATS\Definitiva;
+use ATS\Estudiante;
+use ATS\Inasistencia;
 use Illuminate\Http\Request;
-use Ngsoft\Nota;
-use Ngsoft\Periodo;
-use Ngsoft\Planilla;
-use Ngsoft\Transformers\EstudianteTransformer;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Nota;
+use ATS\Periodo;
+use ATS\Planilla;
+use ATS\Transformers\EstudianteTransformer;
+use ATS\Http\Controllers\Controller;
 class NotaController extends Controller
 {
     private $fondos =  ['primary','secondary','tertiary','quaternary'];
@@ -64,7 +64,7 @@ class NotaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Nota  $nota
+     * @param  \ATS\Nota  $nota
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -125,7 +125,7 @@ class NotaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Nota  $nota
+     * @param  \ATS\Nota  $nota
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -143,7 +143,7 @@ class NotaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Nota  $nota
+     * @param  \ATS\Nota  $nota
      * @return \Illuminate\Http\Response
      */
     public function destroy(Nota $nota)

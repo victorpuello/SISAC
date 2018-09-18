@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft\Rules;
+namespace ATS\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\DB;

@@ -59,7 +59,9 @@ return [
         ],
         'estudiantes' => [
             'driver' => 'local',
-            'root' => public_path('imgUsers/estudiantes'),
+            'root' => storage_path('app/usersdata/img/estudiantes'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
         ],
         'users' => [
             'driver' => 'local',

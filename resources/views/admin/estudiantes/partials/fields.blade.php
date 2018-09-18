@@ -2,13 +2,13 @@
     <div class="col-lg-6">
         <div class="form-group">
             {!! Form::label('name', 'Nombres',['class'=>'control-label']) !!}
-            {!! Form::text('name', null, ['class' => 'form-control','id'=>'inputDefault', 'placeholder' => 'Por favor introduzca el nombre']) !!}
+            {!! Form::text('name', null, ['class' => 'form-control','id'=>'name', 'placeholder' => 'Por favor introduzca el nombre','required']) !!}
         </div>
     </div>
     <div class="col-lg-6">
         <div class="form-group">
             {!! Form::label('lastname', 'Apellidos',['class'=>'control-label']) !!}
-            {!! Form::text('lastname', null, ['class' => 'form-control','id'=>'inputDefault', 'placeholder' => 'Por favor introduzca los apellidos']) !!}
+            {!! Form::text('lastname', null, ['class' => 'form-control','id'=>'inputDefault', 'placeholder' => 'Por favor introduzca los apellidos','required']) !!}
         </div>
     </div>
 </div>
@@ -22,19 +22,19 @@
     <div class="col-lg-3">
         <div class="form-group">
             {!! Form::label('identification', 'Número de Identificación: ',['class'=>'control-label']) !!}
-            {!! Form::number('identification') !!}
+            {!! Form::number('identification',null,['class' => 'form-control','id'=>'identification', 'placeholder' => 'Número de identidad','required']) !!}
         </div>
     </div>
     <div class="col-lg-3">
         <div class="form-group">
             {!! Form::label('gender', 'Sexo',['class'=>'control-label']) !!}
-            {!! Form::select('gender',['F'=>'Femenino','M' => 'Masculino'], null, ['class' => 'form-control','required','placeholder' =>'Selecciona el genero']) !!}
+            {!! Form::select('gender',['F'=>'Femenino','M' => 'Masculino'], null, ['class' => 'form-control','required','placeholder' =>'Selecciona el genero','required']) !!}
         </div>
     </div>
     <div class="col-lg-3">
         <div class="form-group">
             {!! Form::label('birthday', 'Fecha de Nacimiento: ',['class'=>'control-label']) !!}
-            {!! Form::date('birthday') !!}
+            {!! Form::date('birthday',null,['class' => 'form-control','id'=>'birthday', 'placeholder' => 'Fecha de nacimiento','required']) !!}
         </div>
     </div>
 </div>
@@ -50,7 +50,7 @@
     <div class="col-lg-4">
         <div class="form-group">
             {!! Form::label('address', 'Dirección',['class'=>'control-label']) !!}
-            {!! Form::text('address', null, ['class' => 'form-control','id'=>'inputDefault', 'placeholder' => 'Por favor introduzca la dirección del estudiante']) !!}
+            {!! Form::text('address', null, ['class' => 'form-control','id'=>'inputDefault', 'placeholder' => 'Por favor introduzca la dirección del estudiante','required']) !!}
         </div>
     </div>
 </div>
@@ -61,12 +61,12 @@
     </div>
     <div class="col-lg-4">
         {!! Form::label('phone', 'Telefono',['class'=>'control-label']) !!}
-        {!! Form::text('phone', null, ['class' => 'form-control','id'=>'inputDefault', 'placeholder' => 'Por favor introduzca el Telefono']) !!}
+        {!! Form::text('phone', null, ['class' => 'form-control','id'=>'inputDefault', 'placeholder' => 'Por favor introduzca el Telefono','required']) !!}
     </div>
     <div class="col-lg-4">
         <div class="form-group">
             {!! Form::label('datein', 'Fecha de Ingreso: ',['class'=>'control-label']) !!}
-            {!! Form::date('datein')!!}
+            {!! Form::date('datein',null,['class' => 'form-control','id'=>'birthday', 'placeholder' => 'Fecha de ingreso','required'])!!}
         </div>
     </div>
 </div>
@@ -74,7 +74,7 @@
     <div class="col-lg-4">
         <div class="form-group">
             {!! Form::label('dateout', 'Fecha de Retiro: ',['class'=>'control-label']) !!}
-            {!! Form::date('dateout') !!}
+            {!! Form::date('dateout',null,['class' => 'form-control','id'=>'dateout', 'placeholder' => 'Fecha de retiro','disabled']) !!}
         </div>
     </div>
     <div class="col-lg-4">
@@ -109,7 +109,38 @@
         </div>
     </div>
     <div class="col-lg-6">
-        {!! Form::label('salon_id', 'Salón al que pertenece: ',['class'=>'control-label']) !!}
-        {!! Form::select('salon_id', $grados,null,['placeholder' =>'Selecciona un Salón','class' => 'form-control mb-3', 'id'=>'birthcity','required']) !!}
+        {!! Form::label('grupo_id', 'Grupo al que pertenece: ',['class'=>'control-label']) !!}
+        {!! Form::select('grupo_id', $grados,null,['placeholder' =>'Selecciona un Grupo','class' => 'form-control mb-3', 'id'=>'birthcity','required']) !!}
     </div>
 </div>
+<script>
+    $("#birthstate").change(event => {
+        const _url =  event.target.dataset.url;
+        this._url = _url.replace(':ID',`${event.target.value}`);
+        $.get(this._url, function (res, sta) {
+            $("#birthcity").empty();
+            res.forEach(element =>{
+                $("#birthcity").append(`<option value=${element.id}> ${element.name}</option>`);
+            });
+        });
+    });
+    $("#stade").change(event => {
+        const estado = `${event.target.value}`;
+        const dateout = $('#dateout');
+        console.log('cambio'+'    '+ estado);
+        switch(estado) {
+            case 'retirado':
+                dateout.prop({
+                    enable: true,
+                    disabled: false
+                });
+                break;
+            default:
+                dateout.prop({
+                    enable: false,
+                    disabled: true
+                });
+                break
+        }
+    });
+</script>

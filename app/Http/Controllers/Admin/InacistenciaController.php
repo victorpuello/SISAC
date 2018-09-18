@@ -1,10 +1,10 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
-use Ngsoft\Inacistencia;
+use ATS\Inacistencia;
 use Illuminate\Http\Request;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Http\Controllers\Controller;
 
 class InacistenciaController extends Controller
 {
@@ -42,7 +42,7 @@ class InacistenciaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Inacistencia  $inacistencia
+     * @param  \ATS\Inacistencia  $inacistencia
      * @return \Illuminate\Http\Response
      */
     public function show(Inacistencia $inacistencia)
@@ -53,7 +53,7 @@ class InacistenciaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Inacistencia  $inacistencia
+     * @param  \ATS\Inacistencia  $inacistencia
      * @return \Illuminate\Http\Response
      */
     public function edit(Inacistencia $inacistencia)
@@ -65,7 +65,7 @@ class InacistenciaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Inacistencia  $inacistencia
+     * @param  \ATS\Inacistencia  $inacistencia
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Inacistencia $inacistencia)
@@ -76,7 +76,7 @@ class InacistenciaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Inacistencia  $inacistencia
+     * @param  \ATS\Inacistencia  $inacistencia
      * @return \Illuminate\Http\Response
      */
     public function destroy(Inacistencia $inacistencia)

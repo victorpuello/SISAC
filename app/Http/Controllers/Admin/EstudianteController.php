@@ -1,30 +1,43 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
+use ATS\Transformers\Estudiantes\EstudiantesTransformer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
-use Ngsoft\Departamento;
-use Ngsoft\Estudiante;
+use ATS\Departamento;
+use ATS\Estudiante;
 use Illuminate\Http\Request;
-use Ngsoft\Http\Requests\CreateEstudianteRequest;
-use Ngsoft\Http\Requests\UpdateDocenteRequest;
-use Ngsoft\Http\Requests\UpdateEstudianteRequest;
-use Ngsoft\Municipio;
-use Ngsoft\Grupo;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Http\Requests\CreateEstudianteRequest;
+use ATS\Http\Requests\UpdateDocenteRequest;
+use ATS\Http\Requests\UpdateEstudianteRequest;
+use ATS\Municipio;
+use ATS\Grupo;
+use ATS\Http\Controllers\Controller;
 
 class EstudianteController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $estudiantes = Estudiante::all();
-        return view('admin.estudiantes.index',compact('estudiantes'));
+        $estudiantes = Estudiante::with('grupo')->orderBy('created_at','ASC');
+        if($request->ajax()) {
+            return datatables()
+                ->eloquent($estudiantes)
+                ->addColumn('btn', 'admin.estudiantes.partials.actions')
+                ->addColumn('grupo', function (Estudiante $estudiante) {
+                    return $estudiante->grupo->name_aula;
+                })
+                ->rawColumns(['btn'])
+                ->smart(true)
+                ->toJson();
+        }
+        return view('admin.estudiantes.index');
     }
 
     /**
@@ -36,26 +49,31 @@ class EstudianteController extends Controller
     {
         $departamentos = Departamento::pluck('name','id');
         $grados = $this->getSalon();
-        return view('admin.estudiantes.create',compact('departamentos','grados'));
+        return view('admin.estudiantes.ajax.create',compact('departamentos','grados'));
     }
 
+
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateEstudianteRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateEstudianteRequest $request)
     {
+        //dd($request->all());
         $estudiante = new Estudiante($request->all());
         $estudiante->save();
-        return redirect()->route('estudiantes.index');
+        $data = [
+            'estudiante'=>$estudiante,
+            'messaje' => 'Guardado con exito'
+            ];
+        return response()->json($data,200);
+       // return redirect()->route('estudiantes.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Estudiante  $estudiante
+     * @param  \ATS\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -68,7 +86,7 @@ class EstudianteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Estudiante  $estudiante
+     * @param  \ATS\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -83,7 +101,7 @@ class EstudianteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Estudiante  $estudiante
+     * @param  \ATS\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateEstudianteRequest $request, $id)
@@ -97,7 +115,7 @@ class EstudianteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Estudiante  $estudiante
+     * @param  \ATS\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

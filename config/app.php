@@ -163,11 +163,11 @@ return [
         /*
          * Application Service Providers...
          */
-        Ngsoft\Providers\AppServiceProvider::class,
-        Ngsoft\Providers\AuthServiceProvider::class,
-        // Ngsoft\Providers\BroadcastServiceProvider::class,
-        Ngsoft\Providers\EventServiceProvider::class,
-        Ngsoft\Providers\RouteServiceProvider::class,
+        ATS\Providers\AppServiceProvider::class,
+        ATS\Providers\AuthServiceProvider::class,
+        // ATS\Providers\BroadcastServiceProvider::class,
+        ATS\Providers\EventServiceProvider::class,
+        ATS\Providers\RouteServiceProvider::class,
 
 
     ],

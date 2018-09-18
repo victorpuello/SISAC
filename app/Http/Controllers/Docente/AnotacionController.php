@@ -1,14 +1,14 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Docente;
+namespace ATS\Http\Controllers\Docente;
 
-use Ngsoft\Anotacion;
+use ATS\Anotacion;
 use Illuminate\Http\Request;
-use Ngsoft\Estudiante;
-use Ngsoft\Http\Controllers\Controller;
-use Ngsoft\Http\Requests\CreateAnotacionRequest;
-use Ngsoft\Http\Requests\UpdateAnotacionRequest;
-use Ngsoft\Periodo;
+use ATS\Estudiante;
+use ATS\Http\Controllers\Controller;
+use ATS\Http\Requests\CreateAnotacionRequest;
+use ATS\Http\Requests\UpdateAnotacionRequest;
+use ATS\Periodo;
 
 class AnotacionController extends Controller
 {
@@ -52,7 +52,7 @@ class AnotacionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Anotacion  $anotacion
+     * @param  \ATS\Anotacion  $anotacion
      * @return \Illuminate\Http\Response
      */
     public function show(Estudiante $estudiante)
@@ -63,7 +63,7 @@ class AnotacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Anotacion  $anotacion
+     * @param  \ATS\Anotacion  $anotacion
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -78,7 +78,7 @@ class AnotacionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Anotacion  $anotacion
+     * @param  \ATS\Anotacion  $anotacion
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAnotacionRequest $request, $id)
@@ -93,7 +93,7 @@ class AnotacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Anotacion  $anotacion
+     * @param  \ATS\Anotacion  $anotacion
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

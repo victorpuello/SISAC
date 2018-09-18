@@ -38,7 +38,7 @@
             "database/factories"
         ],
         "psr-4": {
-            "Ngsoft\\": "app/"
+            "ATS\\": "app/"
         },
         "files": [
             "app/Helpers/VariosHelpers.php"

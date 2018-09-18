@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft\Http\Middleware;
+namespace ATS\Http\Middleware;
 
 use Carbon\Carbon;
 use Closure;

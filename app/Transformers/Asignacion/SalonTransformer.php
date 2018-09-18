@@ -6,11 +6,11 @@
  * Time: 9:53 PM
  */
 
-namespace Ngsoft\Transformers\Asignacion;
+namespace ATS\Transformers\Asignacion;
 
 
 use League\Fractal\TransformerAbstract;
-use Ngsoft\Grupo;
+use ATS\Grupo;
 
 class SalonTransformer extends TransformerAbstract
 {

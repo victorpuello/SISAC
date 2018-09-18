@@ -1,16 +1,16 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Auth;
-use Ngsoft\Asignacion;
+use ATS\Asignacion;
 use Illuminate\Http\Request;
-use Ngsoft\Asignatura;
-use Ngsoft\Docente;
-use Ngsoft\Http\Controllers\Controller;
-use Ngsoft\Http\Requests\CreateAsignacionRequest;
-use Ngsoft\Http\Requests\UpdateAsignacionRequest;
-use Ngsoft\Grupo;
+use ATS\Asignatura;
+use ATS\Docente;
+use ATS\Http\Controllers\Controller;
+use ATS\Http\Requests\CreateAsignacionRequest;
+use ATS\Http\Requests\UpdateAsignacionRequest;
+use ATS\Grupo;
 
 class AsignacionController extends Controller
 {
@@ -77,7 +77,7 @@ class AsignacionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Asignacion  $asignacion
+     * @param  \ATS\Asignacion  $asignacion
      * @return \Illuminate\Http\Response
      */
     public function show(Asignacion $asignacion)
@@ -88,7 +88,7 @@ class AsignacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Asignacion  $asignacion
+     * @param  \ATS\Asignacion  $asignacion
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -112,7 +112,7 @@ class AsignacionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Asignacion  $asignacion
+     * @param  \ATS\Asignacion  $asignacion
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAsignacionRequest $request, $id)
@@ -126,7 +126,7 @@ class AsignacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Asignacion  $asignacion
+     * @param  \ATS\Asignacion  $asignacion
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

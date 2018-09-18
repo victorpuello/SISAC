@@ -1,17 +1,17 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Docente;
+namespace ATS\Http\Controllers\Docente;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Ngsoft\Asignacion;
-use Ngsoft\Http\Requests\CreateLogroRequest;
-use Ngsoft\Http\Requests\UpdateLogroRequest;
-use Ngsoft\Logro;
+use ATS\Asignacion;
+use ATS\Http\Requests\CreateLogroRequest;
+use ATS\Http\Requests\UpdateLogroRequest;
+use ATS\Logro;
 use Illuminate\Http\Request;
-use Ngsoft\Periodo;
-use Ngsoft\Http\Controllers\Controller;
-use Ngsoft\Rules\CountCodeLogro;
+use ATS\Periodo;
+use ATS\Http\Controllers\Controller;
+use ATS\Rules\CountCodeLogro;
 use Validator;
 
 class LogroController extends Controller
@@ -109,7 +109,7 @@ class LogroController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Logro  $logro
+     * @param  \ATS\Logro  $logro
      * @return \Illuminate\Http\Response
      */
     public function show(Logro $logro)
@@ -120,7 +120,7 @@ class LogroController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Logro  $logro
+     * @param  \ATS\Logro  $logro
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -138,7 +138,7 @@ class LogroController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Logro  $logro
+     * @param  \ATS\Logro  $logro
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateLogroRequest $request, $id)
@@ -152,7 +152,7 @@ class LogroController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Logro  $logro
+     * @param  \ATS\Logro  $logro
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

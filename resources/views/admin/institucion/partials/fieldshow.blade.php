@@ -73,9 +73,15 @@
 <div class="form-group row">
     <div class="col-lg-12">
         <div class="form-group">
-            <a href="{{asset("storage/".$institucion->path)}}" data-plugin-lightbox data-plugin-options='{ "type":"image" }' title="Escudo">
-                <img class="img-fluid" src="{{asset("storage/".$institucion->path)}}" width="75">
-            </a>
+            <div class="thumb-info mb-4">
+                <a href="{{asset("storage/".$institucion->path)}}" data-plugin-lightbox data-plugin-options='{ "type":"image" }' title="Escudo">
+                    <img src="{{asset("storage/".$institucion->path)}}" class="rounded img-fluid" alt="{{$institucion->name}}">
+                    <div class="thumb-info-title">
+                        <span class="thumb-info-inner">Escudo</span>
+                        <span class="thumb-info-type">Institución</span>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

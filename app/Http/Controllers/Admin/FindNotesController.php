@@ -1,13 +1,13 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Ngsoft\Docente;
-use Ngsoft\Logro;
-use Ngsoft\Periodo;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Docente;
+use ATS\Logro;
+use ATS\Periodo;
+use ATS\Http\Controllers\Controller;
 
 
 class FindNotesController extends Controller

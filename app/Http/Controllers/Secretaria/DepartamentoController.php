@@ -1,10 +1,10 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Secretaria;
+namespace ATS\Http\Controllers\Secretaria;
 
-use Ngsoft\Departamento;
+use ATS\Departamento;
 use Illuminate\Http\Request;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Http\Controllers\Controller;
 
 class DepartamentoController extends Controller
 {
@@ -42,7 +42,7 @@ class DepartamentoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Departamento  $departamento
+     * @param  \ATS\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
     public function show(Departamento $departamento)
@@ -53,7 +53,7 @@ class DepartamentoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Departamento  $departamento
+     * @param  \ATS\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
     public function edit(Departamento $departamento)
@@ -65,7 +65,7 @@ class DepartamentoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Departamento  $departamento
+     * @param  \ATS\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Departamento $departamento)
@@ -76,7 +76,7 @@ class DepartamentoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Departamento  $departamento
+     * @param  \ATS\Departamento  $departamento
      * @return \Illuminate\Http\Response
      */
     public function destroy(Departamento $departamento)

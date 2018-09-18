@@ -1,23 +1,23 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
 use Excel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Files\ExcelFile;
-use Ngsoft\Asignacion;
-use Ngsoft\Asignatura;
-use Ngsoft\Docente;
-use Ngsoft\Http\Requests\CreateLogroRequest;
-use Ngsoft\Http\Requests\UpdateLogroRequest;
-use Ngsoft\Logro;
+use ATS\Asignacion;
+use ATS\Asignatura;
+use ATS\Docente;
+use ATS\Http\Requests\CreateLogroRequest;
+use ATS\Http\Requests\UpdateLogroRequest;
+use ATS\Logro;
 use Illuminate\Http\Request;
-use Ngsoft\Periodo;
-use Ngsoft\Grupo;
-use Ngsoft\User;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Periodo;
+use ATS\Grupo;
+use ATS\User;
+use ATS\Http\Controllers\Controller;
 use PhpParser\Node\Expr\New_;
 
 class LogroController extends Controller
@@ -118,7 +118,7 @@ class LogroController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Logro  $logro
+     * @param  \ATS\Logro  $logro
      * @return \Illuminate\Http\Response
      */
     public function show(Logro $logro)
@@ -129,7 +129,7 @@ class LogroController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Logro  $logro
+     * @param  \ATS\Logro  $logro
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -148,7 +148,7 @@ class LogroController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Logro  $logro
+     * @param  \ATS\Logro  $logro
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateLogroRequest $request, $id)
@@ -162,7 +162,7 @@ class LogroController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Logro  $logro
+     * @param  \ATS\Logro  $logro
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

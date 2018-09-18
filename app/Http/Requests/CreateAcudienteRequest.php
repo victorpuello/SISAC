@@ -1,10 +1,10 @@
 <?php
 
-namespace Ngsoft\Http\Requests;
+namespace ATS\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Ngsoft\Rules\ValidateAcudiente;
+use ATS\Rules\ValidateAcudiente;
 
 class CreateAcudienteRequest extends FormRequest
 {

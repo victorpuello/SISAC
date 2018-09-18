@@ -1,16 +1,16 @@
 <?php
 
-namespace Ngsoft\Http\Requests;
+namespace ATS\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Routing\Route;
 use Illuminate\Validation\Rule;
-use Ngsoft\Logro;
-use Ngsoft\Periodo;
-use Ngsoft\Rules\CountCodeLogro;
-use Ngsoft\Rules\UpdateLogro;
-use Ngsoft\Rules\ValidatePeriodo;
+use ATS\Logro;
+use ATS\Periodo;
+use ATS\Rules\CountCodeLogro;
+use ATS\Rules\UpdateLogro;
+use ATS\Rules\ValidatePeriodo;
 
 class UpdateLogroRequest extends FormRequest
 {

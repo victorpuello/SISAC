@@ -1,7 +1,8 @@
 <?php
 
+use ATS\User;
 use Illuminate\Database\Seeder;
-use Ngsoft\User;
+
 
 class UsersTableSeeder extends Seeder
 {

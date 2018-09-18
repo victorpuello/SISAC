@@ -1,12 +1,12 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Docente;
+namespace ATS\Http\Controllers\Docente;
 
-use Ngsoft\Definitiva;
+use ATS\Definitiva;
 use Illuminate\Http\Request;
-use Ngsoft\Estudiante;
-use Ngsoft\Http\Controllers\Controller;
-use Ngsoft\Periodo;
+use ATS\Estudiante;
+use ATS\Http\Controllers\Controller;
+use ATS\Periodo;
 
 class DefinitivaController extends Controller
 {
@@ -45,7 +45,7 @@ class DefinitivaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Definitiva  $definitiva
+     * @param  \ATS\Definitiva  $definitiva
      * @return \Illuminate\Http\Response
      */
     public function show(Definitiva $definitiva)
@@ -56,7 +56,7 @@ class DefinitivaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Definitiva  $definitiva
+     * @param  \ATS\Definitiva  $definitiva
      * @return \Illuminate\Http\Response
      */
     public function edit(Definitiva $definitiva)
@@ -68,7 +68,7 @@ class DefinitivaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Definitiva  $definitiva
+     * @param  \ATS\Definitiva  $definitiva
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Definitiva $definitiva)
@@ -79,7 +79,7 @@ class DefinitivaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Definitiva  $definitiva
+     * @param  \ATS\Definitiva  $definitiva
      * @return \Illuminate\Http\Response
      */
     public function destroy(Definitiva $definitiva)

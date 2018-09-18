@@ -1,9 +1,9 @@
 <?php
 
-namespace Ngsoft\Rules;
+namespace ATS\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use Ngsoft\Estudiante;
+use ATS\Estudiante;
 
 class ValidateAcudiente implements Rule
 {

@@ -27,7 +27,6 @@
             {!! Form::model($institucion,['route' => ['institucion.update',$institucion], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
             @include('admin.institucion.partials.fieldshow')
             {!! Form::close() !!}
-            @endinstitucion
     </div>
     <div class="card-footer">
         <div class="row">
@@ -36,6 +35,7 @@
             </div>
         </div>
     </div>
+    @endinstitucion
 @endsection
 @section('script')
     <script src="{{asset('vendor/autosize/autosize.js')}}"></script>

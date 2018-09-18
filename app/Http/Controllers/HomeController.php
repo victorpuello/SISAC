@@ -1,13 +1,13 @@
 <?php
 
-namespace Ngsoft\Http\Controllers;
+namespace ATS\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Ngsoft\Asignacion;
-use Ngsoft\Docente;
-use Ngsoft\Estudiante;
-use Ngsoft\Logro;
-use Ngsoft\User;
+use ATS\Asignacion;
+use ATS\Docente;
+use ATS\Estudiante;
+use ATS\Logro;
+use ATS\User;
 
 class HomeController extends Controller
 {

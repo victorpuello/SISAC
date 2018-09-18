@@ -6,11 +6,11 @@
  * Time: 11:28 PM
  */
 
-namespace Ngsoft\Transformers\Users;
+namespace ATS\Transformers\Users;
 
 
 use League\Fractal\TransformerAbstract;
-use Ngsoft\User;
+use ATS\User;
 
 class UserTransformer extends TransformerAbstract
 {

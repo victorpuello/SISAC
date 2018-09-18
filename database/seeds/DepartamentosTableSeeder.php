@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Ngsoft\Departamento;
+use ATS\Departamento;
 
 class DepartamentosTableSeeder extends Seeder
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Ngsoft\DataTables;
+namespace ATS\DataTables;
 
-use Ngsoft\Asignacion;
-use Ngsoft\Estudiante;
-use Ngsoft\Inasistencia;
-use Ngsoft\Nota;
-use Ngsoft\Periodo;
+use ATS\Asignacion;
+use ATS\Estudiante;
+use ATS\Inasistencia;
+use ATS\Nota;
+use ATS\Periodo;
 use Yajra\DataTables\DataTablesEditor;
 use Illuminate\Database\Eloquent\Model;
 

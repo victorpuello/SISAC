@@ -1,11 +1,11 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
 use Illuminate\Validation\Rule;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Http\Controllers\Controller;
 use Validator;
-use Ngsoft\Asignatura;
+use ATS\Asignatura;
 use Illuminate\Http\Request;
 
 class AsignaturaController extends Controller
@@ -54,7 +54,7 @@ class AsignaturaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Asignatura  $asignatura
+     * @param  \ATS\Asignatura  $asignatura
      * @return \Illuminate\Http\Response
      */
     public function show(Asignatura $asignatura)
@@ -78,7 +78,7 @@ class AsignaturaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Asignatura  $asignatura
+     * @param  \ATS\Asignatura  $asignatura
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)

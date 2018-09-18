@@ -1,10 +1,10 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
-use Ngsoft\Anotacion;
+use ATS\Anotacion;
 use Illuminate\Http\Request;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Http\Controllers\Controller;
 
 class AnotacionController extends Controller
 {
@@ -42,7 +42,7 @@ class AnotacionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Anotacion  $anotacion
+     * @param  \ATS\Anotacion  $anotacion
      * @return \Illuminate\Http\Response
      */
     public function show(Anotacion $anotacion)
@@ -53,7 +53,7 @@ class AnotacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \Ngsoft\Anotacion  $anotacion
+     * @param  \ATS\Anotacion  $anotacion
      * @return \Illuminate\Http\Response
      */
     public function edit(Anotacion $anotacion)
@@ -65,7 +65,7 @@ class AnotacionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Anotacion  $anotacion
+     * @param  \ATS\Anotacion  $anotacion
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Anotacion $anotacion)
@@ -76,7 +76,7 @@ class AnotacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Anotacion  $anotacion
+     * @param  \ATS\Anotacion  $anotacion
      * @return \Illuminate\Http\Response
      */
     public function destroy(Anotacion $anotacion)

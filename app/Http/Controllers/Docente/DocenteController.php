@@ -1,14 +1,14 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Docente;
+namespace ATS\Http\Controllers\Docente;
 
 use Illuminate\Http\Request;
-use Ngsoft\Asignatura;
-use Ngsoft\Docente;
-use Ngsoft\Http\Requests\CreateDocenteRequest;
-use Ngsoft\Http\Requests\UpdateDocenteRequest;
-use Ngsoft\User;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Asignatura;
+use ATS\Docente;
+use ATS\Http\Requests\CreateDocenteRequest;
+use ATS\Http\Requests\UpdateDocenteRequest;
+use ATS\User;
+use ATS\Http\Controllers\Controller;
 
 class DocenteController extends Controller
 {
@@ -61,7 +61,7 @@ class DocenteController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Ngsoft\Docente  $docente
+     * @param  \ATS\Docente  $docente
      * @return \Illuminate\Http\Response
      */
     public function show(Docente $docente)
@@ -86,7 +86,7 @@ class DocenteController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Ngsoft\Docente  $docente
+     * @param  \ATS\Docente  $docente
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateDocenteRequest $request, $id)
@@ -100,7 +100,7 @@ class DocenteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Ngsoft\Docente  $docente
+     * @param  \ATS\Docente  $docente
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

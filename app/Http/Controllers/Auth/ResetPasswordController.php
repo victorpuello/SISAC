@@ -1,8 +1,8 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Auth;
+namespace ATS\Http\Controllers\Auth;
 
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller

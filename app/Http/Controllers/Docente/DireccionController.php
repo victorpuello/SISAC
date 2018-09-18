@@ -1,12 +1,12 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Docente;
+namespace ATS\Http\Controllers\Docente;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Ngsoft\Estudiante;
-use Ngsoft\Http\Controllers\Controller;
-use Ngsoft\Municipio;
+use ATS\Estudiante;
+use ATS\Http\Controllers\Controller;
+use ATS\Municipio;
 
 class DireccionController extends Controller
 {

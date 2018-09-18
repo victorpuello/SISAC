@@ -1,10 +1,10 @@
 <?php
 
-namespace Ngsoft\Http\Requests;
+namespace ATS\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Ngsoft\Rules\CountCodeLogro;
-use Ngsoft\Rules\ValidatePeriodo;
+use ATS\Rules\CountCodeLogro;
+use ATS\Rules\ValidatePeriodo;
 
 class CreateLogroRequest extends FormRequest
 {

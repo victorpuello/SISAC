@@ -1,17 +1,17 @@
 <?php
 
-namespace Ngsoft\Transformers;
+namespace ATS\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use Ngsoft\Asignacion;
-use Ngsoft\Estudiante;
-use Ngsoft\Periodo;
+use ATS\Asignacion;
+use ATS\Estudiante;
+use ATS\Periodo;
 class EstudianteTransformer extends TransformerAbstract
 {
     protected  $availableIncludes = ['notas','inasistencias'];
     protected  $defaultIncludes = ['notas','inasistencias'];
     /**
-     * @param \Ngsoft\Estudiante $estudiante
+     * @param \ATS\Estudiante $estudiante
      * @return array
      */
     protected $asignatura;

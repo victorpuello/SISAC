@@ -1,11 +1,11 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use Ngsoft\Estudiante;
-use Ngsoft\Http\Controllers\Controller;
+use ATS\Estudiante;
+use ATS\Http\Controllers\Controller;
 
 class ImportEstudianteController extends Controller
 {

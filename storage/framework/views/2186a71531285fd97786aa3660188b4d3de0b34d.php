@@ -146,7 +146,6 @@
         <script src="<?php echo e(asset('vendor/magnific-popup/jquery.magnific-popup.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/jquery-placeholder/jquery-placeholder.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/pnotify/pnotify.custom.js')); ?>"></script>
-        <script src="<?php echo e(asset('js/examples/examples.notifications.js')); ?>"></script>
         <?php echo $__env->yieldContent('script'); ?>
         <!-- Theme Base, Components and Settings -->
         <script src="<?php echo e(asset('js/theme.js')); ?>"></script>

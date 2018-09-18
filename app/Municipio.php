@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft;
+namespace ATS;
 
 use Illuminate\Database\Eloquent\Model;
 

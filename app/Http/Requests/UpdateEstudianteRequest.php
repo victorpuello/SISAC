@@ -1,11 +1,11 @@
 <?php
 
-namespace Ngsoft\Http\Requests;
+namespace ATS\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Routing\Route;
 use Illuminate\Validation\Rule;
-use Ngsoft\Estudiante;
+use ATS\Estudiante;
 
 class UpdateEstudianteRequest extends FormRequest
 {

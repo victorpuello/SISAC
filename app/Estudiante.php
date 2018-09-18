@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft;
+namespace ATS;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -10,18 +10,13 @@ use Illuminate\Support\Facades\Input;
 class Estudiante extends Model
 {
     protected $fillable =[
-        'name','lastname','typeid','identification','birthday','birthstate','birthcity','gender','address','EPS','phone','datein','dateout','path','stade','situation','salon_id',
+        'name','lastname','typeid','identification','birthday','birthstate','birthcity','gender','address','EPS','phone','datein','dateout','path','stade','situation','grupo_id',
     ];
     // Start Relationship of estudent
     protected $all_notas;
     public $_inasistencias;
-    public function __construct (array $attributes = [])
-    {
-        parent::__construct($attributes);
 
-    }
-
-    public function salon()
+    public function grupo()
     {
     	return $this->belongsTo(Grupo::class);
     }
@@ -107,6 +102,12 @@ class Estudiante extends Model
     //
     public function setPathAttribute($path)
     {
+        if (! isset($path)){
+            $this->attributes['path'] = "no-user-image.png";
+        }
+        if (is_null($path)){
+            $this->attributes['path'] = "no-user-image.png";
+        }
         if (!empty($path)) {
             $image = \Image::make(Input::file('path'))->resize(250,270)->encode('jpg',90);
             $name = Carbon::now()->second.$path->getClientOriginalName();

@@ -6,11 +6,11 @@
  * Time: 5:48 PM
  */
 
-namespace Ngsoft\Transformers;
+namespace ATS\Transformers;
 
 
 use League\Fractal\TransformerAbstract;
-use Ngsoft\Nota;
+use ATS\Nota;
 
 class NotaTransformer extends TransformerAbstract
 {

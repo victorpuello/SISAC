@@ -1,10 +1,10 @@
 <?php
 
-namespace Ngsoft\Http\Requests;
+namespace ATS\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Ngsoft\Rules\ValidateAsignacion;
+use ATS\Rules\ValidateAsignacion;
 
 class ReportesLogrosRequest extends FormRequest
 {

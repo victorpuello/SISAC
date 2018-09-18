@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft\Exceptions;
+namespace ATS\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

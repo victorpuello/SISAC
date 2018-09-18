@@ -1,9 +1,9 @@
 <?php
 
-namespace Ngsoft\Http\Controllers\Docente;
+namespace ATS\Http\Controllers\Docente;
 
-use Ngsoft\Http\Controllers\Controller;
-use Ngsoft\Municipio;
+use ATS\Http\Controllers\Controller;
+use ATS\Municipio;
 use Illuminate\Http\Request;
 
 class MunicipioController extends Controller

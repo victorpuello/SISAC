@@ -1,10 +1,10 @@
 <?php
 
-namespace Ngsoft\DataTables;
+namespace ATS\DataTables;
 
 use http\Env\Response;
-use Ngsoft\Docente;
-use Ngsoft\User;
+use ATS\Docente;
+use ATS\User;
 use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTablesEditor;
 use Illuminate\Database\Eloquent\Model;

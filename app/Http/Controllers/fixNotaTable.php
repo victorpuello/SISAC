@@ -1,12 +1,12 @@
 <?php
 
-namespace Ngsoft\Http\Controllers;
+namespace ATS\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Log;
-use Ngsoft\Logro;
-use Ngsoft\Nota;
-use Ngsoft\Grupo;
+use ATS\Logro;
+use ATS\Nota;
+use ATS\Grupo;
 
 class fixNotaTable extends Controller
 {

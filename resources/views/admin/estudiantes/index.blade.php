@@ -3,58 +3,68 @@
 @section('namePage', "Modulo: Estudiantes")
 @section('styles')
     <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.css')}}" />
+    <link rel="stylesheet" href="{{asset('vendor/bootstrap-fileupload/bootstrap-fileupload.min.css')}}" />
     <link rel="stylesheet" href="{{asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('vendor/datatables/media/css/dataTables.bootstrap4.css')}}" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.6/css/select.bootstrap4.min.css" />
+    <link rel="stylesheet" href="{{asset('css/editor.bootstrap4.min.css')}}" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.dataTables.min.css" />
+
+    {{--<style>--}}
+        {{--a.buttons-collection {--}}
+            {{--margin-left: 1em;--}}
+        {{--}--}}
+    {{--</style>--}}
     @endsection
 @section('content')
     <div class="card-body">
-        <div class="row">
+        <div class="row" id="ControlPanel">
             <div class="col-sm-6">
                 <div class="mb-3">
-                    <a href="{{route('estudiantes.create')}}"  class="btn btn-primary">Agregar <i class="fas fa-plus"></i></a>
+                    <a href="{{route('estudiantes.create')}}"  class="btn btn-primary on-default ajax-estudiantes ">Agregar <i class="fas fa-plus"></i></a>
                 </div>
             </div>
         </div>
-        <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+        <table class="table table-bordered table-striped mb-0" id="estudiantes">
             <thead>
             <tr>
+                <th></th>
+                <th></th>
+                <th>N° de Identidad</th>
                 <th>Nombres</th>
                 <th>Apellidos</th>
-                <th>Telefono</th>
+                <th>Estado</th>
+                <th>Grupo</th>
                 <th>Acciones</th>
             </tr>
             </thead>
-            <tbody>
-            @foreach($estudiantes as $estudiante)
-            <tr data-item-id="{{$estudiante->id}}">
-                <td>{{$estudiante->name}}</td>
-                <td>{{$estudiante->lastname}}</td>
-                <td>{{$estudiante->phone}}</td>
-                <td class="actions">
-                    <a href="#" class="hidden on-editing save-row"><i class="fas fa-save"></i></a>
-                    <a href="{{route('estudiantes.show', $estudiante->id)}}" class=" on-default"><i class="fas fa-eye"></i></a>
-                    <a href="{{route('estudiantes.edit', $estudiante->id)}}" class="on-default " > <i class="fas fa-pencil-alt"></i></a>
-                    <a href="#modalEliminar" class="on-default deleted modal-basic" data-nuser="{{$estudiante->FullName}}" data-url="{{ route('estudiantes.destroy', $estudiante->id ) }}"><i class="far fa-trash-alt"></i></a>
-                </td>
-            </tr>
-                @endforeach
-            </tbody>
         </table>
-        @include('admin.users.partials.modals')
+    </div>
+    <div id="inf"
+         data-urltabla ="{{route('estudiantes.index')}}">
     </div>
 @endsection
 @section('script')
+    <script src="{{asset('vendor/autosize/autosize.js')}}"></script>
     <script src="{{asset('vendor/select2/js/select2.js')}}"></script>
     <script src="{{asset('vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('js/examples/examples.datatables.editable.js')}}"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="{{asset('js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('js/dataTables.responsive.min.js')}}"></script>
+    <script src="https://cdn.datatables.net/select/1.2.6/js/dataTables.select.min.js"></script>
+    <script src="{{asset('js/dataTables.editor.min.js')}}"></script>
+    <script src="{{asset('js/editor.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js')}}"></script>
+    <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js')}}"></script>
+    <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js')}}"></script>
+    <script src="{{asset('https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('js/examples/examples.modals.js')}}"></script>
     <script src="{{asset('js/custom.js')}}"></script>
-    <script type="text/javascript">
-        $(".deleted").click(function (e) {
-            $("#form-delete").attr('action', $(this).data('url') );
-            $("#NombreUser").text( $(this).data('nuser') );
-        });
-    </script>
+    <script src="{{asset('vendor/bootstrap-fileupload/bootstrap-fileupload.min.js')}}"></script>
+    <script src="{{asset('js/municipios.js')}}"></script>
+    <script src="{{asset('js/tablas/estudiantes.js')}}"></script>
 @endsection
 

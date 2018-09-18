@@ -29,8 +29,6 @@ class CreateAspectosTable extends Migration
      */
     public function down()
     {
-        Schema::table('aspectos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('aspectos');
     }
 }

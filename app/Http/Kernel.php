@@ -1,6 +1,6 @@
 <?php
 
-namespace Ngsoft\Http;
+namespace ATS\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -17,9 +17,9 @@ class Kernel extends HttpKernel
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \Ngsoft\Http\Middleware\TrimStrings::class,
+        \ATS\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Ngsoft\Http\Middleware\TrustProxies::class,
+        \ATS\Http\Middleware\TrustProxies::class,
     ];
 
     /**
@@ -30,12 +30,12 @@ class Kernel extends HttpKernel
     protected $middlewareGroups = [
         'web' => [
             \Styde\Html\Alert\Middleware::class,
-            \Ngsoft\Http\Middleware\EncryptCookies::class,
+            \ATS\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Ngsoft\Http\Middleware\VerifyCsrfToken::class,
+            \ATS\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
@@ -54,17 +54,17 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        'admin' =>  \Ngsoft\Http\Middleware\Admin::class,
-        'secretaria' =>  \Ngsoft\Http\Middleware\Secretaria::class,
-        'docente' =>  \Ngsoft\Http\Middleware\Docente::class,
-        'coordinador' =>  \Ngsoft\Http\Middleware\Coordinador::class,
-        'verifyAsignacion' =>  \Ngsoft\Http\Middleware\VerifyAsignacion::class,
-        'verifyPeriodo' =>  \Ngsoft\Http\Middleware\VerifyPeriodo::class,
+        'admin' =>  \ATS\Http\Middleware\Admin::class,
+        'secretaria' =>  \ATS\Http\Middleware\Secretaria::class,
+        'docente' =>  \ATS\Http\Middleware\Docente::class,
+        'coordinador' =>  \ATS\Http\Middleware\Coordinador::class,
+        'verifyAsignacion' =>  \ATS\Http\Middleware\VerifyAsignacion::class,
+        'verifyPeriodo' =>  \ATS\Http\Middleware\VerifyPeriodo::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \Ngsoft\Http\Middleware\RedirectIfAuthenticated::class,
+        'guest' => \ATS\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];

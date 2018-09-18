@@ -1,10 +1,10 @@
 <?php
 
-namespace Ngsoft\Rules;
+namespace ATS\Rules;
 
 use Carbon\Carbon;
 use Illuminate\Contracts\Validation\Rule;
-use Ngsoft\Periodo;
+use ATS\Periodo;
 
 class ValidatePeriodo implements Rule
 {
