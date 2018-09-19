@@ -1,13 +1,6 @@
 $( document ).ready(function() {
 
     disableInput();
-
-
-
-
-// Funcion para usar en crear el estudiante y hacer el change de estado
-
-
 function disableInput(){
     var dateout = $('#dateout');
     var estado = $('#stade').val();

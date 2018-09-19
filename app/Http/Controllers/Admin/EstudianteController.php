@@ -48,8 +48,9 @@ class EstudianteController extends Controller
     public function create()
     {
         $departamentos = Departamento::pluck('name','id');
-        $grados = $this->getSalon();
-        return view('admin.estudiantes.ajax.create',compact('departamentos','grados'));
+        $municipios = Municipio::pluck('name','id');
+        $grupos = $this->getGrupo();
+        return view('admin.estudiantes.ajax.create',compact('departamentos','grupos','municipios'));
     }
 
 
@@ -59,7 +60,6 @@ class EstudianteController extends Controller
      */
     public function store(CreateEstudianteRequest $request)
     {
-        //dd($request->all());
         $estudiante = new Estudiante($request->all());
         $estudiante->save();
         $data = [
@@ -67,7 +67,6 @@ class EstudianteController extends Controller
             'messaje' => 'Guardado con exito'
             ];
         return response()->json($data,200);
-       // return redirect()->route('estudiantes.index');
     }
 
     /**
@@ -76,9 +75,8 @@ class EstudianteController extends Controller
      * @param  \ATS\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Estudiante $estudiante)
     {
-        $estudiante = Estudiante::findOrFail($id);
         $municipio = Municipio::findOrFail($estudiante->birthcity);
         return view('admin.estudiantes.show', compact('estudiante','municipio'));
     }
@@ -89,12 +87,12 @@ class EstudianteController extends Controller
      * @param  \ATS\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Estudiante $estudiante)
     {
-        $estudiante= Estudiante::findOrFail($id);
         $departamentos = Departamento::pluck('name','id');
-        $grados = $this->getSalon();
-        return view('admin.estudiantes.edit',compact('estudiante','grados','departamentos'));
+        $municipios = Municipio::pluck('name','id');
+        $grupos = $this->getGrupo();
+        return view('admin.estudiantes.edit',compact('estudiante','grupos','departamentos','municipios'));
     }
 
     /**
@@ -104,11 +102,9 @@ class EstudianteController extends Controller
      * @param  \ATS\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEstudianteRequest $request, $id)
+    public function update(UpdateEstudianteRequest $request, Estudiante $estudiante)
     {
-        $estudiante = Estudiante::findOrFail($id);
-        $estudiante->fill($request->all());
-        $estudiante->save();
+        $estudiante->update($request->all());
         return redirect()->route('estudiantes.index');
     }
 
@@ -118,9 +114,8 @@ class EstudianteController extends Controller
      * @param  \ATS\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Estudiante $estudiante)
     {
-        $estudiante = Estudiante::findOrFail($id);
         $estudiante->delete();
         return redirect()->back();
     }
@@ -128,13 +123,13 @@ class EstudianteController extends Controller
     /**
      * @return array
      */
-    public function getSalon (): array
+    public function getGrupo (): array
     {
         $data = Grupo::all();
-        $grados = [];
+        $grupos = [];
         foreach ($data as $key => $value) {
-            $grados[$key + 1] = $value->NameAula;
+            $grupos[$key + 1] = $value->NameAula;
         }
-        return $grados;
+        return $grupos;
     }
 }

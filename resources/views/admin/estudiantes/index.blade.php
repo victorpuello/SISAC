@@ -10,12 +10,6 @@
     <link rel="stylesheet" href="{{asset('css/editor.bootstrap4.min.css')}}" />
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.dataTables.min.css" />
-
-    {{--<style>--}}
-        {{--a.buttons-collection {--}}
-            {{--margin-left: 1em;--}}
-        {{--}--}}
-    {{--</style>--}}
     @endsection
 @section('content')
     <div class="card-body">

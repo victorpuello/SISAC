@@ -45,7 +45,7 @@
     </div>
     <div class="col-lg-4">
         {!! Form::label('birthcity', 'Municipio de nacimiento',['class'=>'control-label']) !!}
-        {!! Form::select('birthcity', [],null,['class' => 'form-control mb-3', 'id'=>'birthcity','required']) !!}
+        {!! Form::select('birthcity', $municipios,null,['placeholder' =>'Selecciona un Municipio','class' => 'form-control mb-3', 'id'=>'birthcity','required']) !!}
     </div>
     <div class="col-lg-4">
         <div class="form-group">
@@ -110,7 +110,7 @@
     </div>
     <div class="col-lg-6">
         {!! Form::label('grupo_id', 'Grupo al que pertenece: ',['class'=>'control-label']) !!}
-        {!! Form::select('grupo_id', $grados,null,['placeholder' =>'Selecciona un Grupo','class' => 'form-control mb-3', 'id'=>'birthcity','required']) !!}
+        {!! Form::select('grupo_id', $grupos,null,['placeholder' =>'Selecciona un Grupo','class' => 'form-control mb-3', 'id'=>'birthcity','required']) !!}
     </div>
 </div>
 <script>

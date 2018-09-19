@@ -14,12 +14,6 @@ class UpdateEstudianteRequest extends FormRequest
      *
      * @return bool
      */
-    private $route;
-    private $estudiante;
-    public function __construct (Route $route)
-    {
-        $this->route = $route;
-    }
 
     public function authorize()
     {
@@ -33,7 +27,6 @@ class UpdateEstudianteRequest extends FormRequest
      */
     public function rules()
     {
-        $this->estudiante = Estudiante::find($this->route->parameter('estudiante'));
         return [
             'name'=> 'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',
             'lastname'=>'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',
@@ -51,7 +44,7 @@ class UpdateEstudianteRequest extends FormRequest
             'path'=>'image|mimes:jpeg,bmp,png',
             'stade'=>'required|in:activo,retirado,graduado',
             'situation'=>'required|in:nuevo,repitente,promovido,normal',
-            'salon_id'=>'required|numeric'
+            'grupo_id'=>'required|numeric'
         ];
     }
 }

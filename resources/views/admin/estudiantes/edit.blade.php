@@ -10,7 +10,7 @@
             <h2 class="card-title">Editar alummno: {{$estudiante->name}} </h2>
         </header>
         <div class="card-body">
-            @include('admin.users.partials.messages')
+            @include('admin.estudiantes.partials.messages')
             {!! Form::model($estudiante,['route' => ['estudiantes.update',$estudiante->id], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
             <div class="row">
                 <div class="card-body">
@@ -36,5 +36,7 @@
 @section('script')
     <script src="{{asset('vendor/autosize/autosize.js')}}"></script>
     <script src="{{asset('vendor/bootstrap-fileupload/bootstrap-fileupload.min.js')}}"></script>
+    <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
+
     {!! Html::script('js/municipios.js') !!}
 @endsection
