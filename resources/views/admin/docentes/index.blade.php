@@ -11,10 +11,9 @@
         @foreach($docentes as $docente)
             <div class="col-lg-3">
                 <section class="card">
-
                     <header class="card-header {{$fondos[rand(0,3)]}}">
                         <div class="card-header-profile-picture">
-                            <img src="{{ url('/imgUsers/')}}/{{$docente->path}}">
+                            <img src="{{asset("storage/usersdata/img/users/".$docente->user->path)}}">
                         </div>
                     </header>
                     <div class="card-body">

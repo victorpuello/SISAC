@@ -2,11 +2,12 @@
 
 namespace ATS\Http\Controllers\Admin;
 
+use ATS\Grado;
 use Validator;
 use ATS\Grupo;
 use Illuminate\Http\Request;
 use ATS\Http\Controllers\Controller;
-class SalonController extends Controller
+class GrupoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +15,10 @@ class SalonController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $ng ="";
-    private $fondos =  ['primary','secondary','tertiary','quaternary'];
     public function index()
     {
-        $fondos = $this->fondos;
-        $salones = Grupo::all();
-        return view('admin.aulas.index',compact('fondos','salones'));
+        $grados = Grado::all();
+        return view('admin.grupos.index',compact('grados'));
     }
 
     /**
@@ -42,24 +41,24 @@ class SalonController extends Controller
     {
         $validator = $this->ValidateNameOfAula($request);
         if ($validator->fails()){
-            return redirect()->route('aulas.show',$request->grade)->withErrors($validator)->withInput();
+            return redirect()->route('grupos.show',$request->grade)->withErrors($validator)->withInput();
         }
         $salon = new Grupo($request->all());
         $salon->save();
-        return redirect()->route('aulas.show',$salon->grade);
+        return redirect()->route('grupos.show',$salon->grade);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \ATS\Grupo  $salon
+     * @param Grado $grado
      * @return \Illuminate\Http\Response
      */
-    public function show($grado)
+    public function show(Grado $grado)
     {
+        dd($grado);
         $aulas = Grupo::where('grade','=',$grado)->get();
-        $fondos = $this->fondos;
-        return view('admin.aulas.salones',compact('aulas','fondos'));
+        return view('admin.grupos.salones',compact('aulas'));
     }
 
     /**
@@ -90,7 +89,7 @@ class SalonController extends Controller
         }
         $salon->fill($request->all());
         $salon->save();
-        return redirect()->route('aulas.show',$salon->grade);
+        return redirect()->route('grupos.show',$salon->grade);
     }
 
     /**

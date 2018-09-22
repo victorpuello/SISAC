@@ -20,9 +20,9 @@
         </ul>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('aulas.index')}}">
+                <a class="nav-link" href="{{route('grados.index')}}">
                     <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
-                    <span>Grupos</span>
+                    <span>Grados</span>
                 </a>
             </li>
         </ul>

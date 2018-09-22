@@ -34,6 +34,8 @@
             </tr>
             </thead>
         </table>
+        {!! Form::open(['method' => 'DELETE', 'id' => "delete-form" ,'style' => 'display: none;']) !!}
+        {!! Form::close() !!}
     </div>
     <div id="inf"
          data-urltabla ="{{route('estudiantes.index')}}">
@@ -60,5 +62,10 @@
     <script src="{{asset('vendor/bootstrap-fileupload/bootstrap-fileupload.min.js')}}"></script>
     <script src="{{asset('js/municipios.js')}}"></script>
     <script src="{{asset('js/tablas/estudiantes.js')}}"></script>
+    <script type="text/javascript">
+        $(".deleted").click(function (e) {
+            $("#form-delete").attr('action', $(this).data('url') );
+        });
+    </script>
 @endsection
 

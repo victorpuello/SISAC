@@ -1,15 +1,11 @@
-<div id="custom-content" class="modal-block modal-block-full " >
+<div id="custom-content" class="modal-block modal-block-full ">
     <section class="card">
         <?php echo Form::open(['route' => 'estudiantes.store', 'method' => 'POST','files' => true,'class' => 'form-horizontal form-bordered']); ?>        <header class="card-header">
             <h2 class="card-title">Crear estudiante nuevo </h2>
         </header>
         <div class="card-body">
-            <div class="scrollable visible-slider colored-slider" data-plugin-scrollable style="height: 400px;">
-                <div class="scrollable-content">
-                    <?php echo $__env->make('admin.estudiantes.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                    <?php echo $__env->make('admin.estudiantes.partials.fields', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                </div>
-            </div>
+            <?php echo $__env->make('admin.estudiantes.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <?php echo $__env->make('admin.estudiantes.partials.fields', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         </div>
         <footer class="card-footer">
             <div class="row">

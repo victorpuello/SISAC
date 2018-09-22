@@ -10,10 +10,9 @@
         <?php $__currentLoopData = $docentes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $docente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-lg-3">
                 <section class="card">
-
                     <header class="card-header <?php echo e($fondos[rand(0,3)]); ?>">
                         <div class="card-header-profile-picture">
-                            <img src="<?php echo e(url('/imgUsers/')); ?>/<?php echo e($docente->path); ?>">
+                            <img src="<?php echo e(asset("storage/usersdata/img/users/".$docente->user->path)); ?>">
                         </div>
                     </header>
                     <div class="card-body">
