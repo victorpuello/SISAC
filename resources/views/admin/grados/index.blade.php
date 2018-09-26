@@ -2,9 +2,18 @@
 @section('titulo', "Grados")
 @section('namePage', "Modulo: Grados")
 @section('styles')
+    <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.css')}}" />
+    <link rel="stylesheet" href="{{asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('vendor/pnotify/pnotify.custom.css')}}" />
 @endsection
 @section('content')
-    <div class="row">
+    <div class="card card-transparent">
+        <div class="col-sm-6">
+            <div class="mb-3">
+                <a href="{{route('grados.create')}}"  class="btn btn-primary on-default simple-ajax-modal">Agregar grado <i class="fas fa-plus"></i></a>
+            </div>
+        </div>
+        <div class="row">
         @foreach($grados as $grado)
             <div class="col-lg-4 col-xl-4">
                 <section class="card card-featured-left card-featured-primary mb-4">
@@ -26,7 +35,9 @@
                             </div>
                         </div>
                         <div class="summary-footer">
-                            <a href="{{ route('grados.show',$grado) }}" class="btn btn-sm btn-primary text-uppercase">Ver Grupos</a>
+                            <a href="{{ route('grados.edit',$grado) }}" class="btn btn-xs btn-primary simple-ajax-modal"><i class="fas fa-pencil-alt"></i> Editar</a>
+                            <a href="#modalEliminar" class="btn btn-xs btn-primary deleted modal-basic" data-nasg="{{$grado->name}}" data-url="{{ route('grados.destroy', $grado->id ) }}"><i class="far fa-trash-alt"></i> Eliminar</a>
+                            <a href="{{ route('grados.show',$grado) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i> Grupos</a>
                         </div>
                     </div>
                 </div>
@@ -35,4 +46,17 @@
             </div>
         @endforeach
     </div>
+    </div>
+    @include('admin.grados.partials.modals')
 @endsection
+@section('script')
+    <script src="{{asset('vendor/select2/js/select2.js')}}"></script>
+    <script src="{{asset('vendor/pnotify/pnotify.custom.js')}}"></script>
+    <script src="{{asset('js/examples/examples.modals.js')}}"></script>
+    <script>
+        $(".deleted").click(function (e) {
+            $("#form-delete").attr('action', $(this).data('url') );
+            $("#NombreGrado").text( $(this).data('nasg') );
+        });
+    </script>
+    @endsection

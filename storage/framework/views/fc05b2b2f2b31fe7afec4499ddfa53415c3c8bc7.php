@@ -21,8 +21,16 @@
         <ul class="nav nav-children">
             <li>
                 <a class="nav-link" href="<?php echo e(route('grados.index')); ?>">
-                    <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
                     <span>Grados</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="<?php echo e(route('grupos.index')); ?>">
+                    <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+                    <span>Grupos</span>
                 </a>
             </li>
         </ul>

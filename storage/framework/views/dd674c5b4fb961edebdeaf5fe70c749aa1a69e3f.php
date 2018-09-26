@@ -10,7 +10,7 @@
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
                 <div class="modal-text">
-                    <p>Estas seguro que deseas eliminar el grupo: <strong><span id="NombreGrupo"></span></strong></p>
+                    <p>Estas seguro que deseas eliminar el grado: <strong><span id="NombreGrado"></span></strong></p>
                 </div>
             </div>
         </div>
@@ -18,9 +18,11 @@
             <div class="row">
                 <div class="col-md-12 text-right">
                     <button class="btn btn-danger modal-dismiss">Cancelar</button>
-                    {!! Form::open(['method' => 'DELETE', 'id' => "form-delete" ,'style' => 'display: inline-block;']) !!}
+                    <?php echo Form::open(['method' => 'DELETE', 'id' => "form-delete" ,'style' => 'display: inline-block;']); ?>
+
                     <button type="submit" class="btn btn-warning">Confirmar</button>
-                    {!! Form::close() !!}
+                    <?php echo Form::close(); ?>
+
                 </div>
             </div>
         </footer>

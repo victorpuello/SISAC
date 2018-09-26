@@ -3,6 +3,10 @@
 namespace ATS\Http\Controllers\Admin;
 
 use ATS\Grado;
+use ATS\Http\Requests\CreateGrupoRequest;
+use ATS\Http\Requests\UpdateGrupoRequest;
+use ATS\Jornada;
+use ATS\Transformers\GrupoTransformer;
 use Validator;
 use ATS\Grupo;
 use Illuminate\Http\Request;
@@ -10,134 +14,84 @@ use ATS\Http\Controllers\Controller;
 class GrupoController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-    private $ng ="";
-    public function index()
+    public function index(Request $request)
     {
-        $grados = Grado::all();
-        return view('admin.grupos.index',compact('grados'));
+        $grupos = Grupo::with('grado')->with('jornada')->with('estudiantes')->orderBy('created_at','ASC');
+        if($request->ajax()) {
+            return datatables()->eloquent($grupos)
+                ->setTransformer( new GrupoTransformer())
+                ->addColumn('btn', 'admin.grupos.partials.actions')
+                ->rawColumns(['btn'])
+                ->smart(true)
+                ->toJson();
+        }
+        return view('admin.grupos.index');
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        $grados = Grado::pluck('name','id');
+        $jornadas = Jornada::pluck('name','id');
+        return view('admin.grupos.ajax.create',compact('grados','jornadas'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateGrupoRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateGrupoRequest $request)
     {
-        $validator = $this->ValidateNameOfAula($request);
-        if ($validator->fails()){
-            return redirect()->route('grupos.show',$request->grade)->withErrors($validator)->withInput();
-        }
-        $salon = new Grupo($request->all());
-        $salon->save();
-        return redirect()->route('grupos.show',$salon->grade);
+        $grupo = new Grupo($request->all());
+        $grupo->save();
+        return redirect()->route('grupos.index');
     }
 
     /**
-     * Display the specified resource.
-     *
      * @param Grado $grado
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Grado $grado)
+    public function show(Grupo $grupo)
     {
-        dd($grado);
-        $aulas = Grupo::where('grade','=',$grado)->get();
+       
         return view('admin.grupos.salones',compact('aulas'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param $id
-     * @return json
+     * @param Grupo $grupo
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Grupo $grupo)
     {
-        $salon = Grupo::findOrFail($id);
-        return response()->json($salon);
+        $grados = Grado::pluck('name','id');
+        $jornadas = Jornada::pluck('name','id');
+        return view('admin.grupos.ajax.edit',compact('grupo','grados','jornadas'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \ATS\Grupo  $salon
-     * @return \Illuminate\Http\Response
+     * @param UpdateGrupoRequest $request
+     * @param Grupo $grupo
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UpdateGrupoRequest $request, Grupo $grupo)
     {
-        $salon = Grupo::findOrFail($id);
-        $validator = $this->ValidateNameOfAula($request);
-        if ($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        $salon->fill($request->all());
-        $salon->save();
-        return redirect()->route('grupos.show',$salon->grade);
+        $grupo->update($request->all());
+        return redirect()->route('grupos.index');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \ATS\Grupo  $salon
-     * @return \Illuminate\Http\Response
+     * @param Grupo $grupo
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Grupo $grupo)
     {
-        $salon = Grupo::findOrFail($id);
-        $salon->delete();
-        return redirect()->back();
-    }
-
-    /**
-     * @param $data Valor concatenado de Grado con Nombre
-     */
-    public function validationAulas($data){
-        $aulas = Grupo::all();
-        $salones = array();
-        foreach ($aulas as $aula){
-            array_push($salones,$aula->name_for_validation);
-        }
-        return (in_array($data,$salones));
-    }
-
-    /**
-     * @param Request $request
-     * @return mixed
-     */
-    public function ValidateNameOfAula (Request $request)
-    {
-        $this->ng = $request->grade;
-        $validator = Validator::make($request->all(), [
-            'name' => [
-                'required',
-                'numeric',
-                'min:1',
-                'max:6',
-                function ($attribute, $value, $fail) {
-                    if ($this->validationAulas($this->ng . '' . $value)) {
-                        return $fail('El nombre del Salón esta duplicado.');
-                    }
-                },
-            ],
-            'grade' => 'required|numeric|min:0|max:11'
-        ]);
-        return $validator;
+        $grupo->delete();
+        return redirect()->route('grupos.index');
     }
 }

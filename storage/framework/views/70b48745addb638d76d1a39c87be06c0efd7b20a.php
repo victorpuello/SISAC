@@ -18,9 +18,11 @@
             <div class="row">
                 <div class="col-md-12 text-right">
                     <button class="btn btn-danger modal-dismiss">Cancelar</button>
-                    {!! Form::open(['method' => 'DELETE', 'id' => "form-delete" ,'style' => 'display: inline-block;']) !!}
+                    <?php echo Form::open(['method' => 'DELETE', 'id' => "form-delete" ,'style' => 'display: inline-block;']); ?>
+
                     <button type="submit" class="btn btn-warning">Confirmar</button>
-                    {!! Form::close() !!}
+                    <?php echo Form::close(); ?>
+
                 </div>
             </div>
         </footer>

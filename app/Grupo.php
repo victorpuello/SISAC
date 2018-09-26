@@ -11,8 +11,6 @@ class Grupo extends Model
     protected $fillable = [
         'name', 'grado_id','modelo','jornada_id'
     ];
-    private $nombres = ['0' => 'Pre-Escolar', '1' => 'Primero', '2' => 'Segundo', '3' => 'Tercero', '4' => 'Cuarto', '5' => 'Quinto', '6' => 'Sexto', '7' => 'Septimo', '8' => 'Octavo', '9' => 'Noveno', '10' => 'Decimo', '11' => 'Once'];
-
     public function grado()
     {
         return $this->belongsTo(Grado::class);
@@ -29,15 +27,6 @@ class Grupo extends Model
     public function getNameForValidationAttribute ()
     {
         return $this->grade . '' . $this->name;
-    }
-
-    public function getFullNameAttribute ()
-    {
-        return $this->nombres[$this->grade] . ' - ' . $this->name;
-    }
-    public function getNameGradeAttribute ()
-    {
-        return $this->nombres[$this->grade];
     }
 
     public function estudiantes ()
