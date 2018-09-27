@@ -9,7 +9,7 @@
 @section('content')
     <div class="row">
         @foreach($docentes as $docente)
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <section class="card">
                     <header class="card-header bg-{{Config::get('institucion.fondos.0')}}">
                         <div class="card-header-profile-picture">
@@ -17,15 +17,27 @@
                         </div>
                     </header>
                     <div class="card-body">
-                        <h4 class="font-weight-semibold mt-3">{{$docente->name}}</h4>
-                        <p><strong>Asignaturas: </strong>
-                        <ul>
-                            @foreach($docente->asignaciones as $asignacion)
-                                <li>{{$asignacion->$asignatura->name }}</li>
-                            @endforeach
-                        </ul>
-                        </p>
-                        <hr class="solid short">
+                        <h4 class="font-weight-semibold mt-3">{{substr($docente->name,0,20)}}...</h4>
+                        <div class="accordion accordion-tertiary" id="accordion{{$docente->id}}Primary">
+                            <div class="card card-default">
+                                <div class="card-header">
+                                    <h4 class="card-title m-0">
+                                        <a class="accordion-toggle text-center" data-toggle="collapse" data-parent="#accordion{{$docente->id}}Primary" href="#collapse{{$docente->id}}PrimaryOne">
+                                            Asignaturas
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse{{$docente->id}}PrimaryOne" class="collapse">
+                                    <div class="card-body p-1">
+                                        <ul class="pl-0 mb-0">
+                                            @foreach($docente->asignaciones as $asignacion)
+                                                <li class="badge badge-primary ml-1 p-1">{{$asignacion->asignatura->name }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <p class="mb-1"><a href="{{route('docentes.edit',$docente->id)}}"><i class="fas fa-user-edit mr-1"></i>Editar</a></p>

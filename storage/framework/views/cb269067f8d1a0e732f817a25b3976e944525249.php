@@ -8,7 +8,7 @@
 <?php $__env->startSection('content'); ?>
     <div class="row">
         <?php $__currentLoopData = $docentes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $docente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <section class="card">
                     <header class="card-header bg-<?php echo e(Config::get('institucion.fondos.0')); ?>">
                         <div class="card-header-profile-picture">
@@ -16,15 +16,27 @@
                         </div>
                     </header>
                     <div class="card-body">
-                        <h4 class="font-weight-semibold mt-3"><?php echo e($docente->name); ?></h4>
-                        <p><strong>Asignaturas: </strong>
-                        <ul>
-                            <?php $__currentLoopData = $docente->asignaciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignacion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li><?php echo e($asignacion->$asignatura->name); ?></li>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                        </ul>
-                        </p>
-                        <hr class="solid short">
+                        <h4 class="font-weight-semibold mt-3"><?php echo e(substr($docente->name,0,20)); ?>...</h4>
+                        <div class="accordion accordion-tertiary" id="accordion<?php echo e($docente->id); ?>Primary">
+                            <div class="card card-default">
+                                <div class="card-header">
+                                    <h4 class="card-title m-0">
+                                        <a class="accordion-toggle text-center" data-toggle="collapse" data-parent="#accordion<?php echo e($docente->id); ?>Primary" href="#collapse<?php echo e($docente->id); ?>PrimaryOne">
+                                            Asignaturas
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse<?php echo e($docente->id); ?>PrimaryOne" class="collapse">
+                                    <div class="card-body p-1">
+                                        <ul class="pl-0 mb-0">
+                                            <?php $__currentLoopData = $docente->asignaciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignacion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <li class="badge badge-primary ml-1 p-1"><?php echo e($asignacion->asignatura->name); ?></li>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <p class="mb-1"><a href="<?php echo e(route('docentes.edit',$docente->id)); ?>"><i class="fas fa-user-edit mr-1"></i>Editar</a></p>

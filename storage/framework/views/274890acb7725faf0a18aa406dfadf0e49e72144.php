@@ -1,6 +1,6 @@
 <div id="modalHeaderColorPrimary" class="modal-block modal-header-color modal-block-primary ">
     <section class="card">
-        <?php echo Form::open(['route' => 'asignaciones.store', 'method' => 'POST','class' => 'form-horizontal form-bordered']); ?>
+        <?php echo Form::open(['route' => 'asignacions.store', 'method' => 'POST','class' => 'form-horizontal form-bordered']); ?>
 
         <header class="card-header">
             <h2 class="card-title">Crear asignación nueva </h2>
