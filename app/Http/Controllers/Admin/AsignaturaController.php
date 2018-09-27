@@ -2,6 +2,9 @@
 
 namespace ATS\Http\Controllers\Admin;
 
+use ATS\Area;
+use ATS\Http\Requests\CreateAsignaturaRequest;
+use ATS\Transformers\AsignaturaTransformer;
 use Illuminate\Validation\Rule;
 use ATS\Http\Controllers\Controller;
 use Validator;
@@ -10,68 +13,38 @@ use Illuminate\Http\Request;
 
 class AsignaturaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function index(Request $request)
     {
-        $asignaturas = Asignatura::all();
-        return view('admin.asignaturas.index', compact('asignaturas'));
+        $asignaturas = Asignatura::with('area')->orderBy('name','ASC');
+        if ($request->ajax()){
+            return datatables()->eloquent($asignaturas)->setTransformer(new AsignaturaTransformer())->smart(true)->toJson();
+        }
+        return view('admin.asignaturas.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $areas = Area::pluck('name','id');
+        return view('admin.asignaturas.ajax.create',compact('areas'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(CreateAsignaturaRequest $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name' => 'string|max:40|unique:asignaturas',
-            'short_name' => 'string|max:5|unique:asignaturas'
-        ]);
-        if ($validator->fails()){
-            return redirect()->route('asignaturas.index')->withErrors($validator)->withInput();
-        }
         $asignatura = new Asignatura($request->all());
         $asignatura->save();
         return redirect()->route('asignaturas.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \ATS\Asignatura  $asignatura
-     * @return \Illuminate\Http\Response
-     */
     public function show(Asignatura $asignatura)
     {
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param $id
-     * @return void
-     */
-    public function edit($id)
+    public function edit(Asignatura $asignatura)
     {
-        $asignatura = Asignatura::findOrFail($id);
-        return response()->json($asignatura);
+        $areas = Area::pluck('name','id');
+        return view('admin.asignaturas.ajax.edit',compact('areas','asignatura'));
     }
 
     /**

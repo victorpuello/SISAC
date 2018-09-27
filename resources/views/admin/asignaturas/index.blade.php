@@ -2,69 +2,42 @@
 @section('titulo', "Asignaturas")
 @section('namePage', "Modulo: Asignaturas")
 @section('styles')
-    <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.css')}}" />
-    <link rel="stylesheet" href="{{asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('vendor/datatables/media/css/dataTables.bootstrap4.css')}}" />
-    @endsection
+    @include('partials.stilosdt')
+@endsection
 @section('content')
     <div class="card-body">
-        <div class="row">
+        <div class="row" id="ControlPanel">
             <div class="col-sm-6">
                 <div class="mb-3">
-                    <a href="#modalAdd"  class="btn btn-primary on-default modal-basic ">Agregar <i class="fas fa-plus"></i></a>
+                    <a href="{{route('asignaturas.create')}}"  class="btn btn-primary on-default ajax-estudiantes ">Agregar <i class="fas fa-plus"></i></a>
                 </div>
             </div>
         </div>
-        <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+        <table class="table table-bordered table-striped mb-0" id="asignaturas">
             <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Asignatura</th>
-                    <th>Docentes</th>
-                    <th>Acciones</th>
-                </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Nombre</th>
+                <th>Abreviatura</th>
+                <th>Porcentaje</th>
+                <th>Nivel</th>
+                <th>Área</th>
+                <th>Acciones</th>
+            </tr>
             </thead>
-            <tbody>
-            @foreach($asignaturas as $asignatura)
-                <tr data-item-id="{{$asignatura->id}}">
-                    <td>{{$asignatura->id}}</td>
-                    <td>{{$asignatura->name}}</td>
-                    <td>{{$asignatura->docentes->count()}}</td>
-                    <td class="actions">
-                        <a href="#modalEditar" class="on-default edit modal-basic" data-urlupdate="{{ route('asignaturas.update', $asignatura->id ) }}" data-urledit="{{ route('asignaturas.edit', $asignatura->id ) }}"> <i class="fas fa-pencil-alt"></i></a>
-                        <a href="#modalEliminar" class="on-default deleted modal-basic" data-nasg="{{$asignatura->name}}" data-url="{{ route('asignaturas.destroy', $asignatura->id ) }}"><i class="far fa-trash-alt"></i></a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
         </table>
-        @include('admin.asignaturas.partials.modals')
+        {!! Form::open(['method' => 'DELETE', 'id' => "delete-form" ,'style' => 'display: none;']) !!}{!! Form::close() !!}
     </div>
+    <div id="inf" data-urltabla ="{{route('asignaturas.index')}}"  data-url ="{{Config::get('app.url')}}"></div>
+    @include('admin.asignaturas.partials.messages')
+    @include('admin.asignaturas.partials.modals')
 @endsection
 @section('script')
-    <script src="{{asset('vendor/select2/js/select2.js')}}"></script>
-    <script src="{{asset('vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('js/examples/examples.datatables.editable.js')}}"></script>
-    <script src="{{asset('js/examples/examples.modals.js')}}"></script>
-    <script src="{{asset('js/custom.js')}}"></script>
-    <script src="{{asset('js/ModalsAsignaturas.js')}}"></script>
-    <script type="text/javascript">
-        $(".deleted").click(function (e) {
-            $("#form-delete").attr('action', $(this).data('url') );
-            $("#NombreAsg").text( $(this).data('nasg') );
-        });
-
-        $(".edit").click(function (e) {
-            $("#form-edit").attr('action', $(this).data('urlupdate') );
-            var ruta = $(this).data('urledit');
-            console.log(ruta);
-            $.get(ruta , function (data) {
-                $("#idEditAsg").val(data.id);
-                $("#nameEditAsg").val(data.name);
-                $("#short_name").val(data.short_name);
-            });
-        });
-    </script>
+    @include('partials.scriptdt')
 @endsection
-
+@section('scriptfin')
+    <script src="{{asset('js/examples/examples.modals.js')}}"></script>
+    <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
+    <script src="{{asset('js/tablas/asignaturas.js')}}"></script>
+@endsection

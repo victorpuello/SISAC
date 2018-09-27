@@ -69,7 +69,7 @@
     <div id="userbox" class="userbox">
         <a href="#" data-toggle="dropdown">
             <figure class="profile-picture">
-                    <img src="<?php echo e(asset("storage/usersdata/img/users/".Auth::user()->path)); ?>" alt="Joseph Doe" class="rounded-circle" data-lock-picture="<?php echo e(asset('img/!logged-user.jpg')); ?>" />
+                    <img src="<?php echo e(asset("storage/usersdata/img/users/".Auth::user()->path)); ?>" alt="<?php echo e(Auth::user()->name); ?>" class="rounded-circle" data-lock-picture="<?php echo e(asset('img/!logged-user.jpg')); ?>" />
             </figure>
             <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
                 <span class="name"><?php echo e(Auth::user()->full_name); ?></span>

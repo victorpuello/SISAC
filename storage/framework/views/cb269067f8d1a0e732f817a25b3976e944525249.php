@@ -10,7 +10,7 @@
         <?php $__currentLoopData = $docentes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $docente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-lg-3">
                 <section class="card">
-                    <header class="card-header <?php echo e($fondos[rand(0,3)]); ?>">
+                    <header class="card-header <?php echo e(Config::get('institucion.fondos.0')); ?>">
                         <div class="card-header-profile-picture">
                             <img src="<?php echo e(asset("storage/usersdata/img/users/".$docente->user->path)); ?>">
                         </div>
@@ -19,8 +19,8 @@
                         <h4 class="font-weight-semibold mt-3"><?php echo e($docente->name); ?></h4>
                         <p><strong>Asignaturas: </strong>
                         <ul>
-                            <?php $__currentLoopData = array_unique($docente->asignaturas()); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignatura): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <li><?php echo e($asignatura); ?></li>
+                            <?php $__currentLoopData = $docente->asignaciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignacion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <li><?php echo e($asignacion->$asignatura->name); ?></li>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </ul>
                         </p>
@@ -28,11 +28,9 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <p class="mb-1"><a href="<?php echo e(route('docentes.edit',$docente->id)); ?>"><i class="fas fa-user-edit mr-1"></i>Editar</a></p>
-                                <p class="mb-1"><a href="#modalEliminar" class="deleted modal-basic" data-nuser="<?php echo e($docente->name); ?>" data-url="<?php echo e(route('docentes.destroy', $docente->id )); ?>"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
-                                <p class="mb-1"><a href="#modalAddAsignaturas" data-url="<?php echo e(route('docentes.addAsignaturas',$docente->id)); ?>" class="modal-basic addAsignatura"><i class="fas fa-share-square mr-1"></i> Asignaturas</a></p>
                             </div>
                             <div class="col-lg-6">
-                                <p class="mb-1"><a href="#"><i class="fas fa-chalkboard mr-1"></i>Salones</a></p>
+                                <p class="mb-1"><a href="#modalEliminar" class="deleted modal-basic" data-nuser="<?php echo e($docente->name); ?>" data-url="<?php echo e(route('docentes.destroy', $docente->id )); ?>"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
                             </div>
                         </div>
                     </div>

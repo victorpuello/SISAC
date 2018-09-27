@@ -56,10 +56,15 @@ class GrupoController extends Controller
      * @param Grado $grado
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Grupo $grupo)
+    public function show(Request $request,Grupo $grupo)
     {
-       
-        return view('admin.grupos.salones',compact('aulas'));
+        $estudiantes = $grupo->estudiantes;
+        if($request->ajax()) {
+            return datatables()->collection($estudiantes)
+                ->smart(true)
+                ->toJson();
+        }
+        return view('admin.grupos.show',compact('grupo'));
     }
 
     /**

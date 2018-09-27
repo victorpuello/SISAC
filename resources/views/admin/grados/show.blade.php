@@ -8,9 +8,16 @@
 @endsection
 @section('content')
     <div class="card card-transparent">
+        <div class="row" id="ControlPanel">
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <a href="{{route('grados.index')}}"  class="btn btn-primary on-default ">Regresar <i class="fas fa-backward"></i></a>
+                </div>
+            </div>
+        </div>
         <div class="row">
             @foreach($grado->grupos as $grupo)
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <section class="card">
                         <header class="card-header bg-{{Config::get('institucion.fondos.1')}}">
                             <div class="card-header-profile-picture">
@@ -21,14 +28,6 @@
                             <h4 class="font-weight-semibold mt-3">{{$grupo->name_aula}}</h4>
                             <p><strong>Número de estudiantes: </strong>{{count($grupo->estudiantes)}}</p>
                             <hr class="solid short">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <p class="mb-1"><a href="#modalEditar" data-urlupdate="{{ route('grupos.update', $grupo->id ) }}" data-urledit="{{ route('grupos.edit', $grupo->id ) }}" class="modal-basic edit"><i class="fas fa-edit mr-1"></i>Editar</a></p>
-                                </div>
-                                <div class="col-lg-6">
-                                    <p class="mb-1"><a href="#modalEliminar" data-nsl ="{{$grupo->name_aula}}" data-url="{{route('grupos.destroy',$grupo->id)}}" class="deleted modal-basic" ><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
-                                </div>
-                            </div>
                         </div>
                     </section>
                 </div>

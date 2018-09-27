@@ -9,7 +9,10 @@ class Asignatura extends Model
 {
     protected $fillable = [
         'name',
-        'short_name'
+        'short_name',
+        'porcentaje',
+        'nivel',
+        'area_id'
     ];
     public function getDocentesAttribute (){
         $docentes = DB::table('asignacions')->where('asignatura_id','=',$this->id)
@@ -19,6 +22,9 @@ class Asignatura extends Model
         return $docentes;
     }
 
+    public function area(){
+        return $this->belongsTo(Area::class);
+    }
     public function logros(){
         return $this->hasMany(Logro::class);
     }

@@ -34,6 +34,23 @@
                 </a>
             </li>
         </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="<?php echo e(route('areas.index')); ?>">
+                    <i class="fas fa-book" aria-hidden="true"></i>
+                    Áreas
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="<?php echo e(route('asignaturas.index')); ?>">
+                    <i class="fas fa-book" aria-hidden="true"></i>
+                    Asignaturas
+                </a>
+            </li>
+        </ul>
+
     </li>
     <li class="nav-parent nav-active">
         <a class="nav-link" href="#">
@@ -95,20 +112,6 @@
             </li>
         </ul>
     </li>
-    <li class="nav-parent">
-        <a class="nav-link" href="#">
-            <i class="fas fa-book" aria-hidden="true"></i>
-            <span>Asignaturas</span>
-        </a>
-        <ul class="nav nav-children">
-            <li>
-                <a class="nav-link" href="<?php echo e(route('asignaturas.index')); ?>">
-                    Ver Asignaturas
-                </a>
-            </li>
-        </ul>
-    </li>
-
     <li class="nav-parent">
         <a class="nav-link" href="#">
             <i class="fas fa-book-open" aria-hidden="true"></i>

@@ -14,7 +14,7 @@
 
             <div class="form-group row">
                 <div class="thumb-info mb-3 col-lg-3">
-                    <img src="<?php echo e(url('/imgUsers/')); ?>/<?php echo e($docente->path); ?>" class="rounded img-fluid" alt="<?php echo e($docente->user->FullName); ?>">
+                    <img src="<?php echo e(asset("storage/usersdata/img/users/".$docente->user->path)); ?>" class="rounded img-fluid" alt="<?php echo e($docente->user->FullName); ?>">
                     <div class="thumb-info-title">
                         <span class="thumb-info-inner"><?php echo e($docente->user->name); ?></span>
                         <span class="thumb-info-type">Docente</span>

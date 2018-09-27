@@ -19,19 +19,12 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        $docentes = Docente::all();
-        $fondos = ['bg-primary','bg-secondary','bg-tertiary','bg-quaternary'];
-        $asignaturas = Asignatura::all();
-        foreach ($asignaturas as $key => $value){
-            $asignaturas[$key]->name = $value->name;
-        }
-        return view('admin.docentes.index',compact('docentes','fondos','asignaturas'));
+        $docentes = Docente::with('asignaciones')->get();
+        return view('admin.docentes.index',compact('docentes'));
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -45,11 +38,10 @@ class DocenteController extends Controller
         return view('admin.docentes.create',compact('users'));
     }
 
+
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateDocenteRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateDocenteRequest $request)
     {
@@ -59,10 +51,7 @@ class DocenteController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \ATS\Docente  $docente
-     * @return \Illuminate\Http\Response
+     * @param Docente $docente
      */
     public function show(Docente $docente)
     {
@@ -70,58 +59,35 @@ class DocenteController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param $id
-     * @return \Illuminate\Http\Response
+     * @param Docente $docente
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Docente $docente)
     {
-        $docente = Docente::findOrFail($id);
-        $users = $docente->user;
-        return view('admin.docentes.edit',compact('docente','users'));
+        return view('admin.docentes.edit',compact('docente'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \ATS\Docente  $docente
-     * @return \Illuminate\Http\Response
+     * @param UpdateDocenteRequest $request
+     * @param Docente $docente
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateDocenteRequest $request, $id)
+    public function update(UpdateDocenteRequest $request, Docente $docente)
     {
-        $docente = Docente::findOrFail($id);
-        $docente->fill($request->all());
-        $docente->save();
+        $docente->update($request->all());
         return redirect()->route('docentes.index');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \ATS\Docente  $docente
-     * @return \Illuminate\Http\Response
+     * @param Docente $docente
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Docente $docente)
     {
-        $docente = Docente::findOrFail($id);
-        $user = User::findOrFail($docente->user->id);
+        $user = $docente->user;
         $docente->delete();
         $user->delete();
         return redirect()->back();
-    }
-
-    /**
-     * @param Request $request
-     * @param $id
-     */
-    public function addAsignaturas(Request $request,$id){
-        $asignaturas = $request->asignaturas_id;
-        $docente = Docente::findOrFail($id);
-        for ($i=0; $i<= count($asignaturas); $i++){
-            $docente->asignaturas()->sync($asignaturas);
-        }
-        return redirect()->route('docentes.index');
     }
 }

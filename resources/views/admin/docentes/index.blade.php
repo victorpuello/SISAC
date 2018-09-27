@@ -11,7 +11,7 @@
         @foreach($docentes as $docente)
             <div class="col-lg-3">
                 <section class="card">
-                    <header class="card-header {{$fondos[rand(0,3)]}}">
+                    <header class="card-header {{Config::get('institucion.fondos.0')}}">
                         <div class="card-header-profile-picture">
                             <img src="{{asset("storage/usersdata/img/users/".$docente->user->path)}}">
                         </div>
@@ -20,8 +20,8 @@
                         <h4 class="font-weight-semibold mt-3">{{$docente->name}}</h4>
                         <p><strong>Asignaturas: </strong>
                         <ul>
-                            @foreach(array_unique($docente->asignaturas()) as $asignatura)
-                                <li>{{$asignatura }}</li>
+                            @foreach($docente->asignaciones as $asignacion)
+                                <li>{{$asignacion->$asignatura->name }}</li>
                             @endforeach
                         </ul>
                         </p>
@@ -29,11 +29,9 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <p class="mb-1"><a href="{{route('docentes.edit',$docente->id)}}"><i class="fas fa-user-edit mr-1"></i>Editar</a></p>
-                                <p class="mb-1"><a href="#modalEliminar" class="deleted modal-basic" data-nuser="{{$docente->name}}" data-url="{{ route('docentes.destroy', $docente->id ) }}"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
-                                <p class="mb-1"><a href="#modalAddAsignaturas" data-url="{{route('docentes.addAsignaturas',$docente->id)}}" class="modal-basic addAsignatura"><i class="fas fa-share-square mr-1"></i> Asignaturas</a></p>
                             </div>
                             <div class="col-lg-6">
-                                <p class="mb-1"><a href="#"><i class="fas fa-chalkboard mr-1"></i>Salones</a></p>
+                                <p class="mb-1"><a href="#modalEliminar" class="deleted modal-basic" data-nuser="{{$docente->name}}" data-url="{{ route('docentes.destroy', $docente->id ) }}"><i class="fas fa-trash-alt mr-1"></i> Eliminar</a></p>
                             </div>
                         </div>
                     </div>

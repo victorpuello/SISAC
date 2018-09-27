@@ -14,7 +14,7 @@
             {!! Form::model($docente,['route' => ['docentes.update',$docente->id], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
             <div class="form-group row">
                 <div class="thumb-info mb-3 col-lg-3">
-                    <img src="{{ url('/imgUsers/')}}/{{$docente->path}}" class="rounded img-fluid" alt="{{$docente->user->FullName}}">
+                    <img src="{{asset("storage/usersdata/img/users/".$docente->user->path)}}" class="rounded img-fluid" alt="{{$docente->user->FullName}}">
                     <div class="thumb-info-title">
                         <span class="thumb-info-inner">{{$docente->user->name}}</span>
                         <span class="thumb-info-type">Docente</span>

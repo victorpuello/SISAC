@@ -48,6 +48,7 @@
     </div>
     </div>
     @include('admin.grados.partials.modals')
+    @include('admin.grados.partials.messages')
 @endsection
 @section('script')
     <script src="{{asset('vendor/select2/js/select2.js')}}"></script>
@@ -60,3 +61,6 @@
         });
     </script>
     @endsection
+@section('scriptfin')
+    <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
+@endsection

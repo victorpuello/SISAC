@@ -18,7 +18,7 @@ class CreateAsignaturasTable extends Migration
             $table->string('name');
             $table->string('short_name');
             $table->float('porcentaje')->default(100);
-            $table->enum('nivel',['preescolar','primaria','secundaria','media']);
+            $table->enum('nivel',['preescolar','basica','media','institucional']);
             $table->integer('area_id')->unsigned();
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
             $table->timestamps();

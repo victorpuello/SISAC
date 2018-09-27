@@ -1,9 +1,40 @@
-<?php echo Form::label('name', 'Nombre de Asignatura',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
+<div class="form-group row">
+    <?php echo Form::label('name', 'Nombre del asignatura',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
 
-<div class="col-lg-8">
-<?php echo Form::text('name', null, ['class' => 'form-control', 'id' =>'nameEditAsg', 'placeholder' => 'Por favor introduzca el nombre de la asignatura', 'requiered']); ?>
+    <div class="col-lg-8">
+        <?php echo Form::text('name', null, ['class' => 'form-control','id'=>'name', 'placeholder' => 'Nombre de asignatura','required']); ?>
 
-<?php echo Form::text('short_name', null, ['class' => 'form-control', 'id' =>'short_name', 'placeholder' => 'Por favor introduzca el nombre corto de la asignatura', 'requiered']); ?>
+    </div>
+</div>
+<div class="form-group row">
+    <?php echo Form::label('short_name', 'Abreviatura',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
 
-<?php echo Form::number('id', null, ['class' => 'form-control', 'id' =>'idEditAsg', 'style'=>'display:none']); ?>
+    <div class="col-lg-8">
+        <?php echo Form::text('short_name', null, ['class' => 'form-control','id'=>'short_name', 'placeholder' => 'Abreviatura','required']); ?>
 
+    </div>
+</div>
+<div class="form-group row">
+    <?php echo Form::label('porcentaje', 'Porcentaje: ',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
+
+    <div class="col-lg-8">
+        <?php echo Form::number('porcentaje',null,['class' => 'form-control','id'=>'porcentaje', 'placeholder' => 'Porcentaje','required']); ?>
+
+    </div>
+</div>
+<div class="form-group row">
+    <?php echo Form::label('nivel', 'Nivel',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
+
+    <div class="col-lg-8">
+        <?php echo Form::select('nivel',['preescolar'=>'Pre - Escolar','basica' => 'Basica','media'=>'Media','institucional'=>'Institucional'], null, ['class' => 'form-control mb-3','placeholder'=>'Seleccione el nivel', 'id'=>'nivel','required']); ?>
+
+    </div>
+</div>
+<div class="form-group row">
+    <?php echo Form::label('area_id', 'Área',['class'=>'col-lg-4 control-label text-lg-right pt-2']); ?>
+
+    <div class="col-lg-8">
+        <?php echo Form::select('area_id',$areas, null, ['class' => 'form-control mb-3','placeholder'=>'Seleccione el área', 'id'=>'area_id','required']); ?>
+
+    </div>
+</div>
