@@ -1,4 +1,4 @@
-<?php $__env->startSection('titulo', "Usuarios"); ?>
+<?php $__env->startSection('titulo', "Docentes"); ?>
 <?php $__env->startSection('namePage', "Modulo: Docentes"); ?>
 <?php $__env->startSection('styles'); ?>
     <link rel="stylesheet" href="<?php echo e(asset('vendor/select2/css/select2.css')); ?>" />
@@ -10,7 +10,7 @@
         <?php $__currentLoopData = $docentes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $docente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="col-lg-3">
                 <section class="card">
-                    <header class="card-header <?php echo e(Config::get('institucion.fondos.0')); ?>">
+                    <header class="card-header bg-<?php echo e(Config::get('institucion.fondos.0')); ?>">
                         <div class="card-header-profile-picture">
                             <img src="<?php echo e(asset("storage/usersdata/img/users/".$docente->user->path)); ?>">
                         </div>

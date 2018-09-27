@@ -20,22 +20,40 @@
     <link rel="stylesheet" href="{{asset('vendor/magnific-popup/magnific-popup.css')}}" />
 @endsection
 @section('content')
-    <div class="card-body">
-        @institucion($institucion)
-            <a class="mb-1 mt-1 mr-1 btn btn-primary btn-lg btn-block simple-ajax-modal" href="{{route('institucion.create')}}">Agregar institución</a>
-        @else
-            {!! Form::model($institucion,['route' => ['institucion.update',$institucion], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
-            @include('admin.institucion.partials.fieldshow')
-            {!! Form::close() !!}
-    </div>
-    <div class="card-footer">
-        <div class="row">
-            <div class="offset-10 col-md-2 text-right">
-                <a href="{{route('institucion.edit',$institucion)}}" class="btn btn-primary  btn-block simple-ajax-modal">Editar</a>
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-body">
+                    @institucion($institucion)
+                    <a class="mb-1 mt-1 mr-1 btn btn-primary btn-lg btn-block simple-ajax-modal" href="{{route('institucion.create')}}">Agregar institución</a>
+                    @else
+                        {!! Form::model($institucion,['route' => ['institucion.update',$institucion], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
+                        @include('admin.institucion.partials.fieldshow')
+                        {!! Form::close() !!}
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="offset-10 col-md-2 text-right">
+                            <a href="{{route('institucion.edit',$institucion)}}" class="btn btn-primary  btn-block simple-ajax-modal">Editar</a>
+                        </div>
+                    </div>
+                </div>
+                @endinstitucion
             </div>
         </div>
+        <div class="col-lg-2">
+            <section class="card card-info mb-4">
+                <header class="card-header">
+                    <h2 class="card-title">Configuraciones</h2>
+                </header>
+                <div class="card-body">
+                    <a href="{{route('areas.index')}}" class="mb-1 mt-1 mr-1 btn btn-primary btn-block"><span>Áreas</span></a>
+                    <a href="{{route('grados.index')}}" class="mb-1 mt-1 mr-1 btn btn-primary btn-block"><span>Grados</span></a>
+                    <a href="{{route('jornadas.index')}}" class="mb-1 mt-1 mr-1 btn btn-primary btn-block"><span>Jornadas</span></a>
+                </div>
+            </section>
+        </div>
     </div>
-    @endinstitucion
 @endsection
 @section('script')
     <script src="{{asset('vendor/autosize/autosize.js')}}"></script>

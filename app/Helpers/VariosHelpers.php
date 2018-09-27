@@ -1,5 +1,19 @@
 <?php
 
+use ATS\Grupo;
+
+function grupos_pluck (){
+    $_grupos = Grupo::with('grado')->get();
+    $group = collect();
+    foreach ($_grupos as $grupo){
+        $group->push([
+            'id' => $grupo->id,
+            'name' => $grupo->name_aula,
+            'grado' => $grupo->grado->numero,
+        ]);
+    }
+    return  $group->sortBy('grado')->pluck('name','id');
+}
 function currentUser()
 {
     return auth()->user();

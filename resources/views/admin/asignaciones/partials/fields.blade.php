@@ -13,7 +13,7 @@
 <div class="form-group row">
     <label class="col-sm-4 control-label text-sm-right pt-1" for="w1-username">Grupo: </label>
     <div class="col-sm-8">
-        {!! Form::select('salon_id',$salones, null, ['class' => 'form-control mb-3', 'id'=>'w1-username','required', 'placeholder'=>'Seleccione un grupo']) !!}
+        {!! Form::select('grupo_id',$grupos, null, ['class' => 'form-control mb-3', 'id'=>'w1-username','required', 'placeholder'=>'Seleccione un grupo']) !!}
     </div>
 </div>
 <div class="form-group row">

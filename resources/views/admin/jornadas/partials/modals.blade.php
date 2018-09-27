@@ -10,7 +10,7 @@
                     <i class="fas fa-exclamation-triangle"></i>
                 </div>
                 <div class="modal-text">
-                    <p>Estas seguro que deseas eliminar la asignación: <strong id="Nombreasg"></strong></p>
+                    <p>Estas seguro que deseas eliminar el grado: <strong><span id="NombreGrado"></span></strong></p>
                 </div>
             </div>
         </div>
@@ -18,11 +18,9 @@
             <div class="row">
                 <div class="col-md-12 text-right">
                     <button class="btn btn-danger modal-dismiss">Cancelar</button>
-                    <?php echo Form::open(['method' => 'DELETE', 'id' => "form-delete" ,'style' => 'display: inline-block;']); ?>
-
+                    {!! Form::open(['method' => 'DELETE', 'id' => "form-delete" ,'style' => 'display: inline-block;']) !!}
                     <button type="submit" class="btn btn-warning">Confirmar</button>
-                    <?php echo Form::close(); ?>
-
+                    {!! Form::close() !!}
                 </div>
             </div>
         </footer>

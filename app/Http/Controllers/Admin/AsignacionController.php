@@ -2,7 +2,7 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use Illuminate\Support\Facades\Auth;
+use ATS\Transformers\AsignacionTransformer;
 use ATS\Asignacion;
 use Illuminate\Http\Request;
 use ATS\Asignatura;
@@ -10,75 +10,46 @@ use ATS\Docente;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\CreateAsignacionRequest;
 use ATS\Http\Requests\UpdateAsignacionRequest;
-use ATS\Grupo;
 
 class AsignacionController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-
-    private $docentes;
-    private $salones_todos;
-    private $asignaturas;
-    public function __construct ()
+    public function index(Request $request)
     {
-        $this->docentes = Docente::orderBy('name','ASC')->pluck('name','id');
-        $this->salones_todos = Grupo::orderBy('name','ASC')->get();
-        $this->asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
-    }
-
-    public function index()
-    {
-        $asignaciones = Asignacion::with('docente')
-                                    ->with('asignatura')
-                                    ->with('salon')
-                                    ->orderBy('created_at','desc')
-                                    ->get();
-        $docentes = $this->docentes;
-        $asignaturas = $this->asignaturas;
-        $sal= collect();
-        foreach ($this->salones_todos as $salon){
-            $sal->push([
-                'id'=>$salon->id,
-                'nombre'=>$salon->full_name,
-                'grado'=>$salon->grade,
-            ]);
+        $asignaciones = Asignacion::with('docente')->with('asignatura')->with('grupo')->orderBy('created_at','desc');
+        if ($request->ajax()){
+            return datatables()->eloquent($asignaciones)->setTransformer(new AsignacionTransformer())->smart(true)->toJson();
         }
-        $salones = $sal->sortBy('grado')->pluck('nombre','id');
-        return view('admin.asignaciones.index',compact('asignaciones','docentes','salones','asignaturas'));
+        return view('admin.asignaciones.index');
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        $docentes = Docente::orderBy('name','ASC')->pluck('name','id');
+        $asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
+        $grupos = grupos_pluck();
+        return view('admin.asignaciones.ajax.create',compact('asignaciones','docentes','grupos','asignaturas'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateAsignacionRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(CreateAsignacionRequest $request)
     {
         $asignacion = new Asignacion($request->all());
         $asignacion->save();
-        return redirect()->route('asignaciones.index');
+        return redirect()->route('asignacions.index');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \ATS\Asignacion  $asignacion
-     * @return \Illuminate\Http\Response
+     * @param Asignacion $asignacion
      */
     public function show(Asignacion $asignacion)
     {
@@ -86,53 +57,36 @@ class AsignacionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \ATS\Asignacion  $asignacion
-     * @return \Illuminate\Http\Response
+     * @param Asignacion $asignacion
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Asignacion $asignacion)
     {
-        $asignacion = Asignacion::findOrFail($id);
-        $docentes = $this->docentes;
-        $asignaturas = $this->asignaturas;
-        $sal= collect();
-        foreach ($this->salones_todos as $salon){
-            $sal->push([
-                'id'=>$salon->id,
-                'nombre'=>$salon->full_name,
-                'grado'=>$salon->grade,
-            ]);
-        }
-        $salones = $sal->sortBy('grado')->pluck('nombre','id');
-        return view('admin.asignaciones.ajax.edit',compact('asignacion','docentes','salones','asignaturas'));
+        $docentes = Docente::orderBy('name','ASC')->pluck('name','id');
+        $asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
+        $grupos = grupos_pluck();
+        return view('admin.asignaciones.ajax.edit',compact('asignacion','docentes','grupos','asignaturas'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \ATS\Asignacion  $asignacion
-     * @return \Illuminate\Http\Response
+     * @param UpdateAsignacionRequest $request
+     * @param Asignacion $asignacion
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateAsignacionRequest $request, $id)
+    public function update(UpdateAsignacionRequest $request, Asignacion $asignacion)
     {
-        $asignacion = Asignacion::findOrFail($id);
-        $asignacion->fill($request->all());
-        $asignacion->save();
-        return redirect()->route('asignaciones.index');
+        $asignacion->update($request->all());
+        return redirect()->route('asignacions.index');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \ATS\Asignacion  $asignacion
-     * @return \Illuminate\Http\Response
+     * @param Asignacion $asignacion
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Asignacion $asignacion)
     {
-        $asignacion = Asignacion::findOrFail($id);
         $asignacion->delete();
-        return redirect()->route('asignaciones.index');
+        return redirect()->route('asignacions.index');
     }
 }

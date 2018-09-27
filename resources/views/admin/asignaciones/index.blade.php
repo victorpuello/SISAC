@@ -2,59 +2,41 @@
 @section('titulo', "Asignación")
 @section('namePage', "Modulo: Docentes -  Asignación ")
 @section('styles')
-    <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.css')}}" />
-    <link rel="stylesheet" href="{{asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('vendor/datatables/media/css/dataTables.bootstrap4.css')}}" />
+    @include('partials.stilosdt')
 @endsection
 @section('content')
     <div class="card-body">
-        @if(currentPerfil() <> 'docente')
         <div class="row">
             <div class="col-sm-6">
                 <div class="mb-3">
-                    <a href="#modalAdd"  class="btn btn-primary on-default modal-basic ">Agregar <i class="fas fa-plus"></i></a>
+                    <a href="{{route('asignacions.create')}}"  class="btn btn-primary on-default simple-ajax-modal ">Agregar <i class="fas fa-plus"></i></a>
                 </div>
             </div>
         </div>
-        @endif
-        <table class="table table-bordered table-striped mb-0" id="datatable-editable">
+        <table class="table table-bordered table-striped mb-0" id="asignaciones">
             <thead>
-            <tr>
-                <th>Asignatura</th>
-                <th>Docente</th>
-                <th>Grupo</th>
-                <th>Director</th>
-                <th>Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($asignaciones as $asignacion)
-                <tr data-item-id="{{$asignacion->id}}">
-                    <td>{{$asignacion->asignatura->name}}</td>
-                    <td>{{$asignacion->docente->name}}</td>
-                    <td>{{$asignacion->salon->full_name}}</td>
-                    <td>{{$asignacion->direccion}}</td>
-                    <td class="actions">
-                        <a href="{{route('asignaciones.edit',$asignacion)}}" class="on-default simple-ajax-modal" > <i class="fas fa-pencil-alt"></i></a>
-                        <a href="#modalEliminar" class="on-default deleted modal-basic" data-url = "{{ route('asignaciones.destroy', $asignacion->id ) }}" ><i class="far fa-trash-alt"></i></a>
-                    </td>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Asignatura</th>
+                    <th>Docente</th>
+                    <th>Grupo</th>
+                    <th>Director</th>
+                    <th>Acciones</th>
                 </tr>
-            @endforeach
-            </tbody>
+            </thead>
         </table>
-        @include('admin.asignaciones.partials.modals')
+        {!! Form::open(['method' => 'DELETE', 'id' => "delete-form" ,'style' => 'display: none;']) !!}{!! Form::close() !!}
     </div>
+    <div id="inf" data-urltabla ="{{route('asignacions.index')}}"  data-url ="{{Config::get('app.url')}}"></div>
+    @include('admin.asignaciones.partials.messages')
+    @include('admin.asignaciones.partials.modals')
     @endsection
 @section('script')
-    <script src="{{asset('vendor/select2/js/select2.js')}}"></script>
-    <script src="{{asset('vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{asset('js/examples/examples.datatables.editable.js')}}"></script>
+    @include('partials.scriptdt')
+@endsection
+@section('scriptfin')
     <script src="{{asset('js/examples/examples.modals.js')}}"></script>
-    <script src="{{asset('js/custom.js')}}"></script>
-    <script type="text/javascript">
-        $(".deleted").click(function (e) {
-            $("#form-delete").attr('action', $(this).data('url') );
-        });
-    </script>
-    @endsection
+    <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
+    <script src="{{asset('js/tablas/asignaciones.js')}}"></script>
+@endsection

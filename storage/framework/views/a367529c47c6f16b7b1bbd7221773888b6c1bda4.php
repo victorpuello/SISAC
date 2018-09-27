@@ -1,12 +1,13 @@
 <div id="custom-content" class="modal-block modal-block-primary modal-header-color">
     <section class="card">
-        {!! Form::model($institucion,['route' => ['institucion.update',$institucion], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
+        <?php echo Form::model($institucion,['route' => ['institucion.update',$institucion], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']); ?>
+
         <header class="card-header">
             <h2 class="card-title">Actualizar institución </h2>
         </header>
         <div class="card-body">
-            @include('admin.institucion.partials.messages')
-            @include('admin.institucion.partials.fields')
+            <?php echo $__env->make('admin.institucion.partials.messages', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <?php echo $__env->make('admin.institucion.partials.fields', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         </div>
         <footer class="card-footer">
             <div class="row">
@@ -16,6 +17,7 @@
                 </div>
             </div>
         </footer>
-        {!! Form::close() !!}
+        <?php echo Form::close(); ?>
+
     </section>
 </div>

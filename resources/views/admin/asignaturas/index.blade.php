@@ -15,16 +15,16 @@
         </div>
         <table class="table table-bordered table-striped mb-0" id="asignaturas">
             <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th>Nombre</th>
-                <th>Abreviatura</th>
-                <th>Porcentaje</th>
-                <th>Nivel</th>
-                <th>Área</th>
-                <th>Acciones</th>
-            </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Nombre</th>
+                    <th>Abreviatura</th>
+                    <th>Porcentaje</th>
+                    <th>Nivel</th>
+                    <th>Área</th>
+                    <th>Acciones</th>
+                </tr>
             </thead>
         </table>
         {!! Form::open(['method' => 'DELETE', 'id' => "delete-form" ,'style' => 'display: none;']) !!}{!! Form::close() !!}

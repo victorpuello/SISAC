@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Asignacion extends Model
 {
     protected $fillable = [
-        'horas','docente_id','salon_id','asignatura_id','director',
+        'horas','docente_id','grupo_id','asignatura_id','director',
     ];
     public function asignatura()
     {
@@ -17,7 +17,7 @@ class Asignacion extends Model
         return $this->belongsTo(Docente::class);
     }
 
-    public function salon(){
+    public function grupo(){
         return $this->belongsTo(Grupo::class);
     }
 

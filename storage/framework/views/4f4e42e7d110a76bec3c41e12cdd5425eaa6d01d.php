@@ -4,10 +4,11 @@
             <h2 class="card-title">Editar Asignación</h2>
         </header>
         <div class="card-body">
-            {!! Form::model($asignacion,['route'=>['asignacions.update',$asignacion],'method' => 'PUT','class' => 'form-horizontal form-bordered', 'id'=>'form-edit']) !!}
+            <?php echo Form::model($asignacion,['route'=>['asignacions.update',$asignacion],'method' => 'PUT','class' => 'form-horizontal form-bordered', 'id'=>'form-edit']); ?>
+
             <div class="modal-wrapper">
                 <div class="modal-text">
-                    @include('admin.asignaciones.partials.fields')
+                    <?php echo $__env->make('admin.asignaciones.partials.fields', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                 </div>
             </div>
             <footer class="card-footer">
@@ -18,7 +19,8 @@
                     </div>
                 </div>
             </footer>
-            {!! Form::close() !!}
+            <?php echo Form::close(); ?>
+
         </div>
     </section>
 </div>

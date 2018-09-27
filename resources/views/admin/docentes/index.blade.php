@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('titulo', "Usuarios")
+@section('titulo', "Docentes")
 @section('namePage', "Modulo: Docentes")
 @section('styles')
     <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.css')}}" />
@@ -11,7 +11,7 @@
         @foreach($docentes as $docente)
             <div class="col-lg-3">
                 <section class="card">
-                    <header class="card-header {{Config::get('institucion.fondos.0')}}">
+                    <header class="card-header bg-{{Config::get('institucion.fondos.0')}}">
                         <div class="card-header-profile-picture">
                             <img src="{{asset("storage/usersdata/img/users/".$docente->user->path)}}">
                         </div>

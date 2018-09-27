@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.6.38 on 2018-09-12 16:17:46.
+ * Generated for Laravel 5.6.38 on 2018-09-27 02:48:48.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1353,7 +1353,7 @@ namespace Illuminate\Support\Facades {
         public static function handle($input, $output = null)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \Ngsoft\Console\Kernel::handle($input, $output);
+            return \ATS\Console\Kernel::handle($input, $output);
         }
         
         /**
@@ -1367,7 +1367,7 @@ namespace Illuminate\Support\Facades {
         public static function terminate($input, $status)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \Ngsoft\Console\Kernel::terminate($input, $status);
+            \ATS\Console\Kernel::terminate($input, $status);
         }
         
         /**
@@ -1381,7 +1381,7 @@ namespace Illuminate\Support\Facades {
         public static function command($signature, $callback)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \Ngsoft\Console\Kernel::command($signature, $callback);
+            return \ATS\Console\Kernel::command($signature, $callback);
         }
         
         /**
@@ -1394,7 +1394,7 @@ namespace Illuminate\Support\Facades {
         public static function registerCommand($command)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \Ngsoft\Console\Kernel::registerCommand($command);
+            \ATS\Console\Kernel::registerCommand($command);
         }
         
         /**
@@ -1409,7 +1409,7 @@ namespace Illuminate\Support\Facades {
         public static function call($command, $parameters = array(), $outputBuffer = null)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \Ngsoft\Console\Kernel::call($command, $parameters, $outputBuffer);
+            return \ATS\Console\Kernel::call($command, $parameters, $outputBuffer);
         }
         
         /**
@@ -1423,7 +1423,7 @@ namespace Illuminate\Support\Facades {
         public static function queue($command, $parameters = array())
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \Ngsoft\Console\Kernel::queue($command, $parameters);
+            return \ATS\Console\Kernel::queue($command, $parameters);
         }
         
         /**
@@ -1435,7 +1435,7 @@ namespace Illuminate\Support\Facades {
         public static function all()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \Ngsoft\Console\Kernel::all();
+            return \ATS\Console\Kernel::all();
         }
         
         /**
@@ -1447,7 +1447,7 @@ namespace Illuminate\Support\Facades {
         public static function output()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            return \Ngsoft\Console\Kernel::output();
+            return \ATS\Console\Kernel::output();
         }
         
         /**
@@ -1459,7 +1459,7 @@ namespace Illuminate\Support\Facades {
         public static function bootstrap()
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \Ngsoft\Console\Kernel::bootstrap();
+            \ATS\Console\Kernel::bootstrap();
         }
         
         /**
@@ -1472,7 +1472,7 @@ namespace Illuminate\Support\Facades {
         public static function setArtisan($artisan)
         {
             //Method inherited from \Illuminate\Foundation\Console\Kernel            
-            \Ngsoft\Console\Kernel::setArtisan($artisan);
+            \ATS\Console\Kernel::setArtisan($artisan);
         }
          
     }
@@ -1669,7 +1669,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the currently authenticated user.
          *
-         * @return \Ngsoft\User|null 
+         * @return \ATS\User|null 
          * @static 
          */ 
         public static function user()
@@ -1704,7 +1704,7 @@ namespace Illuminate\Support\Facades {
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \Ngsoft\User|false 
+         * @return \ATS\User|false 
          * @static 
          */ 
         public static function onceUsingId($id)
@@ -1768,7 +1768,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \Ngsoft\User|false 
+         * @return \ATS\User|false 
          * @static 
          */ 
         public static function loginUsingId($id, $remember = false)
@@ -1830,7 +1830,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \Ngsoft\User 
+         * @return \ATS\User 
          * @static 
          */ 
         public static function getLastAttempted()
@@ -1932,7 +1932,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Return the currently cached user.
          *
-         * @return \Ngsoft\User|null 
+         * @return \ATS\User|null 
          * @static 
          */ 
         public static function getUser()
@@ -1978,7 +1978,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if the current user is authenticated.
          *
-         * @return \Ngsoft\User 
+         * @return \ATS\User 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -3473,6 +3473,105 @@ namespace Illuminate\Support\Facades {
         public static function getQueuedCookies()
         {
             return \Illuminate\Cookie\CookieJar::getQueuedCookies();
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     * @method static string encrypt(string $value, bool $serialize = true)
+     * @method static string decrypt(string $payload, bool $unserialize = true)
+     * @see \Illuminate\Encryption\Encrypter
+     */ 
+    class Crypt {
+        
+        /**
+         * Determine if the given key and cipher combination is valid.
+         *
+         * @param string $key
+         * @param string $cipher
+         * @return bool 
+         * @static 
+         */ 
+        public static function supported($key, $cipher)
+        {
+            return \Illuminate\Encryption\Encrypter::supported($key, $cipher);
+        }
+        
+        /**
+         * Create a new encryption key for the given cipher.
+         *
+         * @param string $cipher
+         * @return string 
+         * @static 
+         */ 
+        public static function generateKey($cipher)
+        {
+            return \Illuminate\Encryption\Encrypter::generateKey($cipher);
+        }
+        
+        /**
+         * Encrypt the given value.
+         *
+         * @param mixed $value
+         * @param bool $serialize
+         * @return string 
+         * @throws \Illuminate\Contracts\Encryption\EncryptException
+         * @static 
+         */ 
+        public static function encrypt($value, $serialize = true)
+        {
+            return \Illuminate\Encryption\Encrypter::encrypt($value, $serialize);
+        }
+        
+        /**
+         * Encrypt a string without serialization.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function encryptString($value)
+        {
+            return \Illuminate\Encryption\Encrypter::encryptString($value);
+        }
+        
+        /**
+         * Decrypt the given value.
+         *
+         * @param mixed $payload
+         * @param bool $unserialize
+         * @return mixed 
+         * @throws \Illuminate\Contracts\Encryption\DecryptException
+         * @static 
+         */ 
+        public static function decrypt($payload, $unserialize = true)
+        {
+            return \Illuminate\Encryption\Encrypter::decrypt($payload, $unserialize);
+        }
+        
+        /**
+         * Decrypt the given string without unserialization.
+         *
+         * @param string $payload
+         * @return string 
+         * @static 
+         */ 
+        public static function decryptString($payload)
+        {
+            return \Illuminate\Encryption\Encrypter::decryptString($payload);
+        }
+        
+        /**
+         * Get the encryption key.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getKey()
+        {
+            return \Illuminate\Encryption\Encrypter::getKey();
         }
          
     }
@@ -16605,6 +16704,8 @@ namespace  {
     class Config extends \Illuminate\Support\Facades\Config {}
 
     class Cookie extends \Illuminate\Support\Facades\Cookie {}
+
+    class Crypt extends \Illuminate\Support\Facades\Crypt {}
 
     class DB extends \Illuminate\Support\Facades\DB {}
 

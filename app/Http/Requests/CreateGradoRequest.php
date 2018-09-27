@@ -24,7 +24,7 @@ class CreateGradoRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|max:40|unique:grados',
+            'name' => 'required|string|max:40|unique:grados',
             'numero' => 'integer|max:15',
             'nivel'=>'required|in:,preescolar,primaria,secundaria,media'
         ];
