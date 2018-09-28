@@ -19,7 +19,7 @@ class DocenteController extends Controller
      */
     public function index()
     {
-        $docentes = Docente::with('asignaciones')->get();
+        $docentes = Docente::with(['asignaciones.asignatura','user'])->get();
         return view('admin.docentes.index',compact('docentes'));
     }
 

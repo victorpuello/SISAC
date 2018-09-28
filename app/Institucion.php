@@ -13,6 +13,9 @@ class Institucion extends Model
     ];
     public function setPathAttribute($path)
     {
+        if (is_null($path)){
+            $this->attributes['path'] = "15escudo_100x100.png";
+        }
         if (!empty($path)) {
             $image = \Image::make(Input::file('path'))->resize(100,100)->encode('png',100);
             $name = Carbon::now()->second.$path->getClientOriginalName();

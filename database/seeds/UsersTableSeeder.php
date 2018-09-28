@@ -1,5 +1,6 @@
 <?php
 
+use ATS\Docente;
 use ATS\User;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +22,14 @@ class UsersTableSeeder extends Seeder
             'path'=> null,
             'type' => 'admin'
         ]);
-       // factory(User::class,40)->create();
+        // crear docentes
+        for ($i =0; $i > 40; $i++){
+            $user = factory(User::class)->create();
+            Docente::create([
+                'typeid' => "CC",
+                'name' => $user->full_name,
+                'user_id' => $user->id
+            ]);
+        }
     }
 }

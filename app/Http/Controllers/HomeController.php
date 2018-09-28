@@ -2,6 +2,7 @@
 
 namespace ATS\Http\Controllers;
 
+use ATS\Indicador;
 use Illuminate\Http\Request;
 use ATS\Asignacion;
 use ATS\Docente;
@@ -32,7 +33,7 @@ class HomeController extends Controller
             case 'docente':
 
                 $asignaciones = Asignacion::where('docente_id','=',\Auth::user()->docente->id)->with('salon')->get();
-                $Nlogros = Logro::where('docente_id','=',\Auth::user()->docente->id)->count();
+                $Nlogros = Indicador::where('docente_id','=',\Auth::user()->docente->id)->count();
                 $Nasignaciones = $asignaciones->count();
                 $Nestudiantes = 0;
                 if (! \Auth::user()->docente->is_director){
@@ -48,14 +49,14 @@ class HomeController extends Controller
                 $Nestudiantes = Estudiante::all()->count();
                 $Ndocentes = Docente::all()->count();
                 $Nusers = User::all()->count();
-                $Nlogros = Logro::all()->count();
+                $Nlogros = Indicador::all()->count();
                 return view('admin.home',compact('Nestudiantes','Ndocentes','Nusers','Nlogros'));
             break;
             case 'secretaria':
                 $Nestudiantes = Estudiante::all()->count();
                 $Ndocentes = Docente::all()->count();
                 $Nusers = User::all()->count();
-                $Nlogros = Logro::all()->count();
+                $Nlogros = Indicador::all()->count();
                 return view('admin.home',compact('Nestudiantes','Ndocentes','Nusers','Nlogros'));
             break;
             default:

@@ -18,8 +18,8 @@ class CreateNotasTable extends Migration
             $table->float('score');
             $table->integer('estudiante_id')->unsigned();
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
-            $table->integer('logro_id')->unsigned();
-            $table->foreign('logro_id')->references('id')->on('logros');
+            $table->integer('indicador_id')->unsigned();
+            $table->foreign('indicador_id')->references('id')->on('indicadors');
             $table->timestamps();
         });
     }

@@ -95,34 +95,17 @@
             <span>Academico</span>
         </a>
         <ul class="nav nav-children">
-            <li class="nav-parent">
-                <a class="nav-link" href="#">
-                    Logros
+            <li>
+                <a class="nav-link" href="{{route('indicadors.index')}}">
+                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                    Indicadores
                 </a>
-                <ul class="nav nav-children">
-                    <li>
-                        <a href="{{route('logros.index')}}">
-                           Logros Individuales
-                        </a>
-                    </li>
-                    <li class="nav-parent">
-                        <a class="nav-link" href="#">
-                            Paquetes de Logros
-                        </a>
-                        <ul class="nav nav-children">
-                            <li>
-                                <a href="{{route('logros.import')}}">
-                                    Cargar Logros
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
             </li>
         </ul>
         <ul class="nav nav-children">
             <li>
                 <a class="nav-link" href="{{route('notas.index')}}">
+                    <i class="fas fa-check-square"></i>
                     Calificar
                 </a>
             </li>

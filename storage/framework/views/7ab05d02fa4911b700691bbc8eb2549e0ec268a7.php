@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="summary-footer">
-                                <a class="text-muted text-uppercase" href="<?php echo e(route('logros.index')); ?>">(Ver Todos)</a>
+                                <a class="text-muted text-uppercase" href="<?php echo e(route('indicadors.index')); ?>">(Ver Todos)</a>
                             </div>
                         </div>
                     </div>
