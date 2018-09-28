@@ -14,8 +14,8 @@ class Periodo extends Model
         return $this->belongsToMany(Estudiante::class);
     }
 
-    public function logros(){
-        return $this->hasMany(Logro::class);
+    public function indicadores(){
+        return $this->hasMany(Indicador::class);
     }
 
     public function getlogros(Asignacion $asignacion){
@@ -24,6 +24,7 @@ class Periodo extends Model
             ->where('grade','=',$asignacion->salon->grade)
             ->where('periodo_id','=',$this->attributes['id'])->orderBy('category')->with('notas')->get();
     }
-
-
+    public function getNameAttribute(){
+        return ucwords($this->attributes['name']) ;
+    }
 }

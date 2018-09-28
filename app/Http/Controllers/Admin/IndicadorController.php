@@ -2,8 +2,12 @@
 
 namespace ATS\Http\Controllers\Admin;
 
+use ATS\Asignatura;
+use ATS\Docente;
+use ATS\Grado;
 use ATS\Http\Controllers\Controller;
 use ATS\Indicador;
+use ATS\Periodo;
 use ATS\Transformers\IndicadorTransformer;
 use Illuminate\Http\Request;
 
@@ -20,7 +24,7 @@ class IndicadorController extends Controller
         if ($request->ajax()){
             return datatables()->eloquent($indicadores)->setTransformer(new IndicadorTransformer())->smart(true)->toJson();
         }
-        return view('admin.indicador.index');
+        return view('admin.indicadores.index');
     }
 
     /**
@@ -30,7 +34,11 @@ class IndicadorController extends Controller
      */
     public function create()
     {
-        //
+        $grados = Grado::pluck('name','id');
+        $asignaturas = Asignatura::pluck('name','id');
+        $periodos = Periodo::pluck('name','id');
+        $docentes = Docente::pluck('name','id');
+        return view('admin.indicadores.ajax.create',compact('grados','asignaturas','periodos','docentes'));
     }
 
     /**

@@ -26,8 +26,6 @@ Route::post('reportes/academico/logros', 'ReportesController@reporteLogros')->na
 Route::resource('import-users', 'InportUserController')->only(['index', 'store']);
 Route::resource('import-estudiantes', 'ImportEstudianteController')->only(['index', 'store']);
 Route::post('docentes/addAsignaturas/{id}',['as' => 'docentes.addAsignaturas', 'uses' => 'DocenteController@addAsignaturas']);
-Route::post('logros/findnotes',['as'=>'logros.findnotes', 'uses' => 'LogroController@FindNotes']);
-Route::get('logros/loaddata/{id}',['as'=>'logros.loaddata', 'uses' => 'LogroController@loadDataBuscador']);
 Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'MunicipioController']);
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs');
 

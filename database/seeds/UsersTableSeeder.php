@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
             'type' => 'admin'
         ]);
         // crear docentes
-        for ($i =0; $i > 40; $i++){
+        for ($i =0; $i < 40; $i++){
             $user = factory(User::class)->create();
             Docente::create([
                 'typeid' => "CC",
