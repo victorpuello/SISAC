@@ -13,7 +13,7 @@
     </div>
     <div class="col-lg-4">
         <div class="form-group">
-            <?php echo Form::select('periodo_id_id',$periodos, null, ['class' => 'form-control mb-3','placeholder'=>'Seleccione un Periodo', 'id'=>'periodo_id','required']); ?>
+            <?php echo Form::select('periodo_id',$periodos, null, ['class' => 'form-control mb-3','placeholder'=>'Seleccione un Periodo', 'id'=>'periodo_id','required']); ?>
 
         </div>
     </div>
@@ -33,7 +33,7 @@
     </div>
     <div class="col-lg-4">
         <div class="form-group">
-            <?php echo Form::select('indicador',['bajo' => 'Bajo','basico' => 'Basico','alto' => 'Alto','superior' => 'Superior'], null, ['class' => 'form-control mb-3','placeholder'=>'Seleccione un Desempeño', 'id'=>'grado_id','required']); ?>
+            <?php echo Form::select('indicator',['bajo' => 'Bajo','basico' => 'Basico','alto' => 'Alto','superior' => 'Superior'], null, ['class' => 'form-control mb-3','placeholder'=>'Seleccione un Desempeño', 'id'=>'grado_id','required']); ?>
 
         </div>
     </div>
@@ -44,3 +44,4 @@
 
     </div>
 </div>
+<?php echo Form::hidden('code',null); ?>

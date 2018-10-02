@@ -7,7 +7,6 @@ use ATS\Http\Requests\CreateGrupoRequest;
 use ATS\Http\Requests\UpdateGrupoRequest;
 use ATS\Jornada;
 use ATS\Transformers\GrupoTransformer;
-use Validator;
 use ATS\Grupo;
 use Illuminate\Http\Request;
 use ATS\Http\Controllers\Controller;

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Indicador extends Model
 {
     protected $fillable = [
-        'code','grado_id','asignatura_id','periodo_id','docente_id','category','indicador','description'
+        'code','grado_id','asignatura_id','periodo_id','docente_id','category','indicator','description'
     ];
 
     /**
@@ -41,17 +41,17 @@ class Indicador extends Model
     /**
      * @return string
      */
-    public function getIndicadorAttribute(){
-        if($this->attributes['indicador'] === 'basico'){
+    public function getIndicAttribute(){
+        if($this->attributes['indicator'] === 'basico'){
             return ucwords('básico');
         }
-        return ucwords($this->attributes['indicador']);
+        return ucwords($this->attributes['indicator']);
     }
 
     /**
      * @return string
      */
-    public function getCategoryAttribute(){
+    public function getCategoriaAttribute(){
         return ucwords($this->attributes['category']);
     }
 }

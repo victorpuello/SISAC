@@ -25,7 +25,7 @@ class CreateIndicadoresTable extends Migration
             $table->integer('docente_id')->unsigned();
             $table->foreign('docente_id')->references('id')->on('docentes');
             $table->enum('category',['cognitivo','procedimental','actitudinal']);
-            $table->enum('indicador',['bajo','basico','alto','superior']);
+            $table->enum('indicator',['bajo','basico','alto','superior']);
             $table->text('description');
             $table->unique('code');
             $table->timestamps();

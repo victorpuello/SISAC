@@ -20,9 +20,14 @@ Theme Version: 	2.1.1
             const titulo = `${errores[error]}`;
             crearNotificacion(nombre,titulo,'error');
         }
-
         var msg = $('#msg').data('msg');
+
+        var duplicado = $('#duplicado').data('error');
+        if (typeof duplicado != "undefined"){
+            crearNotificacion(duplicado,'Logro duplicado','error');
+        }
         console.log(msg);
+        console.log(duplicado);
 
 	});
 

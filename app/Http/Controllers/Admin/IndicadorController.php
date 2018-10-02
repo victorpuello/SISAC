@@ -6,6 +6,8 @@ use ATS\Asignatura;
 use ATS\Docente;
 use ATS\Grado;
 use ATS\Http\Controllers\Controller;
+use ATS\Http\Requests\CreateIndicadorRequest;
+use ATS\Http\Requests\UpdateIndicadorRequest;
 use ATS\Indicador;
 use ATS\Periodo;
 use ATS\Transformers\IndicadorTransformer;
@@ -47,9 +49,17 @@ class IndicadorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateIndicadorRequest $request)
     {
-        //
+        $indicador = new Indicador($request->all());
+        try {
+            $indicador->save();
+        }
+        catch (\Exception $e) {
+            $data = array(['msg'=>'El indicador presenta duplicidad','status'=>true]); ;
+            return view('admin.indicadores.index',compact('data'));
+        }
+        return redirect()->route('indicadors.index');
     }
 
     /**
@@ -71,29 +81,32 @@ class IndicadorController extends Controller
      */
     public function edit(Indicador $indicador)
     {
-        //
+        $grados = Grado::pluck('name','id');
+        $asignaturas = Asignatura::pluck('name','id');
+        $periodos = Periodo::pluck('name','id');
+        $docentes = Docente::pluck('name','id');
+        return view('admin.indicadores.ajax.edit',compact('grados','asignaturas','periodos','docentes','indicador'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \ATS\Indicador  $indicador
-     * @return \Illuminate\Http\Response
+     * @param UpdateIndicadorRequest $request
+     * @param Indicador $indicador
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Indicador $indicador)
+    public function update(UpdateIndicadorRequest $request, Indicador $indicador)
     {
-        //
+        $indicador->update($request->all());
+        return redirect()->route('indicadors.index');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \ATS\Indicador  $indicador
-     * @return \Illuminate\Http\Response
+     * @param Indicador $indicador
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Indicador $indicador)
     {
-        //
+        $indicador->delete();
+        return redirect()->route('indicadors.index');
     }
 }

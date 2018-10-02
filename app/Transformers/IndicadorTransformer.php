@@ -2,8 +2,9 @@
 
 namespace ATS\Transformers;
 
+use ATS\Indicador;
 use League\Fractal\TransformerAbstract;
-use App\Indicador;
+
 
 class IndicadorTransformer extends TransformerAbstract
 {
@@ -15,6 +16,13 @@ class IndicadorTransformer extends TransformerAbstract
     {
         return [
             'id' => (int) $indicador->id,
+            'grado' => (string) $indicador->grado->name,
+            'asignatura' => (string) $indicador->asignatura->name,
+            'periodo' => (string) $indicador->periodo->name,
+            'docente' => (string) $indicador->docente->name,
+            'indicador' => (string) $indicador->indicator,
+            'categoria' => (string) $indicador->category,
+            'descripcion' => (string) substr($indicador->description,0,50).'...',
         ];
     }
 }

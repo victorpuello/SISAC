@@ -29,8 +29,8 @@
                     {data: "periodo", orderable: true, searchable: true },
                     {data: "docente", orderable: true, searchable: true },
                     {data: "categoria", orderable: true, searchable: true },
-                    {data: "desempeño", orderable: true, searchable: true },
                     {data: "indicador", orderable: true, searchable: true },
+                    {data: "descripcion", orderable: true, searchable: true },
                     {
                         data: "id", render: function (data, type, row) {
                             return '<a href="' + inf.data('url') + "/admin/indicadors/" + data + '/edit"' + ' class="on-default edit-row simple-ajax-modal"><i class="fas fa-pencil-alt"></i></a>  ' +
