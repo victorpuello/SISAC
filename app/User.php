@@ -7,6 +7,37 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Input;
 
+/**
+ * ATS\User
+ *
+ * @property-read \ATS\Docente $docente
+ * @property-read mixed $full_name
+ * @property-read mixed $type_user
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-write mixed $password
+ * @property-write mixed $path
+ * @mixin \Eloquent
+ * @property int $id
+ * @property string $name
+ * @property string $lastname
+ * @property string $username
+ * @property string $type
+ * @property string $email
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereLastname($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereUsername($value)
+ */
 class User extends Authenticatable
 {
     use Notifiable;

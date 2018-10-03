@@ -3,6 +3,7 @@
 namespace ATS\Http\Requests;
 
 use ATS\Rules\CountCodeLogro;
+use ATS\Rules\ValidateAsignacion;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 class CreateIndicadorRequest extends FormRequest
@@ -24,14 +25,12 @@ class CreateIndicadorRequest extends FormRequest
      */
     public function rules()
     {
-        //dd($this->request->all());
         $code = $this->request->get('grado_id').''.$this->request->get('asignatura_id').''.$this->request->get('grado_id').''.$this->request->get('periodo_id').''.$this->request->get('docente_id').''.$this->request->get('category').''.$this->request->get('indicator');
         $this->merge(['code'=>$code]);
-
         return [
             'code' => Rule::unique('indicadors','code'),
             'grado_id' => ['required',Rule::exists('grados','id')],
-            'asignatura_id' => ['required',Rule::exists('asignaturas','id')],
+            'asignatura_id' => ['required',Rule::exists('asignaturas','id'),new ValidateAsignacion($this->request->get('docente_id'),$this->request->get('grado_id'))],
             'periodo_id' => ['required',Rule::exists('periodos','id')],
             'docente_id' => ['required',Rule::exists('docentes','id')],
             'category' => 'required|in:cognitivo,procedimental,actitudinal',

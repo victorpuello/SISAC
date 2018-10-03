@@ -95,7 +95,13 @@ class IndicadorController extends Controller
      */
     public function update(UpdateIndicadorRequest $request, Indicador $indicador)
     {
-        $indicador->update($request->all());
+        try {
+            $indicador->update($request->all());
+        }
+        catch (\Exception $e) {
+            $data = array(['msg'=>'El indicador presenta duplicidad','status'=>true]); ;
+            return view('admin.indicadores.index',compact('data'));
+        }
         return redirect()->route('indicadors.index');
     }
 

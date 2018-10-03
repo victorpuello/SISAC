@@ -7,6 +7,38 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
+/**
+ * ATS\Docente
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Asignacion[] $asignaciones
+ * @property-read mixed $is_director
+ * @property-read mixed $salon_director
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Indicador[] $indicadores
+ * @property-read \ATS\User $user
+ * @mixin \Eloquent
+ * @property int $id
+ * @property string $name
+ * @property string|null $typeid
+ * @property int|null $numberid
+ * @property string|null $fnac
+ * @property string|null $gender
+ * @property string|null $address
+ * @property string|null $phone
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereFnac($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereNumberid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereTypeid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereUserId($value)
+ */
 class Docente extends Model
 {
     /**
@@ -26,8 +58,8 @@ class Docente extends Model
         return array_pluck($asignaturas,'name','id');
     }
 
-    public function logros(){
-        return $this->hasMany(Logro::class);
+    public function indicadores(){
+        return $this->hasMany(Indicador::class);
     }
 
     public function asignaciones(){

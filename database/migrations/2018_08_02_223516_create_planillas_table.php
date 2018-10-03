@@ -15,11 +15,11 @@ class CreatePlanillasTable extends Migration
     {
         Schema::create('planillas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('asignacion_id')->unsigned();
-            $table->foreign('asignacion_id')->references('id')->on('asignacions')->onDelete('cascade');
-            $table->integer('periodo');
-            $table->string('codigo');
             $table->boolean('modificada');
+            $table->integer('periodo_id')->unsigned();
+            $table->foreign('periodo_id')->references('id')->on('periodos');
+            $table->integer('asignacion_id')->unsigned();
+            $table->foreign('asignacion_id')->references('id')->on('asignacions');
             $table->timestamps();
         });
     }

@@ -6,6 +6,31 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Input;
 
+/**
+ * ATS\Anotacion
+ *
+ * @property-read \ATS\Estudiante $estudiante
+ * @property-read \ATS\Periodo $periodo
+ * @property-write mixed $path
+ * @mixin \Eloquent
+ * @property int $id
+ * @property string $annotation
+ * @property string|null $compromises
+ * @property string $type
+ * @property int $estudiante_id
+ * @property int $periodo_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Anotacion whereAnnotation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Anotacion whereCompromises($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Anotacion whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Anotacion whereEstudianteId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Anotacion whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Anotacion wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Anotacion wherePeriodoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Anotacion whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Anotacion whereUpdatedAt($value)
+ */
 class Anotacion extends Model
 {
     protected $fillable = [

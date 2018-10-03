@@ -24,11 +24,8 @@ Theme Version: 	2.1.1
 
         var duplicado = $('#duplicado').data('error');
         if (typeof duplicado != "undefined"){
-            crearNotificacion(duplicado,'Logro duplicado','error');
+            crearNotificacion('Logro duplicado',duplicado,'error');
         }
-        console.log(msg);
-        console.log(duplicado);
-
 	});
 
 	function crearNotificacion(titulo, text, clase) {

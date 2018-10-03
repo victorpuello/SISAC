@@ -41,7 +41,7 @@
 @section('script')
     <script src="{{asset('vendor/select2/js/select2.js')}}"></script>
     <script src="{{asset('vendor/pnotify/pnotify.custom.js')}}"></script>
-    <script src="{{asset('js/examples/examples.modals.js')}}"></script>
+
     <script>
         $(".deleted").click(function (e) {
             $("#form-delete").attr('action', $(this).data('url') );

@@ -7,6 +7,7 @@ Route::resource('estudiantes', 'EstudianteController');
 Route::resource('institucion', 'InstitucionController');
 Route::resource('docentes', 'DocenteController');
 Route::resource('asignaturas', 'AsignaturaController');
+Route::resource('anios', 'AnioController');
 Route::resource('areas', 'AreaController');
 Route::resource('grupos', 'GrupoController');
 Route::resource('grados', 'GradoController');
@@ -19,6 +20,12 @@ Route::resource('asignacions', 'AsignacionController');
 Route::resource('periodos', 'PeriodoController');
 Route::resource('reportes', 'ReportesController')->only(['index']);
 Route::resource('acudiente', 'AcudienteController')->only(['edit','store','update','destroy']);
+
+// Rutas para cargar - Filtrar y Mostrar las planillas
+Route::get('planillas/getFiltro','PlanillaController@getFiltro')->name('planillas.getfiltro');
+Route::post('planillas/filtro','PlanillaController@filtro')->name('planillas.filtro');
+
+
 Route::get('acudiente/{estudiante}', 'AcudienteController@create')->name('acudiente.create');
 Route::post('reportes/academico/', 'ReportesController@reporteAcademico')->name('reportes.academico');
 Route::post('reportes/academico/sabana', 'ReportesController@sabana')->name('reportes.academico.sabana');

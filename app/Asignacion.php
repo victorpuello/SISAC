@@ -4,6 +4,31 @@ namespace ATS;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * ATS\Asignacion
+ *
+ * @property-read \ATS\Asignatura $asignatura
+ * @property-read \ATS\Docente $docente
+ * @property-read mixed $direccion
+ * @property-read \ATS\Grupo $grupo
+ * @mixin \Eloquent
+ * @property int $id
+ * @property int $horas
+ * @property int $director
+ * @property int $docente_id
+ * @property int $grupo_id
+ * @property int $asignatura_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignacion whereAsignaturaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignacion whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignacion whereDirector($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignacion whereDocenteId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignacion whereGrupoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignacion whereHoras($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignacion whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignacion whereUpdatedAt($value)
+ */
 class Asignacion extends Model
 {
     protected $fillable = [

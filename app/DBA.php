@@ -4,6 +4,13 @@ namespace ATS;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * ATS\DBA
+ *
+ * @property-read \ATS\Area $area
+ * @property-read \ATS\Grado $grado
+ * @mixin \Eloquent
+ */
 class DBA extends Model
 {
     protected $fillable = [

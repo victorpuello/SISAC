@@ -2,6 +2,7 @@
 
 namespace ATS\Http\Requests;
 
+use ATS\Rules\ValidateAsignacion;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -29,7 +30,7 @@ class UpdateIndicadorRequest extends FormRequest
         return [
             'code' => Rule::unique('indicadors')->ignore($this->indicador),
             'grado_id' => ['required',Rule::exists('grados','id')],
-            'asignatura_id' => ['required',Rule::exists('asignaturas','id')],
+            'asignatura_id' => ['required',Rule::exists('asignaturas','id'),new ValidateAsignacion($this->request->get('docente_id'),$this->request->get('grado_id'))],
             'periodo_id' => ['required',Rule::exists('periodos','id')],
             'docente_id' => ['required',Rule::exists('docentes','id')],
             'category' => 'required|in:cognitivo,procedimental,actitudinal',

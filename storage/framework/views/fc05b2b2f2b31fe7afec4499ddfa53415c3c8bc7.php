@@ -96,7 +96,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="<?php echo e(route('indicadors.index')); ?>">
+                <a class="nav-link simple-ajax-modal" href="<?php echo e(route('indicadors.index')); ?>">
                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                     Indicadores
                 </a>
@@ -104,7 +104,7 @@
         </ul>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="<?php echo e(route('notas.index')); ?>">
+                <a class="nav-link simple-ajax-modal" href="<?php echo e(route('planillas.getfiltro')); ?>">
                     <i class="fas fa-check-square"></i>
                     Calificar
                 </a>

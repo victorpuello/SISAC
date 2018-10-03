@@ -153,6 +153,6 @@
         <script src="{{asset('js/theme.init.js')}}"></script>
         <!-- Specific Page Vendor -->
         @yield('scriptfin')
-
+        <script src="{{asset('js/examples/examples.modals.js')}}"></script>
     </body>
 </html>

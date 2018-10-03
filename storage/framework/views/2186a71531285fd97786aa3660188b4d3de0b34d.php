@@ -153,6 +153,6 @@
         <script src="<?php echo e(asset('js/theme.init.js')); ?>"></script>
         <!-- Specific Page Vendor -->
         <?php echo $__env->yieldContent('scriptfin'); ?>
-
+        <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
     </body>
 </html>

@@ -3,7 +3,6 @@
 namespace ATS\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use ATS\Asignacion;
 
 class ValidateAsignacion implements Rule
 {
@@ -12,10 +11,18 @@ class ValidateAsignacion implements Rule
      *
      * @return void
      */
-    protected $request;
-    public function __construct($request)
+    protected $grado_id;
+    protected $docente_id;
+
+    /**
+     * ValidateAsignacion constructor.
+     * @param $docente_id
+     * @param $grado_id
+     */
+    public function __construct($docente_id, $grado_id)
     {
-        $this->request = $request->all();
+        $this->docente_id = $docente_id;
+        $this->grado_id = $grado_id;
     }
 
     /**
@@ -27,17 +34,7 @@ class ValidateAsignacion implements Rule
      */
     public function passes($attribute, $value)
     {
-        $marcador = false;
-        $asignaciones = Asignacion::where('docente_id','=', $this->request['docente'])
-                                ->where('asignatura_id','=',$value)
-                                ->with('salon')
-                                ->get();
-        foreach ($asignaciones as $asignacion){
-            if ($asignacion->salon->grade === $this->request['grade']){
-                $marcador = true;
-            }
-        }
-        return $marcador === true;
+        return if_exist_asignacion($this->docente_id,$value,$this->grado_id) === true;
     }
 
     /**

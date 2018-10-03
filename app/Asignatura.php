@@ -5,6 +5,32 @@ namespace ATS;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * ATS\Asignatura
+ *
+ * @property-read \ATS\Area $area
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Asignacion[] $asignaciones
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Definitiva[] $definitivas
+ * @property-read mixed $docentes
+ * @property-read mixed $name
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Indicador[] $indicadores
+ * @mixin \Eloquent
+ * @property int $id
+ * @property string $short_name
+ * @property float $porcentaje
+ * @property string $nivel
+ * @property int $area_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignatura whereAreaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignatura whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignatura whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignatura whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignatura whereNivel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignatura wherePorcentaje($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignatura whereShortName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignatura whereUpdatedAt($value)
+ */
 class Asignatura extends Model
 {
     protected $fillable = [

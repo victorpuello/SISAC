@@ -17,13 +17,13 @@
                 <section class="card">
                     <header class="card-header bg-{{$fondos[rand(0,3)]}}">
                         <div class="card-header-profile-picture">
-                            <img src="{{url('/img')}}/{{$asignacion->salon->grade}}.jpg">
+                            <img src="{{url('/img')}}/{{$asignacion->grupo->grado->numero}}.jpg">
                         </div>
                     </header>
                     <div class="card-body">
                         <ul class="pl-3">
                             <li><span><strong>Asignatura: </strong>{{$asignacion->asignatura->name}}</span></li>
-                            <li><span><strong>Grupo: </strong>{{$asignacion->salon->full_name}}</span></li>
+                            <li><span><strong>Grupo: </strong>{{$asignacion->grupo->name}}</span></li>
                             <li><span><strong>Docente: </strong>{{$asignacion->docente->name}}</span></li>
                         </ul>
 

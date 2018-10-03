@@ -6,6 +6,34 @@ use Illuminate\Database\Eloquent\Model;
 use phpDocumentor\Reflection\Types\This;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * ATS\Grupo
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Asignacion[] $asignaciones
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Estudiante[] $estudiantes
+ * @property-read mixed $asignaturas
+ * @property-read mixed $director
+ * @property-read mixed $docentes
+ * @property-read mixed $name_aula
+ * @property-read mixed $name_for_validation
+ * @property-read \ATS\Grado $grado
+ * @property-read \ATS\Jornada $jornada
+ * @mixin \Eloquent
+ * @property int $id
+ * @property string $name
+ * @property string $modelo
+ * @property int $grado_id
+ * @property int $jornada_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Grupo whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Grupo whereGradoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Grupo whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Grupo whereJornadaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Grupo whereModelo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Grupo whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Grupo whereUpdatedAt($value)
+ */
 class Grupo extends Model
 {
     protected $fillable = [

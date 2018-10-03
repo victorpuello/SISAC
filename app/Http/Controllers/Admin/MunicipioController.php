@@ -18,7 +18,6 @@ class MunicipioController extends Controller
         if ($request->ajax()){
             return response()->json($municipios);
         }
-        //return response()->json($municipios);
     }
 
 }

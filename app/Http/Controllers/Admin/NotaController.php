@@ -29,7 +29,7 @@ class NotaController extends Controller
         $fondos = $this->fondos;
         $asignaciones = Asignacion::with('docente')
                     ->with('asignatura')
-                    ->with('salon')
+                    ->with('grupo')
                     ->get();
         //hay que filtrar por el utlimo año
         $periodos = Periodo::all();
