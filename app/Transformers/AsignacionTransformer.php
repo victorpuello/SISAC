@@ -18,7 +18,9 @@ class AsignacionTransformer extends TransformerAbstract
             'asignatura' => (string) $asignacion->asignatura->name,
             'docente' => (string) $asignacion->docente->name,
             'grupo' => (string) $asignacion->grupo->name_aula,
-            'director' => (string) $asignacion->direccion
+            'anio' => (string) $asignacion->anio->name,
+            'director' => (string) $asignacion->direccion,
+            'active' => (string) $asignacion->estado
         ];
     }
 }

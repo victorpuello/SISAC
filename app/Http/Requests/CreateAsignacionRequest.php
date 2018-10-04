@@ -29,7 +29,9 @@ class CreateAsignacionRequest extends FormRequest
             'asignatura_id' => ['required','integer',Rule::exists('asignaturas','id')],
             'docente_id' => ['required','integer',Rule::exists('docentes','id')],
             'grupo_id' => ['required','integer',Rule::exists('grupos','id')],
-            'director' => 'boolean'
+            'anio_id' => ['required','integer',Rule::exists('anios','id')],
+            'director' => 'boolean',
+            'active' => 'boolean',
         ];
     }
 }

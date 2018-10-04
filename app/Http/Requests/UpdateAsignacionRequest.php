@@ -3,6 +3,7 @@
 namespace ATS\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateAsignacionRequest extends FormRequest
 {
@@ -24,9 +25,13 @@ class UpdateAsignacionRequest extends FormRequest
     public function rules()
     {
         return [
-            'asignatura_id' => ['required','numeric'],
-            'docente_id' => ['required','numeric'],
-            'salon_id' => ['required','numeric']
+            'horas' => 'integer',
+            'asignatura_id' => ['required','integer',Rule::exists('asignaturas','id')],
+            'docente_id' => ['required','integer',Rule::exists('docentes','id')],
+            'grupo_id' => ['required','integer',Rule::exists('grupos','id')],
+            'anio_id' => ['required','integer',Rule::exists('anios','id')],
+            'director' => 'boolean',
+            'active' => 'boolean',
         ];
     }
 }

@@ -26,6 +26,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Periodo whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Periodo whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Periodo whereUpdatedAt($value)
+ * @property int $anio_id
+ * @property-read \ATS\Anio $anio
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Planilla[] $planillas
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Periodo whereAnioId($value)
  */
 class Periodo extends Model
 {
@@ -45,6 +49,13 @@ class Periodo extends Model
      */
     public function indicadores(){
         return $this->hasMany(Indicador::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function planillas(){
+        return $this->hasMany(Planilla::class);
     }
 
     public function getlogros(Asignacion $asignacion){

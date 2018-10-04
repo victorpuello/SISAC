@@ -22,10 +22,29 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Planilla whereModificada($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Planilla wherePeriodo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Planilla whereUpdatedAt($value)
+ * @property int $periodo_id
+ * @property-read \ATS\Asignacion $asignacion
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Planilla wherePeriodoId($value)
  */
 class Planilla extends Model
 {
     protected $fillable = [
-        'grado','docente','asignatura','periodo','codigo','creada'
+        'modificada','periodo_id','asignacion_id'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function periodo(){
+        return $this->belongsTo(Periodo::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function asignacion(){
+        return $this->belongsTo(Asignacion::class);
+    }
 }
+
+

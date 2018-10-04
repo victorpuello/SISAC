@@ -23,6 +23,8 @@
                     {data: "docente", orderable: true, searchable: true},
                     {data: "grupo", orderable: true, searchable: true},
                     {data: "director", orderable: true, searchable: true},
+                    {data: "anio", orderable: true, searchable: true},
+                    {data: "active", orderable: true, searchable: true},
                     {
                         data: "id", render: function (data, type, row) {
                             return '<a href="' + inf.data('url') + "/admin/asignacions/" + data + '/edit"' + ' class="on-default edit-row simple-ajax-modal"><i class="fas fa-pencil-alt"></i></a>  ' +

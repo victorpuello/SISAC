@@ -22,6 +22,8 @@
                     <th>Docente</th>
                     <th>Grupo</th>
                     <th>Director</th>
+                    <th>Año</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>

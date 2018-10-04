@@ -208,8 +208,9 @@ select.form-control-lg {
 
 .form-check {
   position: relative;
-  display: block;
+  display: inline-block;
   padding-left: $form-check-input-gutter;
+  padding-right: 1.5rem;
 }
 
 .form-check-input {

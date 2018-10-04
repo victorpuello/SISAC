@@ -62,6 +62,9 @@ class Docente extends Model
         return $this->hasMany(Indicador::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function asignaciones(){
         return $this->hasMany(Asignacion::class);
     }

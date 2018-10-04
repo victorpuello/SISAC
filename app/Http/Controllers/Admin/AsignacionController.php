@@ -2,6 +2,7 @@
 
 namespace ATS\Http\Controllers\Admin;
 
+use ATS\Anio;
 use ATS\Transformers\AsignacionTransformer;
 use ATS\Asignacion;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class AsignacionController extends Controller
      */
     public function index(Request $request)
     {
-        $asignaciones = Asignacion::with('docente')->with('asignatura')->with('grupo')->orderBy('created_at','desc');
+        $asignaciones = Asignacion::with(['docente','asignatura','grupo','anio'])->orderBy('created_at','desc');
         if ($request->ajax()){
             return datatables()->eloquent($asignaciones)->setTransformer(new AsignacionTransformer())->smart(true)->toJson();
         }
@@ -33,8 +34,9 @@ class AsignacionController extends Controller
     {
         $docentes = Docente::orderBy('name','ASC')->pluck('name','id');
         $asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
+        $anios = Anio::orderBy('name','ASC')->pluck('name','id');
         $grupos = grupos_pluck();
-        return view('admin.asignaciones.ajax.create',compact('asignaciones','docentes','grupos','asignaturas'));
+        return view('admin.asignaciones.ajax.create',compact('asignaciones','docentes','grupos','asignaturas','anios'));
     }
 
     /**
@@ -64,8 +66,9 @@ class AsignacionController extends Controller
     {
         $docentes = Docente::orderBy('name','ASC')->pluck('name','id');
         $asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
+        $anios = Anio::orderBy('name','ASC')->pluck('name','id');
         $grupos = grupos_pluck();
-        return view('admin.asignaciones.ajax.edit',compact('asignacion','docentes','grupos','asignaturas'));
+        return view('admin.asignaciones.ajax.edit',compact('asignacion','docentes','grupos','asignaturas','anios'));
     }
 
     /**
