@@ -8,26 +8,26 @@
 <?php $__env->startSection('content'); ?>
     <section class="card">
         <header class="card-header bg-primary ">
-            <h2 class="card-title text-color-light"><strong><?php echo e(count($asignaciones)); ?></strong> - Planillas disponibles para calificar - <strong>Lic. <?php echo e($asignaciones->first()->docente->name); ?></strong></h2>
+            <h2 class="card-title text-color-light"><strong><?php echo e(count($planillas)); ?></strong> - Planillas disponibles para calificar - <strong>Lic. <?php echo e($docente->name); ?></strong></h2>
         </header>
         <div class="row">
-            <?php $__currentLoopData = $asignaciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignacion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $__currentLoopData = $planillas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $planilla): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-lg-2 mt-2 mb-2">
                     <section class="card">
                         <header class="card-header bg-<?php echo e(Config::get('institucion.fondos.2')); ?>">
                             <div class="card-header-profile-picture">
-                                <img src="<?php echo e(url('/img')); ?>/<?php echo e($asignacion->grupo->grado->numero); ?>.jpg">
+                                <img src="<?php echo e(url('/img')); ?>/<?php echo e($planilla->asignacion->grupo->grado->numero); ?>.jpg">
                             </div>
                         </header>
                         <div class="card-body p-2">
                             <ul class="pl-3">
-                                <li><span><strong>Asignatura: </strong><?php echo e($asignacion->asignatura->name); ?></span></li>
-                                <li><span><strong>Grupo: </strong><?php echo e($asignacion->grupo->name); ?></span></li>
+                                <li><span><strong>Asignatura: </strong><?php echo e($planilla->asignacion->asignatura->name); ?></span></li>
+                                <li><span><strong>Grupo: </strong><?php echo e($planilla->asignacion->grupo->name); ?></span></li>
                             </ul>
                             <hr class="solid short">
                             <div class="row">
                                 <div class="col-lg-3 offset-3 d-block">
-                                    <a href="#" class="btn btn-sm btn-info center" ><i class="fas fa-pencil-alt mr-1"></i>Calificar</a>
+                                    <a href="<?php echo e(Route('planillas.show',$planilla)); ?>" class="btn btn-sm btn-info center" ><i class="fas fa-pencil-alt mr-1"></i>Calificar</a>
                                 </div>
                             </div>
                             <div class="row mt-1">

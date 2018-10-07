@@ -2,7 +2,8 @@
 
 namespace ATS\Transformers;
 
-use ATS\Grupo;
+
+use ATS\Model\Grupo;
 use League\Fractal\TransformerAbstract;
 
 class GrupoTransformer extends TransformerAbstract

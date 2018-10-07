@@ -1,6 +1,6 @@
 <?php
 
-namespace ATS;
+namespace ATS\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -33,13 +33,7 @@ use Illuminate\Support\Facades\DB;
  */
 class Asignatura extends Model
 {
-    protected $fillable = [
-        'name',
-        'short_name',
-        'porcentaje',
-        'nivel',
-        'area_id'
-    ];
+    protected $fillable = ['name','short_name','porcentaje','nivel','area_id'];
     public function getDocentesAttribute (){
         $docentes = DB::table('asignacions')->where('asignatura_id','=',$this->id)
             ->join('docentes','docentes.id','=','asignacions.docente_id')
@@ -51,14 +45,20 @@ class Asignatura extends Model
     public function area(){
         return $this->belongsTo(Area::class);
     }
-    public function indicadores(){
-        return $this->hasMany(Indicador::class);
-    }
     public function asignaciones(){
         return $this->hasMany(Asignacion::class);
     }
     public function definitivas(){
         return $this->hasMany(Definitiva::class);
+    }
+    public function indicadores(){
+        return $this->hasMany(Indicador::class);
+    }
+    public function inasistencias(){
+        return $this->hasMany(Inasistencia::class);
+    }
+    public function notas(){
+        return $this->hasManyThrough('ATS\Model\Nota','ATS\Model\Indicador');
     }
     public function getNameAttribute(){
         return ucwords($this->attributes['name']) ;

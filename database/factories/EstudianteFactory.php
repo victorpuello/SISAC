@@ -1,6 +1,6 @@
 <?php
 
-use ATS\Estudiante;
+use ATS\Model\Estudiante;
 use Faker\Generator as Faker;
 
 $factory->define(Estudiante::class, function (Faker $faker) {
@@ -21,6 +21,6 @@ $factory->define(Estudiante::class, function (Faker $faker) {
         'path' => null,
         'stade'  => 'activo',
         'situation' => $faker->randomElement(['normal','normal']),
-        'grupo_id' => $faker->numberBetween($min=1,$max=2)
+        'grupo_id' => $faker->numberBetween($min=1,$max=3)
     ];
 });

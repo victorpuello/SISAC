@@ -157,6 +157,7 @@
             });
         });
     });
+
     $("#stade").change(event => {
         const estado = `${event.target.value}`;
         const dateout = $('#dateout');

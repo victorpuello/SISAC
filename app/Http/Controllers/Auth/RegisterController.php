@@ -2,7 +2,7 @@
 
 namespace ATS\Http\Controllers\Auth;
 
-use ATS\User;
+use ATS\Model\User;
 use ATS\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;

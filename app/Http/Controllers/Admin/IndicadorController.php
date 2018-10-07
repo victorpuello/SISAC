@@ -2,14 +2,15 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use ATS\Asignatura;
-use ATS\Docente;
-use ATS\Grado;
+
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\CreateIndicadorRequest;
 use ATS\Http\Requests\UpdateIndicadorRequest;
-use ATS\Indicador;
-use ATS\Periodo;
+use ATS\Model\Asignatura;
+use ATS\Model\Docente;
+use ATS\Model\Grado;
+use ATS\Model\Indicador;
+use ATS\Model\Periodo;
 use ATS\Transformers\IndicadorTransformer;
 use Illuminate\Http\Request;
 

@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => ATS\User::class,
+            'model' => ATS\Model\User::class,
         ],
 
         // 'users' => [

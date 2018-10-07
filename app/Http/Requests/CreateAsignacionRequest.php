@@ -2,7 +2,11 @@
 
 namespace ATS\Http\Requests;
 
+use ATS\Clases\CurrentPeriodo;
+use ATS\Model\Asignacion;
+use ATS\Model\Planilla;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class CreateAsignacionRequest extends FormRequest
@@ -34,4 +38,25 @@ class CreateAsignacionRequest extends FormRequest
             'active' => 'boolean',
         ];
     }
+     public function createAsignacion(){
+        DB::transaction(function () {
+            $data = $this->validated();
+            $asignacion = Asignacion::create([
+                'horas' => $data['horas'],
+                'docente_id' => $data['docente_id'],
+                'grupo_id' => $data['grupo_id'],
+                'asignatura_id' => $data['asignatura_id'],
+                'director' => $data['director'],
+                'active' => $data['active'],
+                'anio_id' => $data['anio_id']
+            ]);
+            $p = new CurrentPeriodo();
+            $periodo = $p->getPeriodo();
+            Planilla::create([
+                'modificada' => false,
+                'periodo_id' => $periodo->id,
+                'asignacion_id' => $asignacion->id
+            ]);
+        });
+     }
 }

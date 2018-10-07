@@ -1,6 +1,6 @@
 <?php
 
-namespace ATS;
+namespace ATS\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
 class Nota extends Model
 {
     protected $fillable = [
-        'score','estudiante_id','logro_id',
+        'score','estudiante_id','logro_id','periodo_id',
     ];
 
     public function estudiante(){
@@ -35,5 +35,7 @@ class Nota extends Model
     public function indicador(){
         return $this->belongsTo(Indicador::class);
     }
-
+    public function periodo(){
+        return $this->belongsTo(Periodo::class);
+    }
 }

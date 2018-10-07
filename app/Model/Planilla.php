@@ -1,6 +1,6 @@
 <?php
 
-namespace ATS;
+namespace ATS\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -32,6 +32,10 @@ class Planilla extends Model
         'modificada','periodo_id','asignacion_id'
     ];
 
+
+    public function docente(){
+        $this->hasManyThrough('ATS\Model\Docente','ATS\Model\Asignacion');
+    }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -45,6 +49,8 @@ class Planilla extends Model
     public function asignacion(){
         return $this->belongsTo(Asignacion::class);
     }
+
+
 }
 
 

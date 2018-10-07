@@ -1,6 +1,6 @@
 <?php
 
-namespace ATS;
+namespace ATS\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,7 +48,6 @@ class Asignacion extends Model
     public function docente(){
         return $this->belongsTo(Docente::class);
     }
-
     public function grupo(){
         return $this->belongsTo(Grupo::class);
     }

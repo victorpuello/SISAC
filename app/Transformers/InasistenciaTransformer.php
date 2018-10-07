@@ -2,9 +2,10 @@
 
 namespace ATS\Transformers;
 
+use ATS\Model\Inasistencia;
 use League\Fractal\Resource\Collection;
 use League\Fractal\TransformerAbstract;
-use ATS\Inasistencia;
+
 
 class InasistenciaTransformer extends TransformerAbstract
 {

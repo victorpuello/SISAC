@@ -2,7 +2,8 @@
 
 namespace ATS\Rules;
 
-use ATS\Grado;
+
+use ATS\Model\Grado;
 use Illuminate\Contracts\Validation\Rule;
 
 class ValidateGrupo implements Rule

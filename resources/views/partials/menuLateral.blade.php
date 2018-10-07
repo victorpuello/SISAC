@@ -96,7 +96,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link simple-ajax-modal" href="{{route('indicadors.index')}}">
+                <a class="nav-link" href="{{route('indicadors.index')}}">
                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                     Indicadores
                 </a>

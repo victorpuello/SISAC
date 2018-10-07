@@ -3,12 +3,12 @@
 namespace ATS\Http\Controllers\Admin;
 
 use ATS\Acudiente;
-use Illuminate\Http\Request;
 use ATS\Estudiante;
+use Illuminate\Http\Request;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\CreateAcudienteRequest;
 use ATS\Http\Requests\UpdateAcudienteRequest;
-use ATS\Municipio;
+
 
 class AcudienteController extends Controller
 {

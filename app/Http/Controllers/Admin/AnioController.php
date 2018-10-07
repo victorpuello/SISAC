@@ -2,8 +2,8 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use ATS\Anio;
 use ATS\Http\Controllers\Controller;
+use ATS\Model\Anio;
 use Illuminate\Http\Request;
 
 class AnioController extends Controller

@@ -1,8 +1,9 @@
 <?php
 
+use ATS\Model\Departamento;
 use Faker\Generator as Faker;
 
-$factory->define(ATS\Departamento::class, function (Faker $faker) {
+$factory->define(Departamento::class, function (Faker $faker) {
     return [
         'name' => $faker->name
     ];

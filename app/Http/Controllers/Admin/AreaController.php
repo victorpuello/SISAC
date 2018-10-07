@@ -2,7 +2,7 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use ATS\Area;
+use ATS\Model\Area;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\CreateAreaRequest;
 use ATS\Http\Requests\UpdateAreaRequest;

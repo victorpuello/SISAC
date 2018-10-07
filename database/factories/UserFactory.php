@@ -1,7 +1,7 @@
 <?php
 
+use ATS\Model\User;
 use Faker\Generator as Faker;
-use ATS\User;
 
 /*
 |--------------------------------------------------------------------------

@@ -2,7 +2,8 @@
 
 namespace ATS\Transformers;
 
-use ATS\Asignacion;
+
+use ATS\Model\Asignacion;
 use League\Fractal\TransformerAbstract;
 
 class AsignacionTransformer extends TransformerAbstract

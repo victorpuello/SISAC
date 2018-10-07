@@ -2,13 +2,14 @@
 
 namespace ATS\Http\Controllers;
 
-use ATS\Indicador;
+
+use ATS\Model\Asignacion;
+use ATS\Model\Docente;
+use ATS\Model\Estudiante;
+use ATS\Model\Indicador;
+use ATS\Model\User;
 use Illuminate\Http\Request;
-use ATS\Asignacion;
-use ATS\Docente;
-use ATS\Estudiante;
-use ATS\Logro;
-use ATS\User;
+
 
 class HomeController extends Controller
 {

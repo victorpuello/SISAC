@@ -1,8 +1,9 @@
 <?php
 
+use ATS\Model\Indicador;
 use Faker\Generator as Faker;
 
-$factory->define(ATS\Indicador::class, function (Faker $faker) {
+$factory->define(Indicador::class, function (Faker $faker) {
     return [
         //
     ];

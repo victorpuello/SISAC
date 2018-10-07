@@ -1,6 +1,6 @@
 <?php
 
-namespace ATS;
+namespace ATS\Model;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -38,6 +38,7 @@ use Illuminate\Support\Facades\Input;
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereTypeid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Docente whereUserId($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Model\Planilla[] $planillas
  */
 class Docente extends Model
 {
@@ -48,6 +49,9 @@ class Docente extends Model
         'id','typeid','numberid','fnac','gender','address','phone','name','user_id'
     ];
     private $name;
+    public function planillas(){
+        return $this->hasManyThrough('ATS\Model\Planilla','ATS\Model\Asignacion');
+    }
 
     public function asignaturas(){
         $asignaturas = DB::table('asignacions')->where('docente_id','=',$this->id)

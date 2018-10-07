@@ -71,8 +71,7 @@ class AsignacionController extends Controller
      */
     public function store(CreateAsignacionRequest $request)
     {
-        $asignacion = new Asignacion($request->all());
-        $asignacion->save();
+        $request->createAsignacion();
         return redirect()->route('asignaciones.index');
     }
 

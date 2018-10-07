@@ -2,13 +2,14 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use ATS\Area;
+
 use ATS\Http\Requests\CreateAsignaturaRequest;
+use ATS\Model\Area;
+use ATS\Model\Asignatura;
 use ATS\Transformers\AsignaturaTransformer;
 use Illuminate\Validation\Rule;
 use ATS\Http\Controllers\Controller;
 use Validator;
-use ATS\Asignatura;
 use Illuminate\Http\Request;
 
 class AsignaturaController extends Controller

@@ -1,6 +1,6 @@
 <div id="modalHeaderColorPrimary" class="modal-block modal-header-color modal-block-primary ">
     <section class="card">
-        <?php echo Form::open(['route' => 'planillas.filtro', 'method' => 'POST','class' => 'form-horizontal form-bordered']); ?>
+        <?php echo Form::open(['route' => 'planillas.index', 'method' => 'GET','class' => 'form-horizontal form-bordered']); ?>
 
         <header class="card-header">
             <h2 class="card-title">Filtrar Planillas </h2>

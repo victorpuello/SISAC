@@ -1,6 +1,7 @@
 <?php
 
-use ATS\Grupo;
+use ATS\Model\Grupo;
+
 
 /**
  * Retorna un pluck de todos los grupos registrados

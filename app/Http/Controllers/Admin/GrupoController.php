@@ -2,12 +2,13 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use ATS\Grado;
+
 use ATS\Http\Requests\CreateGrupoRequest;
 use ATS\Http\Requests\UpdateGrupoRequest;
-use ATS\Jornada;
+use ATS\Model\Grado;
+use ATS\Model\Grupo;
+use ATS\Model\Jornada;
 use ATS\Transformers\GrupoTransformer;
-use ATS\Grupo;
 use Illuminate\Http\Request;
 use ATS\Http\Controllers\Controller;
 class GrupoController extends Controller

@@ -1,8 +1,9 @@
 <?php
 
+use ATS\Model\Jornada;
 use Faker\Generator as Faker;
 
-$factory->define(\ATS\Jornada::class, function (Faker $faker) {
+$factory->define(Jornada::class, function (Faker $faker) {
     return [
         'name'=>$faker->name
     ];

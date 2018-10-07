@@ -1,8 +1,9 @@
 <?php
 
+use ATS\Model\Anio;
 use Faker\Generator as Faker;
 
-$factory->define(ATS\Anio::class, function (Faker $faker) {
+$factory->define(Anio::class, function (Faker $faker) {
     return [
         //
     ];

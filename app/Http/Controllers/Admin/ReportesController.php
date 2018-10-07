@@ -3,15 +3,14 @@
 namespace ATS\Http\Controllers\Admin;
 
 use App;
+use ATS\Model\Asignatura;
+use ATS\Model\Docente;
+use ATS\Model\Estudiante;
+use ATS\Model\Grupo;
+use ATS\Model\Institucion;
+use ATS\Model\Periodo;
 use Illuminate\Http\Request;
-use ATS\Asignatura;
-use ATS\Docente;
-use ATS\Estudiante;
 use ATS\Http\Requests\ReportesLogrosRequest;
-use ATS\Institucion;
-use ATS\Logro;
-use ATS\Periodo;
-use ATS\Grupo;
 use ATS\Http\Controllers\Controller;
 use PDF;
 

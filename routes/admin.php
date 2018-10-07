@@ -18,12 +18,13 @@ Route::resource('indicadors', 'IndicadorController');
 Route::resource('notas', 'NotaController');
 Route::resource('asignacions', 'AsignacionController');
 Route::resource('periodos', 'PeriodoController');
+Route::get('planillas/getFiltro','PlanillaController@getFiltro')->name('planillas.getfiltro');
+Route::resource('planillas', 'PlanillaController');
 Route::resource('reportes', 'ReportesController')->only(['index']);
 Route::resource('acudiente', 'AcudienteController')->only(['edit','store','update','destroy']);
 
 // Rutas para cargar - Filtrar y Mostrar las planillas
-Route::get('planillas/getFiltro','PlanillaController@getFiltro')->name('planillas.getfiltro');
-Route::post('planillas/filtro','PlanillaController@filtro')->name('planillas.filtro');
+//Route::post('planillas/filtro','PlanillaController@filtro')->name('planillas.filtro');
 
 
 Route::get('acudiente/{estudiante}', 'AcudienteController@create')->name('acudiente.create');

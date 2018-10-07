@@ -1,5 +1,6 @@
 <?php
 
+use ATS\Model\Grado;
 use Illuminate\Database\Seeder;
 
 class GradosTableSeeder extends Seeder
@@ -24,7 +25,7 @@ class GradosTableSeeder extends Seeder
                 $nivel='media';
             }
 
-            factory(\ATS\Grado::class)->create([
+            factory(Grado::class)->create([
                 'name'=> $nombres[$i],
                 'numero'=>$i,
                 'nivel'=> $nivel

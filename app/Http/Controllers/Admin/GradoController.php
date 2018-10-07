@@ -2,7 +2,7 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use ATS\Grado;
+use ATS\Model\Grado;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\CreateGradoRequest;
 use ATS\Http\Requests\UpdateGradoRequest;

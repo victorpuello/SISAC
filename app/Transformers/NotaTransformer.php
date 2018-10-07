@@ -9,8 +9,9 @@
 namespace ATS\Transformers;
 
 
+use ATS\Model\Nota;
 use League\Fractal\TransformerAbstract;
-use ATS\Nota;
+
 
 class NotaTransformer extends TransformerAbstract
 {

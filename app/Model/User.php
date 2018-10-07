@@ -1,6 +1,6 @@
 <?php
 
-namespace ATS;
+namespace ATS\Model;
 
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;

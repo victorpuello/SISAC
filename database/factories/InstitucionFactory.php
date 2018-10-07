@@ -1,8 +1,9 @@
 <?php
 
+use ATS\Model\Institucion;
 use Faker\Generator as Faker;
 
-$factory->define(\ATS\Institucion::class, function (Faker $faker) {
+$factory->define(Institucion::class, function (Faker $faker) {
     return [
         'name'=> $faker->name,
         'siglas'=> $faker->name,

@@ -1,7 +1,8 @@
 <?php
 
+use ATS\Model\Departamento;
 use Illuminate\Database\Seeder;
-use ATS\Departamento;
+
 
 class DepartamentosTableSeeder extends Seeder
 {

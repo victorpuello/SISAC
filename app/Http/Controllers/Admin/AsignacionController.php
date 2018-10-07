@@ -2,15 +2,16 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use ATS\Anio;
+use ATS\Model\Anio;
+use ATS\Model\Asignacion;
+use ATS\Model\Asignatura;
+use ATS\Model\Docente;
 use ATS\Transformers\AsignacionTransformer;
-use ATS\Asignacion;
 use Illuminate\Http\Request;
-use ATS\Asignatura;
-use ATS\Docente;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\CreateAsignacionRequest;
 use ATS\Http\Requests\UpdateAsignacionRequest;
+use Illuminate\Support\Facades\DB;
 
 class AsignacionController extends Controller
 {
@@ -45,8 +46,7 @@ class AsignacionController extends Controller
      */
     public function store(CreateAsignacionRequest $request)
     {
-        $asignacion = new Asignacion($request->all());
-        $asignacion->save();
+        $request->createAsignacion();
         return redirect()->route('asignacions.index');
     }
 

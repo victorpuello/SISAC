@@ -4,7 +4,7 @@ namespace ATS\Http\Controllers\Admin;
 
 use ATS\Http\Requests\CreateInstitucionRequest;
 use ATS\Http\Requests\UpdateInstitucionRequest;
-use ATS\Institucion;
+use ATS\Model\Institucion;
 use Illuminate\Http\Request;
 use ATS\Http\Controllers\Controller;
 class InstitucionController extends Controller

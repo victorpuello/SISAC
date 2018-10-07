@@ -1,7 +1,8 @@
 <?php
 
-use ATS\Docente;
-use ATS\User;
+
+use ATS\Model\Docente;
+use ATS\Model\User;
 use Illuminate\Database\Seeder;
 
 

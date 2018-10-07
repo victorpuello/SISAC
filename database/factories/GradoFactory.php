@@ -1,8 +1,9 @@
 <?php
 
+use ATS\Model\Grado;
 use Faker\Generator as Faker;
 
-$factory->define(\ATS\Grado::class, function (Faker $faker) {
+$factory->define(Grado::class, function (Faker $faker) {
     return [
         'name'=>$faker->name,
         'numero'=>$faker->numberBetween($min=0,$max=11),

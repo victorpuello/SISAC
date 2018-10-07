@@ -109,11 +109,6 @@
             </section>
         </div>
     </div>
-    <div class="row justify-content-md-center hidden-mobile">
-        <div class="col-md-4 col-md-auto hidden-mobile" style="opacity: 0.1">
-            <img src="<?php echo e(asset('img/escudo.svg')); ?>" class=" img-fluid appear-animation" data-appear-animation="bounceIn" data-appear-animation-delay="0" data-appear-animation-duration="2s">
-        </div>
-    </div>
 </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>

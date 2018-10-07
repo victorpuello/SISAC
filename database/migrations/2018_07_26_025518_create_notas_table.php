@@ -20,6 +20,8 @@ class CreateNotasTable extends Migration
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->integer('indicador_id')->unsigned();
             $table->foreign('indicador_id')->references('id')->on('indicadors');
+            $table->integer('periodo_id')->unsigned();
+            $table->foreign('periodo_id')->references('id')->on('periodos');
             $table->timestamps();
         });
     }

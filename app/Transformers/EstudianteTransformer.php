@@ -2,55 +2,55 @@
 
 namespace ATS\Transformers;
 
+use ATS\Clases\Estudiante\CurrentInasistencia;
+use ATS\Clases\Estudiante\CurrentNota;
+use ATS\Clases\Indicador\IndicadoresPlanilla;
+use ATS\Model\Estudiante;
+use ATS\Model\Planilla;
 use League\Fractal\TransformerAbstract;
-use ATS\Asignacion;
-use ATS\Estudiante;
-use ATS\Periodo;
+
 class EstudianteTransformer extends TransformerAbstract
 {
     protected  $availableIncludes = ['notas','inasistencias'];
     protected  $defaultIncludes = ['notas','inasistencias'];
-    /**
-     * @param \ATS\Estudiante $estudiante
-     * @return array
-     */
+
     protected $asignatura;
     protected $periodo;
     protected $asignacion;
     protected $logros;
+    protected $planilla;
 
 
     /**
      * EstudianteTransformer constructor.
-     * @param Asignacion $asignacion
-     * @param Periodo $periodo
-     * @param $logros
+     * @param Planilla $planilla
      */
-    public function __construct (Asignacion $asignacion, Periodo $periodo, $logros)
+    public function __construct (Planilla $planilla)
     {
-        $this->asignatura = $asignacion->asignatura->id;
-        $this->asignacion = $asignacion->id;
-        $this->periodo = $periodo->id;
-        $this->logros = $logros;
+        $this->planilla = $planilla;
+        $this->periodo = $this->planilla->periodo;
+        $this->asignatura = $planilla->asignacion->asignatura;
     }
 
     public function transform(Estudiante $estudiante)
     {
+//        $estudiante->load('notas','inasistencias');
         return [
             'id' => (int) $estudiante->id,
-            'asignacion_id' => (int) $this->asignacion,
-            'periodo_id' => (int) $this->periodo,
+            'planilla_id' => (int) $this->planilla->id,
             'name'    => $estudiante->apellido_name
         ];
     }
     public function includeNotas(Estudiante $estudiante)
     {
-        $notas =  $estudiante->currentNotas($this->logros);
-        return $this->collection($notas, new NotaTransformer);
+        $notas = new CurrentNota($estudiante, $this->periodo);
+        $indicadores = new IndicadoresPlanilla($this->planilla);
+        return $this->collection($notas->notasIndicadores($indicadores->getIndicadores()), new NotaTransformer);
     }
     public function includeInasistencias(Estudiante $estudiante)
     {
-        $inasistencias =  $estudiante->currentInasistencias($this->asignatura,$this->periodo);
+        $inasistencias =  new CurrentInasistencia($estudiante,$this->periodo);
+//        dd($inasistencias->singleInasistencia($this->asignatura),$this->asignatura);
         return $this->collection($inasistencias, new InasistenciaTransformer);
     }
 }

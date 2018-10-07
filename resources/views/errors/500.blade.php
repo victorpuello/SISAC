@@ -55,7 +55,7 @@
                         <a class="nav-link" href="{{route('home')}}"><i class="fas fa-caret-right text-dark"></i> Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('docente.logros.index')}}"><i class="fas fa-caret-right text-dark"></i> Logros</a>
+                        <a class="nav-link" href="{{route('indicadors.index')}}"><i class="fas fa-caret-right text-dark"></i> Logros</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{URL::previous()}}"><i class="fas fa-caret-right text-dark"></i> Regresar</a>

@@ -2,7 +2,8 @@
 
 namespace ATS\Transformers;
 
-use ATS\Asignatura;
+
+use ATS\Model\Asignatura;
 use League\Fractal\TransformerAbstract;
 
 

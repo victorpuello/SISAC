@@ -21,7 +21,7 @@
                             <a class="nav-link" href="<?php echo e(route('home')); ?>"><i class="fas fa-caret-right text-dark"></i> Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo e(route('docente.logros.index')); ?>"><i class="fas fa-caret-right text-dark"></i> Logros</a>
+                            <a class="nav-link" href="<?php echo e(route('indicadors.index')); ?>"><i class="fas fa-caret-right text-dark"></i> Logros</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?php echo e(URL::previous()); ?>"><i class="fas fa-caret-right text-dark"></i> Regresar</a>

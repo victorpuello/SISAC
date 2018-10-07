@@ -1,6 +1,6 @@
 <?php
 
-namespace ATS;
+namespace ATS\Model;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -188,17 +188,6 @@ class Estudiante extends Model
      * @param $periodo
      * @return \Illuminate\Support\Collection
      */
-    public function currentNotas($logros){
-        $notas = collect();
-        foreach ($logros as $logro){
-            if (! is_null($this->notas->where('logro_id','=',$logro->id)->first())){
-                $nota = $this->notas->where('logro_id','=',$logro->id)->first();
-                $nota->setAttribute('category',$logro->category);
-                $notas->push($nota);
-            }
-        }
-        return $notas;
-    }
 
     public function NotasInforme($asignatura, $periodo){
         $this->all_notas = $this->notas;

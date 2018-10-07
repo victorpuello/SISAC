@@ -1,6 +1,6 @@
 <?php
 
-namespace ATS;
+namespace ATS\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use phpDocumentor\Reflection\Types\This;

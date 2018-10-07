@@ -2,13 +2,13 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use ATS\Departamento;
-use ATS\Estudiante;
+use ATS\Model\Departamento;
+use ATS\Model\Estudiante;
+use ATS\Model\Grupo;
+use ATS\Model\Municipio;
 use Illuminate\Http\Request;
 use ATS\Http\Requests\CreateEstudianteRequest;
 use ATS\Http\Requests\UpdateEstudianteRequest;
-use ATS\Municipio;
-use ATS\Grupo;
 use ATS\Http\Controllers\Controller;
 
 class EstudianteController extends Controller

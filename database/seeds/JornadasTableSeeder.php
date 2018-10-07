@@ -1,5 +1,6 @@
 <?php
 
+use ATS\Model\Jornada;
 use Illuminate\Database\Seeder;
 
 class JornadasTableSeeder extends Seeder
@@ -11,10 +12,10 @@ class JornadasTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\ATS\Jornada::class)->create([
+        factory(Jornada::class)->create([
             'name' => 'Mañana',
         ]);
-        factory(\ATS\Jornada::class)->create([
+        factory(Jornada::class)->create([
             'name' => 'Tarde',
         ]);
     }

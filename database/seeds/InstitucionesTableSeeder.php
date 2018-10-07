@@ -1,5 +1,6 @@
 <?php
 
+use ATS\Model\Institucion;
 use Illuminate\Database\Seeder;
 
 class InstitucionesTableSeeder extends Seeder
@@ -11,7 +12,7 @@ class InstitucionesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\ATS\Institucion::class)->create([
+        factory(Institucion::class)->create([
             'name'=> 'Institución Educativa Las Mujeres',
             'siglas'=> 'INELMU',
             'path'=>null
