@@ -2,14 +2,15 @@
 
 namespace ATS\Transformers;
 
-use ATS\Indicador;
+use ATS\Model\Indicador;
 use League\Fractal\TransformerAbstract;
 
 
 class IndicadorTransformer extends TransformerAbstract
 {
+
     /**
-     * @param \App\Indicador $indicador
+     * @param Indicador $indicador
      * @return array
      */
     public function transform(Indicador $indicador)

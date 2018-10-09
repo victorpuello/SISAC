@@ -37,10 +37,10 @@ class IndicadorController extends Controller
      */
     public function create()
     {
-        $grados = Grado::pluck('name','id');
-        $asignaturas = Asignatura::pluck('name','id');
+        $grados = Grado::orderBy('numero','ASC')->pluck('name','id');
+        $asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
         $periodos = Periodo::pluck('name','id');
-        $docentes = Docente::pluck('name','id');
+        $docentes = Docente::orderBy('name','ASC')->pluck('name','id');
         return view('admin.indicadores.ajax.create',compact('grados','asignaturas','periodos','docentes'));
     }
 

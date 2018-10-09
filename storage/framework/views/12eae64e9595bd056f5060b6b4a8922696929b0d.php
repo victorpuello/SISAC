@@ -1,10 +1,9 @@
-@extends('layouts.app')
-@section('titulo', "Error 403")
-@section('namePage', "Error 403 ")
-@section('styles')
+<?php $__env->startSection('titulo', "Error 403"); ?>
+<?php $__env->startSection('namePage', "Error 403 "); ?>
+<?php $__env->startSection('styles'); ?>
 
-@endsection
-@section('content')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
     <section class="body-error error-inside">
         <div class="center-error">
 
@@ -19,20 +18,22 @@
                     <h4 class="text">Aquí hay algunos enlaces útiles</h4>
                     <ul class="nav nav-list flex-column primary">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('home')}}"><i class="fas fa-caret-right text-dark"></i> Inicio</a>
+                            <a class="nav-link" href="<?php echo e(route('home')); ?>"><i class="fas fa-caret-right text-dark"></i> Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><i class="fas fa-caret-right text-dark"></i> Logros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{URL::previous()}}"><i class="fas fa-caret-right text-dark"></i> Regresar</a>
+                            <a class="nav-link" href="<?php echo e(URL::previous()); ?>"><i class="fas fa-caret-right text-dark"></i> Regresar</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-@endsection
-@section('script')
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -3,6 +3,7 @@
 namespace ATS\Http\Requests;
 
 use ATS\Clases\CurrentPeriodo;
+use ATS\Events\LlenarPlanillasEvent;
 use ATS\Model\Asignacion;
 use ATS\Model\Planilla;
 use Illuminate\Foundation\Http\FormRequest;
@@ -52,11 +53,12 @@ class CreateAsignacionRequest extends FormRequest
             ]);
             $p = new CurrentPeriodo();
             $periodo = $p->getPeriodo();
-            Planilla::create([
+            $planilla = Planilla::create([
                 'modificada' => false,
                 'periodo_id' => $periodo->id,
                 'asignacion_id' => $asignacion->id
             ]);
+            event(new LlenarPlanillasEvent($asignacion));
         });
      }
 }

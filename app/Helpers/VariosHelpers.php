@@ -1,5 +1,6 @@
 <?php
 
+use ATS\Model\Asignacion;
 use ATS\Model\Grupo;
 
 
@@ -20,18 +21,18 @@ function grupos_pluck (){
     return  $group->sortBy('grado')->pluck('name','id');
 }
 
+
 /**
- * Retorna un valor booleano si existe una asignacion activa
  * @param $docente_id
  * @param $asignatura_id
  * @param $grado_id
  * @return bool
  */
 function if_exist_asignacion($docente_id, $asignatura_id, $grado_id){
-    $asignaciones = \ATS\Asignacion::where('docente_id','=',$docente_id)->where('asignatura_id','=',$asignatura_id)->with('grupo.grado')->get();
+    $asignaciones = Asignacion::where('docente_id','=',$docente_id)->where('asignatura_id','=',$asignatura_id)->with('grupo.grado')->get();
     $found = false;
     foreach ($asignaciones as $asignacion){
-        if ($asignacion->grupo->grado->id === $grado_id){
+        if ($asignacion->grupo->grado->id === intval($grado_id)){
             $found = true;
         }
     }

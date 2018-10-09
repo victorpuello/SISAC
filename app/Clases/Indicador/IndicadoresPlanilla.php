@@ -10,6 +10,7 @@ namespace ATS\Clases\Indicador;
 
 
 use ATS\Model\Planilla;
+use Illuminate\Support\Collection;
 
 class IndicadoresPlanilla
 {
@@ -19,6 +20,11 @@ class IndicadoresPlanilla
     protected $grado;
     protected $periodo;
     protected $indicadores;
+
+    /**
+     * IndicadoresPlanilla constructor.
+     * @param Planilla $planilla
+     */
     public function __construct (Planilla $planilla)
     {
         $this->planilla = $planilla;
@@ -30,10 +36,38 @@ class IndicadoresPlanilla
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
     public function getIndicadores(){
         return $this->indicadores->where('asignatura_id','=',$this->asignatura->id);
+    }
+
+    /**
+     * @return int
+     */
+    public function countInd(){
+        return count($this->indicadores->where('asignatura_id','=',$this->asignatura->id));
+    }
+
+    /**
+     * @return int
+     */
+    public function countCognitivos(){
+        return count($this->getIndicadores()->where('category','=','cognitivo'));
+    }
+
+    /**
+     * @return int
+     */
+    public function countProcedimentales(){
+        return count($this->getIndicadores()->where('category','=','procedimental'));
+    }
+
+    /**
+     * @return int
+     */
+    public function countActitudinales(){
+        return count($this->getIndicadores()->where('category','=','actitudinal'));
     }
 
 }

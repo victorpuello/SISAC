@@ -2,17 +2,13 @@
 
 namespace ATS\Http\Controllers\Admin;
 
+use ATS\Model\Asignacion;
+use ATS\Model\Estudiante;
+use ATS\Model\Periodo;
+use ATS\Model\Planilla;
 use Illuminate\Http\Response;
-use ATS\Asignacion;
-use ATS\Asignatura;
 use ATS\DataTables\NotaDataTablesEditor;
-use ATS\Definitiva;
-use ATS\Estudiante;
-use ATS\Inasistencia;
 use Illuminate\Http\Request;
-use ATS\Nota;
-use ATS\Periodo;
-use ATS\Planilla;
 use ATS\Transformers\EstudianteTransformer;
 use ATS\Http\Controllers\Controller;
 class NotaController extends Controller

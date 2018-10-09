@@ -1,4 +1,8 @@
 <?php
+
+
+use Illuminate\Support\Facades\Route;
+
 Route::resource('users', 'UserController')->only(['index']);
 Route::post('users','UserController@store')->name('users.store');
 Route::put('users','UserController@update')->name('users.update');
@@ -19,7 +23,11 @@ Route::resource('notas', 'NotaController');
 Route::resource('asignacions', 'AsignacionController');
 Route::resource('periodos', 'PeriodoController');
 Route::get('planillas/getFiltro','PlanillaController@getFiltro')->name('planillas.getfiltro');
-Route::resource('planillas', 'PlanillaController');
+Route::resource('planillas', 'PlanillaController')->except(['show']);
+Route::middleware(['verifyIndicadores'])->group(function (){
+    Route::get('planillas/{planilla}','PlanillaController@show')->name('planillas.show');
+});
+
 Route::resource('reportes', 'ReportesController')->only(['index']);
 Route::resource('acudiente', 'AcudienteController')->only(['edit','store','update','destroy']);
 

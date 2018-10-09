@@ -7,7 +7,7 @@
                 search: {
                     smart: true
                 },
-                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                lengthMenu: [[12, 24, 36, 48, -1], [12, 24, 48, 100, "All"]],
                 responsive: true,
                 processing: true,
                 serverSide: true,
