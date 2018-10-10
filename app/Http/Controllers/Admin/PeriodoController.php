@@ -2,7 +2,8 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use ATS\Periodo;
+
+use ATS\Model\Periodo;
 use Illuminate\Http\Request;
 use ATS\Http\Controllers\Controller;
 class PeriodoController extends Controller

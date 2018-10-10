@@ -29,9 +29,8 @@ use Illuminate\Database\Eloquent\Model;
 class Planilla extends Model
 {
     protected $fillable = [
-        'modificada','periodo_id','asignacion_id'
+        'modificada','cargada','periodo_id','asignacion_id'
     ];
-
 
     public function docente(){
         $this->hasManyThrough('ATS\Model\Docente','ATS\Model\Asignacion');

@@ -6,12 +6,14 @@ namespace ATS\Http\Controllers\Admin;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\CreateIndicadorRequest;
 use ATS\Http\Requests\UpdateIndicadorRequest;
+use ATS\Model\Anio;
 use ATS\Model\Asignatura;
 use ATS\Model\Docente;
 use ATS\Model\Grado;
 use ATS\Model\Indicador;
 use ATS\Model\Periodo;
 use ATS\Transformers\IndicadorTransformer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class IndicadorController extends Controller
@@ -37,9 +39,11 @@ class IndicadorController extends Controller
      */
     public function create()
     {
+        $date = Carbon::now();
+        $anio = Anio::where('name',$date->year)->with('periodos')->first();
         $grados = Grado::orderBy('numero','ASC')->pluck('name','id');
         $asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
-        $periodos = Periodo::pluck('name','id');
+        $periodos = $anio->periodos->pluck('name','id');
         $docentes = Docente::orderBy('name','ASC')->pluck('name','id');
         return view('admin.indicadores.ajax.create',compact('grados','asignaturas','periodos','docentes'));
     }

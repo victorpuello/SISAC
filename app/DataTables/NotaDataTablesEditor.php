@@ -2,11 +2,7 @@
 
 namespace ATS\DataTables;
 
-use ATS\Asignacion;
-use ATS\Estudiante;
-use ATS\Inasistencia;
-use ATS\Nota;
-use ATS\Periodo;
+use ATS\Model\{Asignacion,Estudiante,Inasistencia,Nota,Periodo};
 use Yajra\DataTables\DataTablesEditor;
 use Illuminate\Database\Eloquent\Model;
 
@@ -42,8 +38,7 @@ class NotaDataTablesEditor extends DataTablesEditor
     {
         return [
             'id' => 'required',
-            'asignacion_id' => 'required',
-            'periodo_id' => 'required'
+            'planilla_id' => 'required',
         ];
     }
 
@@ -61,6 +56,7 @@ class NotaDataTablesEditor extends DataTablesEditor
     public function updating(Model $model, array $data)
     {
         $notas = $data['notas']['data'];
+        dd($data);
         $inasistencia = $this->getInasistencia($data['inasistencias']['data']['0']['id']);
         $asignacion = $this->getAsignacion(intval($data['asignacion_id']));
         $periodo = $this->getPeriodo(intval($data['periodo_id']));

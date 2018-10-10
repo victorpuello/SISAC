@@ -21,7 +21,7 @@ class EstudianteController extends Controller
      */
     public function index(Request $request)
     {
-        $estudiantes = Estudiante::with('grupo')->orderBy('created_at','ASC');
+        $estudiantes = Estudiante::with('grupo.grado')->orderBy('created_at','ASC');
         if($request->ajax()) {
             return datatables()
                 ->eloquent($estudiantes)

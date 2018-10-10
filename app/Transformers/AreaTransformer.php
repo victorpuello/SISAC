@@ -2,10 +2,8 @@
 
 namespace ATS\Transformers;
 
-
-use ATS\Area;
+use ATS\Model\Area;
 use League\Fractal\TransformerAbstract;
-
 
 class AreaTransformer extends TransformerAbstract
 {

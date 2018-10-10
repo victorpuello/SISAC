@@ -58,7 +58,6 @@ class CreateAsignacionRequest extends FormRequest
                 'periodo_id' => $periodo->id,
                 'asignacion_id' => $asignacion->id
             ]);
-            event(new LlenarPlanillasEvent($asignacion));
         });
      }
 }

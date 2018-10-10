@@ -28,8 +28,9 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th ></th>
+                    <th></th>
                     <th>Id</th>
+                    <th>Planilla</th>
                     <th>Nombre</th>
                     <th>Id_Nota_Cog</th>
                     <th>Cognitivo 60%</th>

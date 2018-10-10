@@ -9,7 +9,6 @@ class IndicadoresException extends Exception
 {
     public function render($request){
         $indicadores = new IndicadoresPlanilla($request->planilla);
-//        dd($indicadores->);
         return response()->view('errors.indicadores',array('exception'=>$this,'indicadores'=> $indicadores));
     }
 }

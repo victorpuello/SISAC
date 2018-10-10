@@ -19,7 +19,7 @@ class CreatePeriodosTable extends Migration
             $table->date('datestart');
             $table->date('dateend')->nullable();
             $table->dateTime('cierre')->nullable($value = true);
-            $table->enum('estado',['finalizado','activo'])->default('activo');
+            $table->enum('estado',['finalizado','activo','inactivo'])->default('activo');
             $table->integer('anio_id')->unsigned();
             $table->foreign('anio_id')->references('id')->on('anios');
             $table->timestamps();

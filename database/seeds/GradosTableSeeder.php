@@ -1,6 +1,6 @@
 <?php
 
-use ATS\Model\Grado;
+use ATS\Model\{Grado,Grupo};
 use Illuminate\Database\Seeder;
 
 class GradosTableSeeder extends Seeder
@@ -25,11 +25,19 @@ class GradosTableSeeder extends Seeder
                 $nivel='media';
             }
 
-            factory(Grado::class)->create([
+            $grado = Grado::create([
                 'name'=> $nombres[$i],
                 'numero'=>$i,
                 'nivel'=> $nivel
             ]);
+            for ($j = 1; $j < 4; $j++){
+                Grupo::create([
+                    'name' => $j,
+                    'grado_id' => $grado->id,
+                    'modelo' => 'tradicional',
+                    'jornada_id' => 1
+                ]);
+            }
         }
     }
 }

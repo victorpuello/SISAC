@@ -9,6 +9,7 @@
 namespace ATS\Clases\Indicador;
 
 
+use ATS\Model\Indicador;
 use ATS\Model\Planilla;
 use Illuminate\Support\Collection;
 
@@ -40,6 +41,15 @@ class IndicadoresPlanilla
      */
     public function getIndicadores(){
         return $this->indicadores->where('asignatura_id','=',$this->asignatura->id);
+    }
+
+    /**
+     * @param String $category
+     * @return mixed
+     */
+    public function getIndicadorCategoryBajo(String $category){
+        $indicadores = $this->getIndicadores();
+        return $indicadores->where('category','=',$category)->where('indicator','=','bajo')->first();
     }
 
     /**

@@ -50,7 +50,6 @@ class EstudianteTransformer extends TransformerAbstract
     public function includeInasistencias(Estudiante $estudiante)
     {
         $inasistencias =  new CurrentInasistencia($estudiante,$this->periodo);
-//        dd($inasistencias->singleInasistencia($this->asignatura),$this->asignatura);
-        return $this->collection($inasistencias, new InasistenciaTransformer);
+        return $this->item($inasistencias->singleInasistencia($this->asignatura), new InasistenciaTransformer);
     }
 }

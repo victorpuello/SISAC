@@ -4,6 +4,7 @@ namespace ATS\Http\Middleware;
 
 use ATS\Clases\Indicador\IndicadoresPlanilla;
 use ATS\Clases\Planilla\ConfigPlanillass;
+use ATS\Events\LlenarPlanillasEvent;
 use ATS\Exceptions\IndicadoresException;
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -13,18 +14,19 @@ class VerifyIndicadores
 
     protected $planilla;
 
+
     /**
      * @param $request
      * @param Closure $next
      * @return mixed
-     * @throws AuthorizationException
+     * @throws IndicadoresException
      */
     public function handle($request, Closure $next)
     {
         $conf = new ConfigPlanillass();
         $indicadosres = new IndicadoresPlanilla($request->planilla);
         if (! $this->CheckStatus($indicadosres,$conf)){
-            throw new IndicadoresException('Hola');
+            throw new IndicadoresException();
         }
         return $next($request);
     }

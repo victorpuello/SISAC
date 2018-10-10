@@ -108,15 +108,6 @@ class Estudiante extends Model
         return $this->hasMany(Inasistencia::class);
     }
 
-    /**
-     * @param $idPeriodo
-     * @param $idAsignatura
-     * @return mixed
-     */
-    public  function getInasistenciaExist($idPeriodo, $idAsignatura){
-        return $this->inasistencias->where('periodo_id','=',$idPeriodo)
-            ->where('asignatura_id','=',$idAsignatura);
-    }
     public function anotaciones(){
             return $this->hasMany(Anotacion::class);
     }

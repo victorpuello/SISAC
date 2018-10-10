@@ -2,12 +2,11 @@
 
 namespace ATS\Http\Controllers\Admin;
 
+use ATS\Model\Docente;
+use ATS\Model\User;
 use Illuminate\Http\Request;
-use ATS\Asignatura;
-use ATS\Docente;
 use ATS\Http\Requests\CreateDocenteRequest;
 use ATS\Http\Requests\UpdateDocenteRequest;
-use ATS\User;
 use ATS\Http\Controllers\Controller;
 
 class DocenteController extends Controller

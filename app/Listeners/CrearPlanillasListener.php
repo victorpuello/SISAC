@@ -2,6 +2,7 @@
 
 namespace ATS\Listeners;
 
+use ATS\Clases\Estudiante\VerificadorNotas;
 use ATS\Events\LlenarPlanillasEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -26,9 +27,10 @@ class CrearPlanillasListener
      */
     public function handle(LlenarPlanillasEvent $event)
     {
-        if (isset($event->planilla)){
-            $planilla = $event->planilla;
-            $planilla->load('');
+        $planilla = $event->planilla;
+        if (! $planilla->cargada){
+            $verificador = new VerificadorNotas($planilla);
+            $verificador->foundIndicador();
         }
     }
 }

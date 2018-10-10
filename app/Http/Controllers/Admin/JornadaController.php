@@ -7,7 +7,8 @@ namespace ATS\Http\Controllers\Admin;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\CreateJornadaRequest;
 use ATS\Http\Requests\UpdateJornadaRequest;
-use ATS\Jornada;
+use ATS\Model\Jornada;
+
 
 class JornadaController extends Controller
 {

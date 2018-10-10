@@ -14,8 +14,9 @@ use Illuminate\Http\Request;
 class PlanillaController extends Controller
 {
    public function index(FiltroRequest $request){
-       $docente = Docente::with(['planillas.asignacion.asignatura','planillas.asignacion.grupo.grado'])->findOrFail($request->docente_id);
+       $docente = Docente::with(['planillas.asignacion.asignatura','planillas.asignacion.grupo.estudiantes','planillas.asignacion.grupo.grado'])->findOrFail($request->docente_id);
        $planillas = $docente->planillas->where('periodo_id','=',$request->periodo_id);
+//        dd($planillas);
        return view('admin.planillas.index',compact('planillas','docente'));
    }
 

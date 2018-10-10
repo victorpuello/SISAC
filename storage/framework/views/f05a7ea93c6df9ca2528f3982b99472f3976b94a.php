@@ -3,7 +3,7 @@
         <?php echo Form::open(['route' => 'indicadors.store', 'method' => 'POST','class' => 'form-horizontal form-bordered']); ?>
 
         <header class="card-header">
-            <h2 class="card-title">Crear área nueva </h2>
+            <h2 class="card-title">Crear Indicador nuevo </h2>
         </header>
         <div class="card-body">
             <?php echo $__env->make('admin.indicadores.partials.fields', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

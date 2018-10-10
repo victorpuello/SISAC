@@ -40,7 +40,7 @@
 <?php $__env->startSection('script'); ?>
     <script src="<?php echo e(asset('vendor/select2/js/select2.js')); ?>"></script>
     <script src="<?php echo e(asset('vendor/pnotify/pnotify.custom.js')); ?>"></script>
-    <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
+
     <script>
         $(".deleted").click(function (e) {
             $("#form-delete").attr('action', $(this).data('url') );

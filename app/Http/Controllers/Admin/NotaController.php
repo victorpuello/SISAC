@@ -43,10 +43,9 @@ class NotaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
      * @param NotaDataTablesEditor $editor
-     * @return void
+     * @return \Illuminate\Http\JsonResponse|mixed
+     * @throws \Yajra\DataTables\DataTablesEditorException
      */
     public function store(NotaDataTablesEditor $editor)
     {
@@ -62,54 +61,6 @@ class NotaController extends Controller
     public function show($id)
     {
 
-    }
-    public function getPlanilla(Asignacion $asignacion , Periodo $periodo)
-    {
-        return view('admin.notas.show',compact('asignacion','periodo'));
-    }
-
-    public function dataPlanilla(Request $request,Asignacion $asignacion , Periodo $periodo){
-       if($request->ajax()){
-            $logros = $periodo->getlogros($asignacion);
-            $codigo = $asignacion->salon->id.''.$asignacion->docente->id.''.$asignacion->asignatura->id.''.$periodo->id;
-            $planilla = Planilla::where('codigo','=',$codigo)->get();
-            $estudiantes = Estudiante::where('salon_id','=',$asignacion->salon->id)
-                                        ->with('notas')
-                                        ->with('inasistencias')
-                                        ->with('definitivas')
-                                        ->get();
-            if ($planilla->count() === 0){
-                $this->verificador ($asignacion,$periodo,$logros);
-                Planilla::create([
-                    'grado' => $asignacion->salon->grade,
-                    'docente' => $asignacion->docente->id,
-                    'asignatura' => $asignacion->asignatura->id,
-                    'periodo' => $periodo->id,
-                    'codigo' => $codigo,
-                    'creada' => 1
-                ]);
-            }
-           /* $manager = new Manager();
-            $resource = new Collection($estudiantes,  new  EstudianteTransformer($asignacion,$periodo,$logros));
-            return response()->json($manager->createData($resource)->toArray());*/
-           return datatables()->collection($estudiantes)->setTransformer( new EstudianteTransformer($asignacion,$periodo,$logros))->toJson();
-       }
-    }
-
-
-    public function verificador (Asignacion $asignacion,Periodo $periodo, $logros){
-        $currentEstudiantes = Estudiante::where('salon_id','=',$asignacion->salon->id)
-                                          ->where('stade','=','activo')
-                                          ->with('definitivas')
-                                          ->with('inasistencias')
-                                          ->get();
-        try{
-            $this->VerificadorLogrosEstud($currentEstudiantes, $logros);
-            $this->VerificadorDefinitivaEstud($currentEstudiantes, $asignacion->asignatura,$periodo);
-            $this->VerificadorInasistenciasEstud($currentEstudiantes,$asignacion->asignatura,$periodo);
-        }catch (\Exception $ex) {
-            return view('errors.planilla');
-        }
     }
 
     /**
@@ -141,70 +92,4 @@ class NotaController extends Controller
         //
     }
 
-
-    /**
-     * @param $estudiantes
-     * @param $logros
-     */
-    public function VerificadorLogrosEstud ($estudiantes, $logros): void
-    {
-        foreach ($estudiantes as $estudiante) {
-            $isFound = false;
-            foreach ($logros as $logro) {
-                if ($logro->getNotaExist($estudiante->id)->count() > 0) {
-                    $isFound = true;
-                }
-            }
-            if (!$isFound) {
-                $_logros = $logros->where('indicador', '=', 'bajo');
-                foreach ($_logros as $logro){
-                    Nota::create([
-                        'score'=>'1',
-                        'estudiante_id' => $estudiante->id,
-                        'logro_id' => $logro->id
-                    ]);
-                }
-            }
-        }
-    }
-
-    private function VerificadorInasistenciasEstud ($estudiantes,Asignatura $asignatura, Periodo $periodo)
-    {
-        foreach ($estudiantes as $estudiante){
-            $Found = false;
-            if ($estudiante->getInasistenciaExist($periodo->id,$asignatura->id)->count() > 0){
-                $Found = true;
-            }
-            if (! $Found){
-                Inasistencia::create([
-                    'numero'=> 0,
-                    'estudiante_id' => $estudiante->id,
-                    'periodo_id' => $periodo->id,
-                    'asignatura_id' => $asignatura->id
-                ]);
-            }
-        }
-    }
-    /**
-     * @param $estudiantes
-     * @param Asignatura $asignatura
-     * @param Periodo $periodo
-     */
-    private function VerificadorDefinitivaEstud ($estudiantes, Asignatura $asignatura, Periodo $periodo)
-    {
-        foreach ($estudiantes as $estudiante) {
-            $Found = false;
-            if ($estudiante->getDefinitivaExist($periodo->id, $asignatura->id)->count() > 0) {
-                $Found = true;
-            }
-            if (!$Found) {
-                Definitiva::create([
-                    'score' => 1,
-                    'estudiante_id' => $estudiante->id,
-                    'periodo_id' => $periodo->id,
-                    'asignatura_id' => $asignatura->id
-                ]);
-            }
-        }
-    }
 }

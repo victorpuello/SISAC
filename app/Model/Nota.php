@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
 class Nota extends Model
 {
     protected $fillable = [
-        'score','estudiante_id','logro_id','periodo_id',
+        'score','estudiante_id','indicador_id','periodo_id',
     ];
 
     public function estudiante(){
