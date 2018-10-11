@@ -11,6 +11,7 @@ namespace ATS\Clases\Estudiante;
 
 use ATS\Model\Asignatura;
 use ATS\Model\Estudiante;
+use ATS\Model\Inasistencia;
 use ATS\Model\Periodo;
 
 class CurrentInasistencia
@@ -35,8 +36,24 @@ class CurrentInasistencia
      * @param Asignatura $asignatura
      * @return mixed
      */
-    public function singleInasistencia (Asignatura $asignatura){
+    public function singleInasistenciaAsignatura (Asignatura $asignatura){
         return $this->inasistencias->where('asignatura_id','=',$asignatura->id)->first();
+    }
+
+    /**
+     * @param Int $id
+     * @return mixed
+     */
+    public function singleInasistencia (Int $id){
+        return $this->inasistencias->where('id','=',$id)->first();
+    }
+
+    /**
+     * @param Inasistencia $inasistencia
+     * @param array $atributes
+     */
+    public function updateInasistencia (Inasistencia $inasistencia , Array $atributes){
+        $inasistencia->update($atributes);
     }
 
     /**

@@ -79,12 +79,10 @@ class VerificadorNotas
 
         DB::transaction(function (){
             foreach ($this->categorias as $categoria){
-//                $indicador = $this->indicadores->getIndicadorCategoryBajo($categoria);
-//                dd($indicador->id);
                 Nota::create([
                     'score' => 1,
                     'estudiante_id' => $this->estudiante->id,
-                    'indicador_id' => $this->indicadores->getIndicadorCategoryBajo($categoria)->id,
+                    'indicador_id' => $this->indicadores->getIndicadorCategoryNivel($categoria,'bajo')->id,
                     'periodo_id' =>$this->periodo->id
                 ]);
             }

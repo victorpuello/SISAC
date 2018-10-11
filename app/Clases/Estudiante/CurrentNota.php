@@ -14,11 +14,24 @@ use ATS\Model\Estudiante;
 use ATS\Model\Indicador;
 use ATS\Model\Nota;
 use ATS\Model\Periodo;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
+use Mockery\Matcher\Not;
+use PhpParser\Node\Expr\Array_;
 
 class CurrentNota
 {
+    /**
+     * @var \ATS\Model\Estudiante
+     */
     protected $estudiante;
+    /**
+     * @var \ATS\Model\Periodo
+     */
     protected $periodo;
+    /**
+     * @var \ATS\Model\Nota
+     */
     protected $notas;
      public function __construct (Estudiante $estudiante, Periodo $periodo)
      {
@@ -35,6 +48,37 @@ class CurrentNota
         $notas = $this->estudiante->notas->where('periodo_id','=',$this->periodo->id);
         return $notas->where('indicador_id','=',$indicador->id)->first();
     }
+    private function prom (Asignatura $asignatura, String $category){
+        $categorias = Config::get('institucion.indicadores.categorias');
+        $notas = $this->estudiante->notas->where('asignatura_id','=',$asignatura->id)->where('category','=',$category);
+        $value = 0;
+        foreach ($notas as $nota){
+            $value += $nota->score;
+        }
+        $porcentaje = 0;
+        switch ($category){
+            case 'cognitivo':
+                $porcentaje =$categorias[0]['porcentaje'];
+                break;
+            case 'actitudinal':
+                $porcentaje =$categorias[1]['porcentaje'];
+                break;
+            case 'procedimental':
+                $porcentaje =$categorias[1]['porcentaje'];
+                break;
+            default:break;
+        }
+        return $value * $porcentaje;
+    }
+
+    public function scoreDef(Asignatura $asignatura){
+        $categorias = Config::get('institucion.indicadores.categorias');
+        $score = 0;
+        foreach ($categorias as $categoria){
+           $score += $this->prom($asignatura,$categoria['name']);
+        }
+        return $score;
+    }
 
     /**
      * @return \ATS\Nota[]|\Illuminate\Database\Eloquent\Collection
@@ -43,7 +87,21 @@ class CurrentNota
         return $this->notas;
      }
 
+    /**
+     * @param Int $id
+     * @return \ATS\Model\Nota
+     */
+    public function getNota(Int $id){
+        return $this->notas->where('id','=',$id)->first();
+     }
 
+    /**
+     * @param Nota $nota
+     * @param array $atributes
+     */
+    public function updateNota(Nota $nota, Array $atributes):void {
+        $nota->update($atributes);
+    }
     /**
      * @param array $indicadores
      * @return \Illuminate\Support\Collection

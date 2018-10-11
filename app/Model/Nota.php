@@ -38,4 +38,8 @@ class Nota extends Model
     public function periodo(){
         return $this->belongsTo(Periodo::class);
     }
+
+    public  function getScoreAttribute(){
+        return intval($this->attributes['score']);
+    }
 }

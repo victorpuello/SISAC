@@ -43,13 +43,15 @@ class IndicadoresPlanilla
         return $this->indicadores->where('asignatura_id','=',$this->asignatura->id);
     }
 
+
     /**
      * @param String $category
+     * @param String $nivel
      * @return mixed
      */
-    public function getIndicadorCategoryBajo(String $category){
+    public function getIndicadorCategoryNivel(String $category, String $nivel){
         $indicadores = $this->getIndicadores();
-        return $indicadores->where('category','=',$category)->where('indicator','=','bajo')->first();
+        return $indicadores->where('category','=',$category)->where('indicator','=',$nivel)->first();
     }
 
     /**

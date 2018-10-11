@@ -2,15 +2,40 @@
 
 namespace ATS\DataTables;
 
-use ATS\Model\{Asignacion,Estudiante,Inasistencia,Nota,Periodo};
+use ATS\Clases\Estudiante\CurrentDefinitiva;
+use ATS\Clases\Estudiante\CurrentInasistencia;
+use ATS\Clases\Estudiante\CurrentNota;
+use ATS\Clases\Indicador\IndicadoresPlanilla;
+use ATS\Model\{Asignacion, Estudiante, Inasistencia, Nota, Periodo, Planilla};
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 use Yajra\DataTables\DataTablesEditor;
 use Illuminate\Database\Eloquent\Model;
 
 class NotaDataTablesEditor extends DataTablesEditor
 {
+    /**
+     * @var \ATS\Model\Estudiante
+     */
     protected $model = Estudiante::class;
-    private $logros;
-
+    /**
+     * @var \ATS\Model\Planilla
+     */
+    protected $planilla;
+    /**
+     * @var \ATS\Clases\Indicador\IndicadoresPlanilla
+     */
+    protected $indicadores;
+    /**
+     * @var \ATS\Clases\Estudiante\CurrentNota
+     */
+    protected $currentNotas;
+    /**
+     * @var \ATS\Clases\Estudiante\CurrentInasistencia
+     */
+    protected  $inasistencia;
     public function __construct ()
     {
 
@@ -55,124 +80,65 @@ class NotaDataTablesEditor extends DataTablesEditor
 
     public function updating(Model $model, array $data)
     {
-        $notas = $data['notas']['data'];
-        dd($data);
-        $inasistencia = $this->getInasistencia($data['inasistencias']['data']['0']['id']);
-        $asignacion = $this->getAsignacion(intval($data['asignacion_id']));
-        $periodo = $this->getPeriodo(intval($data['periodo_id']));
-        $logros = $periodo->getlogros($asignacion);
-        foreach ($model->currentNotas($logros) as $nota){
-             $this->verificadorCambios($nota, $notas, $logros);
-        }
-        if ($data['inasistencias']['data']['0']['numero'] <> $inasistencia->numero){
-            $inasistencia->update([
-                'numero' => $data['inasistencias']['data']['0']['numero']
-            ]);
-        }
-        $score = ($notas['0']['cognitivo']['score'] * 0.6) + ($notas['1']['procedimental']['score'] * 0.3) + ($notas['2']['actitudinal']['score'] * 0.1);
-        $model->editDef($score,$asignacion->asignatura->id,$periodo->id);
+        $model->load('notas');
+        $this->planilla = Planilla::with(['periodo','asignacion'])->findOrFail(data_get($data,'planilla_id'));
+        $this->indicadores = new IndicadoresPlanilla($this->planilla);
+        $this->currentNotas = new CurrentNota($model,$this->planilla->periodo);
+        $this->inasistencia = new CurrentInasistencia($model,$this->planilla->periodo);
+        $definitiva = new CurrentDefinitiva($model,$this->planilla->periodo);
+        DB::beginTransaction();
+            try{
+                $this->procesarNotas($model, $data);
+                $this->procesarInasistencia($model, $data);
+                $definitiva->updateDefinitiva($definitiva->singleDefinitivaAsignatura($this->planilla->asignacion->asignatura),[
+                    'score' => $this->currentNotas->scoreDef($this->planilla->asignacion->asignatura),
+                    'estudiante_id' => $model->id,
+                    'periodo_id' => $this->planilla->periodo->id,
+                    'asignatura_id'  => $this->planilla->asignacion->asignatura->id
+                ]);
+            }catch (ValidationException $e){
+                DB::rollBack();
+                return redirect()->back();
+            }
+        DB::commit();
         return $data;
     }
-    public function getEstudiante($id){
-        return Estudiante::findOrFail($id);
-    }
 
-    public function getInasistencia($id){
-        return Inasistencia::findOrFail($id);
-    }
-    public function getAsignacion($id){
-        return Asignacion::findOrFail($id);
-    }
-    public function getPeriodo($id){
-        return Periodo::findOrFail($id);
-    }
-    public function getNotas($arreglo){
-        $notas = collect();
-        foreach ($arreglo as $key=>$value) {
-            foreach ($value as $cat) {
-                $notas->push(Nota::findOrFail($cat['id']));
+    /**
+     * @param Estudiante $estudiante
+     * @param array $data
+     */
+    public function procesarNotas (Estudiante $estudiante, Array $data): void
+    {
+        $categorias = Config::get('institucion.indicadores.categorias');
+        for ($i=0; $i < count($categorias); $i++){
+            $data_notas = data_get($data, strval('notas.data.'.$i));
+            $current_nota = $this->currentNotas->getNota(intval($data_notas[strval($categorias[$i]['name'])]['id']));
+            if (intval($data_notas[strval($categorias[$i]['name'])]['score']) <> $current_nota->score) {
+                $this->currentNotas->updateNota($current_nota, [
+                    'score' => intval($data_notas[strval($categorias[$i]['name'])]['score']),
+                    'estudiante_id' => $estudiante->id,
+                    'indicador_id' => $this->indicadores->getIndicadorCategoryNivel($categorias[$i]['name'], indicador(intval($data_notas[strval($categorias[$i]['name'])]['score'])))->id,
+                    'periodo_id' => $this->planilla->periodo->id
+                ]);
             }
         }
-        return $notas;
-    }
-    public function getNota($id){
-        return Nota::findOrFail($id);
-    }
-
-    public function getLogro($logros,$category,$score){
-        return  $logros->where('category','=',$category)->where('indicador','=',$this->getIndicador($score))->first();
     }
 
     /**
-     * @param $nota
-     * @return string
+     * @param Model $model
+     * @param array $data
      */
-    public function getIndicador($nota){
-        if ($nota <= 5.9 ){
-            return "bajo";
-        }elseif ($nota >= 6 && $nota < 8){
-            return "basico";
-        }elseif ($nota >= 8 && $nota < 9.5){
-            return "alto";
-        }elseif ($nota >= 9.5 && $nota <= 10){
-            return "superior";
-        }
-        else{
-            return "Revisar notas";
-        }
-
-    }
-
-
-    /**
-     * @param $notas
-     * @param $_nota
-     * @param $logro
-     * @param $pos
-     * @return \Illuminate\Database\Eloquent\Collection|Model|Nota|Nota[]
-     */
-    public function setNota ($notas, $_nota, $logro , $pos)
+    public function procesarInasistencia (Model $model, array $data): void
     {
-       $score = $notas[$pos][$_nota->category]['score'];
-        $nota = $this->getNota($_nota->id);
-        $nota->update([
-            'logro_id' => $logro->id,
-            'score' => $score
-        ]);
-        return $nota;
+        if (!$this->inasistencia->singleInasistencia(intval(data_get($data, 'inasistencias.data.id')))->numero === intval(data_get($data, 'inasistencias.data.id'))) {
+            $this->inasistencia->updateInasistencia($this->inasistencia->singleInasistencia(intval(data_get($data, 'inasistencias.data.id'))), [
+                'numero' => intval(data_get($data, 'inasistencias.data.numero')),
+                'estudiante_id' => $model->id,
+                'periodo_id' => $this->planilla->periodo->id,
+                'asignatura_id' => $this->planilla->asignacion->asignatura->id
+            ]);
+        }
     }
-
-    /**
-     * @param $nota
-     * @param $notas
-     * @param $logros
-     */
-    public function verificadorCambios ($nota, $notas, $logros):void
-    {
-             switch ($nota->category){
-                case 'cognitivo':
-                    if (floatval($notas['0'][$nota->category]['score']) <> $nota->score) {
-                        $logro = $this->getLogro($logros, $nota->category, floatval($notas['0'][$nota->category]['score']));
-                        $this->setNota($notas, $nota, $logro, '0');
-                    }
-                    break;
-                case 'procedimental':
-
-                    if (floatval($notas['1'][$nota->category]['score']) <> $nota->score) {
-                        $logro = $this->getLogro($logros, $nota->category, floatval($notas['1'][$nota->category]['score']));
-                        $this->setNota($notas, $nota, $logro, '1');
-                    }
-                    break;
-                case 'actitudinal':
-                    if (floatval($notas['2'][$nota->category]['score']) <> $nota->score) {
-                        $logro = $this->getLogro($logros, $nota->category, floatval($notas['2'][$nota->category]['score']));
-                        $this->setNota($notas, $nota, $logro, '2');
-                    }
-                    break;
-                default:
-                    break;
-            }
-    }
-
 
 }
