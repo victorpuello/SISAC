@@ -16,7 +16,6 @@ use League\Fractal\TransformerAbstract;
 class NotaTransformer extends TransformerAbstract
 {
     public function transform(Nota $nota){
-
         if ($nota->category === 'cognitivo'){
             return [
                 'cognitivo' => $this->getNota($nota)

@@ -2,6 +2,7 @@
 
 namespace ATS\Providers;
 
+use ATS\Model\Planilla;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,6 +15,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::if('load', function (Planilla $planilla){
+            return $planilla->isLoad();
+        });
+        Blade::if('edited', function (Planilla $planilla){
+            return $planilla->isEdited();
+        });
         Blade::if('admin', function (){
             return optional(auth()->user())->isAdmin();
         });

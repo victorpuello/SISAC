@@ -58,6 +58,7 @@ class EstudianteController extends Controller
     {
         $estudiante = new Estudiante($request->all());
         $estudiante->save();
+
         $data = [
             'estudiante'=>$estudiante,
             'messaje' => 'Guardado con exito'

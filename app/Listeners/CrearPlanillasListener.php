@@ -30,7 +30,9 @@ class CrearPlanillasListener
         $planilla = $event->planilla;
         if (! $planilla->cargada){
             $verificador = new VerificadorNotas($planilla);
+//            dd($verificador->foundIndicador());
             $verificador->foundIndicador();
+            $planilla->update(['cargada'=>1]);
         }
     }
 }

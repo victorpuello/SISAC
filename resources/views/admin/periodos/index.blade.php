@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="mb-3">
-                    <a href="#modalAdd"  class="btn btn-primary on-default modal-basic ">Agregar <i class="fas fa-plus"></i></a>
+                    <a href="{{route('periodos.create')}}"  class="btn btn-primary on-default simple-ajax-modal ">Agregar <i class="fas fa-plus"></i></a>
                 </div>
             </div>
         </div>

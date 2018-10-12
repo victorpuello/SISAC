@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="<?php echo e(asset('vendor/font-awesome/css/fontawesome-all.min.css')); ?>"/>
         <link rel="stylesheet" href="<?php echo e(asset('vendor/magnific-popup/magnific-popup.css')); ?>" />
         <link rel="stylesheet" href="<?php echo e(asset('vendor/bootstrap-datepicker/css/bootstrap-datepicker3.css')); ?>" />
+        <link rel="stylesheet" href="<?php echo e(asset('vendor/bootstrap-timepicker/css/bootstrap-timepicker.css')); ?>" />
 
         <!-- Specific Page Vendor CSS -->
         <?php echo $__env->yieldContent('styles'); ?>
@@ -141,18 +142,26 @@
         <script src="<?php echo e(asset('vendor/popper/umd/popper.min.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/bootstrap/js/bootstrap.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/bootstrap-datepicker/js/bootstrap-datepicker.js')); ?>"></script>
+
+    <script src="<?php echo e(asset('vendor/jquery-maskedinput/jquery.maskedinput.js')); ?>"></script>
+    <script src="<?php echo e(asset('vendor/jquery-ui/jquery-ui.js')); ?>"></script>
+    <script src="<?php echo e(asset('vendor/jqueryui-touch-punch/jqueryui-touch-punch.js')); ?>"></script>
+    <script src="<?php echo e(asset('vendor/bootstrap-timepicker/bootstrap-timepicker.js')); ?>"></script>
+
         <script src="<?php echo e(asset('vendor/common/common.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/nanoscroller/nanoscroller.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/magnific-popup/jquery.magnific-popup.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/jquery-placeholder/jquery-placeholder.js')); ?>"></script>
         <script src="<?php echo e(asset('vendor/pnotify/pnotify.custom.js')); ?>"></script>
         <?php echo $__env->yieldContent('script'); ?>
+        <!-- Specific Page Vendor -->
+        <?php echo $__env->yieldContent('scriptfin'); ?>
+        <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
+
         <!-- Theme Base, Components and Settings -->
         <script src="<?php echo e(asset('js/theme.js')); ?>"></script>
         <!-- Theme Initialization Files -->
         <script src="<?php echo e(asset('js/theme.init.js')); ?>"></script>
-        <!-- Specific Page Vendor -->
-        <?php echo $__env->yieldContent('scriptfin'); ?>
-        <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
+        <script src="<?php echo e(asset('js/examples/examples.advanced.form.js')); ?>"></script>
     </body>
 </html>

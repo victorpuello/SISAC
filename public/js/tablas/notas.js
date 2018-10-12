@@ -113,6 +113,7 @@
                 var notaAct = this.field('notas.data.2.actitudinal.score');
                 var notaCog = this.field('notas.data.0.cognitivo.score');
                 var notaPro = this.field('notas.data.1.procedimental.score');
+                console.log(notaAct.val(),notaCog.val(),notaPro.val());
                 if (! notaAct.isMultiValue()){
                     if (! notaAct.val()){
                         notaAct.error( 'Debes ingresar una valoración');
@@ -250,7 +251,7 @@
             }
 
         });
-        table.buttons().container().appendTo( $('.col-md-6:eq(0)', table.table().container() ) );
-        $.fn.dataTable.ext.errMode = 'throw';
     });
+    // table.buttons().container().appendTo( $('.col-md-6:eq(0)', table.table().container() ) );
+    $.fn.dataTable.ext.errMode = 'throw';
 }).apply(this, [jQuery]);

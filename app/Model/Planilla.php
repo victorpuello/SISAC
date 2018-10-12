@@ -48,6 +48,12 @@ class Planilla extends Model
     public function asignacion(){
         return $this->belongsTo(Asignacion::class);
     }
+    public function isLoad(){
+        return $this->cargada === 1;
+    }
+    public function isEdited(){
+        return $this->modificada === 1;
+    }
 
 
 }

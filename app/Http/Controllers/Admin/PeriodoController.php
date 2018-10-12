@@ -26,7 +26,7 @@ class PeriodoController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.periodos.ajax.create');
     }
 
     /**

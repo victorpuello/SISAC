@@ -3,6 +3,7 @@
 namespace ATS\Http\Controllers\Admin;
 
 
+use ATS\Events\LlenarPlanillasEvent;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\FiltroRequest;
 use ATS\Model\Anio;
@@ -16,7 +17,6 @@ class PlanillaController extends Controller
    public function index(FiltroRequest $request){
        $docente = Docente::with(['planillas.asignacion.asignatura','planillas.asignacion.grupo.estudiantes','planillas.asignacion.grupo.grado'])->findOrFail($request->docente_id);
        $planillas = $docente->planillas->where('periodo_id','=',$request->periodo_id);
-//        dd($planillas);
        return view('admin.planillas.index',compact('planillas','docente'));
    }
 
@@ -32,6 +32,7 @@ class PlanillaController extends Controller
 
     public function show(Request $request, Planilla $planilla)
     {
+        event(new LlenarPlanillasEvent($planilla));
         $planilla->load(['asignacion.grupo.grado','asignacion.docente.indicadores','asignacion.grupo.grado','asignacion.asignatura','periodo','asignacion.grupo.estudiantes.notas','asignacion.grupo.estudiantes.inasistencias']);
         $estudiantes = $planilla->asignacion->grupo->estudiantes->sortBy('lastname');
         if ($request->ajax()){
@@ -45,9 +46,13 @@ class PlanillaController extends Controller
 
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Planilla $planilla)
     {
-
+        $planilla->update($request->all());
+        $data = [
+            'messaje' => 'Planilla editada con exito'
+        ];
+        return response()->json($data,200);
     }
 
     public function destroy(Planilla $planilla)

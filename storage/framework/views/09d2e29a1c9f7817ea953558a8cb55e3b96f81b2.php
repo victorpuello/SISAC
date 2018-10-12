@@ -1,16 +1,20 @@
 <?php $__env->startSection('titulo', "Periodos"); ?>
 <?php $__env->startSection('namePage', "Modulo: Periodos"); ?>
 <?php $__env->startSection('styles'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/jquery-ui/jquery-ui.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/jquery-ui/jquery-ui.theme.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('vendor/select2/css/select2.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('vendor/select2-bootstrap-theme/select2-bootstrap.min.css')); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('vendor/datatables/media/css/dataTables.bootstrap4.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/bootstrap-markdown/css/bootstrap-markdown.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('vendor/summernote/summernote-bs4.css')); ?>" />
     <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="card-body">
         <div class="row">
             <div class="col-sm-6">
                 <div class="mb-3">
-                    <a href="#modalAdd"  class="btn btn-primary on-default modal-basic ">Agregar <i class="fas fa-plus"></i></a>
+                    <a href="<?php echo e(route('periodos.create')); ?>"  class="btn btn-primary on-default simple-ajax-modal ">Agregar <i class="fas fa-plus"></i></a>
                 </div>
             </div>
         </div>
@@ -41,6 +45,23 @@
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
+    </div>
+    <div class="form-group row">
+        <label class="col-lg-3 control-label text-lg-right pt-2">Date range</label>
+        <div class="col-lg-6">
+            <div class="input-daterange input-group" data-plugin-datepicker>
+														<span class="input-group-prepend">
+															<span class="input-group-text">
+																<i class="fas fa-calendar-alt"></i>
+															</span>
+														</span>
+                <input type="text" class="form-control" name="start">
+                <span class="input-group-text border-left-0 border-right-0 rounded-0">
+															to
+														</span>
+                <input type="text" class="form-control" name="end">
+            </div>
+        </div>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
