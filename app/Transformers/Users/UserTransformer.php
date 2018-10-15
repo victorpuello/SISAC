@@ -9,8 +9,9 @@
 namespace ATS\Transformers\Users;
 
 
+use ATS\Model\User;
 use League\Fractal\TransformerAbstract;
-use ATS\User;
+
 
 class UserTransformer extends TransformerAbstract
 {
