@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Input;
+use Silber\Bouncer\Database\HasRolesAndAbilities;
 
 /**
  * ATS\User
@@ -40,7 +41,7 @@ use Illuminate\Support\Facades\Input;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRolesAndAbilities;
 
     /**
      * The attributes that are mass assignable.

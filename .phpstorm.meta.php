@@ -5,7 +5,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2018-10-06 12:43:02.
+    * Generated on 2018-10-14 21:41:51.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -33,6 +33,8 @@ namespace PHPSTORM_META {
         'JavaScript' => \Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'Silber\Bouncer\Bouncer' => \Silber\Bouncer\Bouncer::class,
+        'Silber\Bouncer\Contracts\Clipboard' => \Silber\Bouncer\CachedClipboard::class,
         'Styde\Html\Alert\Middleware' => \Styde\Html\Alert\Middleware::class,
         'access' => \Styde\Html\Access\BasicAccessHandler::class,
         'alert' => \Styde\Html\Alert\Container::class,
@@ -197,6 +199,8 @@ namespace PHPSTORM_META {
         'JavaScript' => \Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'Silber\Bouncer\Bouncer' => \Silber\Bouncer\Bouncer::class,
+        'Silber\Bouncer\Contracts\Clipboard' => \Silber\Bouncer\CachedClipboard::class,
         'Styde\Html\Alert\Middleware' => \Styde\Html\Alert\Middleware::class,
         'access' => \Styde\Html\Access\BasicAccessHandler::class,
         'alert' => \Styde\Html\Alert\Container::class,
@@ -361,6 +365,8 @@ namespace PHPSTORM_META {
         'JavaScript' => \Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'Silber\Bouncer\Bouncer' => \Silber\Bouncer\Bouncer::class,
+        'Silber\Bouncer\Contracts\Clipboard' => \Silber\Bouncer\CachedClipboard::class,
         'Styde\Html\Alert\Middleware' => \Styde\Html\Alert\Middleware::class,
         'access' => \Styde\Html\Access\BasicAccessHandler::class,
         'alert' => \Styde\Html\Alert\Container::class,
@@ -525,6 +531,8 @@ namespace PHPSTORM_META {
         'JavaScript' => \Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'Silber\Bouncer\Bouncer' => \Silber\Bouncer\Bouncer::class,
+        'Silber\Bouncer\Contracts\Clipboard' => \Silber\Bouncer\CachedClipboard::class,
         'Styde\Html\Alert\Middleware' => \Styde\Html\Alert\Middleware::class,
         'access' => \Styde\Html\Access\BasicAccessHandler::class,
         'alert' => \Styde\Html\Alert\Container::class,
@@ -689,6 +697,8 @@ namespace PHPSTORM_META {
         'JavaScript' => \Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'Silber\Bouncer\Bouncer' => \Silber\Bouncer\Bouncer::class,
+        'Silber\Bouncer\Contracts\Clipboard' => \Silber\Bouncer\CachedClipboard::class,
         'Styde\Html\Alert\Middleware' => \Styde\Html\Alert\Middleware::class,
         'access' => \Styde\Html\Access\BasicAccessHandler::class,
         'alert' => \Styde\Html\Alert\Container::class,
@@ -853,6 +863,8 @@ namespace PHPSTORM_META {
         'JavaScript' => \Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'Silber\Bouncer\Bouncer' => \Silber\Bouncer\Bouncer::class,
+        'Silber\Bouncer\Contracts\Clipboard' => \Silber\Bouncer\CachedClipboard::class,
         'Styde\Html\Alert\Middleware' => \Styde\Html\Alert\Middleware::class,
         'access' => \Styde\Html\Access\BasicAccessHandler::class,
         'alert' => \Styde\Html\Alert\Container::class,
@@ -1017,6 +1029,8 @@ namespace PHPSTORM_META {
         'JavaScript' => \Laracasts\Utilities\JavaScript\PHPToJavaScriptTransformer::class,
         'NunoMaduro\Collision\Contracts\Adapters\Phpunit\Listener' => \NunoMaduro\Collision\Adapters\Phpunit\Listener::class,
         'NunoMaduro\Collision\Contracts\Provider' => \NunoMaduro\Collision\Provider::class,
+        'Silber\Bouncer\Bouncer' => \Silber\Bouncer\Bouncer::class,
+        'Silber\Bouncer\Contracts\Clipboard' => \Silber\Bouncer\CachedClipboard::class,
         'Styde\Html\Alert\Middleware' => \Styde\Html\Alert\Middleware::class,
         'access' => \Styde\Html\Access\BasicAccessHandler::class,
         'alert' => \Styde\Html\Alert\Container::class,
