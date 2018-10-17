@@ -46,6 +46,7 @@ class Institucion extends Model
     protected $fillable = [
         'name','siglas','dane','nit','path','address','phone','email','rector','idrector','resolucion','slogan',
     ];
+
     public function setPathAttribute($path)
     {
         if (is_null($path)){

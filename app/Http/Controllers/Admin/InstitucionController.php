@@ -7,13 +7,9 @@ use ATS\Http\Requests\UpdateInstitucionRequest;
 use ATS\Model\Institucion;
 use Illuminate\Http\Request;
 use ATS\Http\Controllers\Controller;
+
 class InstitucionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $institucion = Institucion::first();
@@ -21,9 +17,7 @@ class InstitucionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -31,24 +25,17 @@ class InstitucionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateInstitucionRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function store(CreateInstitucionRequest $request)
     {
-
-        $institucion = new Institucion($request->all());
-        $institucion->save();
+        $institucion = Institucion::create($request->all());
         return view('admin.institucion.index',compact('institucion'));
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \ATS\Institucion  $institucion
-     * @return \Illuminate\Http\Response
+     * @param Institucion $institucion
      */
     public function show(Institucion $institucion)
     {
@@ -56,34 +43,25 @@ class InstitucionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \ATS\Institucion  $institucion
-     * @return \Illuminate\Http\Response
+     * @param Institucion $institucion
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Institucion $institucion)
     {
-        return view('admin.institucion.ajax.edit',compact('institucion'));
+        return view('admin.institucion.edit',compact('institucion'));
     }
-
 
     /**
      * @param UpdateInstitucionRequest $request
      * @param Institucion $institucion
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function update(UpdateInstitucionRequest $request, Institucion $institucion)
     {
-        $institucion->fill($request->all());
-        $institucion->save();
+        $institucion->update($request->all());
         return view('admin.institucion.index',compact('institucion'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \ATS\Institucion  $institucion
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Institucion $institucion)
     {
         //

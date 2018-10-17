@@ -34,5 +34,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AnioAndPeriodoSeeder::class);
         DB::table('estudiantes')->delete();
         $this->call(EstudianteSeeder::class);
+        $this->call(BouncerSeeder::class);
     }
 }

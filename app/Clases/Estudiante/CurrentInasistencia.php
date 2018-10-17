@@ -62,4 +62,7 @@ class CurrentInasistencia
     public function inasistenciasPeriodo (){
         return $this->inasistencias;
     }
+
+
+
 }

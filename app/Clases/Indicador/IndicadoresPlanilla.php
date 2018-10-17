@@ -55,6 +55,15 @@ class IndicadoresPlanilla
     }
 
     /**
+     * @param String $category
+     * @return Collection
+     */
+    public function getIndicadoresCategory(String $category){
+        $indicadores = $this->getIndicadores();
+        return $indicadores->where('category','=',$category);
+    }
+
+    /**
      * @return int
      */
     public function countInd(){

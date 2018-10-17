@@ -83,15 +83,19 @@ class NotaDataTablesEditor extends DataTablesEditor
         $model->load('notas');
         $this->planilla = Planilla::with(['periodo','asignacion'])->findOrFail(data_get($data,'planilla_id'));
         $this->indicadores = new IndicadoresPlanilla($this->planilla);
-        $this->currentNotas = new CurrentNota($model,$this->planilla->periodo);
+        $this->currentNotas = new CurrentNota($model,$this->planilla);
         $this->inasistencia = new CurrentInasistencia($model,$this->planilla->periodo);
         $definitiva = new CurrentDefinitiva($model,$this->planilla->periodo);
         DB::beginTransaction();
             try{
                 $this->procesarNotas($model, $data);
                 $this->procesarInasistencia($model, $data);
+                $score = $this->currentNotas->scoreDef($this->planilla->asignacion->asignatura);
+//                dd($score,indicador($score));
+//                dd($this->currentNotas->scoreDef($this->planilla->asignacion->asignatura));
                 $definitiva->updateDefinitiva($definitiva->singleDefinitivaAsignatura($this->planilla->asignacion->asignatura),[
-                    'score' => $this->currentNotas->scoreDef($this->planilla->asignacion->asignatura),
+                    'score' => $score,
+                    'indicador' => indicador($score),
                     'estudiante_id' => $model->id,
                     'periodo_id' => $this->planilla->periodo->id,
                     'asignatura_id'  => $this->planilla->asignacion->asignatura->id

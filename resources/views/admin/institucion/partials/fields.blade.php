@@ -84,7 +84,7 @@
                         <span class="btn btn-default btn-file">
                             <span class="fileupload-exists">Cambiar</span>
                             <span class="fileupload-new">Selecionar archivo</span>
-                            {!! Form::file('path')!!}
+                            {!! Form::file('path') !!}
                         </span>
                         <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Remover</a>
                     </div>

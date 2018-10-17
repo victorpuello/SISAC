@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use ATS\Asignatura;
 use ATS\Docente;
 use ATS\Estudiante;
-use ATS\Http\Requests\ReportesLogrosRequest;
+use ATS\Http\Requests\ReportesIndicadoresRequest;
 use ATS\Institucion;
 use ATS\Logro;
 use ATS\Periodo;
@@ -94,7 +94,7 @@ class ReportesController extends Controller
         return $pdf->download('Sabana_'.$salon->full_name.'_'.$periodo->name.''.'.pdf');
 
     }
-    public function reporteLogros (ReportesLogrosRequest $request){
+    public function reporteLogros (ReportesIndicadoresRequest $request){
         $docente = Docente::find($request->docente);
         $periodo = Periodo::find($request->periodo);
         $asignatura = Asignatura::find($request->asignatura);

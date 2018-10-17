@@ -9,11 +9,13 @@
 namespace ATS\Clases\Estudiante;
 
 
+use ATS\Clases\Indicador\IndicadoresPlanilla;
 use ATS\Model\Asignatura;
 use ATS\Model\Estudiante;
 use ATS\Model\Indicador;
 use ATS\Model\Nota;
 use ATS\Model\Periodo;
+use ATS\Model\Planilla;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Mockery\Matcher\Not;
@@ -30,12 +32,17 @@ class CurrentNota
      */
     protected $periodo;
     /**
+     * @var \ATS\Model\Planilla
+     */
+    protected $planilla;
+    /**
      * @var \ATS\Model\Nota
      */
     protected $notas;
-     public function __construct (Estudiante $estudiante, Periodo $periodo)
+     public function __construct (Estudiante $estudiante, Planilla $planilla)
      {
-         $this->periodo = $periodo;
+         $this->periodo = $planilla->periodo;
+         $this->planilla = $planilla;
          $this->estudiante = $estudiante;
          $this->notas = $estudiante->notas->where('periodo_id','=',$this->periodo->id);
      }
@@ -50,7 +57,8 @@ class CurrentNota
     }
     private function prom (Asignatura $asignatura, String $category){
         $categorias = Config::get('institucion.indicadores.categorias');
-        $notas = $this->estudiante->notas->where('asignatura_id','=',$asignatura->id)->where('category','=',$category);
+        $indicadores = new IndicadoresPlanilla($this->planilla);
+        $notas = $this->notasIndicadores($indicadores->getIndicadoresCategory($category));
         $value = 0;
         foreach ($notas as $nota){
             $value += $nota->score;
@@ -64,7 +72,7 @@ class CurrentNota
                 $porcentaje =$categorias[1]['porcentaje'];
                 break;
             case 'procedimental':
-                $porcentaje =$categorias[1]['porcentaje'];
+                $porcentaje =$categorias[2]['porcentaje'];
                 break;
             default:break;
         }
@@ -75,7 +83,7 @@ class CurrentNota
         $categorias = Config::get('institucion.indicadores.categorias');
         $score = 0;
         foreach ($categorias as $categoria){
-           $score += $this->prom($asignatura,$categoria['name']);
+            $score += $this->prom($asignatura,$categoria['name']);
         }
         return $score;
     }

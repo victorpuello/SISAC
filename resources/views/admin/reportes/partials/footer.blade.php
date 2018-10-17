@@ -1,0 +1,1 @@
+<p>Reporte generado por: <strong>{{auth()->user()->full_name}}</strong>  - <strong>{{\Carbon\Carbon::now()}}</strong> </p>

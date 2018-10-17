@@ -22,6 +22,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Nota whereIndicadorId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Nota whereScore($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Nota whereUpdatedAt($value)
+ * @property int $periodo_id
+ * @property-read \ATS\Model\Periodo $periodo
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Model\Nota wherePeriodoId($value)
  */
 class Nota extends Model
 {

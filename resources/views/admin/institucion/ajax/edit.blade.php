@@ -1,8 +1,8 @@
 <div id="custom-content" class="modal-block modal-block-primary modal-header-color">
     <section class="card">
-        {!! Form::model($institucion,['route' => ['institucion.update',$institucion], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
+        {!! Form::model($institucion,['route' => ['institucions.update',$institucion], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
         <header class="card-header">
-            <h2 class="card-title">Actualizar institución </h2>
+            <h2 class="card-title">Actualizar datos de la institución </h2>
         </header>
         <div class="card-body">
             @include('admin.institucion.partials.messages')

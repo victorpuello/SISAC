@@ -62,9 +62,10 @@ class Grupo extends Model
     {
         return $this->grade . '' . $this->name;
     }
+
     public function getAsignaturasAttribute(){
         $asignaturas = DB::table('asignacions')
-            ->where('salon_id','=',$this->id)
+            ->where('grupo_id','=',$this->id)
             ->join('asignaturas','asignacions.asignatura_id','=', 'asignaturas.id')
             ->select('asignaturas.*')
             ->get();
@@ -79,13 +80,8 @@ class Grupo extends Model
         return $docentes;
     }
     public function getDirectorAttribute(){
-        $docentes = DB::table('asignacions')
-            ->where('salon_id','=',$this->id)
-            ->join('docentes','asignacions.docente_id','=', 'docentes.id')
-            ->select('asignacions.director','docentes.name')
-            ->get();
-        $docente = $docentes->where('director','=', 1)->first();
-        return $docente->name;
+        $asignacion = $this->asignaciones->where('director','=',1)->first();
+        return $asignacion->docente->name ?? "Sin Asignar";
     }
 
 }

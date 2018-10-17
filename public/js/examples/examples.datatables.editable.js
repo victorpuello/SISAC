@@ -50,8 +50,8 @@ Theme Version: 	2.1.1
                 ],
                 bAutoWidth:true,
                 aoColumnDefs: [
-                    {aTargets: [0], "bSortable": true},
-                    {aTargets: [-3], "bSortable": true},
+                    {aTargets: [0], "bSortable": false},
+                    {aTargets: [-3], "bSortable": false},
                     {aTargets: [' _all '], "bSortable": false}
 				],
 			});

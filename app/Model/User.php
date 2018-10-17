@@ -2,6 +2,7 @@
 
 namespace ATS\Model;
 
+use Bouncer;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -38,6 +39,11 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\User whereUsername($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Silber\Bouncer\Database\Ability[] $abilities
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Silber\Bouncer\Database\Role[] $roles
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Model\User whereIs($role)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Model\User whereIsAll($role)
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Model\User whereIsNot($role)
  */
 class User extends Authenticatable
 {
@@ -78,13 +84,16 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($value);
     }
     public function isAdmin(){
-        return $this->type === 'admin';
+        return Bouncer::is($this)->an('admin');
     }
     public function isDocente(){
-        return $this->type === 'docente';
+        return Bouncer::is($this)->an('docente');
     }
     public function isSecretaria(){
-        return $this->type === 'secretaria';
+        return Bouncer::is($this)->an('secretaria');
+    }
+    public function isCoordinador(){
+        return Bouncer::is($this)->an('coordinador');
     }
     public function setPathAttribute($path)
     {

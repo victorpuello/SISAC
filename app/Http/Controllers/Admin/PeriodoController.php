@@ -15,7 +15,7 @@ class PeriodoController extends Controller
      */
     public function index()
     {
-        $periodos = Periodo::all();
+        $periodos = Periodo::with('anio')->orderBy('anio_id','DESC')->get();
         return view('admin.periodos.index',compact('periodos'));
     }
 
@@ -37,7 +37,8 @@ class PeriodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $periodo = Periodo::create($request->all());
+        return redirect()->route('periodos.index');
     }
 
     /**
@@ -62,28 +63,26 @@ class PeriodoController extends Controller
         return view('admin.periodos.ajax.edit',compact('periodo'));
     }
 
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \ATS\Periodo  $periodo
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Periodo $periodo
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Periodo $periodo)
     {
-        $periodo->fill($request->all());
-        $periodo->save();
+        $periodo->update($request->all());
         return redirect()->action('Admin\PeriodoController@index');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \ATS\Periodo  $periodo
-     * @return \Illuminate\Http\Response
+     * @param Periodo $periodo
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Periodo $periodo)
     {
-        //
+        $periodo->delete();
+        return redirect()->route('periodos.index');
     }
 }

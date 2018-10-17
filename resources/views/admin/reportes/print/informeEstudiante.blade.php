@@ -21,27 +21,9 @@
     </style>
 </head>
 <body>
-@foreach($estudiantes as $estudiante)
+@foreach($reporte->getEstudiantesWithPuestos($periodo) as $estudiante)
 <div class="invoice page">
-    <header class="clearfix">
-        <div class="row justify-content-md-center">
-            <div class="col-sm-1 mt-0 position-absolute">
-                <div class="ib ml-5">
-                    <img class="ml-5" src="{{asset('img/escudo_100x100.png')}}" alt="INELMU" />
-                </div>
-            </div>
-            <div class="col-sm-6 text-right mt-3 mb-3">
-                <p class="ib text-center" style="line-height: 1.2">
-                    <span class="text-uppercase">Institución  Educativa Las Mujeres</span><br>
-                    Las Mujeres – Moñitos<br>
-                    DANE Nº 223500000863 - NIT 900127736 - 3<br>
-                    Correo electrónico: ee_22350000086301@hotmail.com<br>
-                    <span class="font-weight-light" style="font-size: 10px; line-height: 1">RESOLUCIÓN DE APROBACIÓN  DE LA INSTITUCIÓN EDUCATIVA 349 DE 28 DE JULIO DE 2011 Y 661 DE DICIEMBRE DE 2011</span></br>
-                </p>
-                <h4 class="ib text-center text-uppercase">Informe Academico</h4>
-            </div>
-        </div>
-    </header>
+    @include('admin.reportes.partials.header', ['nameReporte' => 'Informe Academico'])
     <div class="bill-info">
         <table class="table table-bordered" >
             <tbody>
@@ -51,13 +33,13 @@
                 <td class="p-1" colspan="2">Puesto: <strong>{{$estudiante->puesto}}</strong></td>
             </tr>
             <tr class="p-0">
-                <td class="p-1">Grupo: <strong>{{$estudiante->salon->full_name}}</strong> </td>
+                <td class="p-1">Grupo: <strong>{{$estudiante->grupo->name_aula}}</strong> </td>
                 <td class="p-1">Periodo: <strong>{{$periodo->name}}</strong></td>
                 <td class="p-1">Año: <strong>{{date_format(new \Carbon\Carbon($periodo->datestart),"Y")}}</strong></td>
                 <td class="p-1">Fecha: <strong>{{ \Carbon\Carbon::now()->toDateString() }}</strong></td>
             </tr>
             <tr class="p-0">
-                <td class="p-1" colspan="4">Director de grupo: <strong>{{$estudiante->salon->director}}</strong> </td>
+                <td class="p-1" colspan="4">Director de grupo: <strong>{{$grupo->director}}</strong> </td>
             </tr>
             </tbody>
         </table>
@@ -65,42 +47,39 @@
             <tbody>
                 <tr class="p-0">
                     <td class="p-1" style=" width: 30%; vertical-align: middle" rowspan="2"><strong>AREAS - ASIGNATURAS / VALORACIONES</strong></td>
-                    <td class="p-1 text-center text-uppercase" style="vertical-align: middle" rowspan="2">Faltas</td>
-                    <td class="p-1 text-center text-uppercase" colspan="4">Desarrollo anual / periodos</td>
+                    <td class="p-1 text-center text-uppercase" style="vertical-align: middle; width: 10%;" rowspan="2">Faltas</td>
+                    <td class="p-1 text-center text-uppercase" colspan="5">Desarrollo anual / periodos</td>
                 </tr>
                 <tr class="p-0">
-                    <td class="p-1 text-center">1°</td>
-                    <td class="p-1 text-center">2°</td>
-                    <td class="p-1 text-center">3°</td>
-                    <td class="p-1 text-center">4°</td>
+                    <td class="p-1 text-center " style="width: 12%;">1°</td>
+                    <td class="p-1 text-center " style="width: 12%;">2°</td>
+                    <td class="p-1 text-center " style="width: 12%;">3°</td>
+                    <td class="p-1 text-center " style="width: 12%;">4°</td>
+                    <td class="p-1 text-center " style="width: 12%;">Final</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    @foreach($estudiante->salon->asignaturas as $asignatura)
+    @foreach($reporte->getAsignaturas() as $asignatura)
                 <table class="table table-bordered mb-0">
                     <tbody>
                     <tr class="table-bordered p-0">
                         <td class="p-2 text-left text-uppercase" style="width: 30%; vertical-align: middle;" rowspan="2" ><strong> {{$asignatura->name}}</strong> </td>
-                        <td style="border-left: none" rowspan="2"> {{count($estudiante->currentInasistencias($asignatura->id,$periodo->id))}} </td>
-                        @foreach($periodos as $_periodo)
-                            @if($_periodo->id === 2)
-                                <td class="p-0 pl-1 text-center"><strong>{{$estudiante->getDefInforme($asignatura->id,$_periodo->id)}}</strong></td>
-                            @endif
+                        <td class="p0 pl-1 text-center" style="border-left: none; width: 10%;" rowspan="2" > {{$reporte->getInasistencias($asignatura,$estudiante,$periodo)}} </td>
+                        @foreach($periodo->anio->periodos as $_periodo)
+                           <td class="p-0 pl-1 text-center " style="width: {{porcentajeStyle(count($periodo->anio->periodos))}}%;"><strong>{{$reporte->getDefScore($asignatura,$estudiante,$_periodo)}}</strong></td>
                         @endforeach
                     </tr>
                     <tr class="text-dark">
-                        @foreach($periodos as $_periodo)
-                            @if($_periodo->id === 2)
-                                <td class="p-0 pl-1 text-center"><strong>{{indicador($estudiante->getDefInforme($asignatura->id,$_periodo->id))}}</strong> </td>
-                            @endif
+                        @foreach($periodo->anio->periodos as $_periodo)
+                                <td class="p-0 pl-1 text-center" style="width: {{porcentajeStyle(count($periodo->anio->periodos))}}%;"><strong>{{$reporte->getDefIndicador($asignatura,$estudiante,$_periodo)}}</strong> </td>
                         @endforeach
                     </tr>
-                    @foreach($estudiante->NotasInforme($asignatura->id,$periodo->id) as $nota)
+                    @foreach($reporte->notasInforme($asignatura,$estudiante,$periodo) as $nota)
                         <tr class="table-bordered p-0">
-                            <td class="p-0 pl-1" style="vertical-align: middle">{{ucwords($nota->logro->category)}}  <small>({{$nota->porcentaje}})</small></td>
-                            <td class="p-0 pl-1 text-center " style="vertical-align: middle">{{$nota->score}}</td>
-                            <td class="font-weight-semibold text-left text-dark p-0 pl-1" style="vertical-align: middle" colspan="9">{{$nota->logro->description}}</td>
+                            <td class="p-0 pl-1" style="vertical-align: middle; width: 30%;">{{ucwords($nota->indicador->category)}}  <small>({{$nota->porcentaje}})</small></td>
+                            <td class="p-0 pl-1 text-center " style="vertical-align: middle; width: 10%;">{{$nota->score}}</td>
+                            <td class="font-weight-semibold text-left text-dark p-0 pl-1" style="vertical-align: middle; width: 60%;" colspan="9">{{$nota->indicador->description}}</td>
                         </tr>
                     @endforeach
                     </tbody>

@@ -3,14 +3,18 @@
 namespace ATS\Http\Controllers\Admin;
 
 use App;
+use ATS\Clases\CurrentAnio;
+use ATS\Clases\Reportes\Reporte;
 use ATS\Model\Asignatura;
 use ATS\Model\Docente;
 use ATS\Model\Estudiante;
+use ATS\Model\Grado;
 use ATS\Model\Grupo;
+use ATS\Model\Indicador;
 use ATS\Model\Institucion;
 use ATS\Model\Periodo;
 use Illuminate\Http\Request;
-use ATS\Http\Requests\ReportesLogrosRequest;
+use ATS\Http\Requests\ReportesIndicadoresRequest;
 use ATS\Http\Controllers\Controller;
 use PDF;
 
@@ -22,89 +26,63 @@ class ReportesController extends Controller
         $this->salones_todos = Grupo::orderBy('name','ASC')->get();
     }
     public function index(){
-        $periodos = Periodo::pluck('name','id');
-        $docentes = Docente::pluck('name','id');
+
+        $periodos = (new CurrentAnio())->pluck_periodos();
+        $docentes = Docente::orderBy('name','ASC')->pluck('name','id');
         $asignaturas = Asignatura::pluck('name','id');
-        $grados = ['0' => 'Pre-Escolar', '1' => 'Primero', '2' => 'Segundo', '3' => 'Tercero', '4' => 'Cuarto', '5' => 'Quinto', '6' => 'Sexto', '7' => 'Septimo', '8' => 'Octavo', '9' => 'Noveno', '10' => 'Decimo', '11' => 'Once'];
-        $sal= collect();
-        foreach ($this->salones_todos as $salon){
-            $sal->push([
-                'id'=>$salon->id,
-                'nombre'=>$salon->full_name,
-                'grado'=>$salon->grade,
-            ]);
-        }
-        $salones = $sal->sortBy('grado')->pluck('nombre','id');
-        return view('admin.reportes.index',compact('periodos','salones','docentes','asignaturas','grados'));
+        $grados = Grado::pluck('name','id');
+        $grupos = grupos_pluck();
+        return view('admin.reportes.index',compact('periodos','grupos','docentes','asignaturas','grados'));
     }
     public function reporteAcademico (Request $request){
-        $aula = Grupo::find($request->salon);
+        $grupo = Grupo::with(['estudiantes.definitivas','estudiantes.inasistencias','estudiantes.grupo.grado','estudiantes.notas.indicador','asignaciones.asignatura.indicadores'])->findOrFail($request->grupo);
         $institucion = Institucion::all()->first();
-        $periodos = Periodo::all();
-        $periodo = $periodos->where('id','=',$request->periodo)->first();
-        $estudiantes = Estudiante::with('notas')
-            ->with('definitivas')
-            ->with('inasistencias')
-            ->with('salon')
-            ->orderBy('lastname','ASC')
-            ->where('salon_id','=',$aula->id)
-            ->where('stade','=','activo')
-            //->take(10)
-            ->get();
-        $puesto = 0;
-        foreach ($estudiantes as $estudiante){
-            $_count = 0;
-
-            $_nasg = count($estudiante->definitivas->where('periodo_id','=',$periodo->id));
-            foreach ($estudiante->definitivas->where('periodo_id','=',$periodo->id) as $definitiva){
-                $_count += $definitiva->score;
-            }
-            $estudiante->setAttribute('scoreTotal',($_count/$_nasg));
-
-        }
-        foreach ($estudiantes->sortByDesc('scoreTotal') as $estudiante){
-            $puesto += 1;
-            $estudiante->setAttribute('puesto',$puesto);
-        }
-        $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('estudiantes','institucion','salon','periodo','periodos'))
+        $periodo = Periodo::with('anio.periodos')->findOrFail($request->periodo);
+        $reporte = new Reporte($grupo);
+//        return view('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'));
+        $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'))
                     ->setPaper('legal')
                     ->setOrientation('portrait')
                     ->setOption('margin-bottom', 15)
                     ->setOption('encoding', 'UTF-8');
-
-        //return view('admin.reportes.print.informeEstudiante',compact('estudiantes','institucion','salon','periodo','periodos'));
-        return $pdf->download('Informe'.$aula->full_name.''.$periodo->name.''.'.pdf');
+        return $pdf->stream('Informe'.$grupo->name_aula.''.$periodo->name.''.'.pdf');
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function  sabana(Request $request){
+        $institucion = Institucion::first();
         $periodo = Periodo::findOrFail($request->periodo);
-        $salon = Grupo::where('id','=', $request->salon)->with('estudiantes')->first();
-        $numero = 0;
-        foreach ($salon->estudiantes->sortBy('lastname') as $estudiante){
-            $numero += 1;
-            $estudiante->setAttribute('numero',$numero);
-        }
-       // return view('admin.reportes.print.sabana', compact('salon','periodo'));
-        $pdf = PDF::loadView('admin.reportes.print.sabana', compact('salon','periodo'))
+        $grupo = Grupo::where('id','=', $request->grupo)->with('estudiantes.definitivas')->first();
+        $grupo->load(['asignaciones.asignatura']);
+        $reporte = new Reporte($grupo);
+        $pdf = PDF::loadView('admin.reportes.print.sabana', compact('reporte','periodo','institucion'))
             ->setPaper('legal')
+            ->setOption('footer-html',\View::make('admin.reportes.partials.footer'))
+            ->setOption('footer-right','Pag. [page] de [toPage]')
+            ->setOption('footer-font-size',7)
             ->setOrientation('landscape')
             ->setOption('margin-bottom', 10)
             ->setOption('encoding', 'UTF-8');
-        return $pdf->download('Sabana_'.$salon->full_name.'_'.$periodo->name.''.'.pdf');
+        return $pdf->download('Sabana_'.$grupo->name_aula.'_'.$periodo->name.''.'.pdf');
 
     }
-    public function reporteLogros (ReportesLogrosRequest $request){
-        $docente = Docente::find($request->docente);
-        $periodo = Periodo::find($request->periodo);
-        $asignatura = Asignatura::find($request->asignatura);
-        $grado = $request->grade;
-        $logros = Logro::where('docente_id','=',$request->docente)
-            ->where('periodo_id','=',$request->periodo)
-            ->where('asignatura_id','=',$request->asignatura)
-            ->where('grade','=',$request->grade)
-            ->get();
-        $pdf = PDF::loadView('admin.reportes.print.logrosreport',compact('logros','docente','periodo','asignatura','grado'))
+
+    /**
+     * @param ReportesIndicadoresRequest $request
+     * @return \Illuminate\Http\Response
+     */
+    public function reporteLogros (ReportesIndicadoresRequest $request){
+        $docente = Docente::with(['indicadores.grado','indicadores.asignatura','indicadores.periodo'])->findOrFail($request->docente);
+        $institucion = Institucion::first();
+        $indicadores = $docente->indicadores->where('periodo_id',$request->periodo)->where('asignatura_id',$request->asignatura)->where('grado_id',$request->grade);
+        $pdf = PDF::loadView('admin.reportes.print.logrosreport',compact('indicadores','docente','institucion'))
             ->setPaper('legal')
+            ->setOption('footer-html',\View::make('admin.reportes.partials.footer'))
+            ->setOption('footer-right','Pag. [page] de [toPage]')
+            ->setOption('footer-font-size',7)
             ->setOrientation('portrait')
             ->setOption('margin-bottom', 10)
             ->setOption('encoding', 'UTF-8');

@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="summary-footer">
                                     @director
-                                        <a href="{{route('docente.direccion.index')}}" class="text-muted text-uppercase">(Ver Todos)</a>
+                                        <a href="#" class="text-muted text-uppercase">(Ver Todos)</a>
                                     @enddirector
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                                     </div>
                                 </div>
                                 <div class="summary-footer">
-                                    <a href="{{route('docente.asignaciones.index')}}" class="text-muted text-uppercase">(Ver Todas)</a>
+                                    <a href="#" class="text-muted text-uppercase">(Ver Todas)</a>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="summary-footer">
-                                    <a class="text-muted text-uppercase" href="{{route('docente.logros.index')}}">(Ver Todos)</a>
+                                    <a class="text-muted text-uppercase" href="#">(Ver Todos)</a>
                                 </div>
                             </div>
                         </div>

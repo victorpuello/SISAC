@@ -43,6 +43,11 @@ class ReportesController extends Controller
             ->setOption('encoding', 'UTF-8');
         return $pdf->download('Sabana_'.$salon->full_name.'_'.$periodo->name.''.'.pdf');
     }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function reporteLogros (Request $request){
         $periodo = Periodo::find($request->periodo);
         $asignatura = Asignatura::find($request->asignatura);

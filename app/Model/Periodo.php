@@ -31,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Model\Periodo whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Model\Periodo whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Model\Nota[] $notas
  */
 class Periodo extends Model
 {

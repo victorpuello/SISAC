@@ -37,7 +37,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapWebRoutes();
         $this->mapAdminRoutes();
-        //$this->mapDocenteRoutes();
+        $this->mapDocenteRoutes();
         //$this->mapSecretariaRoutes();
 
         //
@@ -62,7 +62,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware(['web','auth','docente'])
             ->name('docente.')
-            ->namespace($this->namespace.'\Docente')
+            ->namespace($this->namespace.'\Admin')
             ->prefix('docente')
             ->group(base_path('routes/docentes.php'));
     }

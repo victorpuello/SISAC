@@ -29,7 +29,7 @@
             <tbody>
             @foreach($periodos as $periodo)
                 <tr data-item-id="{{$periodo->id}}">
-                    <td>{{$periodo->name}}</td>
+                    <td>{{$periodo->name}} - {{$periodo->anio->name}}</td>
                     <td>{{$periodo->datestart}}</td>
                     <td>{{$periodo->dateend}}</td>
                     <td>{{$periodo->cierre}}</td>

@@ -30,6 +30,8 @@ use Illuminate\Support\Facades\DB;
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignatura wherePorcentaje($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignatura whereShortName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Asignatura whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Model\Inasistencia[] $inasistencias
+ * @property-read \Illuminate\Database\Eloquent\Collection|\ATS\Model\Nota[] $notas
  */
 class Asignatura extends Model
 {
@@ -58,7 +60,7 @@ class Asignatura extends Model
         return $this->hasMany(Inasistencia::class);
     }
     public function notas(){
-        return $this->hasManyThrough('ATS\Model\Nota','ATS\Model\Indicador');
+        return $this->hasManyThrough(Nota::class,Indicador::class);
     }
     public function getNameAttribute(){
         return ucwords($this->attributes['name']) ;

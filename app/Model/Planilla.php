@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $periodo_id
  * @property-read \ATS\Asignacion $asignacion
  * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Planilla wherePeriodoId($value)
+ * @property int $cargada
+ * @method static \Illuminate\Database\Eloquent\Builder|\ATS\Model\Planilla whereCargada($value)
  */
 class Planilla extends Model
 {

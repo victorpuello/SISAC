@@ -45,7 +45,7 @@ function currentUser(){
 }
 
 function currentPerfil(){
-    return auth()->user()->type;
+    return auth()->user()->getRoles()->first();
 }
 function classAcordeon($data){
     switch ($data){
@@ -73,6 +73,7 @@ function classAcordeon($data){
  * @return string
  */
 function indicador($score){
+
     if ($score === ""){
         return "";
     }
@@ -88,4 +89,8 @@ function indicador($score){
     if ($score >= 9.5 && $score <= 10){
         return 'superior';
     }
+}
+
+function porcentajeStyle($n){
+    return (60/$n);
 }

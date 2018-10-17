@@ -12,7 +12,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('docente.logros.index')}}">
+                <a class="nav-link" href="#">
                     Logros
                 </a>
             </li>

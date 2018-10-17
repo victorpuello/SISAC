@@ -12,7 +12,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('institucion.index')}}">
+                <a class="nav-link" href="{{route('institucions.index')}}">
                     <i class="fas fa-cog" aria-hidden="true"></i>
                     <span>Configuración</span>
                 </a>

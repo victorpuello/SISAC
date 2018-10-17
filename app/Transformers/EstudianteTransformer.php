@@ -43,7 +43,7 @@ class EstudianteTransformer extends TransformerAbstract
     }
     public function includeNotas(Estudiante $estudiante)
     {
-        $notas = new CurrentNota($estudiante, $this->periodo);
+        $notas = new CurrentNota($estudiante, $this->planilla);
         $indicadores = new IndicadoresPlanilla($this->planilla);
         return $this->collection($notas->notasIndicadores($indicadores->getIndicadores()), new NotaTransformer);
     }

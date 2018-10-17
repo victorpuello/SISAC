@@ -22,33 +22,15 @@
 </head>
 <body>
     <div class="invoice page">
-        <header class="clearfix">
-            <div class="row justify-content-md-center">
-                <div class="col-sm-1 mt-0 position-absolute">
-                    <div class="ib ml-5">
-                        <img class="ml-5" src="{{asset('img/escudo_100x100.png')}}" alt="INELMU" />
-                    </div>
-                </div>
-                <div class="col-sm-6 text-right mt-3 mb-3">
-                    <p class="ib text-center" style="line-height: 1.2">
-                        <span class="text-uppercase">Institución  Educativa Las Mujeres</span><br>
-                        Las Mujeres – Moñitos<br>
-                        DANE Nº 223500000863 - NIT 900127736 - 3<br>
-                        Correo electrónico: ee_22350000086301@hotmail.com<br>
-                        <span class="font-weight-light" style="font-size: 10px; line-height: 1">RESOLUCIÓN DE APROBACIÓN  DE LA INSTITUCIÓN EDUCATIVA 349 DE 28 DE JULIO DE 2011 Y 661 DE DICIEMBRE DE 2011</span></br>
-                    </p>
-                    <p class="text-center"><span class="ib text-center text-uppercase">Ficha de seguimiento, evaluación y promoción de estudiantes</span></p>
-                </div>
-            </div>
-        </header>
+        @include('admin.reportes.partials.header', ['nameReporte' => 'Sabana de notas'])
         <section>
             <table class="table" style="border: none; border-color: #ffffff;">
                 <tbody>
                 <tr>
-                    <td>Grupo:  <strong>{{$salon->full_name}}</strong></td>
+                    <td>Grupo:  <strong>{{$reporte->getGrupo()->name_aula}}</strong></td>
                     <td>Periodo:  <strong>{{$periodo->name}}</strong></td>
                     <td>Año lectivo: <strong>{{date_format(new \Carbon\Carbon($periodo->datestart),"Y")}}</strong></td>
-                    <td>Director de grupo:  <strong>{{$salon->director}}</strong></td>
+                    <td>Director de grupo:  <strong>{{$reporte->getGrupo()->director}}</strong></td>
                     <td>Fecha:  <strong>{{\Carbon\Carbon::now()->toDateString()}}</strong></td>
                 </tr>
                 </tbody>
@@ -61,16 +43,16 @@
                         <td class="text-center p-0" colspan="12"><strong>AREAS Y ASIGNATURAS</strong></td>
                     </tr>
                     <tr>
-                        @foreach($salon->asignaturas as $asignatura)
+                        @foreach($reporte->getAsignaturas() as $asignatura)
                             <td class="p-0 text-center"><strong>{{$asignatura->short_name}}</strong></td>
                         @endforeach
                     </tr>
-                    @foreach($salon->estudiantes as $estudiante)
+                    @foreach($reporte->getEstudiantes() as $estudiante)
                         <tr class="m-0 p-0">
                             <td class="text-center m-0 p-0">{{$estudiante->numero}}</td>
                             <td class="m-0 pl-1 pt-0 pb-0 pr-0">{{$estudiante->apellido_name}}</td>
-                            @foreach($salon->asignaturas as $asignatura)
-                                <td class="text-center m-0 p-0">{{$estudiante->getDefInforme($asignatura->id,$periodo->id)}}</td>
+                            @foreach($reporte->getAsignaturas() as $asignatura)
+                                <td class="text-center m-0 p-0">{{ $reporte->getDefScore($asignatura,$estudiante,$periodo)}}</td>
                             @endforeach
                         </tr>
                     @endforeach

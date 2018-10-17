@@ -18,7 +18,7 @@
                     </div>
                     <div class="form-group mb-0 pb-0">
                         <label class="control-label text-sm-right " for="w1-username">Grupo: </label>
-                        {!! Form::select('salon',$salones, null, ['class' => 'form-control', 'id'=>'w1-username','required', 'placeholder'=>'Seleccione un grupo']) !!}
+                        {!! Form::select('grupo',$grupos, null, ['class' => 'form-control', 'id'=>'w1-username','required', 'placeholder'=>'Seleccione un grupo']) !!}
                     </div>
                 </div>
             </div>
@@ -102,7 +102,7 @@
                     </div>
                     <div class="form-group mb-0 pb-0">
                         <label class="control-label text-sm-right " for="w1-username">Grupo: </label>
-                        {!! Form::select('salon',$salones, null, ['class' => 'form-control', 'id'=>'w1-username','required', 'placeholder'=>'Seleccione un grupo']) !!}
+                        {!! Form::select('grupo',$grupos, null, ['class' => 'form-control', 'id'=>'w1-username','required', 'placeholder'=>'Seleccione un grupo']) !!}
                     </div>
                 </div>
             </div>

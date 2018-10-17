@@ -30,6 +30,18 @@
             var numStr = s.substr(0, decimalLength + posiciones);
             return Number(numStr);
         }
+        function roundNumber(num, scale) {
+            if(!("" + num).includes("e")) {
+                return +(Math.round(num + "e+" + scale)  + "e-" + scale);
+            } else {
+                var arr = ("" + num).split("e");
+                var sig = ""
+                if(+arr[1] + scale > 0) {
+                    sig = "+";
+                }
+                return +(Math.round(+arr[0] + "e" + sig + (+arr[1] + scale)) + "e-" + scale);
+            }
+        }
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -185,25 +197,27 @@
                     { data: "inasistencias.data.numero",className: 'editable', orderable: false},
                     { data: null,
                         render: function ( data, type, row ) {
-                            return trunc((row.notas.data[0].cognitivo.score * 0.6)+(row.notas.data[1].procedimental.score * 0.30)+(row.notas.data[2].actitudinal.score * 0.10),2);
+                            var prom = parseFloat(row.notas.data[0].cognitivo.score) * 0.60 + parseFloat(row.notas.data[1].procedimental.score) * 0.30 + parseFloat(row.notas.data[2].actitudinal.score) * 0.10;
+                            return roundNumber(prom,2);
                         },
                         orderable: false
                     },
                     { data: null,
                         render: function ( data, type, row ) {
-                            var def = trunc((row.notas.data[0].cognitivo.score * 0.6)+(row.notas.data[1].procedimental.score * 0.3)+(row.notas.data[2].actitudinal.score * 0.1),2);
-                            if (def < 6 ){
+                            var def = parseFloat(row.notas.data[0].cognitivo.score) * 0.60 + parseFloat(row.notas.data[1].procedimental.score) * 0.30 + parseFloat(row.notas.data[2].actitudinal.score) * 0.10;
+                            if (roundNumber(def,2) < 6 ){
                                 return "Bajo";
                             }
-                            if (def >= 6 && def < 8){
+                            if (roundNumber(def,2) >= 6 && roundNumber(def,2) < 8){
                                 return "Basico";
                             }
-                            if (def >= 8 && def < 9.5){
+                            if (roundNumber(def,2) >= 8 && roundNumber(def,2) < 9.5){
                                 return "Alto";
                             }
-                            if (def >= 9.5 && def <= 10){
+                            if (roundNumber(def,2) >= 9.5 && roundNumber(def,2) <= 10){
                                 return "Superior";
                             }
+
                         },
                         orderable: false
                     },
