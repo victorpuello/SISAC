@@ -39,13 +39,12 @@ class ReportesController extends Controller
         $institucion = Institucion::all()->first();
         $periodo = Periodo::with('anio.periodos')->findOrFail($request->periodo);
         $reporte = new Reporte($grupo);
-//        return view('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'));
         $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'))
                     ->setPaper('legal')
                     ->setOrientation('portrait')
                     ->setOption('margin-bottom', 15)
                     ->setOption('encoding', 'UTF-8');
-        return $pdf->stream('Informe'.$grupo->name_aula.''.$periodo->name.''.'.pdf');
+        return $pdf->download('Informe'.$grupo->name_aula.''.$periodo->name.''.'.pdf');
     }
 
     /**

@@ -18,8 +18,7 @@ class UserController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request){
         $users = User::all();
         if($request->ajax()){
             return datatables()->collection($users)->setTransformer( new UserTransformer())->toJson();
@@ -27,18 +26,50 @@ class UserController extends Controller
         return view('admin.users.index');
     }
 
-    public function store(UsersDataTablesEditor $editor)
-    {
-       return $editor->process(\request());
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create(){
+        return view('admin.users.ajax.create');
     }
 
-    public function update(UsersDataTablesEditor $editor)
-    {
-        return $editor->process(\request());
+    /**
+     * @param CreateUserRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(CreateUserRequest $request){
+        $user = User::create($request->all());
+        $user->assign($request->type);
+       return redirect()->route('users.index');
     }
 
-    public function destroy(UsersDataTablesEditor $editor)
+    /**
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(User $user){
+        return view('admin.users.ajax.edit',compact('user'));
+    }
+
+    /**
+     * @param UpdateUserRequest $request
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(UpdateUserRequest $request, User $user){
+        $user->update($request->all());
+        $user->assign($request->type);
+        return redirect()->route('users.index');
+    }
+
+    /**
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy(User $user)
     {
-        return $editor->process(\request());
+        $user->delete();
+        return redirect()->route('users.index');
     }
 }
