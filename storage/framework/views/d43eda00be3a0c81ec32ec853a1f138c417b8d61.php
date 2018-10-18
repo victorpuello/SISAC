@@ -35,7 +35,7 @@
 </head>
 <body>
 <div class="invoice">
-    <?php echo $__env->make('admin.reportes.partials.header', ['institucion' => $institucion], \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('admin.reportes.partials.header', ['nameReporte' => 'Reporte de Indicadores'], \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     <div class="bill-info">
         <table class="table d-block border-dark">
             <tbody>

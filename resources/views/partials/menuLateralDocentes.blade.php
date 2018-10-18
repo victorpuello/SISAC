@@ -35,7 +35,7 @@
         @enddirector
     </li>
     <li>
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{route('docente.asignacions.index')}}">
             <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
             <span>Asignación Academica</span>
         </a>
@@ -47,7 +47,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('docente.reportes.index')}}">
                     Reporte Academico
                 </a>
             </li>

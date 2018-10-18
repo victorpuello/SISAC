@@ -20,13 +20,7 @@ use PDF;
 
 class ReportesController extends Controller
 {
-    private $salones_todos;
-    public function __construct ()
-    {
-        $this->salones_todos = Grupo::orderBy('name','ASC')->get();
-    }
     public function index(){
-
         $periodos = (new CurrentAnio())->pluck_periodos();
         $docentes = Docente::orderBy('name','ASC')->pluck('name','id');
         $asignaturas = Asignatura::pluck('name','id');

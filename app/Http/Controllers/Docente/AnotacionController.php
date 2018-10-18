@@ -2,13 +2,13 @@
 
 namespace ATS\Http\Controllers\Docente;
 
-use ATS\Anotacion;
+use ATS\Clases\CurrentAnio;
+use ATS\Model\{Anotacion,Estudiante,Periodo};
 use Illuminate\Http\Request;
-use ATS\Estudiante;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\CreateAnotacionRequest;
 use ATS\Http\Requests\UpdateAnotacionRequest;
-use ATS\Periodo;
+
 
 class AnotacionController extends Controller
 {
@@ -105,7 +105,7 @@ class AnotacionController extends Controller
     }
     public function getObservador(Estudiante $estudiante)
     {
-        $periodos = Periodo::all();
+        $periodos = (new CurrentAnio())->periodos();
         return view('docente.observador.index', compact('estudiante','periodos'));
     }
 }

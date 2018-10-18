@@ -3,54 +3,21 @@
 namespace ATS\Http\Controllers\Docente;
 
 use Illuminate\Support\Facades\Auth;
-use ATS\Asignacion;
+use ATS\Model\{Asignacion,Asignatura,Docente,Grupo};
 use Illuminate\Http\Request;
-use ATS\Asignatura;
-use ATS\Docente;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\createAsignacionRequest;
 use ATS\Http\Requests\UpdateAsignacionRequest;
-use ATS\Grupo;
 
 class AsignacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    private $asignaciones;
-    private $docentes;
-    private $salones_todos;
-    private $asignaturas;
-    public function __construct ()
-    {
-        $this->asignaciones = Asignacion::all();
-        $this->docentes = Docente::orderBy('name','ASC')->pluck('name','id');
-        $this->salones_todos = Grupo::orderBy('name','ASC')->get();
-        $this->asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
-    }
+
 
     public function index()
     {
-        if (currentPerfil() <> 'docente'){
-            $asignaciones = $this->asignaciones;
-        }else{
-            $asignaciones = $this->asignaciones->where('docente_id','=', Auth::user()->docente->id);
-        }
-        $docentes = $this->docentes;
-        $asignaturas = $this->asignaturas;
-        //dd($this->salones_todos);
-        $sal= collect();
-        foreach ($this->salones_todos as $salon){
-            $sal->push([
-                'id'=>$salon->id,
-                'nombre'=>$salon->full_name,
-                'grado'=>$salon->grade,
-            ]);
-        }
-        $salones = $sal->sortBy('grado')->pluck('nombre','id');
-        return view('docente.asignaciones.index',compact('asignaciones','docentes','salones','asignaturas'));
+       $asignaciones = Auth::user()->docente->asignaciones;
+       $asignaciones->load(['asignatura','grupo.grado','docente']);
+        return view('docente.asignaciones.index',compact('asignaciones'));
     }
 
     /**
@@ -71,8 +38,7 @@ class AsignacionController extends Controller
      */
     public function store(CreateAsignacionRequest $request)
     {
-        $request->createAsignacion();
-        return redirect()->route('asignaciones.index');
+
     }
 
     /**
@@ -106,10 +72,6 @@ class AsignacionController extends Controller
      */
     public function update(UpdateAsignacionRequest $request, $id)
     {
-        $asignacion = Asignacion::findOrFail($id);
-        $asignacion->fill($request->all());
-        $asignacion->save();
-        return redirect()->route('asignaciones.index');
     }
 
     /**
@@ -120,8 +82,6 @@ class AsignacionController extends Controller
      */
     public function destroy($id)
     {
-        $asignacion = Asignacion::findOrFail($id);
-        $asignacion->delete();
-        return redirect()->route('asignaciones.index');
+
     }
 }

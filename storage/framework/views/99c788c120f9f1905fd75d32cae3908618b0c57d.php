@@ -52,7 +52,7 @@
                             <td class="text-center m-0 p-0"><?php echo e($estudiante->numero); ?></td>
                             <td class="m-0 pl-1 pt-0 pb-0 pr-0"><?php echo e($estudiante->apellido_name); ?></td>
                             <?php $__currentLoopData = $reporte->getAsignaturas(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asignatura): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <td class="text-center m-0 p-0"><?php echo e($reporte->getDef($asignatura,$estudiante,$periodo)); ?></td>
+                                <td class="text-center m-0 p-0"><?php echo e($reporte->getDefScore($asignatura,$estudiante,$periodo)); ?></td>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

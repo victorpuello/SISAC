@@ -8,15 +8,6 @@
 @endsection
 @section('content')
     <div class="card-body">
-        @if(currentPerfil() <> 'docente')
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="mb-3">
-                    <a href="#modalAdd"  class="btn btn-primary on-default modal-basic ">Agregar <i class="fas fa-plus"></i></a>
-                </div>
-            </div>
-        </div>
-        @endif
         <table class="table table-bordered table-striped mb-0" id="datatable-editable">
             <thead>
             <tr>
@@ -31,13 +22,12 @@
                 <tr data-item-id="{{$asignacion->id}}">
                     <td>{{$asignacion->asignatura->name}}</td>
                     <td>{{$asignacion->docente->name}}</td>
-                    <td>{{$asignacion->salon->full_name}}</td>
+                    <td>{{$asignacion->grupo->name_aula}}</td>
                     <td>{{$asignacion->direccion}}</td>
                 </tr>
             @endforeach
             </tbody>
         </table>
-        @include('docente.asignaciones.partials.modals')
     </div>
     @endsection
 @section('script')
@@ -45,12 +35,5 @@
     <script src="{{asset('vendor/datatables/media/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('js/examples/examples.datatables.editable.js')}}"></script>
-    <script src="{{asset('js/examples/examples.modals.js')}}"></script>
     <script src="{{asset('js/custom.js')}}"></script>
-    <script src="{{asset('js/ModalsAsignaturas.js')}}"></script>
-    <script type="text/javascript">
-        $(".deleted").click(function (e) {
-            $("#form-delete").attr('action', $(this).data('url') );
-        });
-    </script>
     @endsection
