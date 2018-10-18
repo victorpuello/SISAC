@@ -1,7 +1,7 @@
 <?php
 Route::resource('users', 'UserController');
 Route::resource('estudiantes', 'EstudianteController');
-Route::resource('institucion', 'InstitucionController');
+Route::resource('institucions', 'InstitucionController');
 Route::resource('docentes', 'DocenteController');
 Route::resource('asignaturas', 'AsignaturaController');
 Route::resource('anios', 'AnioController');

@@ -2,6 +2,7 @@
 
 namespace ATS\Http\Controllers\Admin;
 
+use ATS\Imports\EstudianteImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use ATS\Estudiante;
@@ -37,17 +38,8 @@ class ImportEstudianteController extends Controller
      */
     public function store(Request $request)
     {
-        $file = $request->file('archivo')->getRealPath();
-        Excel::load($file, function($reader) {
-            foreach ($reader->get() as $estudiante) {
-                factory(Estudiante::class)->create([
-                    'name' => $estudiante->name,
-                    'lastname' => $estudiante->lastname,
-                    'birthday' => $estudiante->birthday,
-                    'salon_id' => $estudiante->salon_id
-                ]);
-            }
-        },'UTF-8');
+        $file = $request->file('archivo');
+        Excel::import(new EstudianteImport,$file,null,\Maatwebsite\Excel\Excel::XLSX);
         return view('admin.import.importestudiantes');
     }
 
