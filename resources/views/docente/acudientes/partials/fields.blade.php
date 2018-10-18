@@ -22,7 +22,7 @@
     <div class="col-lg-3">
         <div class="form-group">
             {!! Form::label('document', 'Número de Identificación: ',['class'=>'control-label']) !!}
-            {!! Form::number('document') !!}
+            {!! Form::number('document',null,['class' => 'form-control','id'=>'document','placeholder' => 'Por favor introduzca número de identidad']) !!}
         </div>
     </div>
     <div class="col-lg-3">

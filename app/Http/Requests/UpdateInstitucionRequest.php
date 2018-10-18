@@ -25,14 +25,14 @@ class UpdateInstitucionRequest extends FormRequest
     {
 //        dd($this->request->all());
         return [
-            'name'=> 'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',
+            'name'=> 'required|min:3|string|max:80',
             'siglas' => 'alpha',
             'dane' => 'required|numeric',
             'nit' => 'required|string',
-            'address' => 'required|regex:/([- ,\/0-9a-zA-Z]+)/',
+            'address' => 'required|string',
             'phone' => 'required|numeric',
             'email' => 'email',
-            'rector' => 'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',
+            'rector' => 'required|min:3|string|max:80',
             'idrector' => 'required|numeric|max:9999999999|min:1000000',
             'resolucion' => 'required|numeric',
             'slogan' => 'string',

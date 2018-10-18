@@ -59,7 +59,7 @@ class InstitucionController extends Controller
     public function update(UpdateInstitucionRequest $request, Institucion $institucion)
     {
         $institucion->update($request->all());
-        return view('admin.institucion.index',compact('institucion'));
+        return redirect()->route('institucions.index');
     }
 
     public function destroy(Institucion $institucion)

@@ -33,17 +33,10 @@ class HomeController extends Controller
         switch (currentPerfil()){
             case 'docente':
 
-                $asignaciones = Asignacion::where('docente_id','=',\Auth::user()->docente->id)->with('salon')->get();
-                $Nlogros = Indicador::where('docente_id','=',\Auth::user()->docente->id)->count();
-                $Nasignaciones = $asignaciones->count();
+                $asignaciones = 1;
+                $Nlogros = 1;
+                $Nasignaciones = 1;
                 $Nestudiantes = 0;
-                if (! \Auth::user()->docente->is_director){
-                    foreach ($asignaciones as $asignacion){
-                        $Nestudiantes += $asignacion->salon->estudiantes->count();
-                    }
-                }else{
-                    $Nestudiantes = \Auth::user()->docente->salon_director->estudiantes->count();
-                }
                 return view('docente.home',compact('Nlogros','Nasignaciones','Nestudiantes'));
             break;
             case 'admin':

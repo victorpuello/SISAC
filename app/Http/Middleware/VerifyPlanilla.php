@@ -5,7 +5,7 @@ namespace ATS\Http\Middleware;
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
 
-class VerifyAsignacion
+class VerifyPlanilla
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,10 @@ class VerifyAsignacion
      */
     public function handle($request, Closure $next)
     {
-        $asignacion = $request->asignacion;
+        $planilla = $request->planilla;
         $docente = $request->user()->docente;
 
-        if ( $docente->id <> $asignacion->docente->id){
+        if ( $docente->id <> $planilla->asignacion->docente->id){
             throw new AuthorizationException;
         }
         return $next($request);

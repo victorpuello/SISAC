@@ -2,13 +2,11 @@
 
 namespace ATS\Http\Controllers\Docente;
 
-use ATS\Acudiente;
+use ATS\Model\{Acudiente,Estudiante,Municipio};
 use Illuminate\Http\Request;
-use ATS\Estudiante;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\CreateAcudienteRequest;
 use ATS\Http\Requests\UpdateAcudienteRequest;
-use ATS\Municipio;
 
 class AcudienteController extends Controller
 {

@@ -50,4 +50,5 @@
     <script src="{{asset('js/examples/examples.modals.js')}}"></script>
     <script src="{{asset('vendor/pnotify/pnotify.custom.js"')}}"></script>
     <script src="{{asset('vendor/jquery-placeholder/jquery-placeholder.js')}}"></script>
+    <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
 @endsection

@@ -59,13 +59,13 @@ return [
         ],
         'estudiantes' => [
             'driver' => 'local',
-            'root' => storage_path('app/usersdata/img/estudiantes'),
+            'root' => storage_path('app/public/usersdata/img/estudiantes'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
         'users' => [
             'driver' => 'local',
-            'root' => storage_path('app/usersdata/img/users'),
+            'root' => storage_path('app/public/usersdata/img/users'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

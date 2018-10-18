@@ -57,7 +57,7 @@
                     </tr>
                     <tr>
                         <td><strong>Salón: </strong></td>
-                        <td>{{$estudiante->salon->full_name}}</td>
+                        <td>{{$estudiante->grupo->name_aula}}</td>
                     </tr>
                     </tbody>
                 </table>

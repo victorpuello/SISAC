@@ -2,14 +2,16 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use ATS\Model\User;
+use ATS\Model\{User,Docente};
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
-use ATS\DataTables\UsersDataTablesEditor;
 use ATS\Http\Requests\CreateUserRequest;
 use ATS\Http\Requests\UpdateUserRequest;
 use ATS\Transformers\Users\UserTransformer;
 
 use ATS\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+
 class UserController extends Controller
 {
     /**
@@ -33,13 +35,27 @@ class UserController extends Controller
         return view('admin.users.ajax.create');
     }
 
+
     /**
      * @param CreateUserRequest $request
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Throwable
      */
     public function store(CreateUserRequest $request){
-        $user = User::create($request->all());
-        $user->assign($request->type);
+        DB::beginTransaction();
+        try{
+            $user = User::create($request->all());
+            Docente::create([
+                'typeid' => "CC",
+                'name' => $user->full_name,
+                'user_id' => $user->id
+            ]);
+            $user->assign($request->type);
+        }catch (ValidationException $e){
+            DB::rollBack();
+            return redirect()->back();
+        }
+        DB::commit();
        return redirect()->route('users.index');
     }
 
@@ -51,14 +67,28 @@ class UserController extends Controller
         return view('admin.users.ajax.edit',compact('user'));
     }
 
+
     /**
      * @param UpdateUserRequest $request
      * @param User $user
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function update(UpdateUserRequest $request, User $user){
-        $user->update($request->all());
-        $user->assign($request->type);
+        DB::beginTransaction();
+        try{
+            $user->update($request->all());
+            Docente::create([
+                'typeid' => "CC",
+                'name' => $user->full_name,
+                'user_id' => $user->id
+            ]);
+            $user->assign($request->type);
+        }catch (ValidationException $e){
+            DB::rollBack();
+            return redirect()->back();
+        }
+        DB::commit();
         return redirect()->route('users.index');
     }
 

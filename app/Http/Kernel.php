@@ -58,7 +58,6 @@ class Kernel extends HttpKernel
         'secretaria' =>  \ATS\Http\Middleware\Secretaria::class,
         'docente' =>  \ATS\Http\Middleware\Docente::class,
         'coordinador' =>  \ATS\Http\Middleware\Coordinador::class,
-        'verifyAsignacion' =>  \ATS\Http\Middleware\VerifyAsignacion::class,
         'verifyPeriodo' =>  \ATS\Http\Middleware\VerifyPeriodo::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -68,5 +67,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verifyIndicadores' => \ATS\Http\Middleware\VerifyIndicadores::class,
+        'verifyPlanilla' =>  \ATS\Http\Middleware\VerifyPlanilla::class,
     ];
 }

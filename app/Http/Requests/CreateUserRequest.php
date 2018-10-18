@@ -23,12 +23,12 @@ class CreateUserRequest extends FormRequest
      */
     public function rules()
     {
-        if (!isset($this->request->path)){
-            $this->request->set('path',null);
-        }
+//        if (!isset($this->request->path)){
+//            $this->request->set('path',null);
+//        }
         return [
-            'name' => 'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',
-            'lastname' => 'required|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|min:3|max:40',
+            'name' => 'required|min:3|string|max:40',
+            'lastname' => 'required|string|min:3|max:40',
             'username' => 'required|string|max:40|min:6|unique:users,username',
             'email' => 'required|unique:users,email',
             'password' => 'required|min:6',

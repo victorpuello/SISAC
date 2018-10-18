@@ -73,7 +73,7 @@
                             </div>
                             <div class="widget-summary-col mt-3">
                                 <div class="summary" style="min-height: 48px;">
-                                    <h4 class="title">Logros</h4>
+                                    <h4 class="title">Indicadores</h4>
                                     <div class="info">
                                         <strong class="timer amount count-title count-number" data-to="{{$Nlogros}}" data-speed="3500"></strong>
                                     </div>
@@ -87,11 +87,6 @@
                 </section>
             </div>
 
-        </div>
-        <div class="row justify-content-md-center hidden-mobile">
-            <div class="col-md-4 col-md-auto hidden-mobile" style="opacity: 0.1">
-                <img src="{{asset('img/escudo.svg')}}" class=" img-fluid appear-animation" data-appear-animation="bounceIn" data-appear-animation-delay="0" data-appear-animation-duration="2s">
-            </div>
         </div>
     </div>
 @endsection

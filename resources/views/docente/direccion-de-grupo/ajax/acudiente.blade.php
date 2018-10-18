@@ -44,7 +44,7 @@
                     @else
                          <a class="btn btn-primary" href="{{route('docente.acudiente.edit',$estudiante->acudiente)}}" class="btn btn-primary ml-3"> Editar</a>
                     @endacudiente
-                    <button class="btn btn-default modal-dismiss">Close</button>
+                    <button class="btn btn-default modal-dismiss">Cerrar</button>
                 </div>
             </div>
         </footer>

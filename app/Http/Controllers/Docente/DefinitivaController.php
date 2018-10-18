@@ -2,11 +2,10 @@
 
 namespace ATS\Http\Controllers\Docente;
 
-use ATS\Definitiva;
+use ATS\Clases\CurrentAnio;
+use ATS\Model\{Definitiva,Estudiante,Periodo};
 use Illuminate\Http\Request;
-use ATS\Estudiante;
 use ATS\Http\Controllers\Controller;
-use ATS\Periodo;
 
 class DefinitivaController extends Controller
 {
@@ -27,7 +26,7 @@ class DefinitivaController extends Controller
      */
     public function getDefinitivas(Estudiante $estudiante)
     {
-        $periodos = Periodo::all();
+        $periodos = (new CurrentAnio())->periodos();
        return view('docente.direccion-de-grupo.ajax.notas',compact('estudiante','periodos'));
     }
 

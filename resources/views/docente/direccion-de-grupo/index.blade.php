@@ -11,11 +11,11 @@
 @section('content')
     <div class="row">
         @foreach($estudiantes as $estudiante)
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <section class="card">
-                    <header class="card-header {{$fondos[rand(0,3)]}}">
+                    <header class="card-header bg-{{Config::get('institucion.fondos.2')}}">
                         <div class="card-header-profile-picture">
-                            <img src="{{ url('/imgUsers/estudiantes/')}}/{{$estudiante->path}}">
+                            <img src="{{asset("storage/usersdata/img/estudiantes/".$estudiante->path)}}">
                         </div>
                     </header>
                     <div class="card-body">

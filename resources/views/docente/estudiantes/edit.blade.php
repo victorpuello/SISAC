@@ -11,11 +11,11 @@
         </header>
         <div class="card-body">
             @include('admin.users.partials.messages')
-            {!! Form::model($estudiante,['route' => ['docente.estudiantes.update',$estudiante->id], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
+            {!! Form::model($estudiante,['route' => ['docente.estudiantes.update',$estudiante], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
             <div class="form-group row">
                 <div class="card-body col-lg-4">
                     <div class="thumb-info mb-3">
-                        <img src="{{ url('/imgUsers/estudiantes/')}}/{{$estudiante->path}}" class="rounded img-fluid" alt="{{$estudiante->name}}">
+                        <img src="{{asset("storage/usersdata/img/estudiantes/".$estudiante->path)}}" class="rounded img-fluid" alt="{{$estudiante->name}}">
                         <div class="thumb-info-title">
                             <span class="thumb-info-inner">{{$estudiante->name}}</span>
                             <span class="thumb-info-type">Alumno</span>
@@ -47,7 +47,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 {!! Form::label('identification', 'Número de Identificación: ',['class'=>'control-label']) !!}
-                                {!! Form::number('identification') !!}
+                                {!! Form::number('identification',null,['class' => 'form-control','id'=>'identification', 'placeholder' => 'Por favor introduzca N° Identificación']) !!}
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 {!! Form::label('birthday', 'Fecha de Nacimiento: ',['class'=>'control-label']) !!}
-                                {!! Form::date('birthday') !!}
+                                {!! Form::date('birthday',null,['class' => 'form-control','id'=>'birthday', 'placeholder' => 'Fecha de nacimiento','required']) !!}
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-lg-4">
                     {!! Form::label('birthcity', 'Municipio de nacimiento',['class'=>'control-label']) !!}
-                    {!! Form::select('birthcity', [],null,['class' => 'form-control mb-3', 'id'=>'birthcity','required']) !!}
+                    {!! Form::select('birthcity', $municipios,null,['class' => 'form-control mb-3', 'id'=>'birthcity','required']) !!}
                 </div>
                 <div class="col-lg-4">
                     <div class="form-group">
@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                {!! Form::hidden('salon_id') !!}
+                {!! Form::hidden('grupo_id') !!}
                 {!! Form::hidden('dateout') !!}
                 {!! Form::hidden('stade') !!}
                 {!! Form::hidden('situation') !!}
@@ -133,5 +133,5 @@
 @section('script')
     <script src="{{asset('vendor/autosize/autosize.js')}}"></script>
     <script src="{{asset('vendor/bootstrap-fileupload/bootstrap-fileupload.min.js')}}"></script>
-    {!! Html::script('js/municipios.js') !!}
+    <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
 @endsection

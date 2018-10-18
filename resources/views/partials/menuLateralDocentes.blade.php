@@ -12,14 +12,14 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="#">
-                    Logros
+                <a class="nav-link" href="{{route('docente.indicadors.index')}}">
+                    Indicadores
                 </a>
             </li>
         </ul>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('docente.notas.index')}}">
+                <a class="nav-link" href="{{route('docente.planillas.index')}}">
                     Calificar
                 </a>
             </li>
@@ -35,7 +35,7 @@
         @enddirector
     </li>
     <li>
-        <a class="nav-link" href="{{route('docente.asignaciones.index')}}">
+        <a class="nav-link" href="#">
             <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
             <span>Asignación Academica</span>
         </a>
@@ -47,7 +47,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('docente.reportes.index')}}">
+                <a class="nav-link" href="#">
                     Reporte Academico
                 </a>
             </li>

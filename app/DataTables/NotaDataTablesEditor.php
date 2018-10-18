@@ -91,8 +91,6 @@ class NotaDataTablesEditor extends DataTablesEditor
                 $this->procesarNotas($model, $data);
                 $this->procesarInasistencia($model, $data);
                 $score = $this->currentNotas->scoreDef($this->planilla->asignacion->asignatura);
-//                dd($score,indicador($score));
-//                dd($this->currentNotas->scoreDef($this->planilla->asignacion->asignatura));
                 $definitiva->updateDefinitiva($definitiva->singleDefinitivaAsignatura($this->planilla->asignacion->asignatura),[
                     'score' => $score,
                     'indicador' => indicador($score),

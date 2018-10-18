@@ -2,14 +2,9 @@
 
 namespace ATS\Http\Controllers\Docente;
 
-use ATS\Departamento;
-use ATS\Estudiante;
+use ATS\Model\{Departamento,Estudiante,Municipio,Grupo};
 use Illuminate\Http\Request;
-use ATS\Http\Requests\CreateEstudianteRequest;
-use ATS\Http\Requests\UpdateDocenteRequest;
 use ATS\Http\Requests\UpdateEstudianteRequest;
-use ATS\Municipio;
-use ATS\Grupo;
 use ATS\Http\Controllers\Controller;
 
 class EstudianteController extends Controller
@@ -21,8 +16,9 @@ class EstudianteController extends Controller
     public function edit(Estudiante $estudiante)
     {
         $departamentos = Departamento::pluck('name','id');
-        $grado = $estudiante->grade;
-        return view('docente.estudiantes.edit',compact('estudiante','grado','departamentos'));
+        $municipios = Municipio::pluck('name','id');
+        $grupos = $this->getGrupo();
+        return view('docente.estudiantes.edit',compact('estudiante','grupos','municipios','departamentos'));
     }
 
     /**
@@ -32,12 +28,19 @@ class EstudianteController extends Controller
      * @param  \ATS\Estudiante  $estudiante
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateEstudianteRequest $request, $id)
+    public function update(UpdateEstudianteRequest $request, Estudiante $estudiante)
     {
-        $estudiante = Estudiante::findOrFail($id);
-        $estudiante->fill($request->all());
-        $estudiante->save();
+        $estudiante->update($request->all());
         return redirect()->route('docente.direccion.index');
+    }
+    public function getGrupo (): array
+    {
+        $data = Grupo::with('grado')->get();
+        $grupos = [];
+        foreach ($data as $key => $value) {
+            $grupos[$key + 1] = $value->NameAula;
+        }
+        return $grupos;
     }
 
 }

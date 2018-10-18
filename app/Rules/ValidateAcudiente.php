@@ -3,7 +3,7 @@
 namespace ATS\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use ATS\Estudiante;
+use ATS\Model\Estudiante;
 
 class ValidateAcudiente implements Rule
 {

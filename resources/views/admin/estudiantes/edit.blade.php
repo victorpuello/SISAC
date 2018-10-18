@@ -37,6 +37,5 @@
     <script src="{{asset('vendor/autosize/autosize.js')}}"></script>
     <script src="{{asset('vendor/bootstrap-fileupload/bootstrap-fileupload.min.js')}}"></script>
     <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
-
     {!! Html::script('js/municipios.js') !!}
 @endsection

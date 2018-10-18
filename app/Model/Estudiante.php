@@ -114,14 +114,11 @@ class Estudiante extends Model
 
     public function setPathAttribute($path)
     {
-        if (! isset($path)){
-            $this->attributes['path'] = "no-user-image.png";
-        }
         if (is_null($path)){
             $this->attributes['path'] = "no-user-image.png";
         }
         if (!empty($path)) {
-            $image = \Image::make(Input::file('path'))->resize(250,270)->encode('jpg',90);
+            $image = \Image::make(Input::file('path'))->resize(300,300)->encode('jpg',90);
             $name = Carbon::now()->second.$path->getClientOriginalName();
             $this->attributes['path'] = $name;
            \Storage::disk('estudiantes')->put($name,$image);

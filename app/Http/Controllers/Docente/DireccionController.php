@@ -4,16 +4,14 @@ namespace ATS\Http\Controllers\Docente;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use ATS\Estudiante;
+use ATS\Model\{Estudiante,Municipio};
 use ATS\Http\Controllers\Controller;
-use ATS\Municipio;
 
 class DireccionController extends Controller
 {
     public function index(){
         $docente = Auth::user()->docente;
-        $fondos = ['bg-primary','bg-secondary','bg-tertiary','bg-quaternary'];
-        $estudiantes = Estudiante::where('salon_id','=',$docente->salon_director->id)->orderBy('lastname')->get();
+        $estudiantes = $docente->grupo_director->estudiantes->where('stade','activo');
         return view('docente.direccion-de-grupo.index',compact('estudiantes','fondos'));
     }
     public function getAcudiente(Estudiante $estudiante){
