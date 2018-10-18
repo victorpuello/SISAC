@@ -13,7 +13,7 @@ class AnioAndPeriodoSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 2015; $i <= 2018; $i++){
+        for ($i = 2018; $i <= 2018; $i++){
             if ($i < 2018){
                 $anio = \ATS\Model\Anio::create([
                     'name' => $i,

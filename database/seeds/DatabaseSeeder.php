@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         DB::table('asignaturas')->delete();
         DB::table('areas')->delete();
         $this->call(AreasTableSeeder::class);
-        DB::table('institucions')->delete();
-        $this->call(InstitucionesTableSeeder::class);
+//        DB::table('institucions')->delete();
+//        $this->call(InstitucionesTableSeeder::class);
         DB::table('jornadas')->delete();
         $this->call(JornadasTableSeeder::class);
         DB::table('grupos')->delete();
@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
         DB::table('periodos')->delete();
         DB::table('anios')->delete();
         $this->call(AnioAndPeriodoSeeder::class);
-        DB::table('estudiantes')->delete();
-        $this->call(EstudianteSeeder::class);
+//        DB::table('estudiantes')->delete();
+//        $this->call(EstudianteSeeder::class);
         $this->call(BouncerSeeder::class);
     }
 }

@@ -12,6 +12,6 @@ class DocenteSeeder extends Seeder
      */
     public function run()
     {
-        factory(Docente::class,53)->create();
+//        factory(Docente::class,53)->create();
     }
 }

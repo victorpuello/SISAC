@@ -30,14 +30,14 @@ class GradosTableSeeder extends Seeder
                 'numero'=>$i,
                 'nivel'=> $nivel
             ]);
-            for ($j = 1; $j < 4; $j++){
-                Grupo::create([
-                    'name' => $j,
-                    'grado_id' => $grado->id,
-                    'modelo' => 'tradicional',
-                    'jornada_id' => 1
-                ]);
-            }
+//            for ($j = 1; $j < 4; $j++){
+//                Grupo::create([
+//                    'name' => $j,
+//                    'grado_id' => $grado->id,
+//                    'modelo' => 'tradicional',
+//                    'jornada_id' => 1
+//                ]);
+//            }
         }
     }
 }
