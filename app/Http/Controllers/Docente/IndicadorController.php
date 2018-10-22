@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class IndicadorController extends Controller
 {
     /**
@@ -38,10 +39,24 @@ class IndicadorController extends Controller
     public function index(Request $request)
     {
         $this->docente = Auth::user()->docente;
-        $this->docente->load(['indicadores.periodo','indicadores.grado','indicadores.asignatura','indicadores.docente']);
-        $indicadores = $this->docente->indicadores;
+        $indicadores = Indicador::where('docente_id',$this->docente->id)->with(['periodo','grado','asignatura','docente'])->paginate(12);
         if ($request->ajax()){
-            return datatables()->collection($indicadores)->setTransformer(new IndicadorTransformer())->smart(true)->toJson();
+
+            $data = \Fractal::collection($indicadores)->transformWith(new IndicadorTransformer())->toArray();
+
+            $data = array_add($data,
+                'links', [
+                    "total" => $indicadores->total(),
+                    "per_page" => $indicadores->perPage(),
+                    "current_page" => $indicadores->currentPage(),
+                    "last_page" => $indicadores->lastPage(),
+                    "next_page_url"=> $indicadores->nextPageUrl(),
+                    "prev_page_url"=> $indicadores->previousPageUrl(),
+                    "from"=> $indicadores->firstItem(),
+                    "to"=> $indicadores->lastItem(),
+                ]);
+            return $data;
+
         }
         return view('docente.indicadores.index');
     }
@@ -51,7 +66,7 @@ class IndicadorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $this->docente->load(['asignaciones.asignatura','asignaciones.grupo.grado',]);
         $asg = collect();
@@ -66,20 +81,17 @@ class IndicadorController extends Controller
         $asignaturas = $asg->unique()->sortBy('name')->pluck('name','id');
         $periodos = $anio->periodos->pluck('name','id');
         $docente = $this->docente;
+        if ($request->ajax()){
+            return response()->json(compact('grados','asignaturas','periodos','docente'));
+        }
         return view('docente.indicadores.ajax.create',compact('grados','asignaturas','periodos','docente'));
     }
 
 
     public function store(CreateIndicadorRequest $request)
     {
-        try {
-            Indicador::create($request->all());
-        }
-        catch (\Exception $e) {
-            $data = array(['msg'=>'El indicador presenta duplicidad','status'=>true]); ;
-            return view('docente.indicadores.index',compact('data'));
-        }
-        return redirect()->route('docente.indicadors.index');
+        $indicador = Indicador::create($request->all());
+        return response()->json($indicador,200);
     }
 
     /**
@@ -125,6 +137,9 @@ class IndicadorController extends Controller
         }
         catch (\Exception $e) {
             $data = array(['msg'=>'El indicador presenta duplicidad','status'=>true]); ;
+            if ($request->ajax()){
+                return response()->json(['message'=>'Error al guardar: El indicadopr esta duplicado','errors' => ['codigo'=>'El codigo está duplicado..']],422);
+            }
             return view('docente.indicadores.index',compact('data'));
         }
         return redirect()->route('docente.indicadors.index');

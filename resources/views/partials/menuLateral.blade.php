@@ -5,10 +5,11 @@
             <span>Escritorio</span>
         </a>
     </li>
-    <li class="nav-parent">
+    <li class="nav-parent {{ request()->is('admin/institucions') ? 'nav-active' : '' }}">
         <a class="nav-link" href="#">
             <i class="fas fa-school" aria-hidden="true"></i>
             <span>Institución</span>
+            {{request()->path()}}
         </a>
         <ul class="nav nav-children">
             <li>
@@ -36,7 +37,7 @@
         </ul>
 
     </li>
-    <li class="nav-parent nav-active">
+    <li class="nav-parent {{ request()->is('admin/users') ? 'nav-active' : '' }}">
         <a class="nav-link" href="#">
             <i class="fas fa-user" aria-hidden="true"></i>
             <span>Usuarios</span>

@@ -1,6 +1,6 @@
 <div id="modalHeaderColorPrimary" class="modal-block modal-block-lg modal-header-color modal-block-primary ">
     <section class="card">
-        <?php echo Form::open(['route' => 'docente.indicadores.store', 'method' => 'POST','class' => 'form-horizontal form-bordered']); ?>
+        <?php echo Form::open(['route' => 'docente.indicadors.store', 'method' => 'POST','class' => 'form-horizontal form-bordered']); ?>
 
         <header class="card-header">
             <h2 class="card-title">Crear Indicador nuevo </h2>
