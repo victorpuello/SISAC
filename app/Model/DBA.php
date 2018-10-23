@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class DBA extends Model
 {
+    protected  $table = 'dbas';
     protected $fillable = [
         'description','area_id','grado_id'
     ];
@@ -29,5 +30,9 @@ class DBA extends Model
      */
     public function grado(){
         return $this->belongsTo(Grado::class);
+    }
+
+    public function sugerencias(){
+        return $this->morphMany(Suggestion::class,'suggestiontable');
     }
 }

@@ -82,7 +82,7 @@
             <ul class="list-unstyled mb-2">
                 <li class="divider"></li>
                 <li>
-                    <a role="menuitem" tabindex="-1" href="#"><i class="fas fa-user"></i> Perfil</a>
+                    <a role="menuitem" tabindex="-1" href="{{route('user.show',Auth::user())}}"><i class="fas fa-user"></i> Perfil</a>
                 </li>
                 <li>
                     <a role="menuitem" tabindex="-1" href="{{ route('logout') }}" onclick="event.preventDefault();

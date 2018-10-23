@@ -1,5 +1,6 @@
 <?php
 Route::resource('asignacions', 'AsignacionController')->only(['index']);
+Route::resource('dbas', 'DBAController');
 Route::resource('indicadors', 'IndicadorController');
 Route::resource('planillas', 'PlanillaController')->only(['index','update']);
 Route::resource('notas', 'NotaController')->only(['store']);
@@ -17,7 +18,10 @@ Route::resource('estudiantes', 'EstudianteController')->only(['update','edit']);
 Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'MunicipioController']);
 Route::resource('/direccion/anotaciones', 'AnotacionController');
 Route::resource('reportes', 'ReportesController')->only(['index']);
+Route::resource('docentes', 'DocenteController')->only(['update']);
 Route::post('reportes/academico/sabana', 'ReportesController@sabana')->name('reportes.academico.sabana');
 Route::post('reportes/academico/logros', 'ReportesController@reporteLogros')->name('reportes.academico.logros');
-
+//Route::put('/{docente}',function (){
+//    dd('hola');
+//})->name('update');
 

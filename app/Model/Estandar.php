@@ -28,5 +28,8 @@ class Estandar extends Model
     public function area(){
         return $this->belongsTo(Area::class);
     }
+    public function sugerencias(){
+        return $this->morphMany(Suggestion::class,'suggestiontable');
+    }
 }
 

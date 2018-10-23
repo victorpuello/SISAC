@@ -44,6 +44,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('institucion', function ($institucion){
             return is_null($institucion);
         });
+        Blade::directive('prop', function ($expression) {
+            return "<?php echo ATS\Clases\Vue::prop({$expression}); ?>";
+        });
     }
 
     /**

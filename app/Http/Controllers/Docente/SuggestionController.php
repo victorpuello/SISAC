@@ -1,21 +1,21 @@
 <?php
 
-namespace ATS\Http\Controllers\Admin;
+namespace ATS\Http\Controllers\Docente;
 
-use ATS\DBA;
-use ATS\Http\Controllers\Controller;
+use ATS\Model\Suggestion;
 use Illuminate\Http\Request;
 
-class DBAController extends Controller
+class SuggestionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        dd($request->all());
+        $sugerencias = Suggestion::all();
+
     }
 
     /**
@@ -42,10 +42,10 @@ class DBAController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \ATS\DBA  $dBA
+     * @param  \ATS\Suggestion  $suggestion
      * @return \Illuminate\Http\Response
      */
-    public function show(DBA $dBA)
+    public function show(Suggestion $suggestion)
     {
         //
     }
@@ -53,10 +53,10 @@ class DBAController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \ATS\DBA  $dBA
+     * @param  \ATS\Suggestion  $suggestion
      * @return \Illuminate\Http\Response
      */
-    public function edit(DBA $dBA)
+    public function edit(Suggestion $suggestion)
     {
         //
     }
@@ -65,10 +65,10 @@ class DBAController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \ATS\DBA  $dBA
+     * @param  \ATS\Suggestion  $suggestion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DBA $dBA)
+    public function update(Request $request, Suggestion $suggestion)
     {
         //
     }
@@ -76,10 +76,10 @@ class DBAController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \ATS\DBA  $dBA
+     * @param  \ATS\Suggestion  $suggestion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DBA $dBA)
+    public function destroy(Suggestion $suggestion)
     {
         //
     }

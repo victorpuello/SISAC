@@ -18,6 +18,8 @@ class CreateEstandarsTable extends Migration
             $table->string('description');
             $table->integer('area_id')->unsigned();
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
+            $table->integer('grado_id')->unsigned();
+            $table->foreign('grado_id')->references('id')->on('grados');
             $table->timestamps();
         });
     }

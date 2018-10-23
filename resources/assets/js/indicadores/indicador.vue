@@ -7,35 +7,20 @@
                 </div>
             </div>
         </div>
-        <vuetable ref="vuetable" :api-mode="false" :fields="fields" :per-page="perPage" :data="data" :data-manager="dataManager" pagination="pagination"  @vuetable:pagination-data="onPaginationData">
-            <div slot="actions" slot-scope="props">
-                <button class="ui small button" @click="onActionClicked('view-item', props.rowData)">
-                    <i class="zoom icon"></i>
-                </button>
-                <button class="ui small button" @click="onActionClicked('edit-item', props.rowData)">
-                    <i class="edit icon"></i>
-                </button>
-                <button class="ui small button" @click="onActionClicked('delete-item', props.rowData)">
-                    <i class="delete icon"></i>
-                </button>
-            </div>
-        </vuetable>
-        <div style="padding-top:10px">
-            <vuetable-pagination ref="pagination" @vuetable-pagination:change-page="onChangePage"></vuetable-pagination>
-        </div>
+
         <!-- Modal -->
         <div class="modal fade" id="modalSelecMeth" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalCenterTitle">Selecciona un metodo</h5>
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title text-white" id="exampleModalCenterTitle">Selecciona un metodo</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="align-content-sm-center center">
-                            <a href="#" class="btn btn-sm btn-primary">Automatico</a>
+                            <a href="#" v-on:click.prevent="showAutomaticMode"class="btn btn-sm btn-primary">Automatico</a>
                             <a href="#" v-on:click.prevent="showManualMode" class="btn btn-sm btn-dark">Manual</a>
                         </div>
                     </div>
@@ -116,7 +101,77 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" v-on:click="reloadPage" class="btn btn-secondary">Salir</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!--Modal modo Manual-->
+        <!--Modal modo automatico-->
+        <div class="modal fade bd-example-modal-lg " id="modalAutomatico" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title text-white">Nuevo Indicador</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form method="POST" v-on:submit.prevent="newIndicador" class="form-horizontal form-bordered">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-6 col-lg-6 col-sm-6">
+                                    <button type="button" class="btn btn-sm btn-primary mb-2" v-on:click.prevent="getDBA">DBA</button>
+                                    <button type="button" class=" btn btn-sm btn-primary mb-2">Estandares</button>
+                                    <div class="form-group row d-none">
+                                        <div class="col-lg-4 pr-1">
+                                            <div class="form-group">
+                                                <select class="form-control mb-4 p-1" name="asignatura_id"  v-model="asignatura_id" required>
+                                                    <option disabled value="">Asignatura</option>
+                                                    <option v-for="(asignatura, key) in asignaturas" v-bind:value= "key">{{ asignatura }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 pr-1">
+                                            <div class="form-group">
+                                                <select class="form-control mb-4 p-1" name="periodo_id"  v-model="periodo_id" required>
+                                                    <option disabled value="">Periodo</option>
+                                                    <option v-for="(periodo, key) in periodos" v-bind:value= "key">{{ periodo }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <div class="form-group">
+                                                    <select class="form-control mb-4 p-1" name="grado_id"  v-model="grado_id" required>
+                                                        <option disabled value="">Grado</option>
+                                                        <option v-for="(grado, key) in grados" v-bind:value= "key">{{ grado }}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <input type="text" placeholder="Buscar" class="form-control">
+                                        </li>
+                                        <li class="list-group-item" v-for="dba in dbas"><a href="#" v-on:click.prevent="loadSugerencias(dba)">{{dba.description}}</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-6 col-lg-6 col-sm-6 mt-4">
+                                    <div class="nano">
+                                        <div class="nano-content">
+                                            <ul class="list-group mt-1">
+                                                <li class="list-group-item" v-for="sugerencia in sugerencias"><a href="#">{{sugerencia.description}}</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" v-on:click="reloadPage" class="btn btn-secondary">Salir</button>
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
@@ -129,17 +184,9 @@
 <script>
     import axios from 'axios'
     import toastr from 'toastr'
-    import Vuetable from 'vuetable-2'
-    import VuetablePagination from  'vuetable-2/src/components/VuetablePagination';
-    import FieldsDef from "./FieldsDef.js";
-    import _ from "lodash";
+    import nanoscroller from  'nanoscroller'
     export default {
-        components: {
-            Vuetable,
-            VuetablePagination
-
-        },
-        name: "indicadors",
+        name: "indicador",
         data(){
           return{
               asignaturas : [],
@@ -153,69 +200,27 @@
               description: '',
               docente_id:'',
               errors:[],
-              data:[],
-              fields: FieldsDef,
-              perPage: 12,
+              dbas:[],
+              estandares:[],
+              sugerencias:[],
           }
         },
-        watch: {
-            data(newVal, oldVal) {
-                this.$refs.vuetable.refresh();
-            }
-        },
-        mounted() {
-            axios.get('/docente/indicadors').then(response => {
-                this.data = response.data;
-            });
-        },
+
         created: function(){
-            // this.getDataTable();
             this.getDatos();
         },
         methods:{
-            onPaginationData(paginationData) {
-                this.$refs.pagination.setPaginationData(paginationData);
-            },
-            onChangePage(page) {
-                this.$refs.vuetable.changePage(page);
-            },
-            dataManager(sortOrder, pagination) {
-                if (this.data.length < 1) return;
 
-                let local = this.data;
-
-                // sortOrder can be empty, so we have to check for that as well
-                if (sortOrder.length > 0) {
-                    console.log("orderBy:", sortOrder[0].sortField, sortOrder[0].direction);
-                    local = _.orderBy(
-                        local,
-                        sortOrder[0].sortField,
-                        sortOrder[0].direction
-                    );
-                }
-
-                pagination = this.$refs.vuetable.makePagination(
-                    local.length,
-                    this.perPage
-                );
-                console.log('pagination:', pagination);
-                let from = pagination.from - 1;
-                let to = from + this.perPage;
-
-                return {
-                    pagination: pagination,
-                    data: _.slice(local, from, to)
-                };
-            },
-            onActionClicked(action, data) {
-                console.log("slot actions: on-click", data.name);
-            },
             showModal:function () {
                 $('#modalSelecMeth').modal('show');
             },
             showManualMode:function () {
                 $('#modalSelecMeth').modal('hide');
                 $('#modalManual').modal('show');
+            },
+            showAutomaticMode:function () {
+                $('#modalSelecMeth').modal('hide');
+                $('#modalAutomatico').modal('show');
             },
             getDatos:function () {
                 var url = '/docente/indicadors/create';
@@ -227,6 +232,22 @@
                 }).catch( error =>{
                     toastr.error('Upss!! ocurrio un error, intenta nuevamente');
                 });
+            },
+            getDBA:function(){
+              var url = '/docente/dbas';
+              axios.get(url).then(response =>{
+                  console.log(response.data);
+                  this.dbas = response.data;
+              }).catch(
+                  error=>{
+                      toastr.error('Upss!! ocurrio un error, intenta nuevamente');
+                  }
+              );
+            },
+            loadSugerencias: function(dba){
+              this.sugerencias = [];
+              this.sugerencias = dba.sugerencias;
+                $(".nano").nanoScroller();
             },
             newIndicador: function () {
                 var url = '/docente/indicadors';
@@ -242,22 +263,23 @@
                 }).then(response => {
                     this.description = '';
                     this.errors = [];
-                    Vuetable.refresh();
                     toastr.success('Indicador registrado con exito');
                 }).catch(error => {
                     this.errors = error.response.data;
                     toastr.error('Upss!! ocurrio un error, intenta nuevamente');
                 });
 
+            },
+            reloadPage: function () {
+                window.location.reload(true);
             }
         }
     }
 </script>
 
 <style >
-    button.ui.button {
-        padding: 8px 3px 8px 10px;
-        margin-top: 1px;
-        margin-bottom: 1px;
-    }
+    .nano { background: #bba; width: 398px; height: 398px; }
+    .nano .nano-content { padding: 10px; }
+    .nano .nano-pane   { background: #777; }
+    .nano .nano-slider { background: #111; }
 </style>

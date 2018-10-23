@@ -13,5 +13,5 @@ window.Vue = require('vue');
 Vue.component('indicador', require('./indicadores/indicador.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
 });

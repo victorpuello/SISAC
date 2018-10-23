@@ -14,8 +14,7 @@ use ATS\Transformers\IndicadorTransformer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-
+use League\Fractal;
 class IndicadorController extends Controller
 {
     /**
@@ -38,27 +37,27 @@ class IndicadorController extends Controller
      */
     public function index(Request $request)
     {
-        $this->docente = Auth::user()->docente;
-        $indicadores = Indicador::where('docente_id',$this->docente->id)->with(['periodo','grado','asignatura','docente'])->paginate(12);
-        if ($request->ajax()){
-
-            $data = \Fractal::collection($indicadores)->transformWith(new IndicadorTransformer())->toArray();
-
-            $data = array_add($data,
-                'links', [
-                    "total" => $indicadores->total(),
-                    "per_page" => $indicadores->perPage(),
-                    "current_page" => $indicadores->currentPage(),
-                    "last_page" => $indicadores->lastPage(),
-                    "next_page_url"=> $indicadores->nextPageUrl(),
-                    "prev_page_url"=> $indicadores->previousPageUrl(),
-                    "from"=> $indicadores->firstItem(),
-                    "to"=> $indicadores->lastItem(),
-                ]);
-            return $data;
-
+        $this->docente->load(['indicadores.periodo','indicadores.grado','indicadores.asignatura','indicadores.docente','asignaciones.asignatura.area','asignaciones.grupo.grado']);
+        $indicadores = $this->docente->indicadores;
+        $asg = collect();
+        $ar = collect();
+        $gds = collect();
+        foreach ($this->docente->asignaciones as $asignacion){
+            $asg->push($asignacion->asignatura);
+            $ar->push($asignacion->asignatura->area);
+            $gds->push($asignacion->grupo->grado);
         }
-        return view('docente.indicadores.index');
+        $date = Carbon::now();
+        $anio = Anio::where('name',$date->year)->with('periodos')->first();
+        $grados = $gds->unique()->sortBy('numero')->pluck('name','id');
+        $asignaturas = $asg->unique()->sortBy('name')->pluck('name','id');
+        $areas = $ar->unique()->sortBy('name')->pluck('name','id');
+        $periodos = $anio->periodos->pluck('name','id');
+        $docente = $this->docente->id;
+        if ($request->ajax()){
+            return datatables()->collection($indicadores)->setTransformer(new IndicadorTransformer())->smart(true)->toJson();
+        }
+        return view('docente.indicadores.index',compact('grados','asignaturas','areas','periodos','docente'));
     }
 
     /**

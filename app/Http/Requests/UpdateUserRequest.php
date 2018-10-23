@@ -26,17 +26,14 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-//        if (!isset($this->request->path)){
-//            $this->request->set('path',null);
-//        }
         return [
             'name' => 'required|min:3|string|max:40',
             'lastname' => 'required|string|min:3|max:40',
             'username' => 'required|string|max:40|min:6',  Rule::unique('users')->ignore($this->user->username,'user_username'),
             'email' => 'email|required', Rule::unique('users')->ignore($this->user->email,'user_email'),
-            'password' => 'required|min:6',
+            'password' => 'min:6',
             'password-confirm' => 'same:password',
-            'type' => 'required|in:admin,coordinador,docente,secretaria',
+            'type' => 'in:admin,coordinador,docente,secretaria',
             'path'=>'nullable|image|mimes:jpeg,bmp,png',
         ];
     }

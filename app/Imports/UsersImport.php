@@ -2,7 +2,7 @@
 
 namespace ATS\Imports;
 
-use ATS\Model\User;
+use ATS\Model\{User,Docente};
 use Dotenv\Exception\ValidationException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
