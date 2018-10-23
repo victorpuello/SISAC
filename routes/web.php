@@ -13,4 +13,4 @@
 Route::get('/','Auth\LoginController@showLoginForm')->name('login');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('user','UserController')->only(['show','update']);
+Route::resource('user','UserController')->only(['show','update'])->middleware('verifyUser');

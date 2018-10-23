@@ -9,6 +9,7 @@ use ATS\Model\Estudiante;
 use ATS\Model\Indicador;
 use ATS\Model\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class HomeController extends Controller
@@ -21,6 +22,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
     }
 
     /**
@@ -32,12 +34,15 @@ class HomeController extends Controller
     {
         switch (currentPerfil()){
             case 'docente':
-
-                $asignaciones = 1;
-                $Nlogros = 1;
-                $Nasignaciones = 1;
+                $docente = Auth::user()->docente;
+                $docente->load(['asignaciones.grupo.estudiantes','indicadores']);
+                $asignaciones = count($docente->asignaciones);
+                $indicadores = count($docente->indicadores);
                 $Nestudiantes = 0;
-                return view('docente.home',compact('Nlogros','Nasignaciones','Nestudiantes'));
+                foreach ($docente->asignaciones as $asignacion){
+                    $Nestudiantes += count($asignacion->grupo->estudiantes);
+                }
+                return view('docente.home',compact('indicadores','asignaciones','Nestudiantes'));
             break;
             case 'admin':
                 $Nestudiantes = Estudiante::all()->count();

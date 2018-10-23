@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verifyIndicadores' => \ATS\Http\Middleware\VerifyIndicadores::class,
         'verifyPlanilla' =>  \ATS\Http\Middleware\VerifyPlanilla::class,
+        'verifyUser' =>  \ATS\Http\Middleware\VerifyUser::class,
     ];
 }

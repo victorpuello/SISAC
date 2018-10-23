@@ -51,7 +51,7 @@
                                 <div class="summary" style="min-height: 48px;">
                                     <h4 class="title">Asignaciones</h4>
                                     <div class="info">
-                                        <strong class="timer amount count-title count-number" data-to="<?php echo e($Nasignaciones); ?>" data-speed="3500"></strong>
+                                        <strong class="timer amount count-title count-number" data-to="<?php echo e($asignaciones); ?>" data-speed="3500"></strong>
                                     </div>
                                 </div>
                                 <div class="summary-footer">
@@ -75,7 +75,7 @@
                                 <div class="summary" style="min-height: 48px;">
                                     <h4 class="title">Indicadores</h4>
                                     <div class="info">
-                                        <strong class="timer amount count-title count-number" data-to="<?php echo e($Nlogros); ?>" data-speed="3500"></strong>
+                                        <strong class="timer amount count-title count-number" data-to="<?php echo e($indicadores); ?>" data-speed="3500"></strong>
                                     </div>
                                 </div>
                                 <div class="summary-footer">
