@@ -86,6 +86,7 @@ class NotaDataTablesEditor extends DataTablesEditor
         $this->currentNotas = new CurrentNota($model,$this->planilla);
         $this->inasistencia = new CurrentInasistencia($model,$this->planilla->periodo);
         $definitiva = new CurrentDefinitiva($model,$this->planilla->periodo);
+        $definitivaAnio = $definitiva->singleDefinitivaAnio($this->planilla->asignacion->asignatura);
         DB::beginTransaction();
             try{
                 $this->procesarNotas($model, $data);
@@ -94,9 +95,10 @@ class NotaDataTablesEditor extends DataTablesEditor
                 $definitiva->updateDefinitiva($definitiva->singleDefinitivaAsignatura($this->planilla->asignacion->asignatura),[
                     'score' => $score,
                     'indicador' => indicador($score),
-                    'estudiante_id' => $model->id,
-                    'periodo_id' => $this->planilla->periodo->id,
-                    'asignatura_id'  => $this->planilla->asignacion->asignatura->id
+                ]);
+                $definitivaAnio->update([
+                    'score' => $definitiva->getScoreFinal($this->planilla->asignacion->asignatura, $this->planilla->periodo, $score),
+                    'indicador' => indicador($definitiva->getScoreFinal($this->planilla->asignacion->asignatura, $this->planilla->periodo, $score)),
                 ]);
             }catch (ValidationException $e){
                 DB::rollBack();

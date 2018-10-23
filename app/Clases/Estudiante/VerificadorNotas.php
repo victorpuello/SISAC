@@ -9,6 +9,7 @@
 namespace ATS\Clases\Estudiante;
 
 
+use ATS\Clases\CurrentAnio;
 use ATS\Clases\Indicador\IndicadoresPlanilla;
 use ATS\Model\Definitiva;
 use ATS\Model\Estudiante;
@@ -17,7 +18,6 @@ use ATS\Model\Indicador;
 use ATS\Model\Nota;
 use ATS\Model\Planilla;
 use Illuminate\Support\Facades\DB;
-use phpDocumentor\Reflection\DocBlock\Tags\Method;
 
 class VerificadorNotas
 {
@@ -27,6 +27,7 @@ class VerificadorNotas
     protected $indicadores;
     protected $categorias;
     protected $periodo;
+    protected $periodoFinal;
     protected $asignatura;
     protected $estudiante;
 
@@ -76,7 +77,7 @@ class VerificadorNotas
      * @param Estudiante $estudiante
      */
     private function createNotaAndDefinitivaAndInasistencia (Estudiante $estudiante):void {
-
+        $this->periodoFinal = $this->getPeriodoFinal();
         DB::transaction(function (){
             foreach ($this->categorias as $categoria){
                 Nota::create([
@@ -86,6 +87,12 @@ class VerificadorNotas
                     'periodo_id' =>$this->periodo->id
                 ]);
             }
+            Definitiva::create([
+                'score' => 1/4,
+                'estudiante_id' => $this->estudiante->id,
+                'periodo_id' => $this->periodoFinal->id,
+                'asignatura_id' => $this->asignatura->id
+            ]);
             Definitiva::create([
                 'score' => 1,
                 'estudiante_id' => $this->estudiante->id,
@@ -99,6 +106,10 @@ class VerificadorNotas
                 'asignatura_id' => $this->asignatura->id
             ]);
         });
+    }
+    public function getPeriodoFinal(){
+        $periodos = (new CurrentAnio())->periodos();
+        return $periodos->where('isFinal','=',1)->first() ?? 'No hay periodo final';
     }
 
 }

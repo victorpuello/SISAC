@@ -7,8 +7,8 @@
             @include('admin.periodos.partials.messages')
             {!! Form::model($periodo,['route' => ['periodos.update',$periodo->id], 'method' => 'PUT','class' => 'form-horizontal form-bordered']) !!}
             @include('admin.periodos.partials.fields')
-            <div class="card-footer">
-                <button class="btn btn-default modal-dismiss">Close</button>
+            <div class="card-footer text-right">
+                <button class="btn btn-default btn-danger modal-dismiss">Cerrar</button>
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             </div>
             {!! Form::close() !!}

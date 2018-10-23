@@ -8,8 +8,8 @@
             <?php echo Form::model($periodo,['route' => ['periodos.update',$periodo->id], 'method' => 'PUT','class' => 'form-horizontal form-bordered']); ?>
 
             <?php echo $__env->make('admin.periodos.partials.fields', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-            <div class="card-footer">
-                <button class="btn btn-default modal-dismiss">Close</button>
+            <div class="card-footer text-right">
+                <button class="btn btn-default btn-danger modal-dismiss">Cerrar</button>
                 <button type="submit" class="btn btn-primary">Guardar Cambios</button>
             </div>
             <?php echo Form::close(); ?>

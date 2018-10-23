@@ -25,7 +25,15 @@
 <div class="form-group row">
     <label class="col-sm-4 control-label text-sm-right pt-1" for="estado">Estado: </label>
     <div class="col-sm-8">
-        {!! Form::select('estado',['finalizado'=>'Finalizado','activo'=>'Activo'], null, ['class' => 'form-control mb-3', 'id'=>'estado','required', 'placeholder'=>'Seleccione un estado']) !!}
+        {!! Form::select('estado',['activo'=>'Activo','inactivo'=>'Inactivo','finalizado'=>'Finalizado',], null, ['class' => 'form-control mb-3', 'id'=>'estado','required', 'placeholder'=>'Seleccione un estado']) !!}
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-sm-4 control-label text-sm-right pr-0 pt-1">Año: </label>
+    <div class="col-sm-8">
+        <div class="radio-custom radio-primary">
+            {!! Form::radios('isFinal', ['0' => 'No', '1' => 'Si'],null,['class' => 'pl-0 form-control mb-3','id'=>'isFinal']) !!}
+        </div>
     </div>
 </div>
 <script>

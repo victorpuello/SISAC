@@ -36,7 +36,7 @@ use Illuminate\Database\Eloquent\Model;
 class Periodo extends Model
 {
     protected $fillable = [
-        'name','datestart','dateend','cierre','estado','anio_id',
+        'name','datestart','dateend','cierre','estado','anio_id','isFinal'
     ];
 
     /**
@@ -67,5 +67,9 @@ class Periodo extends Model
 
     public function getNameAttribute(){
         return ucwords($this->attributes['name']) ;
+    }
+
+    public function getIsAnioAttribute(){
+        return ($this->attributes['isFinal']) ? 'Si' : 'No' ;
     }
 }

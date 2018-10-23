@@ -22,7 +22,8 @@
                     <th>Fecha de fin</th>
                     <th>Fecha de cierre</th>
                     <th>Estado</th>
-                    <th></th>
+                    <th>Año</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,7 @@
                     <td><?php echo e($periodo->dateend); ?></td>
                     <td><?php echo e($periodo->cierre); ?></td>
                     <td><?php echo e($periodo->estado); ?></td>
+                    <td><?php echo e($periodo->is_anio); ?></td>
                     <td class="actions">
                         <a href="<?php echo e(route('periodos.edit',$periodo)); ?>" class="on-default edit simple-ajax-modal" > <i class="fas fa-pencil-alt"></i></a>
                         <a href="#modalEliminar" class="on-default deleted simple-ajax-modal"  ><i class="far fa-trash-alt"></i></a>

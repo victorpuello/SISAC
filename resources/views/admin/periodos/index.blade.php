@@ -23,7 +23,8 @@
                     <th>Fecha de fin</th>
                     <th>Fecha de cierre</th>
                     <th>Estado</th>
-                    <th></th>
+                    <th>Año</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,6 +35,7 @@
                     <td>{{$periodo->dateend}}</td>
                     <td>{{$periodo->cierre}}</td>
                     <td>{{$periodo->estado}}</td>
+                    <td>{{$periodo->is_anio}}</td>
                     <td class="actions">
                         <a href="{{route('periodos.edit',$periodo)}}" class="on-default edit simple-ajax-modal" > <i class="fas fa-pencil-alt"></i></a>
                         <a href="#modalEliminar" class="on-default deleted simple-ajax-modal"  ><i class="far fa-trash-alt"></i></a>
