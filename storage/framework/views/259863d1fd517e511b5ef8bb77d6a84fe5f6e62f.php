@@ -1,6 +1,6 @@
 <div id="custom-content" class="modal-block modal-block-full ">
     <section class="card">
-        <?php echo Form::open(['route' => 'institucion.store', 'method' => 'POST','files' => true,'class' => 'form-horizontal form-bordered']); ?>
+        <?php echo Form::open(['route' => 'institucions.store', 'method' => 'POST','files' => true,'class' => 'form-horizontal form-bordered']); ?>
 
         <header class="card-header">
             <h2 class="card-title">Crear institución </h2>

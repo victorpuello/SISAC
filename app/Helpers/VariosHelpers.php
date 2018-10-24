@@ -77,16 +77,16 @@ function indicador($score){
     if ($score === ""){
         return "";
     }
-    if ($score < 6){
+    if ($score < 3){
         return 'bajo';
     }
-    if ($score >= 6 && $score < 8){
+    if ($score >= 3 && $score < 4){
         return 'basico';
     }
-    if ($score >= 8 && $score < 9.5){
+    if ($score >= 4 && $score < 4.6){
         return 'alto';
     }
-    if ($score >= 9.5 && $score <= 10){
+    if ($score >= 4.6 && $score <= 5){
         return 'superior';
     }
 }

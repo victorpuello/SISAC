@@ -5,11 +5,10 @@
             <span>Escritorio</span>
         </a>
     </li>
-    <li class="nav-parent {{ request()->is('admin/institucions') ? 'nav-active' : '' }}">
+    <li class="nav-parent">
         <a class="nav-link" href="#">
             <i class="fas fa-school" aria-hidden="true"></i>
             <span>Institución</span>
-            {{request()->path()}}
         </a>
         <ul class="nav nav-children">
             <li>
@@ -66,6 +65,13 @@
             <li>
                 <a class="nav-link" href="{{route('estudiantes.index')}}">
                     Ver Estudiantes
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="{{route('import-estudiantes.index')}}">
+                    Importar Estudiantes
                 </a>
             </li>
         </ul>

@@ -69,10 +69,10 @@ class CurrentNota
                 $porcentaje =$categorias[0]['porcentaje'];
                 break;
             case 'actitudinal':
-                $porcentaje =$categorias[1]['porcentaje'];
+                $porcentaje =$categorias[2]['porcentaje'];
                 break;
             case 'procedimental':
-                $porcentaje =$categorias[2]['porcentaje'];
+                $porcentaje =$categorias[1]['porcentaje'];
                 break;
             default:break;
         }

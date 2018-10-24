@@ -118,13 +118,10 @@ class NotaDataTablesEditor extends DataTablesEditor
         for ($i=0; $i < count($categorias); $i++){
             $data_notas = data_get($data, strval('notas.data.'.$i));
             $current_nota = $this->currentNotas->getNota(intval($data_notas[strval($categorias[$i]['name'])]['id']));
-           // dd(floatval($data_notas[strval($categorias[$i]['name'])]['score']) <> $current_nota->score, floatval($data_notas[strval($categorias[$i]['name'])]['score']) , $current_nota->score);
             if ($data_notas[strval($categorias[$i]['name'])]['score'] <> $current_nota->score) {
                 $this->currentNotas->updateNota($current_nota, [
                     'score' => floatval($data_notas[strval($categorias[$i]['name'])]['score']),
-                    'estudiante_id' => $estudiante->id,
                     'indicador_id' => $this->indicadores->getIndicadorCategoryNivel($categorias[$i]['name'], indicador(intval($data_notas[strval($categorias[$i]['name'])]['score'])))->id,
-                    'periodo_id' => $this->planilla->periodo->id
                 ]);
             }
         }

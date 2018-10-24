@@ -8,7 +8,7 @@
 return[
     'escala' => [
         'min' => 0,
-        'max' => 10,
+        'max' => 5,
     ],
     'fondos' => [
         0 => 'primary',

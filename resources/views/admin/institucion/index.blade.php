@@ -25,7 +25,7 @@
             <div class="card">
                 <div class="card-body">
                     @institucion($institucion)
-                        <a class="mb-1 mt-1 mr-1 btn btn-primary btn-lg btn-block simple-ajax-modal" href="{{route('institucion.create')}}">Agregar institución</a>
+                        <a class="mb-1 mt-1 mr-1 btn btn-primary btn-lg btn-block simple-ajax-modal" href="{{route('institucions.create')}}">Agregar institución</a>
                         @else
                             {!! Form::model($institucion,['route' => ['institucions.update',$institucion], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
                                 @include('admin.institucion.partials.fieldshow')
@@ -62,5 +62,6 @@
     <script src="{{asset('js/examples/examples.modals.js')}}"></script>
     <script src="{{asset('vendor/pnotify/pnotify.custom.js"')}}"></script>
     <script src="{{asset('vendor/jquery-placeholder/jquery-placeholder.js')}}"></script>
+    <script src="{{asset('js/examples/examples.notifications.js')}}"></script>
 @endsection
 

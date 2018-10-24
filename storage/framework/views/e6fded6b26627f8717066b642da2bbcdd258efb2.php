@@ -25,7 +25,7 @@
             <div class="card">
                 <div class="card-body">
                     <?php if (\Illuminate\Support\Facades\Blade::check('institucion', $institucion)): ?>
-                        <a class="mb-1 mt-1 mr-1 btn btn-primary btn-lg btn-block simple-ajax-modal" href="<?php echo e(route('institucion.create')); ?>">Agregar institución</a>
+                        <a class="mb-1 mt-1 mr-1 btn btn-primary btn-lg btn-block simple-ajax-modal" href="<?php echo e(route('institucions.create')); ?>">Agregar institución</a>
                         <?php else: ?>
                             <?php echo Form::model($institucion,['route' => ['institucions.update',$institucion], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']); ?>
 
@@ -64,6 +64,7 @@
     <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
     <script src="<?php echo e(asset('vendor/pnotify/pnotify.custom.js"')); ?>"></script>
     <script src="<?php echo e(asset('vendor/jquery-placeholder/jquery-placeholder.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/examples/examples.notifications.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 

@@ -23,6 +23,7 @@ class CreateInstitucionRequest extends FormRequest
      */
     public function rules()
     {
+//        dd($this->request->all());
         return [
             'name'=> 'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',
             'siglas' => 'alpha',

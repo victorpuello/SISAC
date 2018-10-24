@@ -130,16 +130,16 @@
                     if (! notaAct.val()){
                         notaAct.error( 'Debes ingresar una valoración');
                     }
-                    if (notaAct.val() > 10 || notaAct.val() < 1){
-                        notaAct.error( 'Solo se aceptan valores entre 1 y 10')
+                    if (notaAct.val() > 5 || notaAct.val() < 1){
+                        notaAct.error( 'Solo se aceptan valores entre 1 y 5')
                     }
                 }
                 if (! notaCog.isMultiValue()){
                     if (! notaCog.val()){
                         notaCog.error( 'Debes ingresar una valoración');
                     }
-                    if (notaCog.val() > 10 || notaCog.val() < 1){
-                        notaCog.error( 'Solo se aceptan valores entre 1 y 10')
+                    if (notaCog.val() > 5 || notaCog.val() < 1){
+                        notaCog.error( 'Solo se aceptan valores entre 1 y 5')
                     }
 
                 }
@@ -147,8 +147,8 @@
                     if (! notaPro.val()){
                         notaPro.error( 'Debes ingresar una valoración');
                     }
-                    if (notaPro.val() > 10 || notaPro.val() < 1){
-                        notaPro.error( 'Solo se aceptan valores entre 1 y 10')
+                    if (notaPro.val() > 5 || notaPro.val() < 1){
+                        notaPro.error( 'Solo se aceptan valores entre 1 y 5')
                     }
 
                 }
@@ -205,16 +205,16 @@
                     { data: null,
                         render: function ( data, type, row ) {
                             var def = parseFloat(row.notas.data[0].cognitivo.score) * 0.60 + parseFloat(row.notas.data[1].procedimental.score) * 0.30 + parseFloat(row.notas.data[2].actitudinal.score) * 0.10;
-                            if (roundNumber(def,2) < 6 ){
+                            if (roundNumber(def,2) < 3 ){
                                 return "Bajo";
                             }
-                            if (roundNumber(def,2) >= 6 && roundNumber(def,2) < 8){
+                            if (roundNumber(def,2) >= 3 && roundNumber(def,2) < 4){
                                 return "Basico";
                             }
-                            if (roundNumber(def,2) >= 8 && roundNumber(def,2) < 9.5){
+                            if (roundNumber(def,2) >= 4 && roundNumber(def,2) < 4.6){
                                 return "Alto";
                             }
-                            if (roundNumber(def,2) >= 9.5 && roundNumber(def,2) <= 10){
+                            if (roundNumber(def,2) >= 4.6 && roundNumber(def,2) <= 5){
                                 return "Superior";
                             }
 
