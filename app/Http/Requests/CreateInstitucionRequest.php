@@ -27,9 +27,9 @@ class CreateInstitucionRequest extends FormRequest
         return [
             'name'=> 'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',
             'siglas' => 'alpha',
-            'dane' => 'required|numeric',
+            'dane' => 'required|string',
             'nit' => 'required|string',
-            'address' => 'required|regex:/([- ,\/0-9a-zA-Z]+)/',
+            'address' => 'required|string',
             'phone' => 'required|numeric',
             'email' => 'email',
             'rector' => 'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',

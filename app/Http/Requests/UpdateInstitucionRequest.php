@@ -27,7 +27,7 @@ class UpdateInstitucionRequest extends FormRequest
         return [
             'name'=> 'required|min:3|string|max:80',
             'siglas' => 'alpha',
-            'dane' => 'required|numeric',
+            'dane' => 'required|string',
             'nit' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required|numeric',
