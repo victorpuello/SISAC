@@ -84,7 +84,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <select class="form-control mb-3"  id="indicator" v-model="indicator" required>
-                                            <option disabled value="">Seleccione una categoria</option>
+                                            <option disabled value="">Seleccione un indicador</option>
                                             <option value="bajo">Bajo</option>
                                             <option value="basico">Básico</option>
                                             <option value="alto">Alto</option>

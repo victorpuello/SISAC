@@ -8,7 +8,7 @@
 <?php $__env->startSection('content'); ?>
     <div class="row">
         <?php $__currentLoopData = $docentes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $docente): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <div class="col-lg-2">
+            <div class="col-lg-3 col-xl-2">
                 <section class="card">
                     <header class="card-header bg-<?php echo e(Config::get('institucion.fondos.0')); ?>">
                         <div class="card-header-profile-picture">

@@ -34,10 +34,10 @@ Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'Munic
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs');
 
 
-Route::get('/usersdata/img/users/{file}', function ($file) {
-    return Storage::response("app/usersdata/img/users/$file")->where([
-        'file' => '(.*?)\.(jpg|png|jpeg|gif)$'
-    ]);
-});
+//Route::get('/usersdata/img/users/{file}', function ($file) {
+//    return Storage::response("app/usersdata/img/users/$file")->where([
+//        'file' => '(.*?)\.(jpg|png|jpeg|gif)$'
+//    ]);
+//});
 Route::get('notas/dataPlanilla/asignacion/{asignacion}/periodo/{periodo}','NotaController@dataPlanilla')->name('notas.dataplanilla');
 Route::get('notas/getPlanilla/asignacion/{asignacion}/periodo/{periodo}','NotaController@getPlanilla')->name('notas.getplanilla');

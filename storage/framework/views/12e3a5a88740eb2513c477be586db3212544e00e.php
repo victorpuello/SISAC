@@ -5,7 +5,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="row">
-        <div class="col-lg-2 col-xl-2 mb-4 mb-xl-0 col-5">
+        <div class="col-lg-2 col-xl-2 mb-3 mb-xl-0 col-sm-12">
             <section class="card">
                 <div class="card-body">
                     <div class="thumb-info mb-3">

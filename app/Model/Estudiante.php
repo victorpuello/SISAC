@@ -4,7 +4,7 @@ namespace ATS\Model;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use ATS\Model\Municipio;
 use Illuminate\Support\Facades\Input;
 
 /**
@@ -95,6 +95,18 @@ class Estudiante extends Model
     public function getFullNameAttribute(){
         return $this->name.' '.$this->lastname;
     }
+    public function getFullIdentidadAttribute(){
+        return $this->typeid.' - '.$this->identification;
+    }
+    public function getNacAttribute(){
+        $municipio = Municipio::where('id',$this->birthcity)->with('departamento')->first();
+        return $municipio->name . ' - '. $municipio->departamento->name;
+    }
+    public function getEdadAttribute(){
+        $date = Carbon::parse($this->birthday);
+//        dd($date->age);
+        return $date->age.' Años';
+    }
     public function getApellidoNameAttribute(){
         $name = $this->lastname.' '.$this->name;
         if (strlen($name) > 29){
@@ -118,7 +130,11 @@ class Estudiante extends Model
             $this->attributes['path'] = "no-user-image.png";
         }
         if (!empty($path)) {
-            $image = \Image::make(Input::file('path'))->resize(300,300)->encode('jpg',90);
+            $image = \Image::make(Input::file('path'))->orientate()->encode('jpg',100);
+            $image->resize(350,null,function ($constraint){
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
             $name = Carbon::now()->second.$path->getClientOriginalName();
             $this->attributes['path'] = $name;
            \Storage::disk('estudiantes')->put($name,$image);

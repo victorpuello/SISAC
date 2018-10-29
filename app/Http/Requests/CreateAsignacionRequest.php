@@ -3,7 +3,6 @@
 namespace ATS\Http\Requests;
 
 use ATS\Clases\CurrentPeriodo;
-use ATS\Events\LlenarPlanillasEvent;
 use ATS\Model\Asignacion;
 use ATS\Model\Planilla;
 use Illuminate\Foundation\Http\FormRequest;

@@ -26,7 +26,7 @@ class UpdateGradoRequest extends FormRequest
     {
         return [
             'name' => 'string|max:40|',Rule::unique('grados')->ignore($this->grado->name, 'grados_name'),
-            'numero' => 'integer|max:15',
+            'numero' => 'integer|max:26',
             'nivel'=>'required|in:,preescolar,primaria,secundaria,media'
         ];
     }

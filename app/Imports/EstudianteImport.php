@@ -16,8 +16,7 @@ class EstudianteImport implements ToCollection
                 factory(Estudiante::class)->create([
                     'name' => $row[0],
                     'lastname' => $row[1],
-                    'birthday' => $row[2],
-                    'salon_id' => $row[3]
+                    'grupo_id' => $row[2]
                 ]);
             }
         }

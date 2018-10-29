@@ -101,7 +101,11 @@ class User extends Authenticatable
             $this->attributes['path'] = "no-user-image.png";
         }
         if (!empty($path)) {
-            $image = \Image::make(Input::file('path'))->resize(250,270)->encode('jpg',90);
+            $image = \Image::make(Input::file('path'))->orientate()->encode('jpg',100);
+            $image->resize(350,null,function ($constraint){
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            });
             $name = Carbon::now()->second.$path->getClientOriginalName();
             $this->attributes['path'] = $name;
             \Storage::disk('users')->put($name,$image);

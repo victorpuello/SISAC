@@ -67,7 +67,7 @@
             <div class="row">
                 <div class="col-md-12 text-right">
                         <a class="btn btn-primary" href="{{route('docente.estudiantes.edit',$estudiante)}}" class="btn btn-primary ml-3"> Editar</a>
-                        <button class="btn btn-default modal-dismiss">Close</button>
+                        <button class="btn btn-danger modal-dismiss">Cerrar</button>
                 </div>
             </div>
         </footer>

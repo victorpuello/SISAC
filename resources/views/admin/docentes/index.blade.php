@@ -9,7 +9,7 @@
 @section('content')
     <div class="row">
         @foreach($docentes as $docente)
-            <div class="col-lg-2">
+            <div class="col-lg-3 col-xl-2">
                 <section class="card">
                     <header class="card-header bg-{{Config::get('institucion.fondos.0')}}">
                         <div class="card-header-profile-picture">
