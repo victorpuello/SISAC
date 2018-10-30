@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Input;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * ATS\User
  *
@@ -47,7 +47,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
  */
 class User extends Authenticatable
 {
-    use Notifiable, HasRolesAndAbilities;
+    use Notifiable, HasRolesAndAbilities, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

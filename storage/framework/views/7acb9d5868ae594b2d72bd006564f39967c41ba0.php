@@ -35,7 +35,7 @@
     <?php echo $__env->make('admin.asignaciones.partials.modals', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
-    <?php echo $__env->make('partials.scriptdt', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('partials.datatablescript', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('scriptfin'); ?>
     <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>

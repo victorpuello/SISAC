@@ -78,18 +78,19 @@ class UserController extends Controller
         DB::beginTransaction();
         try{
             $user->update($request->all());
-            Docente::create([
-                'typeid' => "CC",
-                'name' => $user->full_name,
-                'user_id' => $user->id
-            ]);
+            if ($request->type === 'docente'){
+                $user->docente->update([
+                    'name' => $user->full_name,
+                ]);
+            }
             $user->assign($request->type);
         }catch (ValidationException $e){
             DB::rollBack();
             return redirect()->back();
         }
         DB::commit();
-        return redirect()->route('users.index');
+        $data = array(['msg'=>'Usuario guardado con exito']);
+        return redirect()->route('users.index',compact('data'));
     }
 
     /**

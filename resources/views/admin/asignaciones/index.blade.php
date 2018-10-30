@@ -35,7 +35,7 @@
     @include('admin.asignaciones.partials.modals')
     @endsection
 @section('script')
-    @include('partials.scriptdt')
+    @include('partials.datatablescript')
 @endsection
 @section('scriptfin')
     <script src="{{asset('js/examples/examples.modals.js')}}"></script>

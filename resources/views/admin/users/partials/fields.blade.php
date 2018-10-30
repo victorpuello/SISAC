@@ -21,11 +21,11 @@
 <div class="form-group row">
     <div class="col-lg-6">
         {!! Form::label('password', 'Contraseña',['class'=>'col-lg-6 control-label text-lg-left pt-2']) !!}
-        <input name="password" type="password"  class="form-control" required>
+        <input name="password" type="password"  class="form-control" >
     </div>
     <div class="col-lg-6">
         {!! Form::label('password-confirm', 'Confirmar contraseña',['class'=>'col-lg-8 control-label text-lg-left pt-2']) !!}
-        <input name="password-confirm" type="password"  class="form-control" required>
+        <input name="password-confirm" type="password"  class="form-control">
     </div>
 </div>
 <div class="form-group row">

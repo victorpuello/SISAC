@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * ATS\Docente
@@ -42,6 +43,7 @@ use Illuminate\Support\Facades\Input;
  */
 class Docente extends Model
 {
+    use SoftDeletes;
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */

@@ -2,7 +2,7 @@
 @section('titulo', "Indicadores")
 @section('namePage', "Modulo: Academico - Indicadores")
 @section('styles')
-    @include('partials.stilosdt')
+    @include('partials.datatablesstyle')
 @endsection
 @section('content')
     <div class="card-body">

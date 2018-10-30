@@ -84,12 +84,14 @@
             </section>
         </div>
         <?php echo $__env->make('admin.reportes.partials.modals', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->make('admin.acudientes.partials.messages', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
     <script src="<?php echo e(asset('vendor/select2/js/select2.js')); ?>"></script>
     <script src="<?php echo e(asset('vendor/datatables/media/js/dataTables.bootstrap4.min.js')); ?>"></script>
     <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/examples/examples.notifications.js')); ?>"></script>
     <script src="<?php echo e(asset('vendor/pnotify/pnotify.custom.js"')); ?>"></script>
 <?php $__env->stopSection(); ?>
 

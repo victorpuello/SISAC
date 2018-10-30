@@ -25,6 +25,7 @@ class ReportesIndicadoresRequest extends FormRequest
      */
     public function rules()
     {
+//        dd($this->request->all());
         return [
             "periodo" => ['nullable',Rule::exists('periodos','id')],
             "docente" => Rule::exists('docentes','id'),

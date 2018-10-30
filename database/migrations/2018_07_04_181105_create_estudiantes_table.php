@@ -33,6 +33,7 @@ class CreateEstudiantesTable extends Migration
             $table->enum('situation',['nuevo','repitente','promovido','normal'])->default('nuevo');//ok
             $table->integer('grupo_id')->unsigned();
             $table->foreign('grupo_id')->references('id')->on('grupos');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

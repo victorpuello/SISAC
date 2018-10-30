@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use ATS\Model\Municipio;
 use Illuminate\Support\Facades\Input;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * ATS\Estudiante
  *
@@ -66,6 +66,7 @@ use Illuminate\Support\Facades\Input;
  */
 class Estudiante extends Model
 {
+    use SoftDeletes;
     protected $fillable =[
         'name','lastname','typeid','identification','birthday','birthstate','birthcity','gender','address','EPS','phone','datein','dateout','path','stade','situation','grupo_id',
     ];

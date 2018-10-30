@@ -69,6 +69,7 @@ class ReportesController extends Controller
      */
     public function reporteLogros (ReportesIndicadoresRequest $request){
         $docente = Docente::with(['indicadores.grado','indicadores.asignatura','indicadores.periodo'])->findOrFail($request->docente);
+//        dd($docente);
         $institucion = Institucion::first();
         $indicadores = $docente->indicadores->where('periodo_id',$request->periodo)->where('asignatura_id',$request->asignatura)->where('grado_id',$request->grade);
         $pdf = PDF::loadView('admin.reportes.print.logrosreport',compact('indicadores','docente','institucion'))

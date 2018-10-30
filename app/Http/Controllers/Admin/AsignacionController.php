@@ -21,9 +21,31 @@ class AsignacionController extends Controller
      */
     public function index(Request $request)
     {
-        $asignaciones = Asignacion::with(['docente','asignatura','grupo','anio'])->orderBy('created_at','desc');
+        $asignaciones = Asignacion::with(['docente','asignatura','grupo.grado','anio'])->orderBy('docente_id','desc');
         if ($request->ajax()){
-            return datatables()->eloquent($asignaciones)->setTransformer(new AsignacionTransformer())->smart(true)->toJson();
+//            return datatables()->eloquent($asignaciones)->setTransformer(new AsignacionTransformer())->smart(true)->toJson();
+            return datatables()->eloquent($asignaciones)
+                    ->addColumn('asignatura', function (Asignacion $asignacion){
+                        return $asignacion->asignatura->name;
+                    })->addColumn('docente', function (Asignacion $asignacion){
+                        return $asignacion->docente->name;
+                    })->addColumn('grupo', function (Asignacion $asignacion){
+                        return $asignacion->grupo->name_aula;
+                    })->addColumn('anio', function (Asignacion $asignacion){
+                        return $asignacion->anio->name;
+                    })->addColumn('director', function (Asignacion $asignacion){
+                        return $asignacion->direccion;
+                    })->addColumn('active', function (Asignacion $asignacion){
+                        return $asignacion->estado;
+                    })->filter(function ($query) {
+                        if (request()->has('asignatura')) {
+                            $query->where('asignatura.asignatura', 'like', "%" . request('asignatura.name') . "%");
+                        }
+
+                        if (request()->has('docente')) {
+                            $query->where('asignacion.docente', 'like', "%" . request('docente.name') . "%");
+                        }
+                    })->smart(true)->toJson();
         }
         return view('admin.asignaciones.index');
     }
@@ -89,6 +111,7 @@ class AsignacionController extends Controller
      */
     public function destroy(Asignacion $asignacion)
     {
+        $asignacion->planillas()->delete();
         $asignacion->delete();
         return redirect()->route('asignacions.index');
     }

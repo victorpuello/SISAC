@@ -4,25 +4,20 @@
     const inf = $('#inf');
     $(document).ready(function () {
             table.DataTable({
-                search: {
-                    smart: true
-                },
+                // search: {
+                //     smart: true
+                // },
                 lengthMenu: [[12, 24, 36, 48, -1], [12, 24, 48, 100, "All"]],
                 responsive: true,
                 processing: true,
                 serverSide: true,
+                searching:true,
                 //select: true,
                 sDom: '<"text-right mb-md"T><"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
                 ajax: inf.data('urltabla'),
                 dom: 'Bfrtip',
                 columns: [
-                    {   // Responsive control column
-                        data: null,
-                        defaultContent: '',
-                        className: 'control',
-                        orderable: false,
-                        searchable: false
-                    },
+                    {data: null,defaultContent: '',className: 'control',orderable: false,searchable: false},
                     {data: "id", editField: "id", className: 'never', orderable: false, visible: false, searchable: false},
                     {data: "grado", orderable: true, searchable: true},
                     {data: "asignatura", orderable: true, searchable: true},

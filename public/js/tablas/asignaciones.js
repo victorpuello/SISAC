@@ -8,10 +8,14 @@
                 search: {
                     smart: true
                 },
+                // search: {
+                //     regex: true
+                // },
                 lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 responsive: true,
                 processing: true,
                 serverSide: true,
+                // searching:true,
                 //select: true,
                 sDom: '<"text-right mb-md"T><"row"<"col-lg-6"l><"col-lg-6"f>><"table-responsive"t>p',
                 ajax: inf.data('urltabla'),
@@ -19,12 +23,12 @@
                 columns: [
                     {data: null, defaultContent: '', className: 'control', orderable: false, searchable: false },
                     {data: "id", editField: "id", className: 'never', orderable: false, visible: false, searchable: false},
-                    {data: "asignatura", orderable: true, searchable: true},
-                    {data: "docente", orderable: true, searchable: true},
-                    {data: "grupo", orderable: true, searchable: true},
-                    {data: "director", orderable: true, searchable: true},
-                    {data: "anio", orderable: true, searchable: true},
-                    {data: "active", orderable: true, searchable: true},
+                    {data: "asignatura",name:'asignatura.name', orderable: true, searchable: true},
+                    {data: "docente", name:'docente.name', orderable: true, searchable: true},
+                    {data: "grupo",name:'grupo_id', orderable: true, searchable: true},
+                    {data: "director",name:'director', orderable: true, searchable: true},
+                    {data: "anio",name:'anio_id', orderable: true, searchable: true},
+                    {data: "active",name:'active', orderable: true, searchable: true},
                     {
                         data: "id", render: function (data, type, row) {
                             return '<a href="' + inf.data('url') + "/admin/asignacions/" + data + '/edit"' + ' class="on-default edit-row simple-ajax-modal"><i class="fas fa-pencil-alt"></i></a>  ' +

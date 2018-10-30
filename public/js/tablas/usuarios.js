@@ -19,11 +19,11 @@
                 columns: [
                     {data: null, defaultContent: '', className: 'control', orderable: false, searchable: false },
                     {data: "id", editField: "id", className: 'never', orderable: false, visible: false, searchable: false},
-                    { data: "name" },
-                    { data: "lastname" },
-                    { data: "username" },
-                    { data: "email" },
-                    { data: "type" },
+                    { data: "name", orderable: true, searchable: true },
+                    { data: "lastname", orderable: true, searchable: true },
+                    { data: "username", orderable: true, searchable: true },
+                    { data: "email", orderable: true, searchable: true },
+                    { data: "type", orderable: true, searchable: true },
                     {
                         data: "id", render: function (data, type, row) {
                             return '<a href="' + inf.data('url') + "/admin/users/" + data + '/edit"' + ' class="on-default edit-row simple-ajax-modal"><i class="fas fa-pencil-alt"></i></a>  ' +
