@@ -89,6 +89,9 @@ class Estudiante extends Model
     public function inasistencias(){
         return $this->hasMany(Inasistencia::class);
     }
+    public function observaciones(){
+        return $this->hasMany(Observacion::class);
+    }
     public function anotaciones(){
             return $this->hasMany(Anotacion::class);
     }

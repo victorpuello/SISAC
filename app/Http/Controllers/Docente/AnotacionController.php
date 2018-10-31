@@ -46,7 +46,7 @@ class AnotacionController extends Controller
         }
         $anotacion = new Anotacion($request->all());
         $anotacion->save();
-        return redirect()->route('docente.direccion.getobservador',$estudiante);
+        return redirect()->route('docente.direccion.observador',$estudiante);
     }
 
     /**
@@ -87,7 +87,7 @@ class AnotacionController extends Controller
         $anotacion->fill($request->all());
         $anotacion->save();
         $estudiante = Estudiante::findOrFail($request->estudiante_id);
-        return redirect()->route('docente.direccion.getobservador',$estudiante);
+        return redirect()->route('docente.direccion.observador',$estudiante);
     }
 
     /**
@@ -101,11 +101,7 @@ class AnotacionController extends Controller
         $anotacion = Anotacion::findOrFail($id);
         $estudiante = $anotacion->estudiante;
         $anotacion->delete();
-        return redirect()->route('docente.direccion.getobservador',$estudiante);
+        return redirect()->route('docente.direccion.observador',$estudiante);
     }
-    public function getObservador(Estudiante $estudiante)
-    {
-        $periodos = (new CurrentAnio())->periodos();
-        return view('docente.observador.index', compact('estudiante','periodos'));
-    }
+
 }

@@ -4,6 +4,7 @@ Route::resource('estudiantes', 'EstudianteController');
 Route::resource('institucions', 'InstitucionController');
 Route::resource('docentes', 'DocenteController');
 Route::resource('asignaturas', 'AsignaturaController');
+Route::resource('aspectos', 'AspectoController');
 Route::resource('anios', 'AnioController');
 Route::resource('areas', 'AreaController');
 Route::resource('grupos', 'GrupoController');

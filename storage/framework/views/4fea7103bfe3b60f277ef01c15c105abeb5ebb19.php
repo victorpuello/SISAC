@@ -5,7 +5,7 @@
     <div class="col-4">
         <section class="card">
             <header class="card-header bg-transparent">
-                <h2 class="card-title">Información básica</h2>
+                <h2 class="card-title text-black-50">Información básica</h2>
             </header>
             <div class="card-content">
                 <ul class="list-group list-group-flush">
@@ -20,7 +20,7 @@
     <div class="col-4">
         <section class="card">
             <header class="card-header bg-transparent">
-                <h2 class="card-title">Información de contacto</h2>
+                <h2 class="card-title text-black-50">Información de contacto</h2>
             </header>
             <div class="card-content">
                 <ul class="list-group list-group-flush">
@@ -34,7 +34,7 @@
     <div class="col-4">
         <section class="card">
             <header class="card-header bg-transparent">
-                <h2 class="card-title">Información de academica</h2>
+                <h2 class="card-title text-black-50">Información de academica</h2>
             </header>
             <div class="card-content">
                 <ul class="list-group list-group-flush">
@@ -45,35 +45,71 @@
             </div>
         </section>
     </div>
-    <div class="tab-content pb-5">
-        <div id="everything" class="tab-pane active">
-            <ul class="list-unstyled search-results-list">
-                <li>
-                    <p class="result-type">
-                        <span class="badge badge-primary">user</span>
-                    </p>
-                    <a href="pages-user-profile.html" class="has-thumb">
-                        <div class="result-thumb">
-                            <img src="img/!logged-user.jpg" alt="John Doe" />
-                        </div>
-                        <div class="result-data">
-                            <p class="h3 title text-primary">John Doe</p>
-                            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante nisl, sagittis nec lacus et, convallis efficitur justo. Curabitur elementum feugiat quam. Etiam ac orci iaculis, luctus nisl et, aliquet metus. Praesent congue tortor venenatis, ornare eros eu, semper orci.</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <p class="result-type">
-                        <span class="badge badge-primary">page</span>
-                    </p>
-                    <a href="ui-elements-charts.html">
-                        <div class="result-data">
-                            <p class="h3 title text-primary">Charts</p>
-                            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante nisl, sagittis nec lacus et, convallis efficitur justo. Curabitur <strong>something</strong> elementum feugiat quam. Etiam ac orci iaculis, luctus nisl et, aliquet metus. Praesent congue tortor venenatis, ornare eros eu, semper orci.</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-6">
+        <section class="card">
+            <header class="card-header bg-transparent">
+                <h2 class="card-title text-center text-black-50">Aspectos Academicos: <?php echo e($observaciones->getNamePeriodo()); ?></h2>
+            </header>
+            <div class="card-body">
+                <table class="table table-responsive-md mb-0">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Aspecto</th>
+                        <th>Valoración</th>
+                        <th>Valorar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $__currentLoopData = $observaciones->getAcademicas(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $observacion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                            <td><?php echo e($key+1); ?></td>
+                            <td><?php echo e($observacion->aspecto->description); ?></td>
+                            <td><?php echo e($observacion->valoracion); ?></td>
+                            <td class="actions">
+                                <a class="btn btn-xs btn-primary text-white simple-ajax-modal" href="<?php echo e(route('docente.observacions.edit',$observacion)); ?>">Valorar</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-xs text-center text-black-50"><strong style="font-size: 10px;">Equivalencias escala: S = "Siempre" - CS = "Casi siempre" - AV = "Algunas veces" - N = "Nunca"</strong> </p>
+        </section>
+    </div>
+    <div class="col-lg-6">
+        <section class="card">
+            <header class="card-header bg-transparent">
+                <h2 class="card-title text-center text-black-50">Aspectos Convivencia: <?php echo e($observaciones->getNamePeriodo()); ?> </h2>
+            </header>
+            <div class="card-body">
+                <table class="table table-responsive-md mb-0">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Aspecto</th>
+                        <th>Valoración</th>
+                        <th>Valorar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $__currentLoopData = $observaciones->getConvivencias(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $observacion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <tr>
+                            <td><?php echo e($key+1); ?></td>
+                            <td><?php echo e($observacion->aspecto->description); ?></td>
+                            <td><?php echo e($observacion->valoracion); ?></td>
+                            <td class="actions">
+                                <a class="btn btn-xs btn-primary text-white simple-ajax-modal" href="<?php echo e(route('docente.observacions.edit',$observacion)); ?>">Valorar</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-xs text-center text-black-50"><strong style="font-size: 10px;">Equivalencias escala: S = "Siempre" - CS = "Casi siempre" - AV = "Algunas veces" - N = "Nunca"</strong> </p>
+        </section>
     </div>
 </div>

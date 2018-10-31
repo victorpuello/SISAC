@@ -32,11 +32,11 @@
                     <th>Planilla</th>
                     <th>Nombre</th>
                     <th>Id_Nota_Cog</th>
-                    <th>Cognitivo 60%</th>
+                    <th>Cognitivo <?php echo e(Config::get('institucion.indicadores.categorias.0.porcentaje') * 100); ?> %</th>
                     <th>Id_Nota_Proc</th>
-                    <th>Procedimental 30%</th>
+                    <th>Procedimental <?php echo e(Config::get('institucion.indicadores.categorias.1.porcentaje') * 100); ?> %</th>
                     <th>Id_Nota_Act</th>
-                    <th>Actitudinal 10%</th>
+                    <th>Actitudinal <?php echo e(Config::get('institucion.indicadores.categorias.2.porcentaje') * 100); ?> %</th>
                     <th>Inasistencias ID</th>
                     <th>Inasistencias</th>
                     <th>Definitiva</th>

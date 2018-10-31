@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'verifyIndicadores' => \ATS\Http\Middleware\VerifyIndicadores::class,
         'verifyPlanilla' =>  \ATS\Http\Middleware\VerifyPlanilla::class,
         'verifyUser' =>  \ATS\Http\Middleware\VerifyUser::class,
+        'verifyObservacion' =>  \ATS\Http\Middleware\VerifyObservacions::class,
     ];
 }

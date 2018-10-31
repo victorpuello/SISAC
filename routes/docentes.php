@@ -9,7 +9,7 @@ Route::middleware(['verifyPlanilla','verifyIndicadores'])->group(function (){
 });
 Route::get('/direccion', 'DireccionController@index')->name('direccion.index');
 Route::get('/direccion/getDefinitivas/{estudiante}', 'DefinitivaController@getDefinitivas')->name('direccion.getdefinitivas');
-Route::get('/direccion/getObservador/{estudiante}', 'AnotacionController@getObservador')->name('direccion.getobservador');
+Route::get('/direccion/observador/{estudiante}', 'ObservadorController')->middleware('verifyObservacion')->name('direccion.observador');
 Route::get('/direccion/getacudiente/{estudiante}', 'DireccionController@getAcudiente')->name('direccion.getacudiente');
 Route::get('/direccion/getmatricula/{estudiante}', 'DireccionController@getMatricula')->name('direccion.getmatricula');
 Route::resource('acudiente', 'AcudienteController')->only(['edit','store','update','destroy']);
@@ -19,9 +19,7 @@ Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'Munic
 Route::resource('/direccion/anotaciones', 'AnotacionController');
 Route::resource('reportes', 'ReportesController')->only(['index']);
 Route::resource('docentes', 'DocenteController')->only(['update']);
+Route::resource('observacions', 'ObservacionController')->only(['update','edit']);
 Route::post('reportes/academico/sabana', 'ReportesController@sabana')->name('reportes.academico.sabana');
 Route::post('reportes/academico/logros', 'ReportesController@reporteLogros')->name('reportes.academico.logros');
-//Route::put('/{docente}',function (){
-//    dd('hola');
-//})->name('update');
 

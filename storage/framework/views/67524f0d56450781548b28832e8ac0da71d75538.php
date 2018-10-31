@@ -111,6 +111,14 @@
         </ul>
         <ul class="nav nav-children">
             <li>
+                <a class="nav-link" href="<?php echo e(route('aspectos.index')); ?>">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    Aspectos Observador
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-children">
+            <li>
                 <a class="nav-link simple-ajax-modal" href="<?php echo e(route('planillas.getfiltro')); ?>">
                     <i class="fas fa-check-square"></i>
                     Calificar

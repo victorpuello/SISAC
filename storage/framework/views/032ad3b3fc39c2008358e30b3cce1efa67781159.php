@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <p class="mb-1"><a class="simple-ajax-modal" href="<?php echo e(route('docente.direccion.getdefinitivas',$estudiante)); ?>"><i class="fas fa-list-alt mr-1"></i>Notas</a></p>
-                                <p class="mb-1"><a href="<?php echo e(route('docente.direccion.getobservador',$estudiante)); ?>"><i class="fas fa-eye mr-1"></i>Observador</a></p>
+                                <p class="mb-1"><a href="<?php echo e(route('docente.direccion.observador',$estudiante)); ?>"><i class="fas fa-eye mr-1"></i>Observador</a></p>
                             </div>
                         </div>
                     </div>

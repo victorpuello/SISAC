@@ -25,8 +25,8 @@ return[
         'numeroNotas' => '1',
         'numeroIndicadores' => '12',
         'categorias'=> [
-            '0' => ['name' => 'cognitivo','porcentaje' => 0.6],
-            '1' => ['name' => 'procedimental','porcentaje' => 0.3],
+            '0' => ['name' => 'cognitivo','porcentaje' => 0.5],
+            '1' => ['name' => 'procedimental','porcentaje' => 0.4],
             '2' => ['name' => 'actitudinal','porcentaje' => 0.1],
         ],
     ],

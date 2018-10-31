@@ -16,6 +16,9 @@
                                         {{$anotacion->annotation}}
                                     </p>
                                     <div class="float-md-right">
+                                        <a class=" btn btn-xs btn-info " href="{{ url('/imgUsers/documentos/')}}/{{$anotacion->path}} " data-plugin-lightbox data-plugin-options='{ "type":"image" }' title="Acta de compromiso.">
+                                            Generar Acta
+                                        </a>
                                         <a class=" btn btn-xs btn-warning" href="{{ url('/imgUsers/documentos/')}}/{{$anotacion->path}} " data-plugin-lightbox data-plugin-options='{ "type":"image" }' title="Acta de compromiso.">
                                             Ver Acta
                                         </a>
