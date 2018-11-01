@@ -10,13 +10,13 @@
             <h2 class="card-title">Editar alummno: {{$estudiante->name}} </h2>
         </header>
         <div class="card-body">
-            @include('admin.estudiantes.partials.messages')
-            {!! Form::model($estudiante,['route' => ['estudiantes.update',$estudiante->id], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
-                @include('admin.estudiantes.partials.fields')
-                <div class="card-footer">
-                    <a href="{{ URL::previous() }}" class="btn btn-danger">Cancelar</a>
-                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                </div>
+            @include('secretaria.estudiantes.partials.messages')
+            {!! Form::model($estudiante,['route' => ['secretaria.estudiantes.update',$estudiante], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
+            @include('secretaria.estudiantes.partials.fields')
+            <div class="card-footer">
+                <a href="{{ URL::previous() }}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
             {!! Form::close() !!}
         </div>
     </section>

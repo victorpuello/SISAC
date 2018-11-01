@@ -4,14 +4,8 @@ namespace ATS\Http\Controllers\Secretaria;
 
 use App;
 use Illuminate\Http\Request;
-use ATS\Asignatura;
-use ATS\Docente;
-use ATS\Estudiante;
+use ATS\Model\{Asignatura,Docente,Estudiante,Institucion,Indicador,Periodo,Grupo};
 use ATS\Http\Requests\ReportesIndicadoresRequest;
-use ATS\Institucion;
-use ATS\Logro;
-use ATS\Periodo;
-use ATS\Grupo;
 use ATS\Http\Controllers\Controller;
 use PDF;
 
@@ -99,7 +93,7 @@ class ReportesController extends Controller
         $periodo = Periodo::find($request->periodo);
         $asignatura = Asignatura::find($request->asignatura);
         $grado = $request->grade;
-        $logros = Logro::where('docente_id','=',$request->docente)
+        $logros = Indicador::where('docente_id','=',$request->docente)
             ->where('periodo_id','=',$request->periodo)
             ->where('asignatura_id','=',$request->asignatura)
             ->where('grade','=',$request->grade)

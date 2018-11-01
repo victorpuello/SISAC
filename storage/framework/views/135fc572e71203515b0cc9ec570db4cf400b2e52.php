@@ -1,6 +1,6 @@
 <ul class="nav nav-main">
     <li>
-        <a class="nav-link" href="{{route('home')}}">
+        <a class="nav-link" href="<?php echo e(route('home')); ?>">
             <i class="fas fa-home" aria-hidden="true"></i>
             <span>Escritorio</span>
         </a>
@@ -12,7 +12,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('secretaria.estudiantes.index')}}">
+                <a class="nav-link" href="<?php echo e(route('secretaria.estudiantes.index')); ?>">
                     Estudiantes
                 </a>
             </li>
@@ -25,7 +25,7 @@
         </a>
         <ul class="nav nav-children">
             <li>
-                <a class="nav-link" href="{{route('secretaria.reportes.index')}}">
+                <a class="nav-link" href="<?php echo e(route('secretaria.reportes.index')); ?>">
                     Reporte Academico
                 </a>
             </li>

@@ -26,13 +26,13 @@ class CreateAcudienteRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=> 'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',
-            'lastname'=>'required|min:3|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/|max:40',
+            'name'=> 'required|min:3|string|max:40',
+            'lastname'=>'required|min:3|string|max:40',
             'relationship'=>'required|in:Padre,Madre,Abuelo,Hermano,Tío,Conyuge,Otro',
-            'document'=>'required|numeric|max:9999999999|min:1000000|unique:acudientes,document',
+            'document'=>'required|numeric|max:9999999999|min:1000000',
             'phone'=>'required|numeric',
             'email' => 'email',
-            'address' => 'required|regex:/([- ,\/0-9a-zA-Z]+)/',
+            'address' => 'required|string',
             'estudiante_id' => ['required',Rule::exists('estudiantes','id'), new ValidateAcudiente()]
         ];
     }

@@ -2,107 +2,103 @@
 
 namespace ATS\Http\Controllers\Secretaria;
 
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Input;
-use ATS\Departamento;
-use ATS\Estudiante;
+use ATS\Model\{Departamento,Estudiante,Municipio,Grupo};
 use Illuminate\Http\Request;
 use ATS\Http\Requests\CreateEstudianteRequest;
-use ATS\Http\Requests\UpdateDocenteRequest;
 use ATS\Http\Requests\UpdateEstudianteRequest;
-use ATS\Municipio;
-use ATS\Grupo;
 use ATS\Http\Controllers\Controller;
 
 class EstudianteController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $estudiantes = Estudiante::all();
-        return view('admin.estudiantes.index',compact('estudiantes'));
+        $estudiantes = Estudiante::with('grupo.grado')->orderBy('created_at','ASC');
+        if($request->ajax()) {
+            return datatables()
+                ->eloquent($estudiantes)
+                ->addColumn('btn', 'secretaria.estudiantes.partials.actions')
+                ->addColumn('grupo', function (Estudiante $estudiante) {
+                    return $estudiante->grupo->name_aula;
+                })
+                ->rawColumns(['btn'])
+                ->smart(true)
+                ->toJson();
+        }
+        return view('secretaria.estudiantes.index');
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
         $departamentos = Departamento::pluck('name','id');
-        $grados = $this->getSalon();
-        return view('admin.estudiantes.create',compact('departamentos','grados'));
+        $municipios = Municipio::pluck('name','id');
+        $grupos = $this->getGrupo();
+        return view('secretaria.estudiantes.ajax.create',compact('departamentos','grupos','municipios'));
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateEstudianteRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(CreateEstudianteRequest $request)
     {
         $estudiante = new Estudiante($request->all());
         $estudiante->save();
-        return redirect()->route('estudiantes.index');
+
+        $data = [
+            'estudiante'=>$estudiante,
+            'messaje' => 'Guardado con exito'
+        ];
+        return response()->json($data,200);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \ATS\Estudiante  $estudiante
-     * @return \Illuminate\Http\Response
+     * @param Estudiante $estudiante
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($id)
+    public function show(Estudiante $estudiante)
     {
-        $estudiante = Estudiante::findOrFail($id);
         $municipio = Municipio::findOrFail($estudiante->birthcity);
-        return view('admin.estudiantes.show', compact('estudiante','municipio'));
+        return view('secretaria.estudiantes.show', compact('estudiante','municipio'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \ATS\Estudiante  $estudiante
-     * @return \Illuminate\Http\Response
+     * @param Estudiante $estudiante
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Estudiante $estudiante)
     {
-        $estudiante= Estudiante::findOrFail($id);
         $departamentos = Departamento::pluck('name','id');
-        $grados = $this->getSalon();
-        return view('admin.estudiantes.edit',compact('estudiante','grados','departamentos'));
+        $municipios = Municipio::pluck('name','id');
+        $grupos = $this->getGrupo();
+        return view('secretaria.estudiantes.edit',compact('estudiante','grupos','departamentos','municipios'));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \ATS\Estudiante  $estudiante
-     * @return \Illuminate\Http\Response
+     * @param UpdateEstudianteRequest $request
+     * @param Estudiante $estudiante
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateEstudianteRequest $request, $id)
+    public function update(UpdateEstudianteRequest $request, Estudiante $estudiante)
     {
-        $estudiante = Estudiante::findOrFail($id);
-        $estudiante->fill($request->all());
-        $estudiante->save();
-        return redirect()->route('estudiantes.index');
+        $estudiante->update($request->all());
+        return redirect()->route('secretaria.estudiantes.index');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \ATS\Estudiante  $estudiante
-     * @return \Illuminate\Http\Response
+     * @param Estudiante $estudiante
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Estudiante $estudiante)
     {
-        $estudiante = Estudiante::findOrFail($id);
         $estudiante->delete();
         return redirect()->back();
     }
@@ -110,13 +106,13 @@ class EstudianteController extends Controller
     /**
      * @return array
      */
-    public function getSalon (): array
+    public function getGrupo (): array
     {
         $data = Grupo::all();
-        $grados = [];
+        $grupos = [];
         foreach ($data as $key => $value) {
-            $grados[$key + 1] = $value->NameAula;
+            $grupos[$key + 1] = $value->NameAula;
         }
-        return $grados;
+        return $grupos;
     }
 }
