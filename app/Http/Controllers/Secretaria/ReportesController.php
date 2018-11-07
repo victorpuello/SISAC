@@ -17,20 +17,8 @@ class ReportesController extends Controller
         $this->salones_todos = Grupo::orderBy('name','ASC')->get();
     }
     public function index(){
-        $periodos = Periodo::pluck('name','id');
-        $docentes = Docente::pluck('name','id');
-        $asignaturas = Asignatura::pluck('name','id');
-        $grados = ['0' => 'Pre-Escolar', '1' => 'Primero', '2' => 'Segundo', '3' => 'Tercero', '4' => 'Cuarto', '5' => 'Quinto', '6' => 'Sexto', '7' => 'Septimo', '8' => 'Octavo', '9' => 'Noveno', '10' => 'Decimo', '11' => 'Once'];
-        $sal= collect();
-        foreach ($this->salones_todos as $salon){
-            $sal->push([
-                'id'=>$salon->id,
-                'nombre'=>$salon->full_name,
-                'grado'=>$salon->grade,
-            ]);
-        }
-        $salones = $sal->sortBy('grado')->pluck('nombre','id');
-        return view('admin.reportes.index',compact('periodos','salones','docentes','asignaturas','grados'));
+
+        return view('secretaria.reportes.index');
     }
     public function reporteAcademico (Request $request){
         $aula = Grupo::find($request->salon);
