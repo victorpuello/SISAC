@@ -1,10 +1,12 @@
 <ul class="nav nav-main">
+    <?php if (\Illuminate\Support\Facades\Blade::check('multilogros')): ?>
     <li>
         <a class="nav-link" href="<?php echo e(route('home')); ?>">
             <i class="fas fa-home" aria-hidden="true"></i>
             <span>Escritorio</span>
         </a>
     </li>
+    <?php endif; ?>
     <li class="nav-parent">
         <a class="nav-link" href="#">
             <i class="fas fa-school" aria-hidden="true"></i>

@@ -3,6 +3,7 @@
 namespace ATS\Providers;
 
 use ATS\Model\Planilla;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
@@ -42,9 +43,11 @@ class AppServiceProvider extends ServiceProvider
         Blade::if('editar', function ($estudiante){
             return is_null($estudiante);
         });
-
         Blade::if('institucion', function ($institucion){
             return is_null($institucion);
+        });
+        Blade::if('multilogros', function (){
+            return (Config::get('institucion.indicadores.modoPlanilla') === 'seguimiento');
         });
         Blade::directive('prop', function ($expression) {
             return "<?php echo ATS\Clases\Vue::prop({$expression}); ?>";
