@@ -125,6 +125,14 @@
                 </a>
             </li>
         </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="{{route('definitivas.index')}}">
+                    <i class="fas fa-check"></i>
+                    Definitivas
+                </a>
+            </li>
+        </ul>
     </li>
     <li class="nav-parent">
         <a class="nav-link" href="#">

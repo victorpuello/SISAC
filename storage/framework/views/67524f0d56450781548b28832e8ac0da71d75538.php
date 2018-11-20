@@ -1,12 +1,10 @@
 <ul class="nav nav-main">
-    <?php if (\Illuminate\Support\Facades\Blade::check('multilogros')): ?>
     <li>
         <a class="nav-link" href="<?php echo e(route('home')); ?>">
             <i class="fas fa-home" aria-hidden="true"></i>
             <span>Escritorio</span>
         </a>
     </li>
-    <?php endif; ?>
     <li class="nav-parent">
         <a class="nav-link" href="#">
             <i class="fas fa-school" aria-hidden="true"></i>
@@ -124,6 +122,14 @@
                 <a class="nav-link simple-ajax-modal" href="<?php echo e(route('planillas.getfiltro')); ?>">
                     <i class="fas fa-check-square"></i>
                     Calificar
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="<?php echo e(route('definitivas.index')); ?>">
+                    <i class="fas fa-check"></i>
+                    Definitivas
                 </a>
             </li>
         </ul>

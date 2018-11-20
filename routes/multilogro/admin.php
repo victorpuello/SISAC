@@ -8,6 +8,7 @@ Route::resource('aspectos', 'AspectoController');
 Route::resource('anios', 'AnioController');
 Route::resource('areas', 'AreaController');
 Route::resource('grupos', 'GrupoController');
+Route::resource('definitivas', 'DefinitivaController');
 Route::resource('grados', 'GradoController');
 Route::resource('jornadas', 'JornadaController');
 Route::resource('estandars', 'EstandarController');
