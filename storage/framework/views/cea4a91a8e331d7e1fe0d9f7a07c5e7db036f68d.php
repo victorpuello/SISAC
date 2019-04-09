@@ -1,11 +1,11 @@
 <div id="custom-content" class="modal-block modal-block-full ">
     <section class="card">
-        {!! Form::open(['route' => 'estudiantes.store', 'method' => 'POST','files' => true,'class' => 'form-horizontal form-bordered']) !!}        <header class="card-header">
+        <?php echo Form::open(['route' => 'estudiantes.store', 'method' => 'POST','files' => true,'class' => 'form-horizontal form-bordered']); ?>        <header class="card-header">
             <h2 class="card-title">Crear estudiante nuevo </h2>
         </header>
         <div class="card-body">
-            @include('admin.estudiantes.partials.messages')
-            @include('admin.estudiantes.partials.fieldsCreate')
+            <?php echo $__env->make('admin.estudiantes.partials.messages', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <?php echo $__env->make('admin.estudiantes.partials.fieldsCreate', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         </div>
         <footer class="card-footer">
             <div class="row">
@@ -15,7 +15,8 @@
                 </div>
             </div>
         </footer>
-        {!! Form::close() !!}
+        <?php echo Form::close(); ?>
+
     </section>
 </div>
 <script>

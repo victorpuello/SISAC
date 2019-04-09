@@ -10,7 +10,7 @@
             <section class="card">
                 <div class="card-body">
                     <div class="thumb-info mb-3">
-                        <img src="<?php echo e(url('/imgUsers/estudiantes/')); ?>/<?php echo e($estudiante->path); ?>" class="rounded img-fluid" alt="<?php echo e($estudiante->name); ?>">
+                        <img src="<?php echo e(asset("storage/usersdata/img/estudiantes/".$estudiante->path)); ?>" class="rounded img-fluid" alt="<?php echo e($estudiante->name); ?>">
                         <div class="thumb-info-title">
                             <span class="thumb-info-inner"><?php echo e($estudiante->name); ?></span>
                             <span class="thumb-info-type">Alumno</span>

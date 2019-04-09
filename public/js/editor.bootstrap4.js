@@ -73,17 +73,18 @@ $.extend( true, $.fn.dataTable.Editor.classes, {
 	},
 	"form": {
 		"tag": "form-horizontal",
-		"button": "btn btn-default"
+		"button": "btn",
+		"buttonInternal": "btn btn-outline-secondary"
 	},
 	"field": {
 		"wrapper": "DTE_Field form-group row",
 		"label":   "col-lg-4 col-form-label",
 		"input":   "col-lg-8",
 		"error":   "error is-invalid",
-		"msg-labelInfo": "form-text text-secondary",
-		"msg-info":      "form-text text-secondary",
-		"msg-message":   "form-text text-secondary",
-		"msg-error":     "form-text text-danger",
+		"msg-labelInfo": "form-text text-secondary small",
+		"msg-info":      "form-text text-secondary small",
+		"msg-message":   "form-text text-secondary small",
+		"msg-error":     "form-text text-danger small",
 		"multiValue":    "card multi-value",
 		"multiInfo":     "small",
 		"multiRestore":  "card multi-restore"

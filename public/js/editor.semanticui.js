@@ -57,6 +57,7 @@ $.extend( true, $.fn.dataTable.Editor.classes, {
 	"form": {
 		"tag": "ui form",
 		"button": "ui button",
+		"buttonInternal": "ui button",
 		"content": 'DTE_Form_Content'
 	},
 	"field": {
