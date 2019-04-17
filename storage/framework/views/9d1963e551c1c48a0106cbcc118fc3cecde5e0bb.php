@@ -17,4 +17,4 @@
             <h4 class="ib text-center text-uppercase"><?php echo e($nameReporte); ?></h4>
         </div>
     </div>
-</header>
+</header><?php /**PATH C:\xampp\htdocs\SISAC\resources\views/admin/reportes/partials/header.blade.php ENDPATH**/ ?>

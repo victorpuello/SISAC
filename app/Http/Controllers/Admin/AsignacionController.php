@@ -59,7 +59,7 @@ class AsignacionController extends Controller
         $asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
         $anios = Anio::orderBy('name','ASC')->pluck('name','id');
         $grupos = grupos_pluck();
-        return view('admin.asignaciones.ajax.create',compact('asignaciones','docentes','grupos','asignaturas','anios'));
+        return view('admin.asignaciones.ajax.create',compact('docentes','grupos','asignaturas','anios'));
     }
 
     /**

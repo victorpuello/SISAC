@@ -168,3 +168,4 @@
             </ul>
     </li>
 </ul>
+<?php /**PATH C:\xampp\htdocs\SISAC\resources\views/partials/menuLateral.blade.php ENDPATH**/ ?>

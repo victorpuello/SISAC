@@ -44,4 +44,4 @@
 
     </div>
 </div>
-<?php echo Form::hidden('code',null); ?>
+<?php echo Form::hidden('code',null); ?><?php /**PATH C:\xampp\htdocs\SISAC\resources\views/admin/indicadores/partials/fields.blade.php ENDPATH**/ ?>

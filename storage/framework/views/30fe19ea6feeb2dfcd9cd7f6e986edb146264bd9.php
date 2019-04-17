@@ -23,6 +23,13 @@
                     Calificar
                 </a>
             </li>
+            <?php if (\Illuminate\Support\Facades\Blade::check('multilogros')): ?>
+                <li>
+                    <a class="nav-link" href="<?php echo e(route('docente.planillas.index')); ?>">
+                        Asistencias
+                    </a>
+                </li>
+            <?php endif; ?>
         </ul>
         <?php if (\Illuminate\Support\Facades\Blade::check('director')): ?>
         <ul class="nav nav-children">
@@ -59,3 +66,4 @@
 
 
 
+<?php /**PATH C:\xampp\htdocs\SISAC\resources\views/partials/menuLateralDocentes.blade.php ENDPATH**/ ?>

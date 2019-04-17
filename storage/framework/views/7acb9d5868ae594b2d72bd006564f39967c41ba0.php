@@ -1,7 +1,7 @@
 <?php $__env->startSection('titulo', "Asignación"); ?>
 <?php $__env->startSection('namePage', "Modulo: Docentes -  Asignación "); ?>
 <?php $__env->startSection('styles'); ?>
-    <?php echo $__env->make('partials.stilosdt', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('partials.stilosdt', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="card-body">
@@ -31,11 +31,11 @@
 
     </div>
     <div id="inf" data-urltabla ="<?php echo e(route('asignacions.index')); ?>"  data-url ="<?php echo e(Config::get('app.url')); ?>"></div>
-    <?php echo $__env->make('admin.asignaciones.partials.messages', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-    <?php echo $__env->make('admin.asignaciones.partials.modals', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('admin.asignaciones.partials.messages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('admin.asignaciones.partials.modals', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
-    <?php echo $__env->make('partials.datatablescript', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('partials.datatablescript', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('scriptfin'); ?>
     <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
@@ -43,4 +43,4 @@
     <script src="<?php echo e(asset('js/tablas/asignaciones.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\SISAC\resources\views/admin/asignaciones/index.blade.php ENDPATH**/ ?>

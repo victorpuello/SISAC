@@ -12,7 +12,7 @@
                     <i class="fas fa-print mt-2"></i>
                 </div>
                 <div class="modal-text ">
-                    <?php echo $__env->make('admin.asignaturas.partials.messages', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    <?php echo $__env->make('admin.asignaturas.partials.messages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <div class="form-group mb-0 pb-0">
                         <label class=" control-label text-sm-right " for="w1-username">Periodo: </label>
                         <?php echo Form::select('periodo',$periodos, null, ['class' => 'form-control ', 'id'=>'w1-username','required', 'placeholder'=>'Seleccione un periodo']); ?>
@@ -49,7 +49,7 @@
                     <i class="fas fa-print mt-2"></i>
                 </div>
                 <div class="modal-text ">
-                    <?php echo $__env->make('docente.reportes.partials.messages', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    <?php echo $__env->make('docente.reportes.partials.messages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     <div class="form-group mb-0 pb-0">
                         <label class=" control-label text-sm-right " for="w1-username">Periodo: </label>
                         <?php echo Form::select('periodo',$periodos, null, ['class' => 'form-control ', 'id'=>'w1-username','required', 'placeholder'=>'Seleccione un periodo']); ?>
@@ -81,3 +81,4 @@
     </section>
 </div>
 <!-- End Modal Logros-->
+<?php /**PATH C:\xampp\htdocs\SISAC\resources\views/docente/reportes/partials/modals.blade.php ENDPATH**/ ?>

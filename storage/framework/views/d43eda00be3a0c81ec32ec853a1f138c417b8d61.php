@@ -35,7 +35,7 @@
 </head>
 <body>
 <div class="invoice">
-    <?php echo $__env->make('admin.reportes.partials.header', ['nameReporte' => 'Reporte de Indicadores'], \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('admin.reportes.partials.header', ['nameReporte' => 'Reporte de Indicadores'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php if(count($indicadores) > 0): ?>
         <div class="bill-info">
             <table class="table d-block border-dark">
@@ -83,3 +83,4 @@
 
 </body>
 </html>
+<?php /**PATH C:\xampp\htdocs\SISAC\resources\views/admin/reportes/print/logrosreport.blade.php ENDPATH**/ ?>

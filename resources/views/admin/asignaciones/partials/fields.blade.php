@@ -29,7 +29,7 @@
     <label class="col-sm-4 control-label text-sm-left pr-0 pt-1">Dirección de Grupo: </label>
     <div class="col-sm-8">
         <div class="radio-custom radio-primary">
-            {!! Form::radios('director', ['0' => 'No', '1' => 'Si'],null,['class' => 'pl-0 form-control mb-3','id'=>'director']) !!}
+            {!! Form::radios('director', ['0' => 'No', '1' => 'Si'],null,['classes' => 'pl-0 form-control mb-3','id'=>'director']) !!}
         </div>
     </div>
 </div>

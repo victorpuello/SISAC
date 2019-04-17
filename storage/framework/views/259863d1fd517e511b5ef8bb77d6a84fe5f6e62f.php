@@ -6,8 +6,8 @@
             <h2 class="card-title">Crear institución </h2>
         </header>
         <div class="card-body">
-            <?php echo $__env->make('admin.institucion.partials.messages', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-            <?php echo $__env->make('admin.institucion.partials.fields', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <?php echo $__env->make('admin.institucion.partials.messages', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+            <?php echo $__env->make('admin.institucion.partials.fields', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         </div>
         <footer class="card-footer">
             <div class="row">
@@ -20,4 +20,4 @@
         <?php echo Form::close(); ?>
 
     </section>
-</div>
+</div><?php /**PATH C:\xampp\htdocs\SISAC\resources\views/admin/institucion/ajax/create.blade.php ENDPATH**/ ?>

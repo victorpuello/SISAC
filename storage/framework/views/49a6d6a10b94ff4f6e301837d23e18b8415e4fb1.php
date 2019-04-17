@@ -86,7 +86,7 @@
                 </section>
             </div>
         <?php endif; ?>
-        <?php echo $__env->make('docente.reportes.partials.modals', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->make('docente.reportes.partials.modals', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
@@ -96,4 +96,4 @@
     <script src="<?php echo e(asset('vendor/pnotify/pnotify.custom.js"')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\SISAC\resources\views/docente/reportes/index.blade.php ENDPATH**/ ?>

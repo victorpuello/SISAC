@@ -51,7 +51,7 @@
 
             <!-- start: header -->
             <header class="header">
-                <?php echo $__env->make('partials.header', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                <?php echo $__env->make('partials.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 <!-- end: search & user box -->
             </header>
             <!-- end: header -->
@@ -73,13 +73,13 @@
                         <div class="nano-content">
                             <nav id="menu" class="nav-main" role="navigation">
                                 <?php if (\Illuminate\Support\Facades\Blade::check('admin')): ?>
-                                    <?php echo $__env->make('partials.menuLateral', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                    <?php echo $__env->make('partials.menuLateral', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 <?php endif; ?>
                                 <?php if (\Illuminate\Support\Facades\Blade::check('docente')): ?>
-                                    <?php echo $__env->make('partials.menuLateralDocentes', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                    <?php echo $__env->make('partials.menuLateralDocentes', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 <?php endif; ?>
                                 <?php if (\Illuminate\Support\Facades\Blade::check('secretaria')): ?>
-                                    <?php echo $__env->make('partials.menuLateralSecretaria', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                    <?php echo $__env->make('partials.menuLateralSecretaria', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 <?php endif; ?>
                             </nav>
                         </div>
@@ -103,7 +103,7 @@
 
                         <div class="right-wrapper text-right">
                             <ol class="breadcrumbs">
-                                <?php echo $__env->make('partials.breadcrumbs', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                <?php echo $__env->make('partials.breadcrumbs', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                             </ol>
                             <a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fas fa-chevron-left"></i></a>
                         </div>
@@ -125,7 +125,7 @@
 
                             <div class="sidebar-widget widget-calendar">
                                 <h6>Proximas Tareas</h6>
-                                <?php echo $__env->make('partials.task', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                <?php echo $__env->make('partials.task', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
             </aside>
         </section>
         <!-- Variables JS-->
-        <?php echo $__env->make('footer', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->make('footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- End Variables JS -->
         <!-- Vendor -->
         <script src="<?php echo e(asset('vendor/jquery/jquery.js')); ?>"></script>
@@ -156,3 +156,4 @@
         <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
     </body>
 </html>
+<?php /**PATH C:\xampp\htdocs\SISAC\resources\views/layouts/app.blade.php ENDPATH**/ ?>
