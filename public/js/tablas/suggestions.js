@@ -1,7 +1,7 @@
 (function($) {
 
     'use strict';
-    var table = $('#asignaciones');
+    var table = $('#suggestions');
     const inf = $('#inf');
     $(document).ready(function () {
             table.DataTable({
@@ -24,15 +24,14 @@
                     {data: null, defaultContent: '', className: 'control', orderable: false, searchable: false },
                     {data: "id", editField: "id", className: 'never', orderable: false, visible: false, searchable: false},
                     {data: "asignatura",name:'asignatura', orderable: true, searchable: true},
-                    {data: "docente", name:'docente', orderable: true, searchable: true},
-                    {data: "grupo",name:'grupo_id', orderable: true, searchable: true},
-                    {data: "director",name:'director', orderable: true, searchable: true},
-                    {data: "anio",name:'anio_id', orderable: true, searchable: true},
-                    {data: "active",name:'active', orderable: true, searchable: true},
+                    {data: "grado", name:'grado', orderable: true, searchable: true},
+                    {data: "category",name:'category', orderable: true, searchable: true},
+                    {data: "indicator",name:'indicator', orderable: true, searchable: true},
+                    {data: "description",name:'description', orderable: true, searchable: true},
                     {
                         data: "id", render: function (data, type, row) {
-                            return '<a href="' + inf.data('url') + "/admin/asignacions/" + data + '/edit"' + ' class="on-default edit-row simple-ajax-modal"><i class="fas fa-pencil-alt"></i></a>  ' +
-                                '<a href="#modalEliminar" data-nasg ="'+row.asignatura+' para el docente:  '+row.docente+'" data-urldestroy = "' + inf.data('url') + '/admin/asignacions/' + data +'" class="on-default remove-row modal-basic " >' +
+                            return '<a href="' + inf.data('url') + "/admin/suggestions/" + data + '/edit"' + ' class="on-default edit-row simple-ajax-modal"><i class="fas fa-pencil-alt"></i></a>  ' +
+                                '<a href="#modalEliminar" data-nasg ="'+row.asignatura+'" data-urldestroy = "' + inf.data('url') + '/admin/suggestions/' + data +'" class="on-default remove-row modal-basic " >' +
                                 '<i class="far fa-trash-alt"></i>' +
                                 '</a>';
                         },
@@ -53,7 +52,7 @@
                     }
                 ],
                 language: {
-                    lengthMenu: "_MENU_ Grupos por página",
+                    lengthMenu: "_MENU_ Sugerencias por página",
                     search: "_INPUT_",
                     searchPlaceholder: "Buscar...",
                     zeroRecords: "Nada encontrado, lo sentimos",

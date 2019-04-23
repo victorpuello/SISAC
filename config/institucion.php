@@ -19,7 +19,7 @@ return[
     // esta variable define si la planilla sera multilogro o monologro
     'indicadores' => [
         // Valores acomulativo - Seguimiento
-        'modoPlanilla'=> 'seguimiento',
+        'modoPlanilla'=> 'acomulativo',
         // El número de notas es uno (1) si el valor es acomulativo
         // Y (n) si el valor es seguimiento
         'numeroNotas' => '1',

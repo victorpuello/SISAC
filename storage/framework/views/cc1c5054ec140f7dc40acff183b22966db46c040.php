@@ -1,13 +1,14 @@
 <div id="custom-content" class="modal-block modal-block-primary modal-header-color">
     <section class="card">
         <header class="card-header">
-            <h2 class="card-title">Editar Asignación</h2>
+            <h2 class="card-title">Editar Indicador</h2>
         </header>
         <div class="card-body">
-            {!! Form::model($asignacion,['route'=>['asignacions.update',$asignacion],'method' => 'PUT','class' => 'form-horizontal form-bordered', 'id'=>'form-edit']) !!}
+            <?php echo Form::model($suggestion,['route'=>['suggestions.update',$suggestion],'method' => 'PUT','class' => 'form-horizontal form-bordered', 'id'=>'form-edit']); ?>
+
             <div class="modal-wrapper">
                 <div class="modal-text">
-                    @include('admin.suggestions.partials.fields')
+                    <?php echo $__env->make('admin.suggestions.partials.fields', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
             </div>
             <footer class="card-footer">
@@ -18,7 +19,9 @@
                     </div>
                 </div>
             </footer>
-            {!! Form::close() !!}
+            <?php echo Form::close(); ?>
+
         </div>
     </section>
 </div>
+<?php /**PATH C:\xampp\htdocs\SISAC\resources\views/admin/suggestions/ajax/edit.blade.php ENDPATH**/ ?>

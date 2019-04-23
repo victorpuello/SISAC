@@ -5,7 +5,6 @@ namespace ATS\Http\Controllers\Admin;
 use ATS\Imports\EstudianteImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use ATS\Estudiante;
 use ATS\Http\Controllers\Controller;
 
 class ImportEstudianteController extends Controller

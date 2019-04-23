@@ -23,8 +23,6 @@ class CreateSuggestionsTable extends Migration
             $table->foreign('grado_id')->references('id')->on('grados');
             $table->integer('asignatura_id')->unsigned();
             $table->foreign('asignatura_id')->references('id')->on('asignaturas');
-            $table->integer('suggestiontable_id')->unsigned();
-            $table->string('suggestiontable_type');
             $table->timestamps();
         });
     }
