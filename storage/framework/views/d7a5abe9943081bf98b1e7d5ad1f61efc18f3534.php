@@ -45,35 +45,35 @@
             </div>
         </section>
     </div>
-    <div class="tab-content pb-5">
-        <div id="everything" class="tab-pane active">
-            <ul class="list-unstyled search-results-list">
-                <li>
-                    <p class="result-type">
-                        <span class="badge badge-primary">user</span>
-                    </p>
-                    <a href="pages-user-profile.html" class="has-thumb">
-                        <div class="result-thumb">
-                            <img src="img/!logged-user.jpg" alt="John Doe" />
-                        </div>
-                        <div class="result-data">
-                            <p class="h3 title text-primary">John Doe</p>
-                            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante nisl, sagittis nec lacus et, convallis efficitur justo. Curabitur elementum feugiat quam. Etiam ac orci iaculis, luctus nisl et, aliquet metus. Praesent congue tortor venenatis, ornare eros eu, semper orci.</p>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <p class="result-type">
-                        <span class="badge badge-primary">page</span>
-                    </p>
-                    <a href="ui-elements-charts.html">
-                        <div class="result-data">
-                            <p class="h3 title text-primary">Charts</p>
-                            <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ante nisl, sagittis nec lacus et, convallis efficitur justo. Curabitur <strong>something</strong> elementum feugiat quam. Etiam ac orci iaculis, luctus nisl et, aliquet metus. Praesent congue tortor venenatis, ornare eros eu, semper orci.</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    
+        
+            
+                
+                    
+                        
+                    
+                    
+                        
+                            
+                        
+                        
+                            
+                            
+                        
+                    
+                
+                
+                    
+                        
+                    
+                    
+                        
+                            
+                            
+                        
+                    
+                
+            
+        
+    
 </div>

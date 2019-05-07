@@ -123,7 +123,7 @@ class CurrentNota
                 $notas->push($nota);
             }
         }
-        return $notas;
+        return $notas->sortBy('id');
      }
 }
 

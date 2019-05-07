@@ -1,12 +1,12 @@
 <div id="modalHeaderColorPrimary" class="modal-block modal-header-color modal-block-primary ">
     <section class="card">
-        <?php echo Form::open(['route' => 'users.store', 'method' => 'POST','files'=>true,'class' => 'form-horizontal form-bordered']); ?>
+        <?php echo Form::model($indicador,['route' => ['indicadors.update',$indicador], 'method' => 'PUT','class' => 'form-horizontal form-bordered']); ?>
 
         <header class="card-header">
-            <h2 class="card-title">Crear usuario nuevo </h2>
+            <h2 class="card-title">Editar indicador</h2>
         </header>
         <div class="card-body">
-            <?php echo $__env->make('admin.users.partials.fields', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <?php echo $__env->make('admin.indicadores.partials.fields', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         </div>
         <footer class="card-footer">
             <div class="row">

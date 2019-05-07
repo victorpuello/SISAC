@@ -60,7 +60,8 @@ $.extend( true, $.fn.dataTable.Editor.classes, {
 		"msg-error":     "label alert"
 	},
 	form: {
-		button:  "button small"
+		button:  "button small",
+		buttonInternal:  "button small"
 	}
 } );
 
@@ -105,12 +106,12 @@ DataTable.Editor.display.foundation = $.extend( true, {}, DataTable.Editor.model
 		content.prepend( self._dom.close );
 
 		$(self._dom.content)
-			.one('opened.fndtn.reveal', function () {
+			.one('open.zf.reveal', function () {
 				if ( callback ) {
 					callback();
 				}
 			})
-			.one('closed.fndtn.reveal', function () {
+			.one('closed.zf.reveal', function () {
 				self._shown = false;
 			});
 

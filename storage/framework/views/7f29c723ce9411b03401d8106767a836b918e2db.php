@@ -32,9 +32,9 @@
                     <th>Planilla</th>
                     <th>Nombre</th>
                     <th>Id_Nota_Cog</th>
-                    <th>Cognitivo 60%</th>
+                    <th>Cognitivo 50%</th>
                     <th>Id_Nota_Proc</th>
-                    <th>Procedimental 30%</th>
+                    <th>Procedimental 40%</th>
                     <th>Id_Nota_Act</th>
                     <th>Actitudinal 10%</th>
                     <th>Inasistencias ID</th>
@@ -44,7 +44,7 @@
                 </tr>
             </thead>
         </table>
-        <div id="inf" data-token ="<?php echo e(csrf_token()); ?>" data-urlproces ="<?php echo e(route('docente.notas.store')); ?>" data-urltabla ="<?php echo e(route('docente.planillas.show',$planilla)); ?>"></div>
+        <div id="inf" data-token ="<?php echo e(csrf_token()); ?>" data-urlproces ="<?php echo e(route('notas.store')); ?>" data-urltabla ="<?php echo e(route('planillas.show',$planilla)); ?>"></div>
     </div>
     </section>
 <?php $__env->stopSection(); ?>
@@ -67,6 +67,9 @@
     <script src="<?php echo e(asset('js/examples/examples.modals.js')); ?>"></script>
     <script src="<?php echo e(asset('js/jquery.numeric.js')); ?>"></script>
     <script src="<?php echo e(asset('js/tablas/notas.js')); ?>"></script>
+    <script>
+
+    </script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

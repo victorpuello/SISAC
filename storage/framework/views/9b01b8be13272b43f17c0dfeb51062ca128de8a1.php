@@ -1,7 +1,7 @@
 <?php $__env->startSection('titulo', "Indicadores"); ?>
 <?php $__env->startSection('namePage', "Modulo: Academico - Indicadores"); ?>
 <?php $__env->startSection('styles'); ?>
-    <?php echo $__env->make('partials.stilosdt', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    <?php echo $__env->make('partials.datatablesstyle', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="card-body">

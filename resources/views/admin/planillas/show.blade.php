@@ -33,9 +33,9 @@
                     <th>Planilla</th>
                     <th>Nombre</th>
                     <th>Id_Nota_Cog</th>
-                    <th>Cognitivo 60%</th>
+                    <th>Cognitivo 50%</th>
                     <th>Id_Nota_Proc</th>
-                    <th>Procedimental 30%</th>
+                    <th>Procedimental 40%</th>
                     <th>Id_Nota_Act</th>
                     <th>Actitudinal 10%</th>
                     <th>Inasistencias ID</th>

@@ -197,14 +197,14 @@
                     { data: "inasistencias.data.numero",className: 'editable', orderable: false},
                     { data: null,
                         render: function ( data, type, row ) {
-                            var prom = parseFloat(row.notas.data[0].cognitivo.score) * 0.60 + parseFloat(row.notas.data[1].procedimental.score) * 0.30 + parseFloat(row.notas.data[2].actitudinal.score) * 0.10;
+                            var prom = parseFloat(row.notas.data[0].cognitivo.score) * 0.50 + parseFloat(row.notas.data[1].procedimental.score) * 0.40 + parseFloat(row.notas.data[2].actitudinal.score) * 0.10;
                             return roundNumber(prom,2);
                         },
                         orderable: false
                     },
                     { data: null,
                         render: function ( data, type, row ) {
-                            var def = parseFloat(row.notas.data[0].cognitivo.score) * 0.60 + parseFloat(row.notas.data[1].procedimental.score) * 0.30 + parseFloat(row.notas.data[2].actitudinal.score) * 0.10;
+                            var def = parseFloat(row.notas.data[0].cognitivo.score) * 0.50 + parseFloat(row.notas.data[1].procedimental.score) * 0.40 + parseFloat(row.notas.data[2].actitudinal.score) * 0.10;
                             if (roundNumber(def,2) < 3 ){
                                 return "Bajo";
                             }
