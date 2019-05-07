@@ -15,6 +15,19 @@ Route::resource('indicadors', 'IndicadorController');
 Route::resource('notas', 'NotaController');
 Route::resource('asignacions', 'AsignacionController');
 Route::resource('periodos', 'PeriodoController');
+Route::get('planillas/reset', function (){
+    $planillas = \ATS\Model\Planilla::all();
+    foreach ($planillas as $planilla){
+        $planilla->update([
+            'modificada'=>0,
+            'cargada'=>0
+        ]);
+    }
+    $data = [
+        'messaje' => 'Planillas reseteadas con exito'
+    ];
+    return response()->json($data,200);
+});
 Route::resource('planillas', 'PlanillaController')->except(['show']);
 Route::resource('reportes', 'ReportesController')->only(['index']);
 Route::resource('acudiente', 'AcudienteController')->only(['edit','store','update','destroy']);
