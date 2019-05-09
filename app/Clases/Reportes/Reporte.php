@@ -41,7 +41,8 @@ class Reporte
         foreach ($this->grupo->asignaciones as $asignacion){
             $asignaturas->push($asignacion->asignatura);
         }
-        return $asignaturas;
+        //dd($asignaturas);
+        return $asignaturas->sortBy('area_id');
     }
 
     /**
