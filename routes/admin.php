@@ -28,6 +28,7 @@ Route::get('planillas/reset', function (){
     ];
     return response()->json($data,200);
 });
+Route::get('planillas/refresh/{planilla}', 'PlanillaController@updateDefinitivas')->name('planillas.refresh');
 Route::resource('planillas', 'PlanillaController')->except(['show']);
 Route::resource('reportes', 'ReportesController')->only(['index']);
 Route::resource('acudiente', 'AcudienteController')->only(['edit','store','update','destroy']);

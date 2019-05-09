@@ -99,7 +99,7 @@
                     </tbody>
                 </table>
                 <div>
-                    <p class="text-center" style="font-size: 13px">Equivalencias escala institucional con la escala nacional: Bajo: 1.00 - 5.99, Básico: 6.00 - 7.99, Alto: 8.00 - 9.49, Superior: 9.50 - 10.00 </p>
+                    <p class="text-center" style="font-size: 13px">Equivalencias escala institucional con la escala nacional: Bajo: 1.00 - 2.99, Básico: 3.00 - 3.99, Alto: 4.00 - 4.59, Superior: 4.60 - 5.00 </p>
                 </div>
             </div>
         </div>

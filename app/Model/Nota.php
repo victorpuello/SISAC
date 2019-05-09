@@ -29,7 +29,7 @@ use Illuminate\Database\Eloquent\Model;
 class Nota extends Model
 {
     protected $fillable = [
-        'score','estudiante_id','indicador_id','periodo_id',
+       'id', 'score','estudiante_id','indicador_id','periodo_id',
     ];
 
     public function estudiante(){
@@ -42,7 +42,4 @@ class Nota extends Model
         return $this->belongsTo(Periodo::class);
     }
 
-//    public  function getScoreAttribute(){
-//        return intval($this->attributes['score']);
-//    }
 }

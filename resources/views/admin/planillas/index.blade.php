@@ -13,7 +13,7 @@
         </header>
         <div class="row">
             @foreach( $planillas as $planilla)
-                <div class="col-lg-2 mt-2 mb-2">
+                <div class="col-lg-3 mt-2 mb-2">
                     <section class="card">
                         <header class="card-header bg-{{Config::get('institucion.fondos.2')}}">
                             <div class="card-header-profile-picture">
@@ -34,6 +34,9 @@
 
                             {!! Form::model($planilla,['route' => ['planillas.update',$planilla], 'method' => 'PUT','class' => 'form-horizontal form-bordered']) !!}
                                 <div class="row mt-1">
+                                    <div class="col-lg-4 col-4">
+                                        <a class="btn btn-xs btn-danger center mt-3" href="{{route('planillas.refresh',$planilla)}}"><i class="fas fa-pencil-alt mr-1"></i>Refresh</a>
+                                    </div>
                                     <div class="col-lg-2 col-2">
                                                 <div class="col-sm-7 mt-lg-3 col-lg-6 col-xl-6  mt-3 switch switch-sm switch-primary" data-toggle="tooltip" data-placement="top" title="Guardar Planilla">
                                                     @edited($planilla)
@@ -43,7 +46,7 @@
                                                     @endedited
                                                 </div>
                                     </div>
-                                        <div class="col-lg-2  offset-lg-5  col-2 offset-6 ">
+                                        <div class="col-lg-2  offset-lg-1  col-2 offset-2 ">
                                                 <div class="col-sm-7 mt-lg-3 col-lg-6 col-xl-6  mt-3 switch switch-sm switch-warning" data-toggle="tooltip" data-placement="top" title="Bloquear/Desbloquear">
                                                     @load($planilla)
                                                         {!! Form::checkbox('cargada',$planilla->cargada,$planilla->cargada,['class'=>'form-comtrol','data-plugin-ios-switch','id'=>'cargada']) !!}

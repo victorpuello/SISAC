@@ -3,7 +3,8 @@
 namespace ATS\Http\Controllers\Admin;
 
 use ATS\Http\Controllers\Controller;
-use ATS\Municipio;
+
+use ATS\Model\Municipio;
 use Illuminate\Http\Request;
 
 class MunicipioController extends Controller

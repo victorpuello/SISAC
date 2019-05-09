@@ -2,6 +2,7 @@
 
 namespace ATS\Http\Controllers\Admin;
 
+use ATS\Events\CrearEstudianteEvent;
 use ATS\Model\Departamento;
 use ATS\Model\Estudiante;
 use ATS\Model\Grupo;
@@ -57,8 +58,8 @@ class EstudianteController extends Controller
     public function store(CreateEstudianteRequest $request)
     {
         $estudiante = new Estudiante($request->all());
+        event(new CrearEstudianteEvent($estudiante));
         $estudiante->save();
-
         $data = [
             'estudiante'=>$estudiante,
             'messaje' => 'Guardado con exito'
