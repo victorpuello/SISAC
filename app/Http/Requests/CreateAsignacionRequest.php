@@ -2,10 +2,10 @@
 
 namespace ATS\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use ATS\Clases\CurrentPeriodo;
 use ATS\Model\Asignacion;
 use ATS\Model\Planilla;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 

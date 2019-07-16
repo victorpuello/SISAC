@@ -25,8 +25,6 @@ class CreateIndicadorRequest extends FormRequest
      */
     public function rules()
     {
-//        $code = $this->request->get('grado_id').''.$this->request->get('asignatura_id').''.$this->request->get('grado_id').''.$this->request->get('periodo_id').''.$this->request->get('docente_id').''.$this->request->get('category').''.$this->request->get('indicator');
-//        dd($this->request->all());
         return [
             'code' => Rule::unique('indicadors','code'),
             'grado_id' => ['required',Rule::exists('grados','id')],

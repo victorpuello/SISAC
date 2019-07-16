@@ -7,7 +7,7 @@
             {!! Form::model($asignacion,['route'=>['asignacions.update',$asignacion],'method' => 'PUT','class' => 'form-horizontal form-bordered', 'id'=>'form-edit']) !!}
             <div class="modal-wrapper">
                 <div class="modal-text">
-                    @include('admin.asignaciones.partials.fields')
+                    @include('admin.suggestions.partials.fields')
                 </div>
             </div>
             <footer class="card-footer">

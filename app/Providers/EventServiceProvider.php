@@ -13,11 +13,16 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+<<<<<<< HEAD
         'ATS\Events\LlenarPlanillasEvent' => [
             'ATS\Listeners\CrearPlanillasListener',
         ],'ATS\Events\CrearEstudianteEvent' => [
             'ATS\Listeners\CrearEstudianteListener',
         ],
+=======
+        'ATS\Events\LlenarPlanillasEvent' => ['ATS\Listeners\CrearPlanillasListener'],
+        'ATS\Events\CrearObservacionesEvent' => ['ATS\Listeners\CrearObservacionesListener'],
+>>>>>>> f205701c54e689f65413584e1861d5d7aa273eb0
     ];
 
     /**

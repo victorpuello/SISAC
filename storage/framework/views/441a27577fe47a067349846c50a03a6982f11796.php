@@ -29,3 +29,4 @@
     </section>
 </div>
 <!-- End Modal Eliminar-->
+<?php /**PATH C:\xampp\htdocs\SISAC\resources\views/docente/indicadores/partials/modals.blade.php ENDPATH**/ ?>

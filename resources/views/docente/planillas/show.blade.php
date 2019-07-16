@@ -33,11 +33,17 @@
                     <th>Planilla</th>
                     <th>Nombre</th>
                     <th>Id_Nota_Cog</th>
+<<<<<<< HEAD
                     <th>Cognitivo 50%</th>
                     <th>Id_Nota_Proc</th>
                     <th>Procedimental 40%</th>
+=======
+                    <th>Cognitivo {{Config::get('institucion.indicadores.categorias.0.porcentaje') * 100}} %</th>
+                    <th>Id_Nota_Proc</th>
+                    <th>Procedimental {{Config::get('institucion.indicadores.categorias.1.porcentaje') * 100}} %</th>
+>>>>>>> f205701c54e689f65413584e1861d5d7aa273eb0
                     <th>Id_Nota_Act</th>
-                    <th>Actitudinal 10%</th>
+                    <th>Actitudinal {{Config::get('institucion.indicadores.categorias.2.porcentaje') * 100}} %</th>
                     <th>Inasistencias ID</th>
                     <th>Inasistencias</th>
                     <th>Definitiva</th>

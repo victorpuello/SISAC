@@ -71,7 +71,7 @@
                         </div>
                         <div class="widget-summary-col mt-3">
                             <div class="summary" style="min-height: 48px;">
-                                <h4 class="title">Logros</h4>
+                                <h4 class="title">Indicadores</h4>
                                 <div class="info">
                                     <strong class="timer amount count-title count-number" data-to="{{$Nlogros}}" data-speed="3500"></strong>
                                 </div>

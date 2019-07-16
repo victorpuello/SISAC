@@ -23,6 +23,13 @@
                     Calificar
                 </a>
             </li>
+            @multilogros()
+                <li>
+                    <a class="nav-link" href="{{route('docente.planillas.index')}}">
+                        Asistencias
+                    </a>
+                </li>
+            @endmultilogros
         </ul>
         @director
         <ul class="nav nav-children">

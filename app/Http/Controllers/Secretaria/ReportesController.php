@@ -4,14 +4,8 @@ namespace ATS\Http\Controllers\Secretaria;
 
 use App;
 use Illuminate\Http\Request;
-use ATS\Asignatura;
-use ATS\Docente;
-use ATS\Estudiante;
+use ATS\Model\{Asignatura,Docente,Estudiante,Institucion,Indicador,Periodo,Grupo};
 use ATS\Http\Requests\ReportesIndicadoresRequest;
-use ATS\Institucion;
-use ATS\Logro;
-use ATS\Periodo;
-use ATS\Grupo;
 use ATS\Http\Controllers\Controller;
 use PDF;
 
@@ -23,20 +17,8 @@ class ReportesController extends Controller
         $this->salones_todos = Grupo::orderBy('name','ASC')->get();
     }
     public function index(){
-        $periodos = Periodo::pluck('name','id');
-        $docentes = Docente::pluck('name','id');
-        $asignaturas = Asignatura::pluck('name','id');
-        $grados = ['0' => 'Pre-Escolar', '1' => 'Primero', '2' => 'Segundo', '3' => 'Tercero', '4' => 'Cuarto', '5' => 'Quinto', '6' => 'Sexto', '7' => 'Septimo', '8' => 'Octavo', '9' => 'Noveno', '10' => 'Decimo', '11' => 'Once'];
-        $sal= collect();
-        foreach ($this->salones_todos as $salon){
-            $sal->push([
-                'id'=>$salon->id,
-                'nombre'=>$salon->full_name,
-                'grado'=>$salon->grade,
-            ]);
-        }
-        $salones = $sal->sortBy('grado')->pluck('nombre','id');
-        return view('admin.reportes.index',compact('periodos','salones','docentes','asignaturas','grados'));
+
+        return view('secretaria.reportes.index');
     }
     public function reporteAcademico (Request $request){
         $aula = Grupo::find($request->salon);
@@ -99,7 +81,7 @@ class ReportesController extends Controller
         $periodo = Periodo::find($request->periodo);
         $asignatura = Asignatura::find($request->asignatura);
         $grado = $request->grade;
-        $logros = Logro::where('docente_id','=',$request->docente)
+        $logros = Indicador::where('docente_id','=',$request->docente)
             ->where('periodo_id','=',$request->periodo)
             ->where('asignatura_id','=',$request->asignatura)
             ->where('grade','=',$request->grade)

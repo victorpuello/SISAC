@@ -3,7 +3,10 @@
 namespace ATS\Http\Controllers\Admin;
 
 use ATS\Http\Controllers\Controller;
+<<<<<<< HEAD
 
+=======
+>>>>>>> f205701c54e689f65413584e1861d5d7aa273eb0
 use ATS\Model\Municipio;
 use Illuminate\Http\Request;
 

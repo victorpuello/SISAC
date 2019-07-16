@@ -1,1 +1,1 @@
-<p>Reporte generado por: <strong><?php echo e(auth()->user()->full_name); ?></strong>  - <strong><?php echo e(\Carbon\Carbon::now()); ?></strong> </p>
+<p>Reporte generado por: <strong><?php echo e(auth()->user()->full_name); ?></strong>  - <strong><?php echo e(\Carbon\Carbon::now()); ?></strong> </p><?php /**PATH C:\xampp\htdocs\SISAC\resources\views/admin/reportes/partials/footer.blade.php ENDPATH**/ ?>

@@ -81,3 +81,4 @@
 
 	</body>
 </html>
+<?php /**PATH C:\xampp\htdocs\SISAC\resources\views/layouts/login.blade.php ENDPATH**/ ?>

@@ -56,7 +56,7 @@ class HomeController extends Controller
                 $Ndocentes = Docente::all()->count();
                 $Nusers = User::all()->count();
                 $Nlogros = Indicador::all()->count();
-                return view('admin.home',compact('Nestudiantes','Ndocentes','Nusers','Nlogros'));
+                return view('secretaria.home',compact('Nestudiantes','Ndocentes','Nusers','Nlogros'));
             break;
             default:
                 break;

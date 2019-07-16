@@ -89,8 +89,8 @@ class NotaDataTablesEditor extends DataTablesEditor
         $definitivaAnio = $definitiva->singleDefinitivaAnio($this->planilla->asignacion->asignatura);
         DB::beginTransaction();
             try{
-                $this->procesarNotas($model, $data);
-                $this->procesarInasistencia($model, $data);
+                $this->procesarNotas($data);
+                $this->procesarInasistencia($data);
                 $score = $this->currentNotas->scoreDef($this->planilla->asignacion->asignatura);
                 $definitiva->updateDefinitiva($definitiva->singleDefinitivaAsignatura($this->planilla->asignacion->asignatura),[
                     'score' => $score,
@@ -109,10 +109,9 @@ class NotaDataTablesEditor extends DataTablesEditor
     }
 
     /**
-     * @param Estudiante $estudiante
      * @param array $data
      */
-    public function procesarNotas (Estudiante $estudiante, Array $data): void
+    public function procesarNotas (Array $data): void
     {
         $categorias = Config::get('institucion.indicadores.categorias');
         for ($i=0; $i < count($categorias); $i++){
@@ -128,17 +127,13 @@ class NotaDataTablesEditor extends DataTablesEditor
     }
 
     /**
-     * @param Model $model
      * @param array $data
      */
-    public function procesarInasistencia (Model $model, array $data): void
+    public function procesarInasistencia (array $data): void
     {
-        if (!$this->inasistencia->singleInasistencia(intval(data_get($data, 'inasistencias.data.id')))->numero === intval(data_get($data, 'inasistencias.data.id'))) {
+        if ($this->inasistencia->singleInasistencia(intval(data_get($data, 'inasistencias.data.id')))->numero <> intval(data_get($data, 'inasistencias.data.numero'))) {
             $this->inasistencia->updateInasistencia($this->inasistencia->singleInasistencia(intval(data_get($data, 'inasistencias.data.id'))), [
                 'numero' => intval(data_get($data, 'inasistencias.data.numero')),
-                'estudiante_id' => $model->id,
-                'periodo_id' => $this->planilla->periodo->id,
-                'asignatura_id' => $this->planilla->asignacion->asignatura->id
             ]);
         }
     }

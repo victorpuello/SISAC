@@ -12,22 +12,11 @@
         <div class="card-body">
             @include('admin.estudiantes.partials.messages')
             {!! Form::model($estudiante,['route' => ['estudiantes.update',$estudiante->id], 'method' => 'PUT','files' => true,'class' => 'form-horizontal form-bordered']) !!}
-            <div class="row">
-                <div class="card-body">
-                    <div class="thumb-info mb-3">
-                        <img src="{{ url('/imgUsers/estudiantes/')}}/{{$estudiante->path}}" class="rounded img-fluid" alt="{{$estudiante->name}}">
-                        <div class="thumb-info-title">
-                            <span class="thumb-info-inner">{{$estudiante->name}}</span>
-                            <span class="thumb-info-type">Alumno</span>
-                        </div>
-                    </div>
+                @include('admin.estudiantes.partials.fields')
+                <div class="card-footer">
+                    <a href="{{ URL::previous() }}" class="btn btn-danger">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                 </div>
-            </div>
-            @include('admin.estudiantes.partials.fields')
-            <div class="card-footer">
-                <a href="{{ URL::previous() }}" class="btn btn-danger">Cancelar</a>
-                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-            </div>
             {!! Form::close() !!}
         </div>
     </section>

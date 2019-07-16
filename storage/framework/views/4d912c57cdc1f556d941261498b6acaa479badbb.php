@@ -22,7 +22,7 @@
 </head>
 <body>
     <div class="invoice page">
-        <?php echo $__env->make('admin.reportes.partials.header', ['nameReporte' => 'Sabana de notas'], \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+        <?php echo $__env->make('admin.reportes.partials.header', ['nameReporte' => 'Sabana de notas'], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <section>
             <table class="table" style="border: none; border-color: #ffffff;">
                 <tbody>
@@ -62,3 +62,4 @@
     </div>
 </body>
 </html>
+<?php /**PATH C:\xampp\htdocs\SISAC\resources\views/admin/reportes/print/sabana.blade.php ENDPATH**/ ?>

@@ -31,10 +31,10 @@
                         <a class="nav-link" href="#resumen" data-toggle="tab">Resumen</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#observaciones" data-toggle="tab">Observaciones</a>
+                        <a class="nav-link" href="#observaciones" data-toggle="tab">Anotaciones</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#edit" data-toggle="tab">Nueva</a>
+                        <a class="nav-link" href="#edit" data-toggle="tab">Nueva anotación</a>
                     </li>
                 </ul>
                 <div class="tab-content">

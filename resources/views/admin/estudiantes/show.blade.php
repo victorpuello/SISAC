@@ -10,7 +10,7 @@
             <section class="card">
                 <div class="card-body">
                     <div class="thumb-info mb-3">
-                        <img src="{{ url('/imgUsers/estudiantes/')}}/{{$estudiante->path}}" class="rounded img-fluid" alt="{{$estudiante->name}}">
+                        <img src="{{asset("storage/usersdata/img/estudiantes/".$estudiante->path)}}" class="rounded img-fluid" alt="{{$estudiante->name}}">
                         <div class="thumb-info-title">
                             <span class="thumb-info-inner">{{$estudiante->name}}</span>
                             <span class="thumb-info-type">Alumno</span>

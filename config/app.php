@@ -225,6 +225,8 @@ return [
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Arr' => Illuminate\Support\Arr::class,
+        'Str' => Illuminate\Support\Str::class,
     ],
 
 ];

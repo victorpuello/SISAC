@@ -1,0 +1,1 @@
+<?php /**PATH C:\xampp\htdocs\SISAC\resources\views/footer.blade.php ENDPATH**/ ?>

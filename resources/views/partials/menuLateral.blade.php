@@ -111,9 +111,33 @@
         </ul>
         <ul class="nav nav-children">
             <li>
+                <a class="nav-link" href="{{route('suggestions.index')}}">
+                    <i class="fas fa-box" aria-hidden="true"></i>
+                    Banco de Indicadores
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="{{route('aspectos.index')}}">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    Aspectos Observador
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-children">
+            <li>
                 <a class="nav-link simple-ajax-modal" href="{{route('planillas.getfiltro')}}">
                     <i class="fas fa-check-square"></i>
                     Calificar
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-children">
+            <li>
+                <a class="nav-link" href="{{route('definitivas.index')}}">
+                    <i class="fas fa-check"></i>
+                    Definitivas
                 </a>
             </li>
         </ul>

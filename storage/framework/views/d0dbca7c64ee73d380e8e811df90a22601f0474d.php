@@ -8,7 +8,7 @@
 
             <div class="modal-wrapper">
                 <div class="modal-text">
-                    <?php echo $__env->make('admin.asignaciones.partials.fields', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    <?php echo $__env->make('admin.suggestions.partials.fields', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
             </div>
             <footer class="card-footer">
@@ -24,3 +24,4 @@
         </div>
     </section>
 </div>
+<?php /**PATH C:\xampp\htdocs\SISAC\resources\views/admin/asignaciones/ajax/edit.blade.php ENDPATH**/ ?>

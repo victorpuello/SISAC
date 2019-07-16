@@ -5,7 +5,7 @@
         </header>
         <div class="card-body">
             @include('admin.estudiantes.partials.messages')
-            @include('admin.estudiantes.partials.fields')
+            @include('admin.estudiantes.partials.fieldsCreate')
         </div>
         <footer class="card-footer">
             <div class="row">

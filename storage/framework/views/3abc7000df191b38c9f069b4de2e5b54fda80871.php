@@ -71,7 +71,7 @@
                         </div>
                         <div class="widget-summary-col mt-3">
                             <div class="summary" style="min-height: 48px;">
-                                <h4 class="title">Logros</h4>
+                                <h4 class="title">Indicadores</h4>
                                 <div class="info">
                                     <strong class="timer amount count-title count-number" data-to="<?php echo e($Nlogros); ?>" data-speed="3500"></strong>
                                 </div>
@@ -132,4 +132,4 @@
     <script src="<?php echo e(asset('js/examples/examples.charts.js')); ?>"></script>
     <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\SISAC\resources\views/admin/home.blade.php ENDPATH**/ ?>

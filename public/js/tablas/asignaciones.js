@@ -23,8 +23,8 @@
                 columns: [
                     {data: null, defaultContent: '', className: 'control', orderable: false, searchable: false },
                     {data: "id", editField: "id", className: 'never', orderable: false, visible: false, searchable: false},
-                    {data: "asignatura",name:'asignatura.name', orderable: true, searchable: true},
-                    {data: "docente", name:'docente.name', orderable: true, searchable: true},
+                    {data: "asignatura",name:'asignatura', orderable: true, searchable: true},
+                    {data: "docente", name:'docente', orderable: true, searchable: true},
                     {data: "grupo",name:'grupo_id', orderable: true, searchable: true},
                     {data: "director",name:'director', orderable: true, searchable: true},
                     {data: "anio",name:'anio_id', orderable: true, searchable: true},
