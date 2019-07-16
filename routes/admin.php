@@ -17,19 +17,7 @@ Route::resource('indicadors', 'IndicadorController');
 Route::resource('notas', 'NotaController');
 Route::resource('asignacions', 'AsignacionController');
 Route::resource('periodos', 'PeriodoController');
-Route::get('planillas/reset', function (){
-    $planillas = \ATS\Model\Planilla::all();
-    foreach ($planillas as $planilla){
-        $planilla->update([
-            'modificada'=>0,
-            'cargada'=>0
-        ]);
-    }
-    $data = [
-        'messaje' => 'Planillas reseteadas con exito'
-    ];
-    return response()->json($data,200);
-});
+Route::get('planillas/reset/{planilla}','PlanillaController@reset')->name('planillas.reset');
 Route::get('planillas/refresh/{planilla}', 'PlanillaController@updateDefinitivas')->name('planillas.refresh');
 Route::get('suggestions/import','SuggestionController@import')->name('suggestions.import');
 Route::post('suggestions/process','SuggestionController@process')->name('suggestions.process');

@@ -70,6 +70,12 @@ class PlanillaController extends Controller
         return view('admin.planillas.ajax.filtro',compact('docentes','anios'));
     }
 
+    public function reset(Planilla $planilla){
+        $planilla->load('asignacion.docente','periodo.anio');
+        $planilla->update(['cargada'=>0]);
+        return redirect()->back();
+    }
+
     public function updateDefinitivas(Planilla $planilla){
         $planilla->load('asignacion.grupo.estudiantes','periodo','asignacion.asignatura');
         $estudiantes = $planilla->asignacion->grupo->estudiantes;
