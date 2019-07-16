@@ -20,7 +20,7 @@
 
     </style>
 </head>
-<body>
+<body style="font-size: 14.6px">
 @foreach($reporte->getEstudiantesWithPuestos($periodo) as $estudiante)
 <div class="invoice page">
     @include('admin.reportes.partials.header', ['nameReporte' => 'Informe Academico'])
@@ -89,17 +89,16 @@
         <div class="row justify-content-end">
             <div class="col-sm-4 mt-5">
                 <table class="table h6 text-dark">
-                    <tbody>
+                    <tbody class="mt-0 mb-0">
                     <tr>
                         <td colspan="3">Observaciones</td>
                         <td></td>
-                        <td class="mt-5 pt-5 text-center"> <hr class="mt-5">Director de Grupo</td>
+                        <td class="mt-4 pt-5 text-center"> <hr class="mt-5">Director de Grupo</td>
                     </tr>
-
                     </tbody>
                 </table>
                 <div>
-                    <p class="text-center" style="font-size: 13px">Equivalencias escala institucional con la escala nacional: Bajo: 1.00 - 2.99, Básico: 3.00 - 3.99, Alto: 4.00 - 4.59, Superior: 4.60 - 5.00 </p>
+                    <p class="text-center" style="font-size: 10px">Equivalencias escala institucional con la escala nacional: Bajo: 1.00 - 2.99, Básico: 3.00 - 3.99, Alto: 4.00 - 4.59, Superior: 4.60 - 5.00 </p>
                 </div>
             </div>
         </div>

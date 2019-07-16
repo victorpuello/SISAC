@@ -1,1 +1,0 @@
-<p>Reporte generado por: <strong><?php echo e(auth()->user()->full_name); ?></strong>  - <strong><?php echo e(\Carbon\Carbon::now()); ?></strong> </p>

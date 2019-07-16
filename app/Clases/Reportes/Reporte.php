@@ -41,7 +41,7 @@ class Reporte
         foreach ($this->grupo->asignaciones as $asignacion){
             $asignaturas->push($asignacion->asignatura);
         }
-        return $asignaturas;
+        return $asignaturas->sortBy('area_id');
     }
 
     /**
@@ -71,11 +71,12 @@ class Reporte
      */
     public  function getDefScore (Asignatura $asignatura, Estudiante $estudiante, Periodo $periodo){
         $def = $estudiante->definitivas->where('asignatura_id','=',$asignatura->id)->where('periodo_id','=',$periodo->id)->first();
-        return $def->score ?? 1;
+        return $def->score ?? ' ';
     }
+    
     public  function getDefIndicador (Asignatura $asignatura, Estudiante $estudiante, Periodo $periodo){
         $def = $estudiante->definitivas->where('asignatura_id','=',$asignatura->id)->where('periodo_id','=',$periodo->id)->first();
-        return $def->indicador ?? 'Bajo';
+        return $def->indicador ?? ' ';
     }
 
     /**
@@ -151,6 +152,6 @@ class Reporte
             }
         }
         //dd($notas);
-        return $notas;
+        return $notas->take(3);
     }
 }
