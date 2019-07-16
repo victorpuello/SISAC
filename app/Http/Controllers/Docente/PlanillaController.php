@@ -4,6 +4,7 @@ namespace ATS\Http\Controllers\Docente;
 
 
 use ATS\Clases\CurrentPeriodo;
+use ATS\Events\CreatePlanillasEvent;
 use ATS\Events\LlenarPlanillasEvent;
 use ATS\Http\Controllers\Controller;
 use ATS\Model\Anio;
@@ -23,6 +24,7 @@ class PlanillaController extends Controller
    public function __construct (Request $request){
         $this->middleware(function ($request, $next) {
             $this->docente = Auth::user()->docente;
+            event(new CreatePlanillasEvent($this->docente));
             return $next($request);
         });
    }
@@ -30,7 +32,8 @@ class PlanillaController extends Controller
        $periodo = new CurrentPeriodo();
        $docente = $this->docente->load(['planillas.asignacion.asignatura','planillas.asignacion.grupo.estudiantes','planillas.asignacion.grupo.grado']);
        $planillas = $docente->planillas->where('periodo_id','=',$periodo->getPeriodo()->id);
-       return view('docente.planillas.index',compact('planillas','docente'));
+       $pdo = $periodo->getPeriodo();
+       return view('docente.planillas.index',compact('planillas','docente','pdo'));
    }
 
     public function create()
