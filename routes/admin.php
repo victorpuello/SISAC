@@ -17,7 +17,6 @@ Route::resource('indicadors', 'IndicadorController');
 Route::resource('notas', 'NotaController');
 Route::resource('asignacions', 'AsignacionController');
 Route::resource('periodos', 'PeriodoController');
-<<<<<<< HEAD
 Route::get('planillas/reset', function (){
     $planillas = \ATS\Model\Planilla::all();
     foreach ($planillas as $planilla){
@@ -32,11 +31,9 @@ Route::get('planillas/reset', function (){
     return response()->json($data,200);
 });
 Route::get('planillas/refresh/{planilla}', 'PlanillaController@updateDefinitivas')->name('planillas.refresh');
-=======
 Route::get('suggestions/import','SuggestionController@import')->name('suggestions.import');
 Route::post('suggestions/process','SuggestionController@process')->name('suggestions.process');
 Route::resource('suggestions', 'SuggestionController');
->>>>>>> f205701c54e689f65413584e1861d5d7aa273eb0
 Route::resource('planillas', 'PlanillaController')->except(['show']);
 Route::resource('reportes', 'ReportesController')->only(['index']);
 Route::resource('acudiente', 'AcudienteController')->only(['edit','store','update','destroy']);
