@@ -15,6 +15,8 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         'ATS\Events\LlenarPlanillasEvent' => [
             'ATS\Listeners\CrearPlanillasListener',
+        ],'ATS\Events\CrearEstudianteEvent' => [
+            'ATS\Listeners\CrearEstudianteListener',
         ],
     ];
 

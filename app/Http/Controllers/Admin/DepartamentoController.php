@@ -2,7 +2,8 @@
 
 namespace ATS\Http\Controllers\Admin;
 
-use ATS\Departamento;
+
+use ATS\Model\Departamento;
 use Illuminate\Http\Request;
 use ATS\Http\Controllers\Controller;
 

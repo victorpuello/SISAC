@@ -41,7 +41,7 @@ class Reporte
         foreach ($this->grupo->asignaciones as $asignacion){
             $asignaturas->push($asignacion->asignatura);
         }
-        return $asignaturas;
+        return $asignaturas->sortBy('area_id');
     }
 
     /**
@@ -71,11 +71,12 @@ class Reporte
      */
     public  function getDefScore (Asignatura $asignatura, Estudiante $estudiante, Periodo $periodo){
         $def = $estudiante->definitivas->where('asignatura_id','=',$asignatura->id)->where('periodo_id','=',$periodo->id)->first();
-        return $def->score ?? 1;
+        return $def->score ?? ' ';
     }
+    
     public  function getDefIndicador (Asignatura $asignatura, Estudiante $estudiante, Periodo $periodo){
         $def = $estudiante->definitivas->where('asignatura_id','=',$asignatura->id)->where('periodo_id','=',$periodo->id)->first();
-        return $def->indicador ?? 'Bajo';
+        return $def->indicador ?? ' ';
     }
 
     /**
@@ -119,19 +120,22 @@ class Reporte
 
     public function notasInforme(Asignatura $asignatura,Estudiante $estudiante, Periodo $periodo){
         $_current_notas = $estudiante->notas->where('periodo_id','=',$periodo->id);
-        $indicadores= $asignatura->indicadores->where('periodo_id','=',$periodo->id)->where('grado_id','=',$estudiante->grupo->grado->id);
+        $indicadores= $asignatura->indicadores->where('periodo_id','=',$periodo->id)
+                                              ->where('asignatura_id','=',$asignatura->id)  
+                                              ->where('grado_id','=',$estudiante->grupo->grado->id);
         $is_found = false;
+        //dd($_current_notas);
+        //dd($indicadores)
         $notas = collect();
+
         foreach ($_current_notas as $nota){
             foreach ($indicadores as $indicador){
                 if ($nota->indicador->id === $indicador->id){
-                    $is_found = true;
+                    $notas->push($nota);
                 }
             }
-            if ($is_found){
-                $notas->push($nota);
-            }
         }
+       // dd($notas);
         foreach ($notas as $nota){
             switch ($nota->indicador->category){
                 case 'cognitivo':
@@ -147,6 +151,7 @@ class Reporte
                     break;
             }
         }
-        return $notas;
+        //dd($notas);
+        return $notas->take(3);
     }
 }
