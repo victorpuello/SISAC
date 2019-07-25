@@ -2,6 +2,7 @@
 
 namespace ATS\Model;
 
+use ATS\Events\CrearEstudianteEvent;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use ATS\Model\Municipio;
@@ -69,6 +70,9 @@ class Estudiante extends Model
     use SoftDeletes;
     protected $fillable =[
         'name','lastname','typeid','identification','birthday','birthstate','birthcity','gender','address','EPS','phone','datein','dateout','path','stade','situation','grupo_id',
+    ];
+    protected $dispatchesEvents = [
+        'created' => CrearEstudianteEvent::class,
     ];
     // Start Relationship of estudent
     protected $all_notas;

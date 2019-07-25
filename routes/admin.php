@@ -38,6 +38,8 @@ Route::resource('import-users', 'InportUserController')->only(['index', 'store']
 Route::resource('import-estudiantes', 'ImportEstudianteController')->only(['index', 'store']);
 Route::post('docentes/addAsignaturas/{id}',['as' => 'docentes.addAsignaturas', 'uses' => 'DocenteController@addAsignaturas']);
 Route::get('estudiantes/municipios/{id}',['as' => 'municipios', 'uses' => 'MunicipioController']);
+Route::get('estudiantes-import/','ImportEstudianteController@index')->name('import-estudiantes.index');
+Route::post('estudiantes-import/','ImportEstudianteController@store')->name('import-estudiantes.store');
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs');
 
 
