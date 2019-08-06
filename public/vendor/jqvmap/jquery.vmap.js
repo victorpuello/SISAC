@@ -1,10 +1,10 @@
 /*!
  * JQVMap: jQuery Vector Map Library
  * @author JQVMap <me@peterschmalfeldt.com>
- * @version 1.5.1
+ * @version 1.5.0
  * @link http://jqvmap.com
  * @license https://github.com/manifestinteractive/jqvmap/blob/master/LICENSE
- * @builddate 2016/06/02
+ * @builddate 2016/03/15
  */
 
 var VectorCanvas = function (width, height, params) {
@@ -848,23 +848,16 @@ JQVMap.prototype.positionPins = function(){
     pinObj = jQuery(pinObj);
     var countryId = map.getCountryId(pinObj.attr('for').toLowerCase());
     var countryObj = jQuery('#' + countryId);
-    var bbox = countryObj[0].getBBox();
+
+    var bbox = document.getElementById(countryId).getBBox();
+    var position = countryObj.position();
 
     var scale = map.scale;
-    var rootCoords = map.canvas.rootGroup.getBoundingClientRect();
-    var mapCoords = map.container[0].getBoundingClientRect();
-    var coords = {
-      left: rootCoords.left - mapCoords.left,
-      top: rootCoords.top - mapCoords.top
-    };
 
-    var middleX = (bbox.x * scale) + ((bbox.width * scale) / 2);
-    var middleY = (bbox.y * scale) + ((bbox.height * scale) / 2);
+    var left = position.left + (bbox.width / 2) * scale - pinObj.width() / 2,
+      top = position.top + (bbox.height / 2) * scale - pinObj.height() / 2;
 
-    pinObj.css({
-      left: coords.left + middleX - (pinObj.width() / 2),
-      top: coords.top + middleY - (pinObj.height() / 2)
-    });
+    pinObj.css('left', left).css('top', top);
   });
 };
 

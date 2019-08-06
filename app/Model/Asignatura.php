@@ -65,5 +65,8 @@ class Asignatura extends Model
     public function getNameAttribute(){
         return ucwords($this->attributes['name']) ;
     }
+    public function grados(){
+        return $this->belongsToMany(Grado::class);
+    }
 
 }

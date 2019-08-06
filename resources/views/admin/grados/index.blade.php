@@ -38,6 +38,7 @@
                             <a href="{{ route('grados.edit',$grado) }}" class="btn btn-xs btn-primary simple-ajax-modal"><i class="fas fa-pencil-alt"></i> Editar</a>
                             <a href="#modalEliminar" class="btn btn-xs btn-primary deleted modal-basic" data-nasg="{{$grado->name}}" data-url="{{ route('grados.destroy', $grado->id ) }}"><i class="far fa-trash-alt"></i> Eliminar</a>
                             <a href="{{ route('grados.show',$grado) }}" class="btn btn-xs btn-primary "><i class="far fa-eye"></i> Grupos</a>
+                            <a href="{{route('grados.asignaturas',$grado)}}" class="btn btn-xs btn-primary "><i class="fas fa-cog"></i> Configuración</a>
                         </div>
                     </div>
                 </div>

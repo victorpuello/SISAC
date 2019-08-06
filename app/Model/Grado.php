@@ -36,4 +36,11 @@ class Grado extends Model
     public function getFulNameAttribute(){
         return $this->attributes['category'].' °';
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function asignaturas(){
+        return $this->belongsToMany(Asignatura::class)->withPivot('porcentaje');
+    }
 }

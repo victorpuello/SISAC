@@ -1,9 +1,9 @@
 /*! jQuery Mockjax
  * A Plugin providing simple and flexible mocking of ajax requests and responses
  * 
- * Version: 2.2.1
+ * Version: 2.5.0
  * Home: https://github.com/jakerella/jquery-mockjax
- * Copyright (c) 2016 Jordan Kasper, formerly appendTo;
+ * Copyright (c) 2018 Jordan Kasper, formerly appendTo;
  * NOTE: This repository was taken over by Jordan Kasper (@jakerella) October, 2014
  * 
  * Dual licensed under the MIT or GPL licenses.
@@ -174,18 +174,23 @@
 			}
 		} else {
 
+			var effecitveUrl = handler.url;
+
 			// Apply namespace prefix to the mock handler's url.
-			var namespace = handler.namespace || $.mockjaxSettings.namespace;
+			var namespace = handler.namespace || (typeof(handler.namespace) === 'undefined' && $.mockjaxSettings.namespace);
+
 			if (!!namespace) {
-				var namespacedUrl = [namespace, handler.url].join('/');
-				namespacedUrl = namespacedUrl.replace(/(\/+)/g, '/');
-				handler.url = namespacedUrl;
+				var namespacedUrl = [
+					namespace.replace(/(\/+)$/, ''),
+					handler.url.replace(/^(\/+)/, '')
+				].join('/');
+				effecitveUrl = namespacedUrl;
 			}
 
 			// Look for a simple wildcard '*' or a direct URL match
-			var star = handler.url.indexOf('*');
-			if (handler.url !== requestSettings.url && star === -1 ||
-					!new RegExp(handler.url.replace(/[-[\]{}()+?.,\\^$|#\s]/g, '\\$&').replace(/\*/g, '.+')).test(requestSettings.url)) {
+			var star = effecitveUrl.indexOf('*');
+			if (effecitveUrl !== requestSettings.url && star === -1 ||
+					!new RegExp(effecitveUrl.replace(/[-[\]{}()+?.,\\^$|#\s]/g, '\\$&').replace(/\*/g, '.+')).test(requestSettings.url)) {
 				return null;
 			}
 		}
@@ -281,9 +286,14 @@
 						} else {
 							this.responseText = mockHandler.responseText;
 						}
-						if( typeof mockHandler.status === 'number' || typeof mockHandler.status === 'string' ) {
+
+						if ($.isArray(mockHandler.status)) {
+							var idxStatus = Math.floor(Math.random() * mockHandler.status.length);
+							this.status = mockHandler.status[idxStatus];
+						} else if (typeof mockHandler.status === 'number' || typeof mockHandler.status === 'string') {
 							this.status = mockHandler.status;
 						}
+
 						if( typeof mockHandler.statusText === 'string') {
 							this.statusText = mockHandler.statusText;
 						}
@@ -633,16 +643,18 @@
 			};
 		};
 
-		// Iterate over our mock handlers (in registration order) until we find
-		// one that is willing to intercept the request
+		// Iterate over our mock handlers (in order depending on the matchInRegistrationOrder setting)
+		// until we find one that is willing to intercept the request
 		for(var k = 0; k < mockHandlers.length; k++) {
-			if ( !mockHandlers[k] ) {
+			var handlerIndex = $.mockjaxSettings.matchInRegistrationOrder ? k : mockHandlers.length - 1 - k;
+			var origHandler = mockHandlers[handlerIndex];
+			if ( !origHandler ) {
 				continue;
 			}
 
-			mockHandler = getMockForRequest( mockHandlers[k], requestSettings );
+			mockHandler = getMockForRequest( origHandler, requestSettings );
 			if(!mockHandler) {
-				logger.debug( mockHandlers[k], ['Mock does not match request', url, requestSettings] );
+				logger.debug( origHandler, ['Mock does not match request', url, requestSettings] );
 				// No valid mock found for this request
 				continue;
 			}
@@ -657,6 +669,24 @@
 				$.ajaxSetup({}, requestSettings)
 			] );
 
+			if ((mockHandler.status === 301 || mockHandler.status === 302) &&
+				(requestSettings.type.toUpperCase() === 'GET' || requestSettings.type.toUpperCase() === 'HEAD') &&
+				mockHandler.headers.Location) {
+				logger.debug('Doing mock redirect to', mockHandler.headers.Location, requestSettings.type);
+
+				var redirectSettings = {};
+				var origKeys = Object.keys(origSettings);
+				// We can't alter origSettings, so we need a shallow copy of it...
+				for (var oi=0; oi<origKeys.length; oi++) {
+					redirectSettings[origKeys[oi]] = origSettings[origKeys[oi]];
+				}
+				redirectSettings.url = mockHandler.headers.Location;
+				redirectSettings.headers = {
+					Referer: origSettings.url
+				};
+
+				return handleAjax(redirectSettings);
+			}
 
 			if ( requestSettings.dataType && requestSettings.dataType.toUpperCase() === 'JSONP' ) {
 				if ((mockRequest = processJsonpMock( requestSettings, mockHandler, origSettings ))) {
@@ -709,7 +739,7 @@
 					// Mock the XHR object
 					xhr: function() { return xhr( mockHandler, requestSettings, origSettings, origHandler ); }
 				}));
-			})(mockHandler, requestSettings, origSettings, mockHandlers[k]);
+			})(mockHandler, requestSettings, origSettings, origHandler);
 			/* jshint loopfunc:false */
 
 			return mockRequest;
@@ -724,6 +754,7 @@
 			throw new Error('AJAX not mocked: ' + origSettings.url);
 		}
 		else { // trigger a normal request
+			logger.log('Real ajax call to', origSettings.url);
 			return _ajax.apply($, [origSettings]);
 		}
 	}
@@ -853,7 +884,9 @@
 	 * Default settings for mockjax. Some of these are used for defaults of
 	 * individual mock handlers, and some are for the library as a whole.
 	 * For individual mock handler settings, please see the README on the repo:
-	 * https://github.com/jakerella/jquery-mockjax#api-methods
+	 * https://github.com/jakerella/jquery-mockjax#api-methods.
+	 * For Global settings see:
+	 * https://github.com/jakerella/jquery-mockjax#globally-defining-mockjax-settings
 	 *
 	 * @type {Object}
 	 */
@@ -862,6 +895,7 @@
 		logger:				window.console,
 		logging:			2,
 		logLevelMethods:	['error', 'warn', 'info', 'log', 'debug'],
+		matchInRegistrationOrder: true,
 		namespace:			null,
 		status:				200,
 		statusText:			'OK',
@@ -960,6 +994,24 @@
 		if ( arguments.length === 1 ) {
 			return mockHandlers[i];
 		}
+	};
+
+	/**
+	 * Retrieve the current array of mock handlers.
+	 * NOTE: Altering these handlers, or the array itself is probably not a good
+	 * idea! This could easily lead to malfunction of the library. If you need
+	 * to alter a handler, clear(index) it (using the array index) and then
+	 * create a new handler with $.mockjax({ ... })
+	 *
+	 * **WARNING**: Additionally, note that the handlers array WILL NOT CHANGE
+	 * when a mock is cleared. This is because we have to maintain the handler
+	 * indeces for clearing of other mock handlers. (This is not ideal, and
+	 * will probably change in the future.) Cleared mocks are set to null!
+	 *
+ 	 * @return {Array} The current collection of handlers
+	 */
+	$.mockjax.handlers = function() {
+		return mockHandlers;
 	};
 
 	/**

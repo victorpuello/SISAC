@@ -36,6 +36,7 @@
         <link rel="stylesheet" href="<?php echo e(asset('css/custom.css')); ?>">
 
         <!-- Head Libs -->
+
         <script src="<?php echo e(asset('vendor/modernizr/modernizr.js')); ?>"></script>
 
     </head>

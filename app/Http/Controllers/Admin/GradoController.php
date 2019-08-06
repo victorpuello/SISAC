@@ -2,6 +2,7 @@
 
 namespace ATS\Http\Controllers\Admin;
 
+use ATS\Model\Asignatura;
 use ATS\Model\Grado;
 use ATS\Http\Controllers\Controller;
 use ATS\Http\Requests\CreateGradoRequest;
@@ -75,5 +76,30 @@ class GradoController extends Controller
     {
         $grado->delete();
         return redirect()->route('grados.index');
+    }
+
+    /**
+     * @param Grado $grado
+     * @return Grado
+     */
+    public function showAsignaturas(Grado $grado){
+
+        return view('admin.grados.asignaturas',compact('grado'));
+    }
+
+    public function VincularAsignaturas(Grado $grado){
+        $asignaturas = Asignatura::orderBy('name','ASC')->pluck('name','id');
+        return view('admin.grados.ajax.asignaturas',compact('grado','asignaturas'));
+    }
+
+    public function VincularAsignaturasStore(Request $request){
+        $grado = Grado::find($request->grado_id);
+        $grado->asignaturas()->syncWithoutDetaching([
+            'asignatura_id' => $request->asignatura_id,
+            'grado_id' => $request->grado_id,
+            'porcentaje' => $request->porcentaje
+        ]);
+        dd($grado->asignaturas());
+        return view('admin.grados.asignaturas',compact('grado','asignaturas'));
     }
 }

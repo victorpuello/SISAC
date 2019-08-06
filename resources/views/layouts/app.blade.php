@@ -36,6 +36,7 @@
         <link rel="stylesheet" href="{{asset('css/custom.css')}}">
 
         <!-- Head Libs -->
+
         <script src="{{asset('vendor/modernizr/modernizr.js')}}"></script>
 
     </head>
