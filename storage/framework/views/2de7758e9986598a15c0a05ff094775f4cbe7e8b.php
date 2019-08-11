@@ -85,6 +85,37 @@
                     </tbody>
                 </table>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    <table class="table table-bordered" style="margin-top: 10px; margin-bottom: 0px;">
+        <tbody>
+        <tr class="p-0">
+            <td class="p-1" style=" width: 30%; vertical-align: middle" rowspan="2"><strong>AREAS  / VALORACIONES</strong></td>
+            <td class="p-1 text-center text-uppercase" colspan="6">Desarrollo anual / periodos</td>
+        </tr>
+        <tr class="p-0">
+            <td class="p-1 text-center " style="width: 12%;">1°</td>
+            <td class="p-1 text-center " style="width: 12%;">2°</td>
+            <td class="p-1 text-center " style="width: 12%;">3°</td>
+            <td class="p-1 text-center " style="width: 12%;">4°</td>
+            <td class="p-1 text-center " style="width: 12%;">Final</td>
+        </tr>
+        </tbody>
+    </table>
+    <?php $__currentLoopData = $reporte->getAreas(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $area): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <table class="table table-bordered mb-0">
+            <tbody>
+            <tr class="table-bordered p-0">
+                <td class="p-2 text-left text-uppercase" style="width: 30%; vertical-align: middle;" rowspan="2" ><strong> <?php echo e($area->name); ?> </strong> </td>
+            </tr>
+            <tr class="text-dark">
+                <?php $__currentLoopData = $periodo->anio->periodos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $_periodo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <td class="p-0 pl-1 text-center" style="width: <?php echo e(porcentajeStyle(count($periodo->anio->periodos))); ?>%; vertical-align: middle"><strong>Nota Periodo</strong> </td>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </tr>
+            </tbody>
+        </table>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
     <div class="invoice-summary mt-5">
         <div class="row justify-content-end">
             <div class="col-sm-4 mt-5">

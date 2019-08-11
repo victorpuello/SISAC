@@ -83,7 +83,7 @@ class CurrentNota
         $categorias = Config::get('institucion.indicadores.categorias');
         $score = 0;
         foreach ($categorias as $categoria){
-            $score += $this->prom($asignatura,$categoria['name']);
+            $score = $this->prom($asignatura,$categoria['name']);
         }
         return $score;
     }

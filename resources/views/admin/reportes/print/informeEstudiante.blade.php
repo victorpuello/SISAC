@@ -85,6 +85,37 @@
                     </tbody>
                 </table>
     @endforeach
+    <table class="table table-bordered" style="margin-top: 10px; margin-bottom: 0px;">
+        <tbody>
+        <tr class="p-0">
+            <td class="p-1" style=" width: 30%; vertical-align: middle" rowspan="2"><strong>AREAS  / VALORACIONES</strong></td>
+            <td class="p-1 text-center text-uppercase" colspan="6">Desarrollo anual / periodos</td>
+        </tr>
+        <tr class="p-0">
+            <td class="p-1 text-center " style="width: 12%;">1°</td>
+            <td class="p-1 text-center " style="width: 12%;">2°</td>
+            <td class="p-1 text-center " style="width: 12%;">3°</td>
+            <td class="p-1 text-center " style="width: 12%;">4°</td>
+            <td class="p-1 text-center " style="width: 12%;">Final</td>
+        </tr>
+        </tbody>
+    </table>
+    @foreach($reporte->getAreas() as $area)
+        <table class="table table-bordered mb-0">
+            <tbody>
+            <tr class="table-bordered p-0">
+                <td class="p-2 text-left text-uppercase" style="width: 30%; vertical-align: middle;" rowspan="2" ><strong> {{$area->name}} </strong> </td>
+            </tr>
+            <tr class="text-dark">
+                @foreach($periodo->anio->periodos as $_periodo)
+                    <td class="p-0 pl-1 text-center" style="width: {{porcentajeStyle(count($periodo->anio->periodos))}}%; vertical-align: middle"><strong>Nota Periodo</strong> </td>
+                @endforeach
+            </tr>
+            </tbody>
+        </table>
+    @endforeach
+
+
     <div class="invoice-summary mt-5">
         <div class="row justify-content-end">
             <div class="col-sm-4 mt-5">

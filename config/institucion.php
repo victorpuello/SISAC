@@ -30,4 +30,52 @@ return[
             '2' => ['name' => 'actitudinal','porcentaje' => 0.1],
         ],
     ],
+    'SIE' => [
+        'preescolar' => [
+            'areas' => [
+                'Dimensión Comunicativa' => ['porcentaje' => 0.16],
+                'Dimensión Ética y valores' => ['porcentaje' => 0.16],
+                'Dimensión Socio-afectiva' => ['porcentaje' => 0.16],
+                'Dimensión Estética' => ['porcentaje' => 0.16],
+                'Dimensión Corporal' => ['porcentaje' => 0.16],
+                'Dimensión Cognitiva' => ['porcentaje' => 0.2]
+            ]
+        ],
+        'primaria' => [
+            'Ciencias Sociales' => ['porcentaje' => 0.12],
+            'Artistica' => ['porcentaje' => 0.04],
+            'Ciencias Naturales' => ['porcentaje' => 0.16],
+            'Ética y valores' => ['porcentaje' => 0.04],
+            'Educación Física' => ['porcentaje' => 0.08],
+            'Religión' => ['porcentaje' => 0.04],
+            'Lengua Castellana' => ['porcentaje' => 0.2],
+            'Idioma extranjero - Ingles' => ['porcentaje' => 0.08],
+            'Matemáticas' => ['porcentaje' => 0.2],
+            'Tecnología e Informática' => ['porcentaje' => 0.04]
+        ],
+        'secundaria' => [
+            'Ciencias Sociales' => ['porcentaje' => 0.1667],
+            'Artistica' => ['porcentaje' => 0.03333],
+            'Ciencias Naturales' => ['porcentaje' => 0.1667],
+            'Ética y valores' => ['porcentaje' => 0.03333],
+            'Educación Física' => ['porcentaje' => 0.06667],
+            'Religión' => ['porcentaje' => 0.03333],
+            'Lengua Castellana' => ['porcentaje' => 0.1667],
+            'Idioma extranjero - Ingles' => ['porcentaje' => 0.1],
+            'Matemáticas' => ['porcentaje' => 0.1667],
+            'Tecnología e Informática' => ['porcentaje' => 0.06667]
+        ],
+        'media' => [
+            'Ciencias Sociales' => ['porcentaje' => 0.1333],
+            'Artistica' => ['porcentaje' => 0.03333],
+            'Ciencias Naturales' => ['porcentaje' => 0.3],
+            'Ética y valores' => ['porcentaje' => 0.03333],
+            'Educación Física' => ['porcentaje' => 0.03333],
+            'Religión' => ['porcentaje' => 0.03333],
+            'Lengua Castellana' => ['porcentaje' => 0.1333],
+            'Idioma extranjero - Ingles' => ['porcentaje' => 0.1],
+            'Matemáticas' => ['porcentaje' => 0.1666],
+            'Tecnología e Informática' => ['porcentaje' => 0.03333]
+        ],
+    ]
 ];

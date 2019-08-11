@@ -29,7 +29,7 @@ use Illuminate\Database\Eloquent\Model;
 class Nota extends Model
 {
     protected $fillable = [
-       'id', 'score','estudiante_id','indicador_id','periodo_id',
+       'id', 'score','estudiante_id','indicador_id','periodo_id','asignatura_id',
     ];
 
     public function estudiante(){
@@ -40,6 +40,9 @@ class Nota extends Model
     }
     public function periodo(){
         return $this->belongsTo(Periodo::class);
+    }
+    public function asignatura(){
+        return $this->belongsTo(Asignatura::class);
     }
 
 }

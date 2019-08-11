@@ -4,6 +4,7 @@ namespace ATS\Http\Controllers\Admin;
 
 use ATS\Model\Asignacion;
 use ATS\Model\Estudiante;
+use ATS\Model\Nota;
 use ATS\Model\Periodo;
 use ATS\Model\Planilla;
 use Illuminate\Http\Response;
@@ -39,7 +40,22 @@ class NotaController extends Controller
      */
     public function create()
     {
-
+//        Nota::chunk(100, function ($notas) {
+//            foreach ($notas as $nota){
+//                $nota->update([
+//                    'asignatura_id'=> $nota->indicador->asignatura->id
+//                ]);
+//            }
+//        });
+//        $notas = Nota::where('id','>=',74750)->get();
+//        foreach ($notas as $nota){
+//            $nota->update([
+//                'asignatura_id'=> $nota->indicador->asignatura->id
+//            ]);
+//        }
+//
+//
+//        return 'Notas Update Con Exito';
     }
 
     /**

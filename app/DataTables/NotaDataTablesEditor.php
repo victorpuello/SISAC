@@ -92,6 +92,7 @@ class NotaDataTablesEditor extends DataTablesEditor
                 $this->procesarNotas($data);
                 $this->procesarInasistencia($data);
                 $score = $this->currentNotas->scoreDef($this->planilla->asignacion->asignatura);
+                //Estos Bloques de definitiva los puedo quitar mas adelante
                 $definitiva->updateDefinitiva($definitiva->singleDefinitivaAsignatura($this->planilla->asignacion->asignatura),[
                     'score' => $score,
                     'indicador' => indicador($score),

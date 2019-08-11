@@ -125,6 +125,25 @@ class Estudiante extends Model
     public function getAnotacionPeriodo($periodo){
         return $this->anotaciones->where('periodo_id','=',$periodo->id);
     }
+
+    /**
+     * @param Periodo $periodo
+     * @param Asignatura $asignatura
+     * @return int
+     */
+    public function getDefinitivaPeriodo(Periodo $periodo, Asignatura $asignatura){
+        $notas = $this->notas->where('periodo_id','=',$periodo->id)->where('asignatura_id','=',$asignatura->id)->take(3);
+        $notas->load('indicador');
+        $score = 0;
+        foreach ($notas as $nota){
+            $score += score($nota);
+        }
+        return $score ?? 1;
+    }
+
+    /**
+     * @return bool
+     */
     public function getActiveAttribute (){
         if ($this->stade ==='activo'){
             return true;

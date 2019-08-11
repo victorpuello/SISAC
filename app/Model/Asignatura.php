@@ -60,7 +60,7 @@ class Asignatura extends Model
         return $this->hasMany(Inasistencia::class);
     }
     public function notas(){
-        return $this->hasManyThrough(Nota::class,Indicador::class);
+        return $this->hasMany(Nota::class);
     }
     public function getNameAttribute(){
         return ucwords($this->attributes['name']) ;

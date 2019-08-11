@@ -75,7 +75,7 @@ class PlanillaController extends Controller
         $planilla->update(['cargada'=>0]);
         return redirect()->back();
     }
-
+    // Este metodo se puede quitar posteriormente
     public function updateDefinitivas(Planilla $planilla){
         $planilla->load('asignacion.grupo.estudiantes','periodo','asignacion.asignatura');
         $estudiantes = $planilla->asignacion->grupo->estudiantes;

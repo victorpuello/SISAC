@@ -30,7 +30,8 @@ class Reporte
     public function __construct (Grupo $grupo)
     {
         $this->grupo = $grupo;
-        $this->estudiantes = $grupo->estudiantes->where('stade','=','activo')->sortBy('lastname');
+        // No olvidar quitar el Take
+        $this->estudiantes = $grupo->estudiantes->where('stade','=','activo')->take(10)->sortBy('lastname');
     }
 
     /**
@@ -41,8 +42,20 @@ class Reporte
         foreach ($this->grupo->asignaciones as $asignacion){
             $asignaturas->push($asignacion->asignatura);
         }
-        return $asignaturas->sortBy('area_id');
+        return $asignaturas->sortBy('area_id')->unique();
     }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAreas(){
+        $areas = collect();
+        foreach ($this->grupo->asignaciones as $asignacion){
+            $areas->push($asignacion->asignatura->area);
+        }
+        return $areas->sortBy('id')->unique();
+    }
+
 
     /**
      * @return \ATS\Estudiante[]|\Illuminate\Database\Eloquent\Collection
@@ -67,16 +80,36 @@ class Reporte
      * @param Asignatura $asignatura
      * @param Estudiante $estudiante
      * @param Periodo $periodo
-     * @return string
+     * @return int
      */
     public  function getDefScore (Asignatura $asignatura, Estudiante $estudiante, Periodo $periodo){
-        $def = $estudiante->definitivas->where('asignatura_id','=',$asignatura->id)->where('periodo_id','=',$periodo->id)->first();
-        return $def->score ?? ' ';
+        return $this->getDefinitivaPeriodo($asignatura,$estudiante,$periodo) ?? 0;
     }
-    
+
+    /**
+     * @param Asignatura $asignatura
+     * @param Estudiante $estudiante
+     * @param Periodo $periodo
+     * @return string
+     */
     public  function getDefIndicador (Asignatura $asignatura, Estudiante $estudiante, Periodo $periodo){
         $def = $estudiante->definitivas->where('asignatura_id','=',$asignatura->id)->where('periodo_id','=',$periodo->id)->first();
         return $def->indicador ?? ' ';
+    }
+
+    /**
+     * @param Asignatura $asignatura
+     * @param Estudiante $estudiante
+     * @param Periodo $periodo
+     * @return float|int
+     */
+    public function getDefinitivaPeriodo(Asignatura $asignatura, Estudiante $estudiante, Periodo $periodo){
+        $notas = $estudiante->notas->where('periodo_id','=',$periodo->id)->where('asignatura_id','=',$asignatura->id)->take(3);
+        $score = 0;
+        foreach ($notas as $nota){
+            $score += score($nota);
+        }
+        return $score ?? 1;
     }
 
     /**
@@ -121,7 +154,7 @@ class Reporte
     public function notasInforme(Asignatura $asignatura,Estudiante $estudiante, Periodo $periodo){
         $_current_notas = $estudiante->notas->where('periodo_id','=',$periodo->id);
         $indicadores= $asignatura->indicadores->where('periodo_id','=',$periodo->id)
-                                              ->where('asignatura_id','=',$asignatura->id)  
+                                              ->where('asignatura_id','=',$asignatura->id)
                                               ->where('grado_id','=',$estudiante->grupo->grado->id);
         $is_found = false;
         //dd($_current_notas);

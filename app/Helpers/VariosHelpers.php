@@ -2,6 +2,7 @@
 
 use ATS\Model\Asignacion;
 use ATS\Model\Grupo;
+use ATS\Model\Nota;
 
 
 /**
@@ -93,4 +94,25 @@ function indicador($score){
 
 function porcentajeStyle($n){
     return (60/$n);
+}
+
+
+/**
+ * @param Nota $nota
+ * @return float|int
+ */
+function score(Nota $nota){
+    switch ($nota->indicador->category){
+        case 'cognitivo':
+            return config('institucion.indicadores.categorias.0.porcentaje') * $nota->score;
+            break;
+        case 'procedimental':
+            return config('institucion.indicadores.categorias.1.porcentaje') * $nota->score;
+            break;
+        case 'actitudinal':
+            return  config('institucion.indicadores.categorias.2.porcentaje') * $nota->score;
+            break;
+        default:
+            break;
+    }
 }

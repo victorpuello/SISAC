@@ -84,10 +84,12 @@ class VerificadorNotas
                     'score' => 1,
                     'estudiante_id' => $this->estudiante->id,
                     'indicador_id' => $this->indicadores->getIndicadorCategoryNivel($categoria,'bajo')->id,
-                    'periodo_id' =>$this->periodo->id
+                    'periodo_id' =>$this->periodo->id,
+                    'asignatura_id' => $this->asignatura->id
                 ]);
             }
-            Definitiva::create([
+            // Los puede eliminar Posteriormente
+            /*Definitiva::create([
                 'score' => 1/4,
                 'estudiante_id' => $this->estudiante->id,
                 'periodo_id' => $this->periodoFinal->id,
@@ -98,7 +100,7 @@ class VerificadorNotas
                 'estudiante_id' => $this->estudiante->id,
                 'periodo_id' => $this->periodo->id,
                 'asignatura_id' => $this->asignatura->id
-            ]);
+            ]);*/
             Inasistencia::create([
                 'numero'=> 0,
                 'estudiante_id'=> $this->estudiante->id,

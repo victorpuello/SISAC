@@ -29,11 +29,11 @@ class ReportesController extends Controller
         return view('admin.reportes.index',compact('periodos','grupos','docentes','asignaturas','grados'));
     }
     public function reporteAcademico (Request $request){
-        $grupo = Grupo::with(['estudiantes.definitivas','estudiantes.inasistencias','estudiantes.grupo.grado','estudiantes.notas.indicador','asignaciones.asignatura.indicadores'])->findOrFail($request->grupo);
+        $grupo = Grupo::with(['estudiantes.definitivas','estudiantes.inasistencias','estudiantes.grupo.grado','estudiantes.notas.indicador','asignaciones.asignatura.indicadores','asignaciones.asignatura.area'])->findOrFail($request->grupo);
         $institucion = Institucion::all()->first();
         $periodo = Periodo::with('anio.periodos')->findOrFail($request->periodo);
         $reporte = new Reporte($grupo);
-        //return view('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'));
+        return view('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'));
         $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'))
                     ->setPaper('legal')
                     ->setOrientation('portrait')
@@ -49,10 +49,10 @@ class ReportesController extends Controller
     public function  sabana(Request $request){
         $institucion = Institucion::first();
         $periodo = Periodo::findOrFail($request->periodo);
-        $grupo = Grupo::where('id','=', $request->grupo)->with('estudiantes.definitivas')->first();
+        $grupo = Grupo::where('id','=', $request->grupo)->with('estudiantes.notas.indicador')->first();
         $grupo->load(['asignaciones.asignatura']);
         $reporte = new Reporte($grupo);
-        //return view('admin.reportes.print.sabana', compact('reporte','periodo','institucion'));
+        return view('admin.reportes.print.sabana', compact('reporte','periodo','institucion'));
         $pdf = PDF::loadView('admin.reportes.print.sabana', compact('reporte','periodo','institucion'))
             ->setPaper('legal')
             ->setOption('footer-html',\View::make('admin.reportes.partials.footer'))
