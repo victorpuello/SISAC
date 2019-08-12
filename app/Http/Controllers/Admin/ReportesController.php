@@ -33,7 +33,7 @@ class ReportesController extends Controller
         $institucion = Institucion::all()->first();
         $periodo = Periodo::with('anio.periodos')->findOrFail($request->periodo);
         $reporte = new Reporte($grupo);
-        return view('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'));
+        //return view('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'));
         $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'))
                     ->setPaper('legal')
                     ->setOrientation('portrait')
@@ -52,7 +52,7 @@ class ReportesController extends Controller
         $grupo = Grupo::where('id','=', $request->grupo)->with('estudiantes.notas.indicador')->first();
         $grupo->load(['asignaciones.asignatura']);
         $reporte = new Reporte($grupo);
-        return view('admin.reportes.print.sabana', compact('reporte','periodo','institucion'));
+        //return view('admin.reportes.print.sabana', compact('reporte','periodo','institucion'));
         $pdf = PDF::loadView('admin.reportes.print.sabana', compact('reporte','periodo','institucion'))
             ->setPaper('legal')
             ->setOption('footer-html',\View::make('admin.reportes.partials.footer'))

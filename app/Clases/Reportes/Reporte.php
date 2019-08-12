@@ -31,7 +31,7 @@ class Reporte
     {
         $this->grupo = $grupo;
         // No olvidar quitar el Take
-        $this->estudiantes = $grupo->estudiantes->where('stade','=','activo')->take(10)->sortBy('lastname');
+        $this->estudiantes = $grupo->estudiantes->where('stade','=','activo')->sortBy('lastname');
     }
 
     /**
