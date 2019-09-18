@@ -21,8 +21,6 @@
             }
 
         };
-        console.log($('#inf').data('urltabla'));
-        console.log($('#inf').data('urlproces'));
         function trunc (x, posiciones = 0) {
             var s = x.toString();
             var l = s.length;

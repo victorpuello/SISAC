@@ -85,22 +85,10 @@ class NotaDataTablesEditor extends DataTablesEditor
         $this->indicadores = new IndicadoresPlanilla($this->planilla);
         $this->currentNotas = new CurrentNota($model,$this->planilla);
         $this->inasistencia = new CurrentInasistencia($model,$this->planilla->periodo);
-        $definitiva = new CurrentDefinitiva($model,$this->planilla->periodo);
-        $definitivaAnio = $definitiva->singleDefinitivaAnio($this->planilla->asignacion->asignatura);
         DB::beginTransaction();
             try{
                 $this->procesarNotas($data);
                 $this->procesarInasistencia($data);
-                $score = $this->currentNotas->scoreDef($this->planilla->asignacion->asignatura);
-                //Estos Bloques de definitiva los puedo quitar mas adelante
-                $definitiva->updateDefinitiva($definitiva->singleDefinitivaAsignatura($this->planilla->asignacion->asignatura),[
-                    'score' => $score,
-                    'indicador' => indicador($score),
-                ]);
-                $definitivaAnio->update([
-                    'score' => $definitiva->getScoreFinal($this->planilla->asignacion->asignatura, $this->planilla->periodo, $score),
-                    'indicador' => indicador($definitiva->getScoreFinal($this->planilla->asignacion->asignatura, $this->planilla->periodo, $score)),
-                ]);
             }catch (ValidationException $e){
                 DB::rollBack();
                 return redirect()->back();
