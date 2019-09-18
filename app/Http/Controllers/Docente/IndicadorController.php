@@ -38,7 +38,7 @@ class IndicadorController extends Controller
     public function index(Request $request)
     {
         $this->docente->load(['indicadores.periodo','indicadores.grado','indicadores.asignatura','indicadores.docente','asignaciones.asignatura.area','asignaciones.grupo.grado']);
-        $indicadores = $this->docente->indicadores;
+        $indicadores = $this->docente->indicadores->sortByDesc('id');
         $asg = collect();
         $ar = collect();
         $gds = collect();
