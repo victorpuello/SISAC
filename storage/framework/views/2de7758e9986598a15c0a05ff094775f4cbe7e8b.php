@@ -108,7 +108,7 @@
             </tr>
             <tr class="text-dark">
                 <?php $__currentLoopData = $periodo->anio->periodos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $_periodo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <td class="p-0 pl-1 text-center" style="width: <?php echo e(porcentajeStyle(count($periodo->anio->periodos))); ?>%; vertical-align: middle"><strong>Nota Periodo</strong> </td>
+                    <td class="p-0 pl-1 text-center" style="width: <?php echo e(porcentajeStyle(count($periodo->anio->periodos))); ?>%; vertical-align: middle"><strong><?php echo e($reporte->defArea($estudiante,$area,$_periodo)); ?></strong> </td>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tr>
             </tbody>
@@ -135,7 +135,7 @@
         </div>
     </div>
 </div>
-    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </body>
 </html>
 <?php /**PATH /var/www/SISAC/resources/views/admin/reportes/print/informeEstudiante.blade.php ENDPATH**/ ?>

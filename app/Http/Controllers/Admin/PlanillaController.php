@@ -3,7 +3,6 @@
 namespace ATS\Http\Controllers\Admin;
 
 
-use ATS\Clases\Estudiante\CurrentDefinitiva;
 use ATS\Clases\Estudiante\CurrentNota;
 use ATS\Events\LlenarPlanillasEvent;
 use ATS\Http\Controllers\Controller;
@@ -49,6 +48,10 @@ class PlanillaController extends Controller
     {
 
     }
+    public function print(Planilla $planilla)
+    {
+        dd($planilla);
+    }
 
     public function update(Request $request, Planilla $planilla)
     {
@@ -74,36 +77,6 @@ class PlanillaController extends Controller
         $planilla->load('asignacion.docente','periodo.anio');
         $planilla->update(['cargada'=>0]);
         return redirect()->back();
-    }
-    // Este metodo se puede quitar posteriormente
-    public function updateDefinitivas(Planilla $planilla){
-        $planilla->load('asignacion.grupo.estudiantes','periodo','asignacion.asignatura');
-        $estudiantes = $planilla->asignacion->grupo->estudiantes;
-        foreach ($estudiantes as $estudiante){
-            $currentNotas = new CurrentNota($estudiante, $planilla);
-            $definitiva = new CurrentDefinitiva($estudiante,$planilla->periodo);
-            $definitivaAnio = $definitiva->singleDefinitivaAnio($planilla->asignacion->asignatura);
-            DB::beginTransaction();
-            try{
-                $score = $currentNotas->scoreDef($planilla->asignacion->asignatura);
-                $definitiva->updateDefinitiva($definitiva->singleDefinitivaAsignatura($planilla->asignacion->asignatura),[
-                    'score' => $score,
-                    'indicador' => indicador($score),
-                ]);
-                $definitivaAnio->update([
-                    'score' => $definitiva->getScoreFinal($planilla->asignacion->asignatura, $planilla->periodo, $score),
-                    'indicador' => indicador($definitiva->getScoreFinal($planilla->asignacion->asignatura, $planilla->periodo, $score)),
-                ]);
-            }catch (ValidationException $e){
-                DB::rollBack();
-                return redirect()->back();
-            }
-            DB::commit();
-        }
-        $data = [
-            'messaje' => 'Guardado con exito'
-        ];
-        return redirect()->route('planillas.index');
     }
 
 }

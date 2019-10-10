@@ -29,11 +29,11 @@ class ReportesController extends Controller
         return view('admin.reportes.index',compact('periodos','grupos','docentes','asignaturas','grados'));
     }
     public function reporteAcademico (Request $request){
-        $grupo = Grupo::with(['estudiantes.definitivas','estudiantes.inasistencias','estudiantes.grupo.grado','estudiantes.notas.indicador','asignaciones.asignatura.indicadores','asignaciones.asignatura.area'])->findOrFail($request->grupo);
+        $grupo = Grupo::with(['estudiantes.inasistencias','estudiantes.grupo.grado','estudiantes.notas.indicador','asignaciones.asignatura.indicadores','asignaciones.asignatura.area'])->findOrFail($request->grupo);
         $institucion = Institucion::all()->first();
         $periodo = Periodo::with('anio.periodos')->findOrFail($request->periodo);
         $reporte = new Reporte($grupo);
-        //return view('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'));
+//        return view('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'));
         $pdf = PDF::loadView('admin.reportes.print.informeEstudiante', compact('reporte','institucion','grupo','periodo'))
                     ->setPaper('legal')
                     ->setOrientation('portrait')
@@ -52,7 +52,7 @@ class ReportesController extends Controller
         $grupo = Grupo::where('id','=', $request->grupo)->with('estudiantes.notas.indicador')->first();
         $grupo->load(['asignaciones.asignatura']);
         $reporte = new Reporte($grupo);
-        //return view('admin.reportes.print.sabana', compact('reporte','periodo','institucion'));
+        return view('admin.reportes.print.sabana', compact('reporte','periodo','institucion'));
         $pdf = PDF::loadView('admin.reportes.print.sabana', compact('reporte','periodo','institucion'))
             ->setPaper('legal')
             ->setOption('footer-html',\View::make('admin.reportes.partials.footer'))
@@ -71,7 +71,6 @@ class ReportesController extends Controller
      */
     public function reporteLogros (ReportesIndicadoresRequest $request){
         $docente = Docente::with(['indicadores.grado','indicadores.asignatura','indicadores.periodo'])->findOrFail($request->docente);
-//        dd($docente);
         $institucion = Institucion::first();
         $indicadores = $docente->indicadores->where('periodo_id',$request->periodo)->where('asignatura_id',$request->asignatura)->where('grado_id',$request->grade);
         $pdf = PDF::loadView('admin.reportes.print.logrosreport',compact('indicadores','docente','institucion'))
@@ -84,5 +83,6 @@ class ReportesController extends Controller
             ->setOption('encoding', 'UTF-8');
         return $pdf->download('Reporte_Logros_'.''.$docente->name.'.pdf');
     }
+
 
 }

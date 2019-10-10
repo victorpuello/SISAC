@@ -2,6 +2,8 @@
 
 namespace ATS\Model;
 
+use ATS\Clases\Estudiante\DefinitivaArea;
+use ATS\Clases\SIE;
 use ATS\Events\CrearEstudianteEvent;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -74,6 +76,7 @@ class Estudiante extends Model
     protected $dispatchesEvents = [
         'created' => CrearEstudianteEvent::class,
     ];
+    protected $with = ['grupo'];
     // Start Relationship of estudent
     protected $all_notas;
     public $_inasistencias;
@@ -86,9 +89,6 @@ class Estudiante extends Model
     }
     public function notas(){
         return $this->hasMany(Nota::class);
-    }
-    public function definitivas(){
-        return $this->hasMany(Definitiva::class);
     }
     public function inasistencias(){
         return $this->hasMany(Inasistencia::class);
@@ -110,6 +110,7 @@ class Estudiante extends Model
         $municipio = Municipio::where('id',$this->birthcity)->with('departamento')->first();
         return $municipio->name . ' - '. $municipio->departamento->name;
     }
+
     public function getEdadAttribute(){
         $date = Carbon::parse($this->birthday);
 //        dd($date->age);
@@ -126,20 +127,6 @@ class Estudiante extends Model
         return $this->anotaciones->where('periodo_id','=',$periodo->id);
     }
 
-    /**
-     * @param Periodo $periodo
-     * @param Asignatura $asignatura
-     * @return int
-     */
-    public function getDefinitivaPeriodo(Periodo $periodo, Asignatura $asignatura){
-        $notas = $this->notas->where('periodo_id','=',$periodo->id)->where('asignatura_id','=',$asignatura->id)->take(3);
-        $notas->load('indicador');
-        $score = 0;
-        foreach ($notas as $nota){
-            $score += score($nota);
-        }
-        return $score ?? 1;
-    }
 
     /**
      * @return bool
@@ -166,5 +153,14 @@ class Estudiante extends Model
             $this->attributes['path'] = $name;
            \Storage::disk('estudiantes')->put($name,$image);
         }
+    }
+
+    public function getscore (Periodo $periodo,Grupo $grupo){
+        $sie = New SIE($grupo);
+        $score = 0;
+        foreach ($sie->getAreasGrado($grupo->grado) as $area){
+            $score += (new DefinitivaArea($this,$area,$periodo))->getDefArea() * $sie->porcentajeArea($this->grupo->grado,$area);
+        }
+        return $score;
     }
 }

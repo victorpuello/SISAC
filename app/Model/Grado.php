@@ -27,6 +27,7 @@ class Grado extends Model
 {
     protected $fillable = ['id','name','numero','nivel'];
 
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

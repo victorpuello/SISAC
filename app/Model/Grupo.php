@@ -39,6 +39,7 @@ class Grupo extends Model
     protected $fillable = [
         'name', 'grado_id','modelo','jornada_id'
     ];
+    protected $with = ['grado'];
     public function grado()
     {
         return $this->belongsTo(Grado::class);

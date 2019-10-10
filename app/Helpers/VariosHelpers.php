@@ -102,7 +102,7 @@ function porcentajeStyle($n){
  * @return float|int
  */
 function score(Nota $nota){
-    switch ($nota->indicador->category){
+    switch ($nota->category){
         case 'cognitivo':
             return config('institucion.indicadores.categorias.0.porcentaje') * $nota->score;
             break;

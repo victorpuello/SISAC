@@ -108,7 +108,7 @@
             </tr>
             <tr class="text-dark">
                 @foreach($periodo->anio->periodos as $_periodo)
-                    <td class="p-0 pl-1 text-center" style="width: {{porcentajeStyle(count($periodo->anio->periodos))}}%; vertical-align: middle"><strong>Nota Periodo</strong> </td>
+                    <td class="p-0 pl-1 text-center" style="width: {{porcentajeStyle(count($periodo->anio->periodos))}}%; vertical-align: middle"><strong>{{$reporte->defArea($estudiante,$area,$_periodo)}}</strong> </td>
                 @endforeach
             </tr>
             </tbody>
@@ -135,6 +135,6 @@
         </div>
     </div>
 </div>
-    @endforeach
+@endforeach
 </body>
 </html>

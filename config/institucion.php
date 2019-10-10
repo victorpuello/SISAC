@@ -8,7 +8,6 @@
 return[
     'escala' => [
         'min' => 0,
-        'max' => 5,
     ],
     'fondos' => [
         0 => 'primary',
@@ -33,49 +32,192 @@ return[
     'SIE' => [
         'preescolar' => [
             'areas' => [
-                'Dimensión Comunicativa' => ['porcentaje' => 0.16],
-                'Dimensión Ética y valores' => ['porcentaje' => 0.16],
-                'Dimensión Socio-afectiva' => ['porcentaje' => 0.16],
-                'Dimensión Estética' => ['porcentaje' => 0.16],
-                'Dimensión Corporal' => ['porcentaje' => 0.16],
-                'Dimensión Cognitiva' => ['porcentaje' => 0.2]
+                '15' => ['porcentaje' => 0.16,'asignaturas' => [
+                    '22' => 1,
+                ]],
+                '14' => ['porcentaje' => 0.16,'asignaturas' => [
+                    '23' => 1,
+                ]],
+                '13' => ['porcentaje' => 0.16,'asignaturas' => [
+                    '24' => 1,
+                ]],
+                '12' => ['porcentaje' => 0.16,'asignaturas' => [
+                    '25' => 1,
+                ]],
+                '11' => ['porcentaje' => 0.16,'asignaturas' => [
+                    '26' => 1,
+                ]],
+                '10' => ['porcentaje' => 0.2,'asignaturas' => [
+                    '27' => 1,
+                ]]
             ]
         ],
         'primaria' => [
-            'Ciencias Sociales' => ['porcentaje' => 0.12],
-            'Artistica' => ['porcentaje' => 0.04],
-            'Ciencias Naturales' => ['porcentaje' => 0.16],
-            'Ética y valores' => ['porcentaje' => 0.04],
-            'Educación Física' => ['porcentaje' => 0.08],
-            'Religión' => ['porcentaje' => 0.04],
-            'Lengua Castellana' => ['porcentaje' => 0.2],
-            'Idioma extranjero - Ingles' => ['porcentaje' => 0.08],
-            'Matemáticas' => ['porcentaje' => 0.2],
-            'Tecnología e Informática' => ['porcentaje' => 0.04]
-        ],
-        'secundaria' => [
-            'Ciencias Sociales' => ['porcentaje' => 0.1667],
-            'Artistica' => ['porcentaje' => 0.03333],
-            'Ciencias Naturales' => ['porcentaje' => 0.1667],
-            'Ética y valores' => ['porcentaje' => 0.03333],
-            'Educación Física' => ['porcentaje' => 0.06667],
-            'Religión' => ['porcentaje' => 0.03333],
-            'Lengua Castellana' => ['porcentaje' => 0.1667],
-            'Idioma extranjero - Ingles' => ['porcentaje' => 0.1],
-            'Matemáticas' => ['porcentaje' => 0.1667],
-            'Tecnología e Informática' => ['porcentaje' => 0.06667]
-        ],
+            'areas' => [
+            '2' => [
+                'porcentaje' => 0.12,
+                'asignaturas' => [
+                    '8' => 1,
+                ]
+            ],
+            '3' => [
+                'porcentaje' => 0.04,
+                'asignaturas' => [
+                    '9' => 1,
+                ]
+            ],
+            '1' => ['porcentaje' => 0.16, 'asignaturas' => [
+                '11' => 1,
+            ]],
+            '4' => ['porcentaje' => 0.04, 'asignaturas' => [
+                '12' => 1,
+            ]],
+            '5' => ['porcentaje' => 0.08, 'asignaturas' => [
+                '13' => 1,
+            ]],
+            '6' => ['porcentaje' => 0.04, 'asignaturas' => [
+                '14' => 1,
+            ]],
+            '7' => ['porcentaje' => 0.2, 'asignaturas' => [
+                '15' => 1,
+            ]],
+            '17' => ['porcentaje' => 0.08, 'asignaturas' => [
+                '16' => 1,
+            ]],
+            '8' => ['porcentaje' => 0.2, 'asignaturas' => [
+                '17' => 1,
+            ]],
+            '9' => ['porcentaje' => 0.04, 'asignaturas' => [
+                '21' => 1,
+            ]]
+        ]],
+        //Grados 5-6-7
+        'secundaria1' => [
+            'areas' => [
+            '2' => [
+                'porcentaje' => 0.12,
+                'asignaturas' => [
+                    '8' => 1,
+                ]
+            ],
+            '3' => [
+                'porcentaje' => 0.04,
+                'asignaturas' => [
+                    '9' => 1,
+                ]
+            ],
+            '1' => ['porcentaje' => 0.16, 'asignaturas' => [
+                '11' => 1,
+            ]],
+            '4' => ['porcentaje' => 0.04, 'asignaturas' => [
+                '12' => 1,
+            ]],
+            '5' => ['porcentaje' => 0.08, 'asignaturas' => [
+                '13' => 1,
+            ]],
+            '6' => ['porcentaje' => 0.04, 'asignaturas' => [
+                '14' => 1,
+            ]],
+            '7' => ['porcentaje' => 0.2, 'asignaturas' => [
+                '15' => 1,
+            ]],
+            '17' => ['porcentaje' => 0.08, 'asignaturas' => [
+                '16' => 1,
+            ]],
+            '8' => ['porcentaje' => 0.2, 'asignaturas' => [
+                '17' => 1,
+            ]],
+            '9' => ['porcentaje' => 0.04, 'asignaturas' => [
+                '21' => 1,
+            ]]
+        ]],
+        //Grados 8-9
+        'secundaria2' => [
+            'areas' => [
+            '2' => ['porcentaje' => 0.1667,   'asignaturas' => [
+                '8' => 1,
+            ]],
+            '3' => ['porcentaje' => 0.03333,
+                'asignaturas' => [
+                    '9' => 1,
+                ]
+            ],
+            '1' => ['porcentaje' => 0.1667, 'asignaturas' => [
+                '11' => 0.6,
+                '10' => 0.2,
+                '2' => 0.2,
+            ]],
+            '4' => ['porcentaje' => 0.03333,'asignaturas' => [
+                '12' => 1,
+            ]],
+            '5' => ['porcentaje' => 0.06667, 'asignaturas' => [
+                '13' => 1,
+            ]],
+            '6' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                '14' => 1,
+            ]],
+            '7' => ['porcentaje' => 0.1667, 'asignaturas' => [
+                '15' => 1,
+            ]],
+            '17' => ['porcentaje' => 0.1, 'asignaturas' => [
+                '16' => 1,
+            ]],
+            '8' => ['porcentaje' => 0.1667, 'asignaturas' => [
+                '17' => 1,
+            ]],
+            '9' => ['porcentaje' => 0.06667, 'asignaturas' => [
+                '21' => 1,
+            ]]
+        ]],
         'media' => [
-            'Ciencias Sociales' => ['porcentaje' => 0.1333],
-            'Artistica' => ['porcentaje' => 0.03333],
-            'Ciencias Naturales' => ['porcentaje' => 0.3],
-            'Ética y valores' => ['porcentaje' => 0.03333],
-            'Educación Física' => ['porcentaje' => 0.03333],
-            'Religión' => ['porcentaje' => 0.03333],
-            'Lengua Castellana' => ['porcentaje' => 0.1333],
-            'Idioma extranjero - Ingles' => ['porcentaje' => 0.1],
-            'Matemáticas' => ['porcentaje' => 0.1666],
-            'Tecnología e Informática' => ['porcentaje' => 0.03333]
-        ],
+            'areas' => [
+            '2' => ['porcentaje' => 0.1333,
+                'asignaturas' => [
+                '8' => 0.5,
+                '4' => 0.5,
+            ]],
+            '3' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                '9' => 1,
+            ]],
+            '1' => ['porcentaje' => 0.3, 'asignaturas' => [
+                '1' => 1,
+            ]],
+            '4' => ['porcentaje' => 0.03333,'asignaturas' => [
+                '12' => 1,
+            ]],
+            '5' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                '13' => 1,
+            ]],
+            '6' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                '14' => 1,
+            ]],
+            '7' => ['porcentaje' => 0.1333, 'asignaturas' => [
+                '15' => 1,
+            ]],
+            '17' => ['porcentaje' => 0.1, 'asignaturas' => [
+                '16' => 1,
+            ]],
+            '8' => ['porcentaje' => 0.1666, 'asignaturas' => [
+                '17' => 1,
+            ]],
+            '9' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                '21' => 1,
+            ]],
+            '18' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                '10' => 1,
+            ]],
+            '19' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                '2' => 1,
+            ]],
+            '20' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                '6' => 1,
+            ]],
+            '21' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                '5' => 1,
+            ]],
+            '22' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                '18' => 1,
+            ]]
+        ]],
     ]
 ];

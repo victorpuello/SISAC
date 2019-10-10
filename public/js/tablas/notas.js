@@ -227,17 +227,25 @@
                 },
             buttons: [
                 { extend: "edit",   editor: editor, className: 'btn-info' },
+                // {
+                //     extend: 'collection',
+                //     text: 'Exportar',
+                //     buttons: [
+                //         'excel',
+                //         'csv',
+                //         'pdf',
+                //         'print'
+                //     ],
+                //     className:'dropdown-toggle btn-primary',
+                //     exportOptions: buttonCommon
+                // },
                 {
-                    extend: 'collection',
-                    text: 'Exportar',
-                    buttons: [
-                        'excel',
-                        'csv',
-                        'pdf',
-                        'print'
-                    ],
-                    className:'dropdown-toggle btn-primary',
-                    exportOptions: buttonCommon
+                    text: '<i class="fa fa-file-download"></i>Descargar',
+                    action: function ( e, dt, node, config ) {
+                        console.log(e);
+                        alert( 'Button activated' );
+                    },
+                    className: 'btn btn-success '
                 }
             ],
             language: {

@@ -22,6 +22,7 @@ Route::resource('asignacions', 'AsignacionController');
 Route::resource('periodos', 'PeriodoController');
 Route::get('planillas/reset/{planilla}','PlanillaController@reset')->name('planillas.reset');
 Route::get('planillas/refresh/{planilla}', 'PlanillaController@updateDefinitivas')->name('planillas.refresh');
+Route::get('planillas/print/{planilla}', 'PlanillaController@print')->name('planillas.print');
 Route::get('suggestions/import','SuggestionController@import')->name('suggestions.import');
 Route::post('suggestions/process','SuggestionController@process')->name('suggestions.process');
 Route::resource('suggestions', 'SuggestionController');
@@ -46,10 +47,5 @@ Route::post('estudiantes-import/','ImportEstudianteController@store')->name('imp
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('logs');
 
 
-//Route::get('/usersdata/img/users/{file}', function ($file) {
-//    return Storage::response("app/usersdata/img/users/$file")->where([
-//        'file' => '(.*?)\.(jpg|png|jpeg|gif)$'
-//    ]);
-//});
 Route::get('notas/dataPlanilla/asignacion/{asignacion}/periodo/{periodo}','NotaController@dataPlanilla')->name('notas.dataplanilla');
 Route::get('notas/getPlanilla/asignacion/{asignacion}/periodo/{periodo}','NotaController@getPlanilla')->name('notas.getplanilla');

@@ -31,6 +31,7 @@ class Nota extends Model
     protected $fillable = [
        'id', 'score','estudiante_id','indicador_id','periodo_id','asignatura_id',
     ];
+    protected $with = ['indicador'];
 
     public function estudiante(){
         return $this->belongsTo(Estudiante::class);
@@ -43,6 +44,10 @@ class Nota extends Model
     }
     public function asignatura(){
         return $this->belongsTo(Asignatura::class);
+    }
+    public function getCategoryAttribute()
+    {
+        return $this->indicador->category;
     }
 
 }

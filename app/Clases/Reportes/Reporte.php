@@ -11,10 +11,15 @@ namespace ATS\Clases\Reportes;
 
 use ATS\Clases\CurrentAnio;
 use ATS\Clases\Estudiante\CurrentInasistencia;
+use ATS\Clases\Estudiante\DefinitivaArea;
+use ATS\Clases\Estudiante\DefinitivaAsignatura;
+use ATS\Clases\Estudiante\NotaDef;
+use ATS\Model\Area;
 use ATS\Model\Asignatura;
 use ATS\Model\Estudiante;
 use ATS\Model\Grupo;
 use ATS\Model\Periodo;
+use PhpParser\Node\Expr\New_;
 
 class Reporte
 {
@@ -23,6 +28,7 @@ class Reporte
      */
     protected $grupo;
     protected $estudiantes;
+    protected $def;
     /**
      * Reporte constructor.
      * @param Grupo $grupo
@@ -83,7 +89,8 @@ class Reporte
      * @return int
      */
     public  function getDefScore (Asignatura $asignatura, Estudiante $estudiante, Periodo $periodo){
-        return $this->getDefinitivaPeriodo($asignatura,$estudiante,$periodo) ?? 0;
+        $this->def = new DefinitivaAsignatura($estudiante,$asignatura,$periodo);
+        return $this->def->getDef() ?? 1;
     }
 
     /**
@@ -93,23 +100,8 @@ class Reporte
      * @return string
      */
     public  function getDefIndicador (Asignatura $asignatura, Estudiante $estudiante, Periodo $periodo){
-        $def = $estudiante->definitivas->where('asignatura_id','=',$asignatura->id)->where('periodo_id','=',$periodo->id)->first();
-        return $def->indicador ?? ' ';
-    }
-
-    /**
-     * @param Asignatura $asignatura
-     * @param Estudiante $estudiante
-     * @param Periodo $periodo
-     * @return float|int
-     */
-    public function getDefinitivaPeriodo(Asignatura $asignatura, Estudiante $estudiante, Periodo $periodo){
-        $notas = $estudiante->notas->where('periodo_id','=',$periodo->id)->where('asignatura_id','=',$asignatura->id)->take(3);
-        $score = 0;
-        foreach ($notas as $nota){
-            $score += score($nota);
-        }
-        return $score ?? 1;
+        $def = new DefinitivaAsignatura($estudiante,$asignatura,$periodo);
+        return $def->getIndicador() ?? ' ';
     }
 
     /**
@@ -117,22 +109,8 @@ class Reporte
      * @return \ATS\Estudiante[]|\Illuminate\Database\Eloquent\Collection
      */
     public function getEstudiantesWithPuestos(Periodo $periodo) {
-        $puesto = 0;
-        $estudiantes = $this->estudiantes;
-        foreach ($estudiantes as $estudiante){
-            $_count = 0;
-            $_nasg = count($estudiante->definitivas->where('periodo_id','=',$periodo->id));
-            foreach ($estudiante->definitivas->where('periodo_id','=',$periodo->id) as $definitiva){
-                $_count += $definitiva->score;
-            }
-            $estudiante->setAttribute('scoreTotal',($_count/$_nasg));
-        }
-
-        foreach ($estudiantes->sortByDesc('scoreTotal') as $estudiante){
-            $puesto += 1;
-            $estudiante->setAttribute('puesto',$puesto);
-        }
-        return $estudiantes;
+            $estudiantes = New Puestos($this->estudiantes,$periodo, $this->grupo);
+            return $estudiantes->getEstudiantesPuestos();
     }
 
     /**
@@ -152,7 +130,9 @@ class Reporte
     }
 
     public function notasInforme(Asignatura $asignatura,Estudiante $estudiante, Periodo $periodo){
-        $_current_notas = $estudiante->notas->where('periodo_id','=',$periodo->id);
+        $definitivas = new DefinitivaAsignatura($estudiante,$asignatura,$periodo);
+
+        $_current_notas = $_current_notas = $definitivas->getNotas();
         $indicadores= $asignatura->indicadores->where('periodo_id','=',$periodo->id)
                                               ->where('asignatura_id','=',$asignatura->id)
                                               ->where('grado_id','=',$estudiante->grupo->grado->id);
@@ -186,5 +166,10 @@ class Reporte
         }
         //dd($notas);
         return $notas->take(3);
+    }
+
+    public function defArea(Estudiante $estudiante,Area $area,Periodo $periodo){
+        $def = New DefinitivaArea($estudiante,$area,$periodo);
+        return $def->getDefArea();
     }
 }

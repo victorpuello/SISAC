@@ -9,7 +9,7 @@
         <div class="row" id="ControlPanel">
             <div class="col-sm-6">
                 <div class="mb-3">
-                    <a href="{{route('asignaturas.create')}}"  class="btn btn-primary on-default ajax-estudiantes ">Agregar <i class="fas fa-plus"></i></a>
+                    <a href="{{route('asignaturas.create')}}"  class="btn btn-primary on-default ajax-estudiantes ">Agregar <i class="fas  fa-plus"></i></a>
                 </div>
             </div>
         </div>

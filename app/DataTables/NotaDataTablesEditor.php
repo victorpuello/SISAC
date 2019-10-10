@@ -2,7 +2,6 @@
 
 namespace ATS\DataTables;
 
-use ATS\Clases\Estudiante\CurrentDefinitiva;
 use ATS\Clases\Estudiante\CurrentInasistencia;
 use ATS\Clases\Estudiante\CurrentNota;
 use ATS\Clases\Indicador\IndicadoresPlanilla;

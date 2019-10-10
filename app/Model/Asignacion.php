@@ -41,6 +41,7 @@ class Asignacion extends Model
     protected $fillable = [
         'horas','docente_id','grupo_id','asignatura_id','director','active','anio_id'
     ];
+    protected $with = ['asignatura'];
     public function asignatura()
     {
         return $this->belongsTo(Asignatura::class);

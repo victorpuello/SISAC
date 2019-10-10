@@ -36,6 +36,7 @@ use Illuminate\Support\Facades\DB;
 class Asignatura extends Model
 {
     protected $fillable = ['name','short_name','porcentaje','nivel','area_id'];
+    protected $with = ['area'];
     public function getDocentesAttribute (){
         $docentes = DB::table('asignacions')->where('asignatura_id','=',$this->id)
             ->join('docentes','docentes.id','=','asignacions.docente_id')
