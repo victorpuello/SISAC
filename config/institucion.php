@@ -142,11 +142,15 @@ return[
                     '9' => 1,
                 ]
             ],
-            '1' => ['porcentaje' => 0.1667, 'asignaturas' => [
+            '1' => ['porcentaje' => 0.10002, 'asignaturas' => [
                 '11' => 0.6,
-                '10' => 0.2,
-                '2' => 0.2,
             ]],
+                '18' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                    '10' => 1,
+                ]],
+                '19' => ['porcentaje' => 0.03333, 'asignaturas' => [
+                    '2' => 1,
+                ]],
             '4' => ['porcentaje' => 0.03333,'asignaturas' => [
                 '12' => 1,
             ]],
